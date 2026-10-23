@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ami · pitch caso Antonia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --neblina: #F2F4F1;
+    --papel: #FFFFFF;
+    --tinta: #1E2321;
+    --tinta-suave: #4A524E;
+    --amarillo: #F6C445;
+    --celeste: #7FBFC4;
+    --celeste-claro: #DCEEEF;
+    --rubor: #EF8A6E;
+    --durazno: #F7E9DF;
+    --puerto: #1F5F73;
+    --puerto-hondo: #163F4D;
+    --linea: #DCE1DD;
+    --display: 'Bricolage Grotesque', 'Avenir Next', system-ui, sans-serif;
+    --texto: Figtree, 'Avenir Next', system-ui, sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--neblina); color: var(--tinta); font-family: var(--texto); }
+  button { font-family: inherit; cursor: pointer; }
+  button:focus-visible, a:focus-visible { outline: 3px solid var(--puerto); outline-offset: 3px; }
+
+  /* The deck is drawn on a fixed 1600×900 stage and scaled to the window. */
+  .viewport { position: fixed; inset: 0; overflow: hidden; }
+  .stage { width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%; transform-origin: center; }
+
+  .slide { position: absolute; inset: 0; padding: 88px 112px 96px; display: flex; flex-direction: column; gap: 32px; overflow: hidden; visibility: hidden; opacity: 0; transform: translateY(16px); transition: opacity 360ms var(--ease), transform 360ms var(--ease), visibility 0s linear 360ms; }
+  .slide.is-active { visibility: visible; opacity: 1; transform: none; transition: opacity 360ms var(--ease), transform 360ms var(--ease); }
+  .blob { position: absolute; pointer-events: none; z-index: 0; }
+  .slide > *:not(.blob) { position: relative; z-index: 1; }
+
+  h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; margin: 0; line-height: 1.02; }
+  h1 { font-size: 88px; }
+  h2 { font-size: 64px; max-width: 1180px; }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 30px; margin: 0; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  .lead { font-size: 28px; line-height: 1.4; color: var(--tinta-suave); max-width: 1000px; }
+  .small { font-size: 18px; line-height: 1.45; color: var(--tinta-suave); }
+  .source { font-size: 16px; color: var(--tinta-suave); }
+
+  /* Placeholder for Esperanza's part: deliberately visible so it is not shipped by accident. */
+  .esperanza { border: 2.5px dashed var(--puerto); border-radius: 26px 32px 28px 34px; padding: 20px 24px; font-size: 22px; line-height: 1.4; color: var(--puerto-hondo); background: rgba(220, 238, 239, .5); }
+  .esperanza strong { font-weight: 700; }
+
+  /* 1 · week */
+  .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; margin-top: 12px; }
+  .day { display: flex; flex-direction: column; gap: 14px; }
+  .day-blob { height: 210px; display: grid; place-items: center; position: relative; }
+  .day-blob svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .day-value { position: relative; font-family: var(--display); font-weight: 700; font-size: 56px; letter-spacing: -0.02em; }
+  .day-name { font-family: var(--display); font-weight: 700; font-size: 26px; }
+  .day-text { font-size: 21px; line-height: 1.4; color: var(--tinta-suave); }
+
+  /* 2 · quote */
+  .quote { font-family: var(--display); font-weight: 500; font-size: 76px; line-height: 1.05; letter-spacing: -0.025em; max-width: 1200px; margin: 0; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; margin-top: auto; }
+  .two p { font-size: 24px; line-height: 1.45; }
+
+  /* 3 · story */
+  .story { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 72px; align-items: center; flex-grow: 1; }
+  .story-text { font-size: 30px; line-height: 1.45; }
+  .story-text p + p { margin-top: 20px; }
+  .finding { background: var(--papel); border-radius: 44px 36px 48px 40px; padding: 44px 48px; display: flex; flex-direction: column; gap: 22px; }
+  .finding .row { display: flex; gap: 18px; align-items: baseline; font-size: 26px; line-height: 1.35; }
+  .finding .tag { font-family: var(--display); font-weight: 700; font-size: 24px; min-width: 130px; }
+
+  /* 4 · Ami */
+  .ami-head { display: flex; align-items: center; gap: 28px; }
+  .ami-head svg { width: 132px; height: 132px; flex-shrink: 0; }
+  .moments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; flex-grow: 1; }
+  .moment { border-radius: 40px 34px 44px 38px; padding: 36px 40px; display: flex; flex-direction: column; gap: 18px; }
+  .moment.antes { background: var(--papel); }
+  .moment.despues { background: var(--celeste-claro); }
+  .moment ol, .moment ul { margin: 0; padding-left: 26px; display: flex; flex-direction: column; gap: 12px; font-size: 24px; line-height: 1.4; }
+  .bubble { align-self: flex-start; background: var(--papel); border-radius: 6px 26px 26px 26px; padding: 16px 22px; font-size: 26px; line-height: 1.35; }
+
+  /* 5 · demo */
+  .demo { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 88px; align-items: center; height: 100%; }
+  .phone { width: 400px; height: 820px; border-radius: 64px; background: var(--tinta); padding: 14px; position: relative; justify-self: center; }
+  .screen { width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #101413; position: relative; display: grid; place-items: center; }
+  .screen video { width: 100%; height: 100%; object-fit: contain; display: none; background: #101413; }
+  .screen.is-live video { display: block; }
+  .screen-empty { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 32px; text-align: center; color: #E8ECEA; }
+  .screen-empty svg { width: 150px; height: 150px; }
+  .screen-empty p { font-size: 20px; line-height: 1.4; }
+  .screen.is-live .screen-empty { display: none; }
+  .live-pill { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--papel); color: var(--puerto-hondo); font-size: 15px; font-weight: 700; z-index: 2; }
+  .live-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--puerto); }
+  .screen.is-live + .live-pill, .phone.is-live .live-pill { display: inline-flex; }
+  .demo-side { display: flex; flex-direction: column; gap: 28px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn { min-height: 60px; padding: 0 30px; border-radius: 999px; font-size: 22px; font-weight: 600; border: 2px solid var(--puerto); background: var(--papel); color: var(--puerto); transition: background 200ms var(--ease), color 200ms var(--ease); }
+  .btn:hover { background: var(--celeste-claro); }
+  .btn.primary { background: var(--puerto); color: var(--papel); }
+  .btn.primary:hover { background: var(--puerto-hondo); }
+  .btn[hidden] { display: none; }
+  .status { font-size: 22px; line-height: 1.45; min-height: 64px; max-width: 760px; }
+  .status.is-error { color: #8A3B26; }
+  .planb { display: flex; flex-direction: column; gap: 14px; padding: 26px 30px; border-radius: 32px 26px 36px 28px; background: var(--papel); max-width: 760px; transition: box-shadow 200ms var(--ease); }
+  .planb.is-urgent { box-shadow: 0 0 0 3px var(--amarillo); }
+  .planb p { font-size: 20px; line-height: 1.45; color: var(--tinta-suave); }
+
+  /* 6 · evidence */
+  .evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 48px; flex-grow: 1; }
+  .ev { display: flex; flex-direction: column; gap: 10px; padding-top: 22px; border-top: 2px solid var(--linea); }
+  .ev h3 { font-size: 28px; }
+  .ev p { font-size: 21px; line-height: 1.45; }
+  .ev .source { margin-top: auto; }
+  .ev.hint h3::after { content: ' (una pista, no una prueba)'; font-family: var(--texto); font-weight: 500; font-size: 19px; color: var(--tinta-suave); letter-spacing: 0; }
+
+  /* 7 · out of scope */
+  .out { display: flex; flex-direction: column; gap: 4px; max-width: 1240px; }
+  .out-row { display: grid; grid-template-columns: 430px minmax(0, 1fr); gap: 40px; padding: 18px 0; border-bottom: 2px solid var(--linea); align-items: baseline; }
+  .out-row strong { font-family: var(--display); font-weight: 700; font-size: 30px; letter-spacing: -0.01em; }
+  .out-row span { font-size: 22px; line-height: 1.45; color: var(--tinta-suave); }
+  .closing { font-family: var(--display); font-weight: 700; font-size: 44px; letter-spacing: -0.02em; line-height: 1.1; margin-top: auto; max-width: 1200px; }
+
+  /* deck chrome */
+  .chrome { position: fixed; right: 20px; bottom: 16px; display: flex; align-items: center; gap: 8px; z-index: 10; font-size: 15px; color: var(--tinta-suave); }
+  .chrome button { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--linea); background: var(--papel); color: var(--puerto); display: grid; place-items: center; }
+  .chrome svg { width: 20px; height: 20px; }
+  .count { min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .slide.is-active { transition: none; transform: none; }
+    .btn, .planb { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <defs>
+    <g id="ami-b">
+      <path d="M90 50 C126 46 152 74 150 110 C148 146 122 164 90 160 C58 156 38 132 42 100 C46 70 62 53 90 50 Z" fill="#F6C445"/>
+      <path d="M152 108 C168 106 180 121 178 138 C176 156 161 165 146 161 C131 157 125 144 129 128 C132 115 140 109 152 108 Z" fill="#7FBFC4"/>
+      <path d="M73 98 Q79 91 85 98" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
+      <path d="M101 96 Q107 89 113 96" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="68" cy="113" rx="8" ry="4.5" fill="#EF8A6E" opacity=".55"/>
+      <ellipse cx="120" cy="111" rx="8" ry="4.5" fill="#EF8A6E" opacity=".55"/>
+      <path d="M83 116 Q93 125 103 115" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="145" cy="131" r="3.5" fill="#1E2321"/>
+      <circle cx="159" cy="130" r="3.5" fill="#1E2321"/>
+    </g>
+    <path id="mancha" d="M100 14 C160 10 192 60 188 108 C184 160 140 192 92 188 C44 184 10 150 14 100 C18 52 48 18 100 14 Z"/>
+  </defs>
+</svg>
+
+<main class="viewport">
+  <div class="stage" id="stage">
+
+    <!-- 1 · Antonia -->
+    <section class="slide" aria-label="Antonia: su semana">
+      <svg class="blob" viewBox="0 0 200 200" style="right: -140px; top: -180px; width: 560px; height: 560px" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".2"/></svg>
+      <h1>Antonia, 23 años</h1>
+      <p class="lead">Estudia en Valparaíso y vive con dos amigas. Tiene una pauta de la nutricionista de la U y la cumple al pie de la letra… hasta el viernes.</p>
+      <div class="week">
+        <div class="day">
+          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#DCEEEF"/></svg><span class="day-value">100%</span></div>
+          <span class="day-name">lunes</span>
+          <span class="day-text">retoma la pauta al pie de la letra</span>
+        </div>
+        <div class="day">
+          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#DCEEEF"/></svg><span class="day-value">4/4</span></div>
+          <span class="day-name">jueves</span>
+          <span class="day-text">cuarto día seguido cumpliendo</span>
+        </div>
+        <div class="day">
+          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F7E9DF"/></svg><span class="day-value">02:40</span></div>
+          <span class="day-name">viernes</span>
+          <span class="day-text">carrete, y un completo a la salida</span>
+        </div>
+        <div class="day">
+          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F7E9DF"/></svg><span class="day-value">2×</span></div>
+          <span class="day-name">sábado</span>
+          <span class="day-text">delivery al almuerzo y a la comida, con caña</span>
+        </div>
+        <div class="day">
+          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".55"/></svg><span class="day-value" style="font-size: 40px">ciclo 10</span></div>
+          <span class="day-name">domingo</span>
+          <span class="day-text">«el lunes parto de nuevo»</span>
+        </div>
+      </div>
+      <p class="source">Ficha oficial del caso 05, Hackatón Señales.</p>
+    </section>
+
+    <!-- 2 · Por qué le pasa -->
+    <section class="slide" aria-label="Por qué le pasa">
+      <svg class="blob" viewBox="0 0 200 200" style="left: -200px; bottom: -260px; width: 640px; height: 640px" aria-hidden="true"><use href="#mancha" fill="#7FBFC4" opacity=".18"/></svg>
+      <p class="quote">«Ya la embarré con la semana, el lunes parto de nuevo.»</p>
+      <p class="lead">No le falta disciplina: le sobra. Un desliz anula la semana entera, y el lunes limpia la cuenta para volver a la vara perfecta.</p>
+      <div class="two">
+        <p><strong>Lo que dispara el atracón es sentir que rompió el plan,</strong> no lo que comió. Quienes creen que se pasaron comen más después.<br><span class="source">Polivy, Herman y Deo, Appetite, 2010.</span></p>
+        <p><strong>Todo lo que existe sirve de lunes a jueves.</strong> Apps de recetas, contadores de comida, la pauta en PDF: ninguno tiene un plan para el fin de semana, que es justo donde se cae.</p>
+      </div>
+    </section>
+
+    <!-- 3 · Lo vivimos -->
+    <section class="slide" aria-label="Lo vivimos">
+      <svg class="blob" viewBox="0 0 200 200" style="right: -120px; bottom: -200px; width: 560px; height: 560px" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".22"/></svg>
+      <h2>Esto no lo sacamos de la ficha. Lo vivimos.</h2>
+      <div class="story">
+        <div class="story-text">
+          <p>Benja estudió lejos de su ciudad, con una mesada. El fin de semana los amigos lo esperaban.</p>
+          <p>Aunque tuviera táperes en el refri, pedía algo rico: una hamburguesa de $10.000 que eran varios almuerzos.</p>
+        </div>
+        <div class="finding">
+          <h3>Lo que descubrimos</h3>
+          <div class="row"><span class="tag" style="color: var(--puerto)">la plata</span><span>Si gastas de más un día, nadie bota la mesada. Ajustas y sigues.</span></div>
+          <div class="row"><span class="tag" style="color: #8A3B26">la comida</span><span>Un sábado de delivery «arruina» la semana completa.</span></div>
+          <p style="font-size: 24px; line-height: 1.4">Con la plata nadie piensa en blanco o negro. Con la comida, sí. Y las rachas que vuelven a cero lo empeoran.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Ami -->
+    <section class="slide" aria-label="Ami">
+      <div class="ami-head">
+        <svg viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <h1>Ami</h1>
+          <p class="lead" style="font-size: 26px">Una amiga en el WhatsApp que Antonia ya usa todos los días. No es una app más ni una coach.</p>
+        </div>
+      </div>
+      <div class="moments">
+        <div class="moment antes">
+          <h3>Antes: el jueves deja el sábado decidido</h3>
+          <ol>
+            <li>Antonia le manda una foto del refri y la despensa.</li>
+            <li>Ami arma el sábado: un antojo por delivery y una casera rica de 10 minutos con lo que ya tiene.</li>
+            <li>Le dice qué le falta y cuánto cuesta, comparado con pedir.</li>
+          </ol>
+          <p class="small">El sábado a las 15:00, con caña, Ami le escribe con la receta paso a paso. Nadie decide con caña.</p>
+        </div>
+        <div class="moment despues">
+          <h3>Después: si el plan se rompe</h3>
+          <div class="bubble">no la embarraste, comiste. seguimos desde tu próxima comida 🫶</div>
+          <div class="esperanza"><strong>[Esperanza]</strong> Cómo acompaña Ami cuando el plan se rompe: qué siente Antonia en ese momento, qué le dice Ami primero y cuándo deriva a la nutricionista o a Salud Responde.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Demo en vivo -->
+    <section class="slide" aria-label="Demo en vivo" id="slide-demo">
+      <svg class="blob" viewBox="0 0 200 200" style="left: 40px; top: 40px; width: 560px; height: 820px" preserveAspectRatio="none" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".2"/></svg>
+      <div class="demo">
+        <div class="phone" id="phone">
+          <div class="screen" id="screen">
+            <video id="mirror" autoplay muted playsinline aria-label="Pantalla del iPhone en vivo"></video>
+            <div class="screen-empty">
+              <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#ami-b"/></svg>
+              <p>Aquí se ve el iPhone en vivo, con el chat de Ami en WhatsApp.</p>
+            </div>
+          </div>
+          <span class="live-pill">en vivo</span>
+        </div>
+        <div class="demo-side">
+          <h2>Demo en vivo</h2>
+          <p class="lead" style="font-size: 26px">El WhatsApp de Antonia, tal cual. Jueves: la foto del refri. Sábado: la caña. Y qué pasa cuando el plan se rompe.</p>
+          <div class="controls">
+            <button class="btn primary" id="connect" type="button">Conectar iPhone</button>
+            <button class="btn" id="reconnect" type="button" hidden>Cambiar ventana</button>
+            <button class="btn" id="stop" type="button" hidden>Detener</button>
+          </div>
+          <p class="status" id="status" role="status" aria-live="polite">Elige la ventana «Duplicación del iPhone» o la de QuickTime Player.</p>
+          <div class="planb" id="planb">
+            <h3 style="font-size: 26px">Plan B</h3>
+            <p>Si el iPhone no conecta, la misma Ami corre en la web, con un reloj para adelantar al sábado.</p>
+            <div><button class="btn" id="open-web" type="button">Abrir la demo web</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Por qué cambiaría -->
+    <section class="slide" aria-label="Por qué cambiaría">
+      <h2>Por qué esta vez sí cambiaría</h2>
+      <div class="evidence">
+        <div class="ev">
+          <h3>Un finde no borra la semana</h3>
+          <p>Al formar un hábito, saltarse una oportunidad no afectó de forma importante el avance. Por eso Ami nunca vuelve a cero.</p>
+          <p class="source">Lally y otros, European Journal of Social Psychology, 2010.</p>
+        </div>
+        <div class="ev">
+          <h3>Sumar rinde más que prohibir</h3>
+          <p>Decidir por adelantado ayuda casi el doble a sumar algo rico y casero (d = 0,51) que a evitar algo (d = 0,29). Ami no prohíbe el delivery: suma una casera. Los autores advierten que el efecto puede estar inflado.</p>
+          <p class="source">Adriaanse y otros, Appetite, 2011.</p>
+        </div>
+        <div class="ev">
+          <h3>Sin culpa se come mejor después</h3>
+          <p>Universitarias comieron un alimento «prohibido». Con un mensaje de autocompasión, las más restrictivas comieron menos después. Es el «seguimos desde tu próxima comida».</p>
+          <p class="source">Adams y Leary, Journal of Social and Clinical Psychology, 2007.</p>
+        </div>
+        <div class="ev hint">
+          <h3>Antojos limitados</h3>
+          <p>Una meta con pocos días de reserva definidos de antemano se cumplió más (52,5%) que la rígida (21,1%) y que la flexible sin límite (33,9%). La tarea era digital y de 7 días, no de comida.</p>
+          <p class="source">Sharif y Shu, 2017.</p>
+        </div>
+      </div>
+      <p class="small">Hablamos de romper el ciclo de culpa y de volver a partir de cero, no de resultados de peso.</p>
+    </section>
+
+    <!-- 7 · Qué dejamos fuera -->
+    <section class="slide" aria-label="Qué dejamos fuera a propósito">
+      <svg class="blob" viewBox="0 0 200 200" style="right: -60px; top: 120px; width: 380px; height: 380px" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
+      <h2>Lo que dejamos fuera, a propósito</h2>
+      <div class="out">
+        <div class="out-row"><strong>Rachas</strong><span>Una racha que vuelve a cero es el «ya la embarré» hecho app.</span></div>
+        <div class="out-row"><strong>Contar calorías</strong><span>Ami revisa la pauta por dentro, pero le habla con palabras. Ni números ni peso.</span></div>
+        <div class="out-row"><strong>Pedirle que no salga</strong><span>Quiere sentirse bien sin ser «la fome que no sale». El carrete es parte del plan.</span></div>
+        <div class="out-row"><strong>Reemplazar a la nutricionista</strong><span>La pauta es de ella. Ami deriva cuando corresponde: a la nutricionista, a Salud Responde (600 360 7777) o al *4141.</span></div>
+        <div class="out-row"><strong>Pedir delivery desde el chat</strong><span>Es el siguiente paso, con una alianza. Hoy Ami deja el antojo decidido y Antonia lo pide como siempre.</span></div>
+      </div>
+      <p class="closing">Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.</p>
+    </section>
+
+  </div>
+</main>
+
+<nav class="chrome" aria-label="Navegación del pitch">
+  <button type="button" id="prev" aria-label="Slide anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <span class="count" id="count" aria-live="polite">1 / 7</span>
+  <button type="button" id="next" aria-label="Slide siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button type="button" id="fullscreen" aria-label="Pantalla completa (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 V4 H9 M15 4 H20 V9 M20 15 V20 H15 M9 20 H4 V15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</nav>
+
+<script>
+  // Web demo of the agent (agente/, route /demo). Change it once there is a deploy.
+  const DEMO_URL = 'http://localhost:3000/demo';
+
+  const stage = document.getElementById('stage');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const count = document.getElementById('count');
+  let current = 0;
+
+  function fit() {
+    const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+
+  function show(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === current);
+      slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+      slide.inert = i !== current;
+    });
+    count.textContent = `${current + 1} / ${slides.length}`;
+    const hash = `#${current + 1}`;
+    if (location.hash !== hash) history.replaceState(null, '', hash);
+  }
+
+  function fromHash() {
+    const n = parseInt(location.hash.slice(1), 10);
+    return Number.isFinite(n) ? n - 1 : 0;
+  }
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(() => {});
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const onControl = event.target.closest && event.target.closest('button, a, input');
+    switch (event.key) {
+      case 'ArrowRight': case 'PageDown': show(current + 1); event.preventDefault(); break;
+      case 'ArrowLeft': case 'PageUp': show(current - 1); event.preventDefault(); break;
+      case ' ':
+        if (onControl) return; // space presses the focused button instead
+        show(event.shiftKey ? current - 1 : current + 1); event.preventDefault(); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length - 1); break;
+      case 'f': case 'F': toggleFullscreen(); break;
+    }
+  });
+  document.getElementById('prev').addEventListener('click', () => show(current - 1));
+  document.getElementById('next').addEventListener('click', () => show(current + 1));
+  document.getElementById('fullscreen').addEventListener('click', toggleFullscreen);
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', () => show(fromHash()));
+
+  // Live iPhone mirror: captures the iPhone Mirroring (or QuickTime) window.
+  const video = document.getElementById('mirror');
+  const screen = document.getElementById('screen');
+  const phone = document.getElementById('phone');
+  const status = document.getElementById('status');
+  const planb = document.getElementById('planb');
+  const connectBtn = document.getElementById('connect');
+  const reconnectBtn = document.getElementById('reconnect');
+  const stopBtn = document.getElementById('stop');
+  const idleText = 'Elige la ventana «Duplicación del iPhone» o la de QuickTime Player.';
+  let stream = null;
+
+  function setStatus(text, isError) {
+    status.textContent = text;
+    status.classList.toggle('is-error', Boolean(isError));
+    planb.classList.toggle('is-urgent', Boolean(isError));
+  }
+
+  function setLive(live) {
+    screen.classList.toggle('is-live', live);
+    phone.classList.toggle('is-live', live);
+    connectBtn.hidden = live;
+    reconnectBtn.hidden = !live;
+    stopBtn.hidden = !live;
+  }
+
+  function stopMirror(message) {
+    if (stream) stream.getTracks().forEach((track) => track.stop());
+    stream = null;
+    video.srcObject = null;
+    setLive(false);
+    setStatus(message || idleText, false);
+  }
+
+  async function connectMirror() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      setStatus(window.isSecureContext
+        ? 'Este navegador no puede compartir una ventana. Abre el pitch en Chrome, o usa el plan B.'
+        : 'Para compartir una ventana, abre el pitch desde localhost (npx serve pitch), no como archivo. Mientras, usa el plan B.', true);
+      return;
+    }
+    try {
+      const next = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false });
+      if (stream) stream.getTracks().forEach((track) => track.stop());
+      stream = next;
+      video.srcObject = stream;
+      const [track] = stream.getVideoTracks();
+      // Fires when sharing is stopped from Chrome's own bar or the window closes.
+      track.addEventListener('ended', () => {
+        if (stream === next) stopMirror('Se dejó de compartir la ventana. Vuelve a conectar, o usa el plan B.');
+      });
+      setLive(true);
+      setStatus('Conectado. Abre WhatsApp en el chat con Ami.', false);
+    } catch (error) {
+      if (error && error.name === 'NotAllowedError') {
+        setStatus(stream
+          ? 'Cancelaste el cambio: sigue la ventana de antes.'
+          : 'Cancelaste la selección. Toca «Conectar iPhone» de nuevo, o usa el plan B.', !stream);
+      } else {
+        setStatus(`No se pudo conectar la ventana (${(error && error.message) || 'error desconocido'}). Usa el plan B.`, true);
+      }
+    }
+  }
+
+  connectBtn.addEventListener('click', connectMirror);
+  reconnectBtn.addEventListener('click', connectMirror);
+  stopBtn.addEventListener('click', () => stopMirror());
+  document.getElementById('open-web').addEventListener('click', () => {
+    window.open(DEMO_URL, '_blank', 'noopener');
+  });
+
+  fit();
+  show(fromHash());
+</script>
+</body>
+</html>
