@@ -258,6 +258,7 @@ const PROHIBIDO = [
   /\b(lunes|d[ií]a uno|partir de cero|volver a empezar|reinici\w*|retom\w*|semana nueva)\b/i,
   /\b(sano|sana|chatarra|contundente|livian[oa]|de m[aá]s)\b/i,
   /calza con tu pauta/i,
+  /\bpo\b/i,
   /DERIVAR_/i,
 ];
 
