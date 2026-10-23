@@ -7,15 +7,12 @@ export const NOMBRE = "Amy";
 
 /**
  * Número en formato internacional, sin "+" ni espacios. Es el número del sandbox
- * de WhatsApp de Twilio (+1 415 523 8886), donde hoy vive Amy.
+ * de WhatsApp de Kapso (+56 9 2040 3095), donde hoy vive Amy. Solo responde a los
+ * celulares activados en el sandbox de Kapso (cada uno con su código de activación).
  */
-export const WHATSAPP_NUMERO = "14155238886";
+export const WHATSAPP_NUMERO = "56920403095";
 
-/**
- * Primer mensaje que queda escrito al abrir el chat. En el sandbox, el primer
- * mensaje tiene que ser el código de unión; después ya se conversa con Amy.
- * Con un número propio de Amy, cambiar por «Hola, quiero dejar listo mi finde».
- */
-export const WHATSAPP_TEXTO = "join driving-minerals";
+/** Primer mensaje que queda escrito al abrir el chat. */
+export const WHATSAPP_TEXTO = "Hola Amy";
 
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_TEXTO)}`;
