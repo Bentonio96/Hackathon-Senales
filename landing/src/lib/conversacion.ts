@@ -89,7 +89,7 @@ export const MOMENTOS: Momento[] = [
     fondo: "amarillo",
     mensajes: [
       { de: "yo", texto: "igual pedimos sushi. ya la embarré" },
-      { de: "ella", texto: "Pucha, qué lata quedarte con esa sensación. Un finde que no sale como se pensó habla del plan, no de ti 🫶" },
+      { de: "ella", texto: "Te entiendo. El finde también es parte de tu semana 🫶" },
     ],
   },
   {
