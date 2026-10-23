@@ -130,3 +130,36 @@ Re: 2026-10-23 11:10 y tus correcciones de las 11:28. **Integré tu parte entera
 - El contacto del día siguiente después de un B.
 
 Lo de arriba ya se probó sin la API, pero **el clasificador no se ha probado con la API**, porque falta la clave. Cuando Benja la tenga, corremos tus casos ★ de la sección 9.
+
+### 2026-10-23 15:30 · para Esperanza
+
+**Ami ya está en línea y conectado a WhatsApp.** Esto es lo que necesitas para seguir entrenándola sin depender de Benja.
+
+**Dónde probarla**
+- **Chat web:** https://hola-ami-agente.vercel.app/demo. Usa el mismo cerebro que WhatsApp y no necesita cuenta.
+  - **Reloj de la demo:** «Jueves 17:00», «Sábado al despertar» y «Domingo» hacen que Ami escriba primero.
+  - **Reiniciar conversación:** borra todo y parte limpio.
+  - **📷:** sube la foto del refri.
+- **WhatsApp:** manda `join driving-minerals` al +1 415 523 8886. El chat aparece como «PhishGuard», que es el número compartido del sandbox de Twilio y no se puede cambiar. Escribir `reiniciar` borra la conversación, y `pausa` pausa a Ami.
+
+**Cómo cambiar el comportamiento**
+1. **Edita `agente/prompts/acompanamiento.md`.** Es tu parte, y Ami la lee primero. Ahí mandan tu tono y tu seguridad.
+2. **Haz commit solo de ese archivo** (nunca `git add -A`), `git pull --rebase` y `git push` a `main`, con tu propia cuenta de GitHub (las bases lo piden).
+3. **Vercel vuelve a publicar solo** en 1 o 2 minutos. Recarga `/demo`, aprieta «Reiniciar conversación» y prueba de nuevo.
+
+**Lo que no está en tu prompt y conviene saber**
+- **Las alertas no las escribe el modelo.** Antes de que Ami responda, el código revisa si hay una alerta:
+  - primero tu lista de frases de nivel 2;
+  - si no hay coincidencia, un clasificador aparte que lee los últimos 20 mensajes.
+
+  Si hay alerta, se mandan tus mensajes fijos, que están en `agente/lib/seguridad.ts`, en la función `mensajesFijos`. **Si cambias un texto de alerta en tu prompt, cámbialo también ahí:** tu Claude puede editar **solo los textos entre comillas** de esa función (sin tocar la lógica) y correr `npx tsc --noEmit` dentro de `agente/` antes del push. Si el build falla, Vercel mantiene la versión anterior en línea, así que no se cae nada.
+- **Las frases de nivel 2** también están en `seguridad.ts` (`FRASES_NIVEL_2`). Si una frase de jerga dispara una alerta por error, o falta una, tu Claude puede ajustar esa lista. Escríbelas en minúscula.
+- **Filtro de salida:** si Ami escribe algo de la lista prohibida (calorías, gramos, kilos, peso, «lunes», «perfecto», «sano», «contundente», «calza con tu pauta», etc.), el código le pide que lo reescriba y, si vuelve a fallar, manda una respuesta neutra. La lista está en `PROHIBIDO`, en el mismo archivo.
+- **Burbujas:** Ami separa los mensajes con una línea que dice solo `---`, y el código manda cada parte como una burbuja de WhatsApp. Si en tu prompt pides «en burbujas separadas», ese es el mecanismo.
+- **Modelo:** hoy corre con Haiku 5.5 (barato) para que puedan probar harto. Para el pitch se cambia a Opus 5.5, que entiende mejor el tono. Si algo del tono te parece flojo con Haiku, anótalo antes de reescribir el prompt.
+- **Crédito:** la cuenta de Claude tiene pocos dólares. Prueben con calma, sin conversaciones largas de relleno.
+
+**Lo que más ayudaría ahora**
+- **Correr tus casos ★ de la sección 9** (`esperanza/acompanamiento-ami.md`) en `/demo` y anotar en tu `.md` cuáles fallan. Si el problema es de clasificación, lo arregla la lista o el clasificador; si es de tono, tu prompt.
+- **Cerrar con Benja el número de antojos por semana.** Hoy está en «dos» (variable `AMI_ANTOJOS_SEMANA` en Vercel).
+- **Avisarme aquí** si algo de la planificación (`agente/prompts/ami.md`, de Benja) choca con lo tuyo. Ese archivo no lo edites tú.
