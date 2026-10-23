@@ -3,23 +3,28 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { Sesion } from "./estado";
 import { ejecutarHerramienta, herramientas } from "./herramientas";
+import { clasificacionPorFrase, clasificar, frasesNivel2, mensajesFijos, violaFiltro } from "./seguridad";
 
 const client = new Anthropic();
 // Haiku 5.5 para probar barato; en el deploy del pitch se pone AMI_MODELO=claude-opus-5-5.
 const MODELO = process.env.AMI_MODELO || "claude-haiku-5-5";
+// El clasificador de alertas corre en cada mensaje: por defecto el modelo barato.
+const MODELO_CLASIFICADOR = process.env.AMI_MODELO_CLASIFICADOR || "claude-haiku-5-5";
 // El respaldo automático por rechazo existe en Opus, no en Haiku.
 const CON_RESPALDO = MODELO.startsWith("claude-opus");
+const ANTOJOS_SEMANA = process.env.AMI_ANTOJOS_SEMANA || "dos";
 const MAX_VUELTAS_HERRAMIENTAS = 8;
 const MAX_TURNOS_POR_SESION = 120;
+const SEPARADOR_BURBUJAS = /^\s*---\s*$/m;
 
 // El system prompt no cambia entre turnos para que el caché de prompts funcione.
 const SYSTEM = [
-  readFileSync(path.join(process.cwd(), "prompts", "ami.md"), "utf8"),
   readFileSync(path.join(process.cwd(), "prompts", "acompanamiento.md"), "utf8"),
+  readFileSync(path.join(process.cwd(), "prompts", "ami.md"), "utf8").replaceAll("{{ANTOJOS_SEMANA}}", ANTOJOS_SEMANA),
   "# La pauta de Antonia\n\n" + readFileSync(path.join(process.cwd(), "data", "pauta-ejemplo.md"), "utf8"),
 ].join("\n\n---\n\n");
 
-export type Entrada = { texto?: string; imagen?: { datos: Buffer; tipo: string } };
+export type Entrada = { texto?: string; imagen?: { datos: Buffer; tipo: string }; esReloj?: boolean };
 
 export async function subirImagen(datos: Buffer, tipo: string): Promise<string> {
   const archivo = await client.files.upload({ file: await toFile(datos, "refri.jpg", { type: tipo }) });
@@ -42,23 +47,19 @@ export const EVENTOS_RELOJ = {
     "[RELOJ DE LA DEMO] Ahora es jueves, 17:00. Antonia va saliendo de la universidad. Escríbele tú primero para preguntarle si sale este finde.",
   sabado:
     "[RELOJ DE LA DEMO] Ahora es sábado, a la hora en que Antonia dijo que despertaría. Escríbele tú primero según el plan guardado.",
-  domingo:
-    "[RELOJ DE LA DEMO] Ahora es domingo, 20:00. Escríbele algo corto y normal sobre mañana, sin puntajes ni balances del finde.",
+  domingo: "[RELOJ DE LA DEMO] Ahora es domingo en la mañana. Escríbele tú primero para preguntarle cómo amaneció.",
 } as const;
 
 export type MomentoReloj = keyof typeof EVENTOS_RELOJ;
 
-/**
- * Corre un turno de Ami: agrega lo que llegó al historial, deja que use herramientas
- * y devuelve los mensajes de texto que hay que mandarle a Antonia.
- */
-export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<string[]> {
-  if (sesion.turnos >= MAX_TURNOS_POR_SESION) {
-    return ["Por hoy llegamos al límite de mensajes de la demo 🙈. Escríbeme más rato y seguimos."];
-  }
-  sesion.turnos += 1;
-  sesion.historial.push({ role: "user", content: await aContenido(entrada) });
+/** Agrega al historial un intercambio cuyo lado de Ami es fijo (no lo generó el modelo). */
+function registrarFijo(sesion: Sesion, contenido: Anthropic.Beta.BetaContentBlockParam[], burbujas: string[]) {
+  sesion.historial.push({ role: "user", content: contenido });
+  sesion.historial.push({ role: "assistant", content: [{ type: "text", text: burbujas.join("\n---\n") }] });
+}
 
+/** Corre el modelo que conversa, con herramientas, sobre el historial actual. Devuelve sus textos. */
+async function correrModelo(sesion: Sesion): Promise<string[]> {
   const textos: string[] = [];
   for (let vuelta = 0; vuelta < MAX_VUELTAS_HERRAMIENTAS; vuelta++) {
     const respuesta = await client.beta.messages.create({
@@ -72,15 +73,14 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     });
 
     if (respuesta.stop_reason === "refusal") {
-      // No se agrega al historial: el turno se cerró sin respuesta utilizable.
-      textos.push("Uy, eso no lo puedo responder bien yo 🙏. Si es algo de salud, tu nutricionista o Salud Responde (600 360 7777) te pueden ayudar.");
-      sesion.historial.push({ role: "assistant", content: [{ type: "text", text: textos[textos.length - 1] }] });
+      const texto = "uy, eso no te lo sé responder bien. si es algo de salud, tu nutri o Salud Responde (600 360 7777) te pueden orientar.";
+      sesion.historial.push({ role: "assistant", content: [{ type: "text", text: texto }] });
+      textos.push(texto);
       break;
     }
 
     // Se guarda el contenido completo (incluido thinking) y nunca se edita después.
     sesion.historial.push({ role: "assistant", content: respuesta.content });
-
     for (const bloque of respuesta.content) {
       if (bloque.type === "text" && bloque.text.trim()) textos.push(bloque.text.trim());
     }
@@ -100,6 +100,83 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     );
     sesion.historial.push({ role: "user", content: resultados });
   }
-
   return textos;
+}
+
+const enBurbujas = (textos: string[]) =>
+  textos.flatMap((t) => t.split(SEPARADOR_BURBUJAS)).map((b) => b.trim()).filter(Boolean);
+
+/**
+ * Corre un turno de Ami y devuelve las burbujas para Antonia.
+ * Orden (diseño de Esperanza): detección de alertas antes del modelo, filtro de salida después.
+ */
+export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<string[]> {
+  if (sesion.turnos >= MAX_TURNOS_POR_SESION) {
+    return ["por hoy llegamos al límite de mensajes de la demo. escríbeme más rato 🌿"];
+  }
+  sesion.turnos += 1;
+  const texto = entrada.texto?.trim() ?? "";
+  const contenido = await aContenido(entrada);
+  const previa = sesion.derivacion_previa?.nivel ?? null;
+
+  if (!entrada.esReloj && texto.toLowerCase() === "pausa") {
+    sesion.modo = "pausa";
+    const burbujas = [
+      previa
+        ? "dale, quedo en pausa. si lo necesitas, el *4141 atiende a toda hora y tu nutricionista o la psicóloga de la u te pueden acompañar 🫶"
+        : "dale, quedo en pausa esta semana. el jueves te pregunto por el finde 🫶",
+    ];
+    registrarFijo(sesion, contenido, burbujas);
+    return burbujas;
+  }
+
+  // 1. Detección: frases de nivel 2 primero; si no, el clasificador con los últimos 20 mensajes.
+  if (!entrada.esReloj && texto) {
+    const porFrase = frasesNivel2(texto);
+    let clasificacion = porFrase ? clasificacionPorFrase(porFrase, texto) : null;
+    if (!clasificacion) {
+      try {
+        clasificacion = await clasificar(client, MODELO_CLASIFICADOR, sesion.historial, texto, previa);
+      } catch (error) {
+        // Si el clasificador falla, sigue el modelo que conversa, que tiene las mismas reglas en su prompt.
+        console.error("Clasificador falló:", error);
+      }
+    }
+    if (clasificacion && clasificacion.nivel !== "0") {
+      const burbujas = mensajesFijos(clasificacion, previa);
+      if (burbujas.length > 0) {
+        if (clasificacion.nivel !== "ambiguo") {
+          sesion.modo = "derivada";
+          sesion.derivacion_previa = { nivel: clasificacion.nivel, fecha: new Date().toISOString() };
+        }
+        console.info("Alerta detectada:", clasificacion.nivel, clasificacion.senal);
+        registrarFijo(sesion, contenido, burbujas);
+        return burbujas;
+      }
+    }
+  }
+
+  // 2. El modelo que conversa.
+  sesion.historial.push({ role: "user", content: contenido });
+  let burbujas = enBurbujas(await correrModelo(sesion));
+
+  // 3. Filtro de salida: si aparece algo prohibido, se regenera una vez; si vuelve, respuesta neutra.
+  const violacion = violaFiltro(burbujas.join("\n"));
+  if (violacion) {
+    console.warn("Filtro de salida:", violacion);
+    sesion.historial.push({
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: `[REVISIÓN INTERNA, no es de Antonia] Tu último mensaje usó «${violacion}», que Ami no dice. Antonia no lo vio. Escribe de nuevo ese mensaje sin eso, siguiendo las reglas del acompañamiento.`,
+        },
+      ],
+    });
+    burbujas = enBurbujas(await correrModelo(sesion));
+    if (violaFiltro(burbujas.join("\n"))) {
+      burbujas = ["perdón, se me enredó la respuesta. ¿me cuentas de nuevo? 🌿"];
+    }
+  }
+  return burbujas;
 }

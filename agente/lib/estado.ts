@@ -25,6 +25,9 @@ export interface Sesion {
   historial: Anthropic.Beta.BetaMessageParam[];
   plan?: PlanSabado;
   turnos: number;
+  // Estado interno del acompañamiento (diseño de Esperanza). Nunca se le muestra a Antonia.
+  modo?: "normal" | "derivada" | "pausa";
+  derivacion_previa?: { nivel: string; fecha: string } | null;
 }
 
 const redis =
