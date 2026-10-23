@@ -6,154 +6,127 @@
 <title>Ami · pitch caso Antonia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
+  /* Same tokens as the landing (landing/src/index.css): «Cerro de calamina». */
   :root {
-    --neblina: #F2F4F1;
-    --papel: #FFFFFF;
-    --tinta: #1E2321;
-    --tinta-suave: #4A524E;
-    --amarillo: #F6C445;
-    --celeste: #7FBFC4;
-    --celeste-claro: #DCEEEF;
-    --rubor: #EF8A6E;
-    --ladrillo: #B24A2E;
-    --durazno: #F7E9DF;
-    --puerto: #1F5F73;
-    --puerto-hondo: #163F4D;
-    --linea: #DCE1DD;
+    --cielo: #f2f4f1;
+    --superficie: #ffffff;
+    --tinta: #1e2321;
+    --tinta-suave: #4a524e;
+    --amarillo: #fcefc6;
+    --celeste: #dceeef;
+    --rosado: #fbe3da;
+    --menta: #e3efe6;
+    --accion: #1f5f73;
+    --accion-fuerte: #163f4d;
+    --casa-amarillo: #f6c445;
+    --casa-celeste: #7fbfc4;
+    --casa-rosado: #ef8a6e;
+    --casa-menta: #9cc9a6;
+    --casa-naranja: #f2a65e;
+    --casa-rojo: #d9675a;
+    --casa-azul: #5b93b8;
+    --ventana: #fff8e6;
+    --techo: #1e2321;
+    --vista: #dceeef;
+    --cerro: #cfe2d4;
+    --cerro-2: #bcd6c3;
+    --mar: #9fcfd3;
     --display: 'Bricolage Grotesque', 'Avenir Next', system-ui, sans-serif;
     --texto: Figtree, 'Avenir Next', system-ui, sans-serif;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--neblina); color: var(--tinta); font-family: var(--texto); }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--cielo); color: var(--tinta); font-family: var(--texto); }
   button { font-family: inherit; cursor: pointer; }
-  button:focus-visible, a:focus-visible { outline: 3px solid var(--puerto); outline-offset: 3px; }
+  button:focus-visible, a:focus-visible { outline: 3px solid var(--accion); outline-offset: 3px; }
 
   /* The deck is drawn on a fixed 1600×900 stage and scaled to the window. */
   .viewport { position: fixed; inset: 0; overflow: hidden; }
   .stage { width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%; transform-origin: center; }
 
-  .slide { position: absolute; inset: 0; padding: 84px 112px 96px; display: flex; flex-direction: column; gap: 36px; overflow: hidden; visibility: hidden; opacity: 0; transform: translateY(16px); transition: opacity 360ms var(--ease), transform 360ms var(--ease), visibility 0s linear 360ms; }
-  .slide.is-active { visibility: visible; opacity: 1; transform: none; transition: opacity 360ms var(--ease), transform 360ms var(--ease); }
-  .blob { position: absolute; pointer-events: none; z-index: 0; }
-  .slide > *:not(.blob) { position: relative; z-index: 1; }
+  .slide { position: absolute; inset: 0; padding: 96px 120px; display: flex; flex-direction: column; justify-content: center; gap: 36px; overflow: hidden; background: var(--cielo); visibility: hidden; opacity: 0; transition: opacity 400ms var(--ease), visibility 0s linear 400ms; isolation: isolate; }
+  .slide.is-active { visibility: visible; opacity: 1; transition: opacity 400ms var(--ease); }
+  .slide.amarillo { background: var(--amarillo); }
+  .slide.rosado { background: var(--rosado); }
+  .slide.celeste { background: var(--celeste); }
+  /* Paper grain, as in the landing's colored fields. */
+  .grano::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .07; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 
-  h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; margin: 0; line-height: 1.02; }
-  h1 { font-size: 96px; }
-  h2 { font-size: 64px; max-width: 1240px; }
-  h3 { font-family: var(--display); font-weight: 700; font-size: 30px; margin: 0; letter-spacing: -0.01em; }
-  p { margin: 0; }
-  .lead { font-size: 30px; line-height: 1.35; color: var(--tinta-suave); }
-  .source { font-size: 16px; color: var(--tinta-suave); }
-  .bubble { background: var(--papel); border-radius: 6px 26px 26px 26px; padding: 16px 22px; font-size: 25px; line-height: 1.35; align-self: flex-start; }
-  .bubble.mine { background: var(--celeste-claro); border-radius: 26px 6px 26px 26px; align-self: flex-end; }
+  h1, h2 { font-family: var(--display); margin: 0; }
+  .display { font-weight: 800; font-size: 120px; line-height: .92; letter-spacing: -0.04em; }
+  .titulo { font-weight: 800; font-size: 80px; line-height: 1; letter-spacing: -0.03em; }
+  .lead { font-size: 32px; line-height: 1.3; margin: 0; max-width: 30ch; }
+  .chico { font-size: 18px; line-height: 1.4; color: var(--tinta-suave); margin: 0; }
 
-  /* Placeholder for Esperanza's part: deliberately visible so it is not shipped by accident. */
-  .esperanza { border: 2.5px dashed var(--puerto); border-radius: 22px 28px 24px 30px; padding: 14px 20px; font-size: 19px; line-height: 1.4; color: var(--puerto-hondo); background: rgba(220, 238, 239, .55); }
+  .split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 6fr); gap: 56px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 32px; }
 
-  /* 1 · week */
-  .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; margin-top: auto; margin-bottom: auto; }
-  .day { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-  .day-blob { width: 230px; height: 230px; display: grid; place-items: center; position: relative; }
-  .day-blob svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .day-value { position: relative; font-family: var(--display); font-weight: 700; font-size: 60px; letter-spacing: -0.02em; }
-  .day-name { font-family: var(--display); font-weight: 700; font-size: 30px; }
-  .day-text { font-size: 22px; line-height: 1.3; color: var(--tinta-suave); max-width: 220px; }
+  /* Ami speaking: avatar + bubble, the landing's signature. */
+  .dice { display: flex; align-items: flex-end; gap: 14px; }
+  .dice svg.av { width: 64px; height: 64px; flex-shrink: 0; }
+  .burbuja { background: var(--superficie); border-radius: 4px 26px 24px 28px; padding: 16px 22px; font-size: 26px; line-height: 1.3; }
+  .burbuja.yo { background: var(--celeste); border-radius: 26px 4px 28px 24px; }
+  .cuando { font-size: 17px; font-weight: 700; color: var(--tinta-suave); margin-bottom: 6px; display: block; }
 
-  /* 2 · reset line */
-  .quote { font-family: var(--display); font-weight: 500; font-size: 80px; line-height: 1.04; letter-spacing: -0.025em; max-width: 1240px; }
-  .timeline { margin-top: auto; display: flex; flex-direction: column; gap: 18px; }
-  .covers { display: grid; grid-template-columns: 4fr 3fr; gap: 28px; }
-  .cover { border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; text-align: center; }
-  .cover.ok { background: var(--celeste-claro); color: var(--puerto-hondo); }
-  .cover.none { border: 2.5px dashed var(--ladrillo); color: var(--ladrillo); }
-  .days7 { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 28px; }
-  .d7 { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 34px; }
-  .d7.on { background: var(--amarillo); }
-  .d7.off { background: var(--papel); border: 2.5px dashed #C6CDC9; color: #8A928E; }
+  /* Cerro */
+  .cerro { position: relative; width: 100%; }
+  .cerro svg { display: block; width: 100%; height: auto; }
+  .cerro .nota { position: absolute; top: 2%; left: 0; max-width: 68%; display: flex; align-items: flex-start; gap: 12px; background: var(--superficie); border-radius: 22px 22px 22px 6px; padding: 12px 18px 12px 12px; font-size: 22px; line-height: 1.3; }
+  .cerro .nota svg { width: 48px; height: 48px; flex-shrink: 0; }
+  .cerro .nota b { display: block; }
 
-  /* 3 · money vs food */
-  .vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; flex-grow: 1; }
-  .chart { background: var(--papel); border-radius: 44px 36px 48px 40px; padding: 36px 40px 32px; display: flex; flex-direction: column; gap: 18px; }
-  .chart svg { width: 100%; height: 260px; }
-  .chart .what { font-size: 26px; line-height: 1.3; }
-  .burger { display: flex; align-items: center; gap: 22px; font-size: 30px; color: var(--tinta-suave); }
-  .burger svg { width: 84px; height: 84px; flex-shrink: 0; }
-  .burger strong { font-family: var(--display); font-size: 40px; color: var(--tinta); }
+  /* Wavy calamina seam and the closing silhouette */
+  .onda { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 28px; z-index: -1; }
+  .silueta { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 140px; z-index: -1; }
 
-  /* 4 · Ami */
-  .ami { display: grid; grid-template-columns: 330px minmax(0, 1fr) minmax(0, 1fr); gap: 44px; flex-grow: 1; align-items: stretch; }
-  .ami-id { display: flex; flex-direction: column; gap: 18px; justify-content: center; }
-  .ami-id svg { width: 300px; height: 300px; }
-  .chat { border-radius: 40px 34px 44px 38px; padding: 28px 28px; display: flex; flex-direction: column; gap: 12px; }
-  .chat.antes { background: var(--papel); }
-  .chat.despues { background: var(--celeste-claro); }
-  .chat-when { font-family: var(--display); font-weight: 700; font-size: 28px; margin-bottom: 4px; }
-  .chat .bubble { font-size: 21px; padding: 12px 18px; background: var(--neblina); }
-  .chat.despues .bubble { background: var(--papel); }
-  .chat .bubble.mine { background: var(--celeste-claro); }
-  .plan { align-self: flex-start; width: 100%; background: var(--neblina); border-radius: 6px 24px 24px 24px; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; font-size: 20px; line-height: 1.3; }
-  .plan-row { display: flex; gap: 12px; align-items: center; }
-  .plan-row svg { width: 34px; height: 34px; flex-shrink: 0; }
-  .price { display: flex; justify-content: space-between; font-size: 19px; }
+  /* Pills (landing «Lo que nunca hace») */
+  .pildoras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; }
+  .pildora { display: flex; align-items: center; gap: 16px; background: var(--superficie); border-radius: 22px; padding: 18px 24px; font-size: 25px; font-weight: 500; }
+  .pildora svg { width: 26px; height: 26px; flex-shrink: 0; }
+  .pildora.siguiente { background: transparent; border: 2.5px dashed var(--accion); color: var(--accion-fuerte); grid-column: 1 / -1; }
 
-  /* 5 · demo */
-  .demo { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 88px; align-items: center; height: 100%; }
-  .phone { width: 400px; height: 820px; border-radius: 64px; background: var(--tinta); padding: 14px; position: relative; justify-self: center; }
-  .screen { width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #101413; position: relative; display: grid; place-items: center; }
+  /* Evidence as things Ami says */
+  .razones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px; }
+  .razon { display: flex; flex-direction: column; gap: 10px; }
+
+  .esperanza { border: 2.5px dashed var(--accion); border-radius: 18px; padding: 10px 16px; font-size: 18px; color: var(--accion-fuerte); background: rgba(255,255,255,.55); align-self: flex-start; }
+
+  /* Demo */
+  .demo { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 96px; align-items: center; }
+  .phone { width: 390px; height: 800px; border-radius: 60px; background: var(--tinta); padding: 13px; position: relative; justify-self: center; }
+  .screen { width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #101413; position: relative; display: grid; place-items: center; }
   .screen video { width: 100%; height: 100%; object-fit: contain; display: none; background: #101413; }
   .screen.is-live video { display: block; }
   .screen-empty { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 32px; text-align: center; color: #E8ECEA; }
-  .screen-empty svg { width: 150px; height: 150px; }
-  .screen-empty p { font-size: 20px; line-height: 1.4; }
+  .screen-empty svg { width: 140px; height: 140px; }
+  .screen-empty p { font-size: 20px; line-height: 1.4; margin: 0; }
   .screen.is-live .screen-empty { display: none; }
-  .live-pill { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--papel); color: var(--puerto-hondo); font-size: 15px; font-weight: 700; z-index: 2; }
-  .live-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--puerto); }
+  .live-pill { position: absolute; top: 26px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--superficie); color: var(--accion-fuerte); font-size: 15px; font-weight: 700; z-index: 2; }
+  .live-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--accion); }
   .phone.is-live .live-pill { display: inline-flex; }
-  .demo-side { display: flex; flex-direction: column; gap: 28px; }
   .controls { display: flex; flex-wrap: wrap; gap: 14px; }
-  .btn { min-height: 60px; padding: 0 30px; border-radius: 999px; font-size: 22px; font-weight: 600; border: 2px solid var(--puerto); background: var(--papel); color: var(--puerto); transition: background 200ms var(--ease), color 200ms var(--ease); }
-  .btn:hover { background: var(--celeste-claro); }
-  .btn.primary { background: var(--puerto); color: var(--papel); }
-  .btn.primary:hover { background: var(--puerto-hondo); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 60px; padding: 0 30px; border-radius: 999px; font-size: 22px; font-weight: 600; border: 2px solid var(--accion); background: var(--superficie); color: var(--accion); transition: background 200ms var(--ease), transform 150ms var(--ease); }
+  .btn:active { transform: scale(.96); }
+  .btn.primary { background: var(--accion); color: #fff; }
+  .btn.primary:hover { background: var(--accion-fuerte); }
   .btn[hidden] { display: none; }
-  .status { font-size: 22px; line-height: 1.45; min-height: 64px; max-width: 760px; }
-  .status.is-error { color: var(--ladrillo); }
-  .planb { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 22px 28px; border-radius: 32px 26px 36px 28px; background: var(--papel); max-width: 760px; transition: box-shadow 200ms var(--ease); }
-  .planb.is-urgent { box-shadow: 0 0 0 3px var(--amarillo); }
-  .planb p { font-size: 20px; line-height: 1.4; color: var(--tinta-suave); flex: 1 1 260px; }
-
-  /* 6 · evidence */
-  .evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 56px; flex-grow: 1; }
-  .ev { display: flex; flex-direction: column; gap: 14px; }
-  .ev h3 { font-size: 32px; }
-  .ev .source { margin-top: auto; }
-  .ev-hint { font-family: var(--texto); font-weight: 500; font-size: 18px; color: var(--tinta-suave); letter-spacing: 0; }
-  .bars { display: flex; flex-direction: column; gap: 10px; }
-  .bar { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 16px; align-items: center; font-size: 20px; }
-  .bar-track { height: 34px; display: flex; align-items: center; }
-  .bar-fill { height: 100%; border-radius: 6px 18px 18px 6px; background: #C6CDC9; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
-  .bar-fill.hi { background: var(--amarillo); }
-  .reset { display: flex; align-items: center; gap: 18px; }
-  .reset svg { width: 100%; height: 110px; }
-
-  /* 7 · out of scope */
-  .nope { display: flex; flex-wrap: wrap; gap: 18px; max-width: 1280px; }
-  .nope span { font-family: var(--display); font-weight: 700; font-size: 34px; padding: 16px 30px; border-radius: 999px; background: var(--papel); text-decoration: line-through; text-decoration-color: var(--ladrillo); text-decoration-thickness: 4px; color: var(--tinta-suave); }
-  .nope span.next { text-decoration: none; border: 2.5px dashed var(--puerto); background: transparent; color: var(--puerto-hondo); }
-  .closing { font-family: var(--display); font-weight: 700; font-size: 60px; letter-spacing: -0.025em; line-height: 1.05; margin-top: auto; max-width: 1080px; }
+  .status { font-size: 22px; line-height: 1.45; min-height: 64px; max-width: 760px; margin: 0; }
+  .status.is-error { color: #a3402a; }
+  .planb { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 20px 26px; border-radius: 26px; background: var(--superficie); max-width: 760px; transition: box-shadow 200ms var(--ease); }
+  .planb.is-urgent { box-shadow: 0 0 0 3px var(--casa-amarillo); }
+  .planb p { font-size: 20px; line-height: 1.4; color: var(--tinta-suave); flex: 1 1 260px; margin: 0; }
 
   /* deck chrome */
-  .chrome { position: fixed; right: 20px; bottom: 16px; display: flex; align-items: center; gap: 8px; z-index: 10; font-size: 15px; color: var(--tinta-suave); }
-  .chrome button { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--linea); background: var(--papel); color: var(--puerto); display: grid; place-items: center; }
+  .chrome { position: fixed; right: 20px; bottom: 16px; display: flex; align-items: center; gap: 8px; z-index: 10; font-size: 15px; color: var(--tinta-suave); opacity: .55; transition: opacity 200ms; }
+  .chrome:hover, .chrome:focus-within { opacity: 1; }
+  .chrome button { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgb(30 35 33 / .12); background: var(--superficie); color: var(--accion); display: grid; place-items: center; }
   .chrome svg { width: 20px; height: 20px; }
   .count { min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
 
   @media (prefers-reduced-motion: reduce) {
-    .slide, .slide.is-active { transition: none; transform: none; }
-    .btn, .planb { transition: none; }
+    .slide, .slide.is-active, .btn, .planb, .chrome { transition: none; }
   }
 </style>
 </head>
@@ -161,7 +134,8 @@
 
 <svg width="0" height="0" style="position: absolute" aria-hidden="true">
   <defs>
-    <g id="ami-b">
+    <symbol id="ami" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="100" fill="#F7E9DF"/>
       <path d="M90 50 C126 46 152 74 150 110 C148 146 122 164 90 160 C58 156 38 132 42 100 C46 70 62 53 90 50 Z" fill="#F6C445"/>
       <path d="M152 108 C168 106 180 121 178 138 C176 156 161 165 146 161 C131 157 125 144 129 128 C132 115 140 109 152 108 Z" fill="#7FBFC4"/>
       <path d="M73 98 Q79 91 85 98" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
@@ -171,13 +145,8 @@
       <path d="M83 116 Q93 125 103 115" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
       <circle cx="145" cy="131" r="3.5" fill="#1E2321"/>
       <circle cx="159" cy="130" r="3.5" fill="#1E2321"/>
-    </g>
-    <path id="mancha" d="M100 14 C160 10 192 60 188 108 C184 160 140 192 92 188 C44 184 10 150 14 100 C18 52 48 18 100 14 Z"/>
-    <g id="taper">
-      <rect x="6" y="20" width="52" height="34" rx="8" fill="#FFFFFF" stroke="#9CC3C9" stroke-width="3"/>
-      <rect x="4" y="12" width="56" height="12" rx="5" fill="#9CC3C9"/>
-      <circle cx="22" cy="38" r="4" fill="#F2CF6B"/><circle cx="34" cy="40" r="4" fill="#7FA35A"/><circle cx="44" cy="36" r="4" fill="#E0644A"/>
-    </g>
+    </symbol>
+    <symbol id="x" viewBox="0 0 24 24"><path d="M6 6 L18 18 M18 6 L6 18" stroke="#a3402a" stroke-width="2.6" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 
@@ -185,148 +154,78 @@
   <div class="stage" id="stage">
 
     <!-- 1 · Antonia -->
-    <section class="slide" aria-label="Antonia: su semana">
-      <svg class="blob" viewBox="0 0 200 200" style="right: -140px; top: -180px; width: 560px; height: 560px" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".2"/></svg>
-      <div style="display: flex; align-items: baseline; gap: 32px; flex-wrap: wrap">
-        <h1>Antonia</h1>
-        <p class="lead">23 años, estudiante, Valparaíso</p>
-      </div>
-      <div class="week">
-        <div class="day">
-          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#DCEEEF"/></svg><span class="day-value">100%</span></div>
-          <span class="day-name">lunes</span>
-          <span class="day-text">la pauta al pie de la letra</span>
+    <section class="slide" aria-label="Antonia">
+      <div class="split">
+        <div class="stack">
+          <h1 class="display">Antonia parte de cero cada lunes.</h1>
+          <p class="lead">23 años, estudia en Valparaíso. Cumple su pauta de lunes a jueves. Van nueve ciclos.</p>
         </div>
-        <div class="day">
-          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#DCEEEF"/></svg><span class="day-value">4/4</span></div>
-          <span class="day-name">jueves</span>
-          <span class="day-text">cuatro días perfectos</span>
-        </div>
-        <div class="day">
-          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F7E9DF"/></svg><span class="day-value">02:40</span></div>
-          <span class="day-name">viernes</span>
-          <span class="day-text">carrete y completo</span>
-        </div>
-        <div class="day">
-          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F7E9DF"/></svg><span class="day-value">2×</span></div>
-          <span class="day-name">sábado</span>
-          <span class="day-text">delivery con caña</span>
-        </div>
-        <div class="day">
-          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".6"/></svg><span class="day-value" style="font-size: 44px">ciclo 10</span></div>
-          <span class="day-name">domingo</span>
-          <span class="day-text">«el lunes parto de nuevo»</span>
-        </div>
+        <figure class="cerro" data-cerro="roto" style="margin: 0" role="img" aria-label="La semana como un cerro de casas: de lunes a jueves están de colores; viernes, sábado y domingo son casas vacías">
+          <figcaption class="nota"><svg aria-hidden="true"><use href="#ami"/></svg><span><b>Domingo</b>«El lunes parto de nuevo.»</span></figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- 2 · Por qué le pasa -->
-    <section class="slide" aria-label="Por qué le pasa">
-      <p class="quote">«Ya la embarré con la semana, el lunes parto de nuevo.»</p>
-      <div class="timeline">
-        <div class="covers">
-          <div class="cover ok">apps de recetas · contadores · la pauta en PDF</div>
-          <div class="cover none">sin plan</div>
+    <section class="slide amarillo grano" aria-label="Por qué le pasa">
+      <div class="split" style="margin-top: -60px; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr)">
+        <div class="stack">
+          <h2 class="titulo">«Ya la embarré con la semana, el lunes parto de nuevo.»</h2>
+          <p class="lead" style="max-width: 34ch">Un desliz anula la semana entera. Y nada de lo que ya probó tiene un plan para el finde.</p>
         </div>
-        <div class="days7" aria-hidden="true">
-          <div class="d7 on">L</div><div class="d7 on">M</div><div class="d7 on">M</div><div class="d7 on">J</div>
-          <div class="d7 off">V</div><div class="d7 off">S</div><div class="d7 off">D</div>
-        </div>
-        <svg viewBox="0 0 1376 90" style="width: 100%; height: 90px" role="img" aria-label="El domingo vuelve al lunes: vuelta a cero">
-          <path d="M1280 6 C1280 70 1200 78 690 78 C180 78 96 70 96 14" fill="none" stroke="#B24A2E" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
-          <path d="M82 30 L96 10 L110 30" fill="none" stroke="#B24A2E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="690" y="66" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="24" fill="#B24A2E">vuelta a cero</text>
-        </svg>
+        <div class="dice"><svg class="av" style="width: 80px; height: 80px" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">el lunes no se parte de cero: se sigue 🫶</p></div>
       </div>
+      <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
 
     <!-- 3 · Lo vivimos -->
-    <section class="slide" aria-label="Lo vivimos">
-      <h2>Lo vivimos</h2>
-      <div class="burger">
-        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 28 C8 12 56 12 56 28 Z" fill="#E3A857"/><rect x="6" y="30" width="52" height="7" rx="3.5" fill="#7FA35A"/><rect x="8" y="37" width="48" height="8" rx="4" fill="#8A4B2E"/><path d="M8 47 L56 47 C56 55 8 55 8 47 Z" fill="#E3A857"/></svg>
-        <strong>$10.000 =</strong>
-        <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#taper"/></svg>
-        <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#taper"/></svg>
-        <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#taper"/></svg>
-        <span>Benja, estudiando lejos de casa, con mesada</span>
-      </div>
-      <div class="vs">
-        <div class="chart">
-          <h3>Con la plata</h3>
-          <svg viewBox="0 0 600 260" role="img" aria-label="La mesada baja con un gasto de más y sigue">
-            <line x1="20" y1="236" x2="580" y2="236" stroke="#DCE1DD" stroke-width="3"/>
-            <path d="M20 40 L200 80 L230 136 L400 172 L580 210" fill="none" stroke="#1F5F73" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="230" cy="136" r="12" fill="#F6C445"/>
-            <text x="250" y="118" font-family="Figtree, sans-serif" font-size="22" font-weight="600" fill="#1E2321">un gasto de más</text>
-          </svg>
-          <p class="what">Ajustas y sigues. Nadie bota la mesada.</p>
+    <section class="slide rosado grano" aria-label="Lo vivimos">
+      <div class="split" style="grid-template-columns: minmax(0, 6fr) minmax(0, 5fr)">
+        <div class="stack">
+          <h2 class="titulo">Lo vivimos.</h2>
+          <p class="lead">Benja estudió lejos de casa, con mesada. El finde pedía una hamburguesa de $10.000: varios almuerzos.</p>
         </div>
-        <div class="chart">
-          <h3>Con la comida</h3>
-          <svg viewBox="0 0 600 260" role="img" aria-label="Cuatro días suben y el fin de semana cae a cero, tres semanas seguidas">
-            <line x1="20" y1="236" x2="580" y2="236" stroke="#DCE1DD" stroke-width="3"/>
-            <path d="M20 236 L140 60 L160 236 L200 236 L320 60 L340 236 L380 236 L500 60 L520 236 L580 236" fill="none" stroke="#B24A2E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="150" y="40" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">ciclo 8</text>
-            <text x="330" y="40" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">ciclo 9</text>
-            <text x="510" y="40" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">ciclo 10</text>
-          </svg>
-          <p class="what">Un sábado «arruina» la semana entera.</p>
+        <div class="stack" style="gap: 20px">
+          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">con la plata, un gasto de más y sigues</p></div>
+          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">con la comida, un desliz y «ya la embarré»</p></div>
+          <p class="lead" style="font-family: var(--display); font-weight: 800; font-size: 44px; letter-spacing: -0.02em; line-height: 1.05; margin-top: 16px">Con la plata nadie piensa en blanco o negro.</p>
         </div>
       </div>
     </section>
 
     <!-- 4 · Ami -->
     <section class="slide" aria-label="Ami">
-      <div class="ami">
-        <div class="ami-id">
-          <svg viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
-          <h1>Ami</h1>
-          <p class="lead" style="font-size: 26px">una amiga en su WhatsApp</p>
-        </div>
-
-        <div class="chat antes">
-          <span class="chat-when">jueves, antes</span>
-          <div class="bubble">¿sales este finde? mándame una foto del refri</div>
-          <div class="bubble mine" style="padding: 8px">
-            <svg viewBox="0 0 240 150" role="img" aria-label="Foto del refri (ilustración)" style="width: 220px; height: 138px; display: block; border-radius: 16px"><rect width="240" height="150" fill="#E4EBEC"/><rect x="10" y="8" width="220" height="134" rx="8" fill="#F7FAFA"/><line x1="14" y1="74" x2="226" y2="74" stroke="#C9D3D5" stroke-width="3"/><circle cx="40" cy="56" r="10" fill="#FBF3E6" stroke="#D9C6A5" stroke-width="2"/><circle cx="62" cy="56" r="10" fill="#FBF3E6" stroke="#D9C6A5" stroke-width="2"/><ellipse cx="110" cy="50" rx="14" ry="18" fill="#7FA35A"/><circle cx="110" cy="54" r="6" fill="#8A5A3B"/><circle cx="160" cy="56" r="11" fill="#E0644A"/><circle cx="184" cy="58" r="10" fill="#E0644A"/><path d="M40 126 L96 126 L96 96 Z" fill="#F2CF6B"/><rect x="120" y="98" width="70" height="30" rx="6" fill="#EFE2C4"/></svg>
-          </div>
-          <div class="plan">
-            <div class="plan-row"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#DCEEEF"/><path d="M11 21 Q20 30 29 21" fill="none" stroke="#1F5F73" stroke-width="2.6" stroke-linecap="round"/><line x1="10" y1="19" x2="30" y2="19" stroke="#1F5F73" stroke-width="2.6" stroke-linecap="round"/></svg><span>quesadillas en 10 min, con lo que tienes</span></div>
-            <div class="plan-row"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#FCEBC0"/><path d="M20 10 C24 15 27 18 27 22 C27 26 24 29 20 29 C16 29 13 26 13 22 C13 18 16 15 20 10 Z" fill="none" stroke="#8A5A12" stroke-width="2.4"/></svg><span>sushi por delivery: tu antojo</span></div>
-            <div class="price"><span>casera</span><strong>+$690</strong></div>
-            <div class="price" style="color: var(--tinta-suave)"><span>la misma por delivery</span><span>~$9.800</span></div>
-            <span class="source">precios de ejemplo</span>
+      <div class="split">
+        <div class="stack">
+          <h2 class="display" style="font-size: 108px">El lunes ya no partes de cero.</h2>
+          <p class="lead">Ami es una amiga en tu WhatsApp que el jueves te deja listo el sábado.</p>
+          <div class="stack" style="gap: 14px">
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 22px"><span class="cuando">jueves</span>mándame una foto del refri y armamos tu sábado</p></div>
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 22px"><span class="cuando">si el plan se rompe</span>seguimos desde tu próxima comida 🫶</p></div>
+            <span class="esperanza"><strong>[Esperanza]</strong> cómo acompaña Ami y cuándo deriva</span>
           </div>
         </div>
-
-        <div class="chat despues">
-          <span class="chat-when">si el plan se rompe</span>
-          <div class="bubble mine">ya la embarré con la semana</div>
-          <div class="bubble">no la embarraste, comiste. seguimos desde tu próxima comida 🫶</div>
-          <div class="bubble">mañana, desayuno con el pan y la palta que te quedan</div>
-          <div class="bubble mine">ya po. gracias ami</div>
-          <div class="esperanza" style="margin-top: auto"><strong>[Esperanza]</strong> cómo acompaña Ami y cuándo deriva.</div>
-        </div>
+        <figure class="cerro" data-cerro="entero" style="margin: 0" role="img" aria-label="La semana como un cerro de siete casas de colores que siempre sube">
+          <figcaption class="nota"><svg aria-hidden="true"><use href="#ami"/></svg><span><b>Sábado</b>Antojo y algo casero. Ya está decidido.</span></figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- 5 · Demo en vivo -->
-    <section class="slide" aria-label="Demo en vivo" id="slide-demo">
-      <svg class="blob" viewBox="0 0 200 200" style="left: 40px; top: 40px; width: 560px; height: 820px" preserveAspectRatio="none" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".2"/></svg>
+    <section class="slide celeste" aria-label="Demo en vivo" id="slide-demo">
       <div class="demo">
         <div class="phone" id="phone">
           <div class="screen" id="screen">
             <video id="mirror" autoplay muted playsinline aria-label="Pantalla del iPhone en vivo"></video>
             <div class="screen-empty">
-              <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#ami-b"/></svg>
+              <svg aria-hidden="true"><use href="#ami"/></svg>
               <p>Aquí se ve el iPhone en vivo.</p>
             </div>
           </div>
           <span class="live-pill">en vivo</span>
         </div>
-        <div class="demo-side">
-          <h2>Demo en vivo</h2>
+        <div class="stack" style="gap: 28px">
+          <h2 class="display" style="font-size: 104px">Un finde cualquiera, con Ami.</h2>
           <div class="controls">
             <button class="btn primary" id="connect" type="button">Conectar iPhone</button>
             <button class="btn" id="reconnect" type="button" hidden>Cambiar ventana</button>
@@ -343,58 +242,41 @@
 
     <!-- 6 · Por qué cambiaría -->
     <section class="slide" aria-label="Por qué cambiaría">
-      <h2>Por qué esta vez sí</h2>
-      <div class="evidence">
-        <div class="ev">
-          <h3>Un finde no borra la semana</h3>
-          <div class="reset">
-            <svg viewBox="0 0 600 110" role="img" aria-label="Saltarse un día no devuelve el hábito a cero: la curva sigue subiendo">
-              <path d="M10 100 C120 90 200 60 300 46 C400 34 500 22 590 16" fill="none" stroke="#1F5F73" stroke-width="7" stroke-linecap="round"/>
-              <circle cx="300" cy="46" r="12" fill="#FFFFFF" stroke="#B24A2E" stroke-width="4"/>
-              <text x="300" y="88" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">un día saltado</text>
-            </svg>
-          </div>
-          <p class="source">Lally y otros, 2010: saltarse una oportunidad no afectó de forma importante el hábito.</p>
+      <h2 class="titulo">Por qué esta vez sí.</h2>
+      <div class="razones">
+        <div class="razon">
+          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">un finde no borra tu semana</p></div>
+          <p class="chico">Saltarse un día no afectó de forma importante el hábito. Lally y otros, 2010.</p>
         </div>
-        <div class="ev">
-          <h3>Sumar rinde casi el doble que evitar</h3>
-          <div class="bars">
-            <div class="bar"><span>sumar una casera</span><div class="bar-track"><div class="bar-fill hi" style="width: 100%">d = 0,51</div></div></div>
-            <div class="bar"><span>evitar el delivery</span><div class="bar-track"><div class="bar-fill" style="width: 57%">d = 0,29</div></div></div>
-          </div>
-          <p class="source">Adriaanse y otros, 2011, planificar en alimentación. Los autores advierten que puede estar inflado.</p>
+        <div class="razon">
+          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">sumar una casera rica, no prohibir el delivery</p></div>
+          <p class="chico">Planificar rinde casi el doble para sumar que para evitar. Adriaanse y otros, 2011.</p>
         </div>
-        <div class="ev">
-          <h3>Sin culpa, se come mejor después</h3>
-          <div class="bubble" style="font-size: 22px">seguimos desde tu próxima comida</div>
-          <p class="source">Adams y Leary, 2007: con autocompasión tras un desliz, las universitarias más restrictivas comieron menos después.</p>
+        <div class="razon">
+          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">seguimos desde tu próxima comida</p></div>
+          <p class="chico">Con autocompasión tras un desliz, universitarias comieron menos después. Adams y Leary, 2007.</p>
         </div>
-        <div class="ev">
-          <h3>Antojos limitados <span class="ev-hint">(una pista, no una prueba)</span></h3>
-          <div class="bars">
-            <div class="bar"><span>reserva limitada</span><div class="bar-track"><div class="bar-fill hi" style="width: 100%">52,5%</div></div></div>
-            <div class="bar"><span>flexible sin límite</span><div class="bar-track"><div class="bar-fill" style="width: 64.6%">33,9%</div></div></div>
-            <div class="bar"><span>rígida</span><div class="bar-track"><div class="bar-fill" style="width: 40.2%">21,1%</div></div></div>
-          </div>
-          <p class="source">Sharif y Shu, 2017: cumplieron la meta. La tarea era digital y de 7 días, no de comida.</p>
+        <div class="razon">
+          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">tus antojos, pocos y decididos antes</p></div>
+          <p class="chico">Una reserva limitada rindió más que la meta rígida o sin límite. Sharif y Shu, 2017: una pista, no una prueba.</p>
         </div>
       </div>
     </section>
 
-    <!-- 7 · Qué dejamos fuera -->
-    <section class="slide" aria-label="Qué dejamos fuera a propósito">
-      <svg class="blob" viewBox="0 0 200 200" style="right: 60px; bottom: 80px; width: 340px; height: 340px" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
-      <h2>Lo que dejamos fuera, a propósito</h2>
-      <div class="nope">
-        <span>rachas</span>
-        <span>calorías</span>
-        <span>peso</span>
-        <span>«no salgas»</span>
-        <span>reemplazar a la nutricionista</span>
-        <span class="next">pedir delivery desde el chat: el siguiente paso, con una alianza</span>
+    <!-- 7 · Qué dejamos fuera + cierre -->
+    <section class="slide amarillo grano" aria-label="Lo que dejamos fuera y cierre">
+      <svg style="position: absolute; right: 110px; top: 150px; width: 300px; height: 300px" aria-hidden="true"><use href="#ami"/></svg>
+      <div class="stack" style="margin-top: -90px">
+        <h2 class="display" style="font-size: 100px; max-width: 1040px">No tiene que dejar de salir. Tiene que dejar de partir de cero.</h2>
+        <div class="pildoras">
+          <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Rachas que vuelven a cero</span>
+          <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Calorías, peso ni cuerpo</span>
+          <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Pedirle que no salga</span>
+          <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Reemplazar a su nutricionista</span>
+          <span class="pildora siguiente">Siguiente paso, con una alianza: pedir el antojo desde el chat</span>
+        </div>
       </div>
-      <p class="source" style="font-size: 20px">Ami deriva cuando corresponde: a su nutricionista, a Salud Responde (600 360 7777) o al *4141.</p>
-      <p class="closing">Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.</p>
+      <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
 
   </div>
@@ -411,6 +293,68 @@
   // Web demo of the agent (agente/, route /demo). Change it once there is a deploy.
   const DEMO_URL = 'http://localhost:3000/demo';
 
+  // --- Illustrations, ported from the landing (Cerro.tsx, Cierre.tsx) ---------
+  const CASAS = [
+    { corto: 'Lun', x: 22, base: 506, ancho: 84, alto: 104, color: 'var(--casa-celeste)', techo: 'dos-aguas' },
+    { corto: 'Mar', x: 118, base: 486, ancho: 78, alto: 118, color: 'var(--casa-amarillo)', techo: 'plano' },
+    { corto: 'Mié', x: 208, base: 452, ancho: 86, alto: 110, color: 'var(--casa-rosado)', techo: 'media' },
+    { corto: 'Jue', x: 306, base: 404, ancho: 80, alto: 128, color: 'var(--casa-menta)', techo: 'dos-aguas' },
+    { corto: 'Vie', x: 398, base: 346, ancho: 88, alto: 116, color: 'var(--casa-naranja)', techo: 'plano' },
+    { corto: 'Sáb', x: 498, base: 282, ancho: 84, alto: 130, color: 'var(--casa-azul)', techo: 'dos-aguas' },
+    { corto: 'Dom', x: 594, base: 222, ancho: 90, alto: 112, color: 'var(--casa-rojo)', techo: 'media' },
+  ];
+
+  function techo(c, fill) {
+    const y = c.base - c.alto, izq = c.x - 6, der = c.x + c.ancho + 6;
+    if (c.techo === 'dos-aguas') return `<path d="M${izq} ${y + 4} L${c.x + c.ancho / 2} ${y - 30} L${der} ${y + 4} Z" fill="${fill}"/>`;
+    if (c.techo === 'media') return `<path d="M${izq} ${y + 4} L${izq} ${y - 8} L${der} ${y - 26} L${der} ${y + 4} Z" fill="${fill}"/>`;
+    return `<rect x="${izq}" y="${y - 8}" width="${c.ancho + 12}" height="12" rx="3" fill="${fill}"/>`;
+  }
+
+  function casa(c, vacia, n) {
+    const y = c.base - c.alto;
+    const label = `<text x="${c.x + c.ancho / 2}" y="${c.base + 30}" text-anchor="middle" font-size="19" font-family="Figtree, sans-serif" font-weight="600" fill="var(--tinta)" opacity="${vacia ? .5 : 1}">${c.corto}</text>`;
+    if (vacia) {
+      // The weekend as a hole: just the dashed outline of a house.
+      return `<g><rect x="${c.x}" y="${y}" width="${c.ancho}" height="${c.alto}" rx="4" fill="none" stroke="var(--tinta)" stroke-opacity=".35" stroke-width="3" stroke-dasharray="8 8"/>${label}</g>`;
+    }
+    const w = 18, filas = c.alto > 115 ? [y + 18, y + 54] : [y + 22], cols = [c.x + 14, c.x + c.ancho - 14 - w];
+    const ventanas = filas.flatMap((fy) => cols.map((cx) => `<rect x="${cx}" y="${fy}" width="${w}" height="22" rx="9" fill="var(--ventana)"/>`)).join('');
+    const puerta = `<path d="M${c.x + c.ancho / 2 - 11} ${c.base} v-24 a11 11 0 0 1 22 0 v24 Z" fill="var(--techo)" opacity=".85"/>`;
+    return `<g>${techo(c, 'var(--techo)')}<rect x="${c.x}" y="${y}" width="${c.ancho}" height="${c.alto}" rx="4" fill="${c.color}"/><rect x="${c.x}" y="${y}" width="${c.ancho}" height="${c.alto}" rx="4" fill="url(#calamina-${n})"/>${ventanas}${puerta}${label}</g>`;
+  }
+
+  function cerro(roto, n) {
+    const mar = Array.from({ length: 19 }, (_, k) => `Q${k * 40 + 10} 544 ${k * 40 + 20} 556 T${k * 40 + 40} 556`).join(' ');
+    return `<svg viewBox="0 0 720 600" aria-hidden="true">
+      <defs>
+        <pattern id="calamina-${n}" width="7" height="10" patternUnits="userSpaceOnUse"><rect width="3" height="10" fill="var(--techo)" opacity=".1"/></pattern>
+        <clipPath id="vista-${n}"><path d="M34 150 C 30 60, 150 22, 380 20 C 600 18, 706 56, 708 190 L 714 520 C 714 588, 640 600, 360 598 C 80 596, 6 590, 8 500 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#vista-${n})">
+        <rect width="720" height="600" fill="var(--vista)"/>
+        <circle cx="560" cy="96" r="40" fill="var(--ventana)"/><circle cx="560" cy="96" r="40" fill="var(--casa-amarillo)" opacity=".7"/>
+        <path d="M0 470 C 140 430, 260 330, 400 250 C 520 180, 620 120, 720 96 L720 600 L0 600 Z" fill="var(--cerro-2)"/>
+        <path d="M0 530 C 150 512, 260 470, 380 400 C 500 330, 600 250, 720 212 L720 600 L0 600 Z" fill="var(--cerro)"/>
+        <path d="M72 530 h26 v-14 h26 v-14 h26 v-16 h26 v-16 h26 v-18 h26 v-18 h26 v-20 h26 v-20 h26 v-22 h26 v-22 h26 v-20 h26 v-22 h26 v-20 h26 v-18 h26 v-18" fill="none" stroke="var(--tinta)" stroke-opacity=".22" stroke-width="3" stroke-linejoin="round"/>
+        ${CASAS.map((c, i) => casa(c, roto && i >= 4, n)).join('')}
+        <path d="M0 556 ${mar} L720 600 L0 600 Z" fill="var(--mar)"/>
+      </g>
+    </svg>`;
+  }
+
+  document.querySelectorAll('[data-cerro]').forEach((el, n) => {
+    el.insertAdjacentHTML('afterbegin', cerro(el.dataset.cerro === 'roto', n));
+  });
+
+  const SILUETA = [[0,64,70],[70,82,92],[152,70,78],[222,90,104],[312,76,86],[388,88,110],[476,72,94],[548,92,120],[640,70,84],[710,84,100],[794,78,116],[872,90,96],[962,74,108],[1036,86,88],[1122,80,118],[1202,90,98],[1292,70,110],[1362,78,90],[1440,84,104],[1524,76,92]];
+  document.querySelectorAll('[data-silueta]').forEach((el) => {
+    el.innerHTML = SILUETA.map(([x, w, h]) =>
+      `<path d="M${x} 140 V${140 - h + 16} L${x + w / 2} ${140 - h} L${x + w} ${140 - h + 16} V140 Z" fill="var(--casa-amarillo)" opacity=".75"/>` +
+      `<rect x="${x + w / 2 - 8}" y="${140 - h + 30}" width="16" height="18" rx="7" fill="var(--superficie)"/>`).join('');
+  });
+
+  // --- Deck --------------------------------------------------------------------
   const stage = document.getElementById('stage');
   const slides = Array.from(document.querySelectorAll('.slide'));
   const count = document.getElementById('count');
@@ -428,6 +372,8 @@
       slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
       slide.inert = i !== current;
     });
+    // The letterbox around the stage takes the slide's color.
+    document.body.style.background = getComputedStyle(slides[current]).backgroundColor;
     count.textContent = `${current + 1} / ${slides.length}`;
     const hash = `#${current + 1}`;
     if (location.hash !== hash) history.replaceState(null, '', hash);
@@ -463,7 +409,7 @@
   window.addEventListener('resize', fit);
   window.addEventListener('hashchange', () => show(fromHash()));
 
-  // Live iPhone mirror: captures the QuickTime (or iPhone Mirroring) window.
+  // --- Live iPhone mirror: captures the QuickTime (or iPhone Mirroring) window --
   const video = document.getElementById('mirror');
   const screen = document.getElementById('screen');
   const phone = document.getElementById('phone');
