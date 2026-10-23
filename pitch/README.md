@@ -30,6 +30,16 @@ El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la
 3. **Cambiar ventana** abre el diálogo otra vez. **Detener** corta la transmisión. Si dejas de compartir desde la barra de Chrome, la slide vuelve sola al estado inicial.
 4. Si cancelas el diálogo o algo falla, el mensaje lo explica y el **plan B** se marca en amarillo.
 
+**Recorte de la cabecera.** El video se recorta por arriba para esconder la barra de estado del iPhone y la cabecera del chat de WhatsApp (la foto y el nombre del número del sandbox). Solo se recorta: no se pinta nada encima. Se ajusta en vivo, en la slide 5:
+
+| Control | Qué hace |
+|---|---|
+| ↓ / ↑ | Recorta más o menos (0,5% por toque; con Mayús, 2%) |
+| R | Quita o vuelve a poner el recorte |
+| Pasar el mouse sobre el teléfono | Muestra un control con la barra deslizante y el botón |
+
+El valor por defecto es 15% de la altura de la ventana. El que ajustes queda guardado en este navegador para la próxima vez.
+
 **La primera vez**, macOS pide permiso: Configuración del Sistema › Privacidad y seguridad › **Grabación de pantalla y audio del sistema** › activa Google Chrome y reinícialo.
 
 ### Opción 1: Duplicación del iPhone (iPhone Mirroring)
