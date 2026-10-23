@@ -82,6 +82,26 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
     strict: true,
   },
   {
+    name: "guardar_perfil",
+    description:
+      "Guarda cómo se llama la persona y cómo tratarla gramaticalmente. Llámala apenas te diga su nombre, y de nuevo si después se nombra de otra forma o te corrige.",
+    input_schema: {
+      type: "object",
+      properties: {
+        nombre: { type: "string", description: "El nombre o apodo con que quiere que le digas." },
+        trato: {
+          type: "string",
+          enum: ["femenino", "masculino", "neutro"],
+          description:
+            "femenino o masculino si el nombre lo deja claro o si la persona se nombra así («estoy cansada», «estoy cansado»); neutro si el nombre es ambiguo, no lo conoces o no estás segura.",
+        },
+      },
+      required: ["nombre", "trato"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
     name: "guardar_plan_sabado",
     description:
       "Guarda el plan del sábado cuando Antonia ya eligió. Llámala una vez por plan; si ella lo cambia, llámala de nuevo con el plan completo actualizado.",
@@ -234,6 +254,10 @@ export async function ejecutarHerramienta(nombre: string, entrada: unknown, sesi
         ),
       );
       return JSON.stringify({ uso_interno: "No mostrar ningún número a Antonia.", resultados });
+    }
+    case "guardar_perfil": {
+      sesion.perfil = entrada as NonNullable<Sesion["perfil"]>;
+      return JSON.stringify({ guardado: true });
     }
     case "guardar_plan_sabado": {
       const plan = entrada as Omit<PlanSabado, "guardado_en">;

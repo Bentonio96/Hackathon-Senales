@@ -73,7 +73,7 @@ async function correrModelo(sesion: Sesion): Promise<string[]> {
     });
 
     if (respuesta.stop_reason === "refusal") {
-      const texto = "uy, eso no te lo sé responder bien. si es algo de salud, tu nutri o Salud Responde (600 360 7777) te pueden orientar.";
+      const texto = "Uy, eso no te lo sé responder bien. Si es algo de salud, tu nutri o Salud Responde (600 360 7777) te pueden orientar";
       sesion.historial.push({ role: "assistant", content: [{ type: "text", text: texto }] });
       textos.push(texto);
       break;
@@ -112,7 +112,7 @@ const enBurbujas = (textos: string[]) =>
  */
 export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<string[]> {
   if (sesion.turnos >= MAX_TURNOS_POR_SESION) {
-    return ["por hoy llegamos al límite de mensajes de la demo. escríbeme más rato 🌿"];
+    return ["Por hoy llegamos al límite de mensajes de la demo. Escríbeme más rato 🌿"];
   }
   sesion.turnos += 1;
   const texto = entrada.texto?.trim() ?? "";
@@ -123,8 +123,8 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     sesion.modo = "pausa";
     const burbujas = [
       previa
-        ? "dale, quedo en pausa. si lo necesitas, el *4141 atiende a toda hora y tu nutricionista o la psicóloga de la u te pueden acompañar 🫶"
-        : "dale, quedo en pausa esta semana. el jueves te pregunto por el finde 🫶",
+        ? "Dale, quedo en pausa. Si lo necesitas, el *4141 atiende a toda hora y tu nutricionista o la psicóloga de la u te pueden acompañar"
+        : "Dale, quedo en pausa esta semana. El jueves te pregunto por el finde 🌿",
     ];
     registrarFijo(sesion, contenido, burbujas);
     return burbujas;
@@ -143,7 +143,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
       }
     }
     if (clasificacion && clasificacion.nivel !== "0") {
-      const burbujas = mensajesFijos(clasificacion, previa);
+      const burbujas = mensajesFijos(clasificacion, previa, sesion.perfil?.trato ?? "neutro");
       if (burbujas.length > 0) {
         if (clasificacion.nivel !== "ambiguo") {
           sesion.modo = "derivada";
@@ -175,7 +175,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     });
     burbujas = enBurbujas(await correrModelo(sesion));
     if (violaFiltro(burbujas.join("\n"))) {
-      burbujas = ["perdón, se me enredó la respuesta. ¿me cuentas de nuevo? 🌿"];
+      burbujas = ["Perdón, se me enredó la respuesta. Me cuentas de nuevo? 🌿"];
     }
   }
   return burbujas;

@@ -167,3 +167,19 @@ Lo de arriba ya se probó sin la API, pero **el clasificador no se ha probado co
 ### 2026-10-23 16:30 · para Esperanza
 
 Cambio chico en la planificación: el enlace para pedir ahora abre **la app de delivery que usa Antonia** (PedidosYa, Uber Eats o Rappi). Si Ami no sabe cuál usa, se lo pregunta una vez. El sábado, si elige pedir, va tu frase («dale, hoy se pide…») y el enlace en una burbuja aparte. En `/demo` el enlace se ve como un botón. Benja descartó que Ami busque una «alternativa saludable» al antojo: chocaba con tus reglas de no evaluar la comida.
+
+### 2026-10-23 17:30 · para Esperanza
+
+Benja pidió que Ami **se presente y pregunte el nombre la primera vez**, y que trate a cada persona con el género que corresponde, porque en la demo pueden escribirle hombres (el jurado, Benja). Lo que cambió:
+
+- **`agente/prompts/ami.md`, sección «Primer contacto y trato»:**
+  - La primera vez, Ami se presenta corto y pregunta «Cómo te llamas?», con tu formato.
+  - Si el primer mensaje trae algo importante, responde eso primero.
+  - Si la conversación parte con el reloj del jueves, se presenta en una burbuja y sigue con la pregunta del jueves.
+- **El trato:** con el nombre, Ami guarda un perfil (herramienta `guardar_perfil`) con el trato **femenino, masculino o neutro**.
+  - Lo deduce del nombre, y si el nombre es ambiguo o es un apodo, usa neutro.
+  - Lo que la persona dice de sí misma («estoy cansado») manda sobre el nombre.
+  - Ami nunca pregunta por el género ni comenta el tema.
+- **Tus ejemplos están en femenino porque piensan en Antonia.** El prompt le dice a Ami que los adapte al trato y que, en neutro, arme frases sin marcar género.
+- **Tus mensajes fijos de alerta** (`seguridad.ts`) ahora usan el trato: «sola», «solo» o, en neutro, «sin compañía» («No tienes que cargar con esto sin compañía», «No te quedes sin compañía»). «No la dejes sola», el de la amiga en peligro, quedó igual. **Revisa si te gusta la versión neutra o prefieres otra frase.**
+- **Los textos fijos del código pasaron a tu formato nuevo** (mayúscula, sin punto final, sin «¿»): pausa, error, límite de la demo, respuesta neutra del filtro y el jueves después de una alerta.

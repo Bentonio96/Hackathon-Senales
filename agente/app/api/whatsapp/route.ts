@@ -27,7 +27,7 @@ export async function POST(req: Request) {
         await recordarUltimoWhatsApp(de);
         if (texto.trim().toLowerCase() === "reiniciar") {
           await borrarSesion(de);
-          await enviarWhatsApp(de, "listo, borré esta conversación ✨");
+          await enviarWhatsApp(de, "Listo, borré esta conversación ✨");
           return;
         }
         const sesion = await cargarSesion(de, "whatsapp");
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         await enviarWhatsApp(de, ...respuestas);
       } catch (error) {
         console.error("Error procesando mensaje de WhatsApp:", error);
-        await enviarWhatsApp(de, "Uy, se me enredó algo 😅. ¿Me lo mandas de nuevo?").catch(() => undefined);
+        await enviarWhatsApp(de, "Uy, se me enredó algo. Me lo mandas de nuevo? 😅").catch(() => undefined);
       }
     }),
   );

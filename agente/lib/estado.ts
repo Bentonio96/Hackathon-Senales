@@ -28,7 +28,11 @@ export interface Sesion {
   // Estado interno del acompañamiento (diseño de Esperanza). Nunca se le muestra a Antonia.
   modo?: "normal" | "derivada" | "pausa";
   derivacion_previa?: { nivel: string; fecha: string } | null;
+  // Cómo se llama y cómo tratarla gramaticalmente (lo infiere Ami del nombre o de cómo se nombra).
+  perfil?: { nombre: string; trato: Trato };
 }
+
+export type Trato = "femenino" | "masculino" | "neutro";
 
 const redis =
   process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN

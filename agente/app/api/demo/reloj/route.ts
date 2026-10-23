@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       } else if (sesion.modo === "derivada") {
         // El jueves después de una alerta de nivel 1 no abre con la receta.
         sesion.modo = "normal";
-        respuestas = ["¿pudiste hablar con alguien? ¿quieres que sigamos con el finde o prefieres pausar? 🫶"];
+        respuestas = ["Pudiste hablar con alguien? Si quieres, seguimos con el finde, o lo dejamos en pausa"];
         sesion.historial.push({ role: "user", content: [{ type: "text", text: EVENTOS_RELOJ.jueves }] });
         sesion.historial.push({ role: "assistant", content: [{ type: "text", text: respuestas[0] }] });
       } else {

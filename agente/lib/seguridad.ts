@@ -1,4 +1,5 @@
 import type Anthropic from "@anthropic-ai/sdk";
+import type { Trato } from "./estado";
 
 /*
  * Seguridad de Ami, según el diseño de Esperanza (esperanza/acompanamiento-ami.md, sección 6).
@@ -153,7 +154,10 @@ export async function clasificar(
 }
 
 /** Arma las burbujas fijas para un nivel distinto de 0. */
-export function mensajesFijos(c: Clasificacion, derivacionPrevia: string | null): string[] {
+// «sola», «solo» o, si no sabemos cómo tratarla, «sin compañía».
+const sola = (trato: Trato) => (trato === "femenino" ? "sola" : trato === "masculino" ? "solo" : "sin compañía");
+
+export function mensajesFijos(c: Clasificacion, derivacionPrevia: string | null, trato: Trato = "neutro"): string[] {
   // Retractación: la retractación no baja el nivel ni vuelve al plan.
   if (c.retractacion && derivacionPrevia) {
     if (derivacionPrevia === "2a") {
@@ -179,26 +183,26 @@ export function mensajesFijos(c: Clasificacion, derivacionPrevia: string | null)
       ];
       if (c.objeto_a_mano && c.objeto_pronombre !== "ninguno") {
         burbujas.push(
-          `Si puedes, deja ahora ${c.objeto_a_mano} en otra pieza o pídele a alguien que ${c.objeto_pronombre} guarde lejos de ti. Y si ya tomaste algo, llama al 131 ya y no te quedes sola`,
+          `Si puedes, deja ahora ${c.objeto_a_mano} en otra pieza o pídele a alguien que ${c.objeto_pronombre} guarde lejos de ti. Y si ya tomaste algo, llama al 131 ya y no te quedes ${sola(trato)}`,
         );
       } else if (c.ya_se_hizo_dano) {
-        burbujas.push("Llama al 131 ya y no te quedes sola");
+        burbujas.push(`Llama al 131 ya y no te quedes ${sola(trato)}`);
       }
       return burbujas;
     }
 
     case "2b":
-      return ["Eso necesita atención ahora. Llama al 131 (es el SAMU) o pídele a alguien que te lleve a urgencias. No te quedes sola"];
+      return [`Eso necesita atención ahora. Llama al 131 (es el SAMU) o pídele a alguien que te lleve a urgencias. No te quedes ${sola(trato)}`];
 
     case "2c":
       return ["Llama al 131 ahora y no la dejes sola: ellos te dicen qué hacer mientras llegan"];
 
     case "1": {
       const primera = {
-        ya_lo_hizo: "Gracias por contármelo, de verdad. No tienes que cargar con esto sola",
+        ya_lo_hizo: `Gracias por contármelo, de verdad. No tienes que cargar con esto ${sola(trato)}`,
         anuncia: "Gracias por contármelo. Eso no lo voy a organizar contigo, pero a ti sí te acompaño. No tienes que explicarme nada",
         con_agrado: "Gracias por contármelo. Me preocupa que pases tanto tiempo sin comer. Eso no lo voy a organizar contigo, y a ti sí te sigo acompañando",
-        ninguno: "Gracias por contármelo, de verdad. No tienes que cargar con esto sola",
+        ninguno: `Gracias por contármelo, de verdad. No tienes que cargar con esto ${sola(trato)}`,
       }[c.tipo_1];
       const burbujas = [
         primera,
