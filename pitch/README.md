@@ -2,7 +2,7 @@
 
 Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, más una portada de Amy (nombre, frase y un celular con el chat) para dejar en pantalla durante las preguntas, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Amy (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
-El guion, con tiempos, quién dice qué, el libreto de la demo y respuestas para las preguntas del jurado, está en [`guion.md`](guion.md). Publicado, se lee con formato en https://pitch-ami.vercel.app/guion (la página `guion.html` dibuja el mismo `guion.md`, así que basta con editar el `.md`).
+El guion, con tiempos, quién dice qué, el libreto de la demo y respuestas para las preguntas del jurado, está en [`guion.md`](guion.md). Publicado, se lee con formato en https://amy-pitch.vercel.app/guion (la página `guion.html` dibuja el mismo `guion.md`, así que basta con editar el `.md`).
 
 ## Cómo abrirlo
 
@@ -23,9 +23,11 @@ Con `npx serve pitch` el pitch también funciona, pero sin control remoto.
 
 Hay dos formas. Las dos usan la misma página del celular.
 
-### En el pitch publicado (pitch-ami.vercel.app), sin servidor
+### En el pitch publicado (amy-pitch.vercel.app), sin servidor
 
-1. Abre https://pitch-ami.vercel.app/ en Chrome y aprieta **M** (o el botón del celular, abajo a la derecha).
+Se publica en la cuenta de Vercel de Esperanza con la CLI desde esta carpeta (`npx vercel deploy --prod`). El proyecto `pitch-ami` de la cuenta de Benja quedó con los deploys automáticos apagados.
+
+1. Abre https://amy-pitch.vercel.app/ en Chrome y aprieta **M** (o el botón del celular, abajo a la derecha).
 2. Escanea el código QR con la cámara del celular. Abre el control remoto.
 3. Cuando el pitch diga «Celular conectado», cierra el cuadro con **M**.
 
