@@ -92,6 +92,33 @@ export async function ultimoWhatsApp(): Promise<string | null> {
   return memoria.__amiUltimoWa ?? null;
 }
 
+// El recetario: las caseras que la persona contó que cocinó. Vive aparte de la sesión y sin
+// vencimiento, así que «reiniciar» no lo borra. Solo crece: no se cuenta ni se le muestra un número.
+export interface RecetaGuardada {
+  nombre: string;
+  cuando: string; // el momento con sus palabras, ej. «el sábado con caña»
+  guardada_en: string;
+}
+
+const claveRecetario = (id: string) => `ami:recetario:${id}`;
+const recetariosEnMemoria = () => ((memoria as { __amiRecetarios?: Map<string, RecetaGuardada[]> }).__amiRecetarios ??= new Map());
+
+export async function cargarRecetario(id: string): Promise<RecetaGuardada[]> {
+  if (redis) return (await redis.get<RecetaGuardada[]>(claveRecetario(id))) ?? [];
+  return recetariosEnMemoria().get(id) ?? [];
+}
+
+/** Agrega una receta si no estaba (por nombre). Devuelve false si ya estaba. */
+export async function agregarAlRecetario(id: string, receta: Omit<RecetaGuardada, "guardada_en">): Promise<boolean> {
+  const recetario = await cargarRecetario(id);
+  const normal = (s: string) => s.trim().toLowerCase();
+  if (recetario.some((r) => normal(r.nombre) === normal(receta.nombre))) return false;
+  recetario.push({ ...receta, guardada_en: new Date().toISOString() });
+  if (redis) await redis.set(claveRecetario(id), recetario);
+  else recetariosEnMemoria().set(id, recetario);
+  return true;
+}
+
 /** true la primera vez que se ve una clave (para ignorar webhooks repetidos). */
 export async function primeraVez(clave: string): Promise<boolean> {
   if (redis) return (await redis.set(`ami:visto:${clave}`, 1, { nx: true, ex: 60 * 60 * 24 })) === "OK";

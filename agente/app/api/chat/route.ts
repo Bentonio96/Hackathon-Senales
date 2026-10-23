@@ -1,6 +1,6 @@
 import { turnoDeAmi } from "@/lib/ami";
 import { enCola } from "@/lib/cola";
-import { borrarSesion, cargarSesion, guardarSesion } from "@/lib/estado";
+import { borrarSesion, cargarRecetario, cargarSesion, guardarSesion } from "@/lib/estado";
 
 export const maxDuration = 300;
 
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   }
   if (cuerpo.reiniciar) {
     await borrarSesion(id);
-    return Response.json({ respuestas: [], plan: null });
+    return Response.json({ respuestas: [], plan: null, recetario: [] });
   }
   if (cuerpo.imagenBase64 && !TIPOS_IMAGEN.has(cuerpo.imagenTipo ?? "")) {
     return Response.json({ error: "Tipo de imagen no soportado" }, { status: 400 });
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
         : undefined;
       const respuestas = await turnoDeAmi(sesion, { texto: cuerpo.texto, imagen });
       await guardarSesion(sesion);
-      return Response.json({ respuestas, plan: sesion.plan ?? null });
+      return Response.json({ respuestas, plan: sesion.plan ?? null, recetario: await cargarRecetario(id) });
     });
   } catch (error) {
     console.error("Error en el chat web:", error);

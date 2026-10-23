@@ -1,7 +1,7 @@
 import type Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import type { PlanSabado, Sesion } from "./estado";
+import { agregarAlRecetario, cargarRecetario, type PlanSabado, type Sesion } from "./estado";
 
 interface PreciosEjemplo {
   supermercado: Record<string, number>;
@@ -143,6 +143,31 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
     },
     strict: true,
   },
+  {
+    name: "guardar_en_recetario",
+    description:
+      "Guarda en el recetario de la persona una casera que te contó que cocinó (no una que solo planearon). El recetario solo crece y no se borra.",
+    input_schema: {
+      type: "object",
+      properties: {
+        nombre: { type: "string", description: "El nombre de la receta, corto y rico. Ej: 'quesadillas de huevo y palta'." },
+        cuando: {
+          type: "string",
+          description: "El momento en que la hizo, con sus palabras y sin juicio. Ej: 'el sábado con caña', 'antes de salir con las chiquillas'.",
+        },
+      },
+      required: ["nombre", "cuando"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
+    name: "ver_recetario",
+    description:
+      "Devuelve las caseras que la persona ya cocinó, con el momento de cada una. Úsala el jueves antes de proponer el sábado, y cuando ella pida ver su recetario.",
+    input_schema: { type: "object", properties: {}, required: [], additionalProperties: false },
+    strict: true,
+  },
 ];
 
 interface ProductoJumbo {
@@ -263,6 +288,20 @@ export async function ejecutarHerramienta(nombre: string, entrada: unknown, sesi
       const plan = entrada as Omit<PlanSabado, "guardado_en">;
       sesion.plan = { ...plan, guardado_en: new Date().toISOString() };
       return JSON.stringify({ guardado: true });
+    }
+    case "guardar_en_recetario": {
+      const { nombre, cuando } = entrada as { nombre: string; cuando: string };
+      const nueva = await agregarAlRecetario(sesion.id, { nombre, cuando });
+      return JSON.stringify(
+        nueva ? { guardado: true } : { guardado: false, nota: "Ya estaba en su recetario: no hace falta decírselo." },
+      );
+    }
+    case "ver_recetario": {
+      const recetas = await cargarRecetario(sesion.id);
+      return JSON.stringify({
+        recetas: recetas.map(({ nombre, cuando }) => ({ nombre, cuando })),
+        nota: "Nunca digas cuántas son ni compares semanas: muéstralas o úsalas, sin contar.",
+      });
     }
     default:
       throw new Error(`Herramienta desconocida: ${nombre}`);
