@@ -25,7 +25,7 @@ export function Barra() {
   return (
     <header className="sticky top-0 z-30 bg-cielo">
       <div className="envoltura flex h-(--alto-header) items-center justify-between gap-6">
-        <a href="#inicio" className="flex items-center gap-2 text-lead font-bold tracking-tight" aria-label={`${NOMBRE}, inicio`}>
+        <a href="#inicio" className="flex items-center gap-2 font-titulo text-lead font-bold tracking-tight" aria-label={`${NOMBRE}, inicio`}>
           <AvatarAmi className="size-9" />
           {NOMBRE}
         </a>
@@ -65,8 +65,7 @@ export function Portada() {
             El lunes ya no partes de cero.
           </h1>
           <p className="entra mt-6 max-w-[34ch] text-lead" style={{ ["--i" as string]: 1 }}>
-            {NOMBRE} es una amiga en tu WhatsApp. El jueves te deja listo el sábado: tu antojo y una receta casera de
-            10 minutos con lo que tienes en el refri.
+            {NOMBRE} es una amiga en tu WhatsApp que el jueves te deja listo el sábado.
           </p>
           <div className="entra mt-9 flex flex-wrap items-center gap-x-7 gap-y-4" style={{ ["--i" as string]: 2 }}>
             <BotonWhatsApp />
@@ -75,12 +74,12 @@ export function Portada() {
             </a>
           </div>
           <p className="entra mt-8 max-w-[44ch] text-chico text-tinta-suave" style={{ ["--i" as string]: 3 }}>
-            Sin rachas, sin contar calorías y sin pedirte que dejes de salir. No reemplaza a tu nutricionista.
+            Sin rachas ni calorías. No reemplaza a tu nutricionista.
           </p>
         </div>
         <div className="lg:col-span-6">
           <Cerro />
-          <p className="mt-3 text-center text-chico text-tinta-suave">Toca una casa: cada día de tu semana tiene su lugar.</p>
+          <p className="mt-3 text-center text-chico text-tinta-suave">Toca una casa.</p>
         </div>
       </div>
       <Onda className="text-amarillo" />

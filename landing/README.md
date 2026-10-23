@@ -2,11 +2,13 @@
 
 La puerta de entrada al agente del caso Antonia: presenta qué hace y lleva a activarlo en WhatsApp. Es una sola página en Vite, React 19, TypeScript y Tailwind v4, prerenderizada a HTML estático.
 
+En línea: https://hola-ami.vercel.app (proyecto `ami-landing` en Vercel; cada push a `main` la vuelve a publicar).
+
 ![Escritorio, modo claro](docs/escritorio-claro.jpg)
 
-| Móvil | Cómo funciona en móvil | Modo oscuro |
+| Móvil | Escenas en móvil | Escenas en escritorio |
 |---|---|---|
-| ![](docs/movil-claro.jpg) | ![](docs/movil-como-funciona.jpg) | ![](docs/escritorio-oscuro.jpg) |
+| ![](docs/movil-claro.jpg) | ![](docs/movil-como-funciona.jpg) | ![](docs/escritorio-escenas.jpg) |
 
 ## Lo que hay que cambiar antes de presentar
 
@@ -30,13 +32,14 @@ npm run capturas -- http://localhost:4173   # og.png, ícono y docs/*.jpg (con p
 
 ## Desplegar en Vercel
 
-`vercel.json` ya define el framework (Vite), el build y el directorio de salida. Al importar el repo en Vercel, usa `landing` como **Root Directory** (Settings → General). Después de desplegar, conviene pasar `og:image` a una URL absoluta con el dominio final.
+Ya está creado: el proyecto `ami-landing` en la cuenta personal, enlazado al repo con `landing` como **Root Directory** y el dominio `hola-ami.vercel.app` (`ami.vercel.app` lo tiene otro proyecto). `vercel.json` define el framework (Vite), el build y el directorio de salida. Cada push a `main` publica.
 
 ## Decisiones
 
 - **Concepto «Cerro de calamina».** La semana es un cerro de Valparaíso con siete casas que siempre suben. El viernes y el sábado son casas como las demás, no un hoyo, y el cerro nunca baja: el lunes se sigue, no se parte de cero. Es una imagen, no un marcador de progreso (acordamos no medir progreso acumulado). Los bordes ondulados entre secciones son el perfil de la calamina.
-- **Un solo verde para lo que se toca** (hablar por WhatsApp, elegir, avanzar). Los colores de las casas son campos de fondo, no acentos. En modo oscuro se ve el puerto de noche con las ventanas encendidas.
-- **Una sola familia tipográfica:** Bricolage Grotesque variable, con eje óptico. Es cálida y algo irregular, con tono de amiga y no de app de salud.
+- **La paleta de Ami, solo en claro** (la misma de los mockups): neblina `#F2F4F1` de fondo, tinta `#1E2321`, amarillo ascensor, celeste cerro y rubor como campos, y el azul puerto `#1F5F73` solo en lo que se toca (hablar por WhatsApp, elegir, avanzar).
+- **Letra:** Bricolage Grotesque para el nombre y los títulos, y Figtree para el texto, como en los mockups.
+- **Poco texto, escenas cotidianas:** el corazón de la página son seis escenas de un finde (saliendo de la U, la foto del refri, el completo del carrete, la caña, el sushi con las amigas, la culpa del domingo), cada una con su dibujo. Al tocarla, el chat muestra qué le escribe Ami en ese momento.
 - **Movimiento que responde a la persona.** El chat avanza con «Adelantar el reloj» o con el scroll (en escritorio el teléfono queda fijo y los pasos pasan al lado). Las casas responden al toque. No hay animaciones ambientales continuas, para que ande fluido en equipos modestos. La entrada del hero está en CSS puro. Lenis se carga aparte y solo con movimiento.
 - **Sin movimiento:** `prefers-reduced-motion` o `?reduced=1` apagan todo, y el contenido se ve igual.
 - **El revelado al hacer scroll solo desplaza, nunca anima la opacidad**, para que Lighthouse no lo lea como falta de contraste.
@@ -48,4 +51,4 @@ npm run capturas -- http://localhost:4173   # og.png, ícono y docs/*.jpg (con p
 - `npm run build` y `npm run lint` sin errores.
 - AccessLint (WCAG 2.2): 0 violaciones.
 - Lighthouse en móvil, sobre `vite preview`: rendimiento 98, accesibilidad 100, buenas prácticas 100 y SEO 100. CLS 0, TBT 0 ms.
-- Revisada a 375 px, 768 px y 1440 px, en claro y en oscuro.
+- Revisada a 375 px y 1440 px.

@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
-import { hayMovimiento } from "./lib/movimiento";
+import { desplazamiento, hayMovimiento } from "./lib/movimiento";
 import "./index.css";
 
 document.documentElement.classList.add("js");
@@ -25,6 +25,6 @@ if (root.hasChildNodes()) {
 // para no atrasar la primera pintura.
 if (hayMovimiento()) {
   void import("lenis").then(({ default: Lenis }) => {
-    new Lenis({ autoRaf: true, anchors: { offset: -64 }, lerp: 0.12 });
+    desplazamiento.lenis = new Lenis({ autoRaf: true, anchors: { offset: -64 }, lerp: 0.12 });
   });
 }

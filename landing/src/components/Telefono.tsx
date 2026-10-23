@@ -1,4 +1,4 @@
-import { AnimatePresence, LazyMotion, MotionConfig, domAnimation, m as motion } from "motion/react";
+import { LazyMotion, MotionConfig, domAnimation, m as motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { NOMBRE } from "../config";
 import { AvatarAmi } from "./Avatar";
@@ -31,31 +31,38 @@ function Refri() {
 
 function Plan() {
   return (
-    <div className="space-y-2.5">
-      <p className="font-bold">Tu sábado, decidido</p>
-      <div className="rounded-xl bg-amarillo px-3 py-2">
-        <p className="text-[0.8125rem] font-semibold">Almuerzo · tu antojo</p>
+    <div className="space-y-2">
+      <p className="font-titulo font-bold">tu sábado, listo</p>
+      <div className="rounded-[14px_18px_14px_18px] bg-menta px-3 py-2">
+        <p className="text-[0.8125rem] font-semibold">almuerzo, casero</p>
         <p>
-          {pizza.nombre} de {pizza.local}: {pesos(pizza.precio + ENVIO)} con envío.
+          {RECETA.nombre.toLowerCase()}, {RECETA.minutos} min · te falta tomate y cilantro, {pesos(faltan)}
         </p>
       </div>
-      <div className="rounded-xl bg-menta px-3 py-2">
-        <p className="text-[0.8125rem] font-semibold">Comida · casero</p>
+      <div className="rounded-[18px_14px_18px_14px] bg-amarillo px-3 py-2">
+        <p className="text-[0.8125rem] font-semibold">comida, tu antojo</p>
         <p>
-          {RECETA.nombre}, {RECETA.minutos} min. Te faltan tomate y cilantro: {pesos(faltan)} en el súper.
+          {pizza.nombre.toLowerCase()} de {pizza.local}, {pesos(pizza.precio + ENVIO)}
         </p>
       </div>
-      <p className="text-[0.8125rem] text-tinta-suave">Locales y precios de ejemplo.</p>
+      <p className="text-[0.8125rem] text-tinta-suave">Precios de ejemplo.</p>
     </div>
   );
 }
 
 function Burbuja({ m }: { m: Mensaje }) {
+  if (m.de === "nota") {
+    return (
+      <p className="mx-auto my-6 max-w-[16rem] rounded-[20px_26px_22px_28px] bg-superficie px-4 py-3 text-center text-[0.9375rem] text-tinta-suave">
+        {m.texto}
+      </p>
+    );
+  }
   const mia = m.de === "yo";
   return (
     <div
-      className={`max-w-[86%] rounded-2xl px-3.5 py-2.5 text-[0.9375rem] leading-snug ${
-        mia ? "ml-auto rounded-br-md bg-burbuja-yo" : "rounded-bl-md bg-burbuja-ella"
+      className={`w-fit max-w-[86%] px-3.5 py-2.5 text-[0.9375rem] leading-snug ${
+        mia ? "ml-auto rounded-[18px_4px_18px_18px] bg-burbuja-yo" : "rounded-[4px_18px_18px_18px] bg-burbuja-ella"
       }`}
     >
       {"foto" in m ? (
@@ -74,7 +81,7 @@ function Burbuja({ m }: { m: Mensaje }) {
           {"botones" in m && (
             <div className="mt-2.5 grid gap-1.5" aria-hidden="true">
               {m.botones.map((b) => (
-                <span key={b} className="rounded-full bg-chat-fondo py-1.5 text-center text-[0.875rem] font-semibold text-accion-fuerte dark:text-accion">
+                <span key={b} className="rounded-full bg-chat-fondo py-1.5 text-center text-[0.875rem] font-semibold text-accion">
                   {b}
                 </span>
               ))}
@@ -105,7 +112,7 @@ export function Telefono({ momento, animar }: { momento: Momento; animar: boolea
       <div className="flex items-center gap-3 bg-superficie px-4 pt-4 pb-3">
         <AvatarAmi className="size-10 shrink-0" />
         <div className="leading-tight">
-          <p className="font-bold">{NOMBRE}</p>
+          <p className="font-titulo text-lg font-bold">{NOMBRE}</p>
           <p className="text-[0.8125rem] text-tinta-suave">en línea</p>
         </div>
       </div>
@@ -116,21 +123,20 @@ export function Telefono({ momento, animar }: { momento: Momento; animar: boolea
         </p>
         <LazyMotion features={domAnimation} strict>
           <MotionConfig reducedMotion="user">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div key={momento.id} className="space-y-2" exit={animar ? { opacity: 0, y: -8, transition: { duration: 0.15 } } : undefined}>
-                {momento.mensajes.map((msg, i) => (
-                  <motion.div
-                    key={i}
-                    initial={animar ? { opacity: 0, y: 14, scale: 0.97 } : false}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ delay: animar ? 0.15 + i * 0.55 : 0, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ transformOrigin: msg.de === "yo" ? "100% 100%" : "0% 100%" }}
-                  >
-                    <Burbuja m={msg} />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
+            {/* key: cada momento monta un chat nuevo, así nunca queda uno a medio salir. */}
+            <div key={momento.id} className="space-y-2">
+              {momento.mensajes.map((msg, i) => (
+                <motion.div
+                  key={i}
+                  initial={animar ? { opacity: 0, y: 14, scale: 0.97 } : false}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ delay: animar ? 0.15 + i * 0.55 : 0, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ transformOrigin: msg.de === "yo" ? "100% 100%" : "0% 100%" }}
+                >
+                  <Burbuja m={msg} />
+                </motion.div>
+              ))}
+            </div>
           </MotionConfig>
         </LazyMotion>
       </div>

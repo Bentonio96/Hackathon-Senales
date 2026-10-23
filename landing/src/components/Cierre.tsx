@@ -27,7 +27,7 @@ const SILUETA = [
 
 export function Cierre() {
   return (
-    <section className="relative overflow-hidden bg-accion text-accion-texto" aria-labelledby="titulo-cierre">
+    <section className="grano relative overflow-hidden bg-amarillo" aria-labelledby="titulo-cierre">
       <Onda volteada className="text-cielo" />
       <div className="envoltura grid gap-10 pt-20 pb-10 md:pt-28 lg:grid-cols-12">
         <div className="lg:col-span-8">
@@ -35,13 +35,13 @@ export function Cierre() {
             Deja listo tu próximo sábado.
           </h2>
           <p className="mt-6 max-w-[44ch] text-lead">
-            Escríbele a {NOMBRE} hoy. El jueves te pregunta si sales, y desde ahí arman el plan.
+            Escríbele hoy. El jueves te pregunta si sales.
           </p>
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="boton mt-9 bg-cielo text-tinta hover:bg-superficie"
+            className="boton mt-9"
           >
             <IconoChat />
             Hablar por WhatsApp
@@ -55,8 +55,8 @@ export function Cierre() {
       <svg viewBox="0 0 1440 130" preserveAspectRatio="xMidYMax slice" className="block h-24 w-full md:h-32" aria-hidden="true">
         {SILUETA.map(([x, w, h]) => (
           <g key={x}>
-            <path d={`M${x} 130 V${130 - h + 16} L${x + w / 2} ${130 - h} L${x + w} ${130 - h + 16} V130 Z`} fill="var(--accion-fuerte)" opacity="0.55" />
-            <rect x={x + w / 2 - 8} y={130 - h + 30} width="16" height="18" rx="7" fill="var(--ventana)" opacity="0.9" />
+            <path d={`M${x} 130 V${130 - h + 16} L${x + w / 2} ${130 - h} L${x + w} ${130 - h + 16} V130 Z`} fill="var(--casa-amarillo)" opacity="0.75" />
+            <rect x={x + w / 2 - 8} y={130 - h + 30} width="16" height="18" rx="7" fill="var(--superficie)" />
           </g>
         ))}
       </svg>

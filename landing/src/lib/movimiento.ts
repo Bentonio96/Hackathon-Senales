@@ -34,3 +34,16 @@ export function useRevela<T extends HTMLElement>() {
   }, []);
   return ref;
 }
+
+/** La instancia de Lenis, si está activa: los saltos de scroll pasan por ella. */
+type Desplazador = { scrollTo: (destino: HTMLElement, opciones?: { offset?: number }) => void };
+export const desplazamiento: { lenis: Desplazador | null } = { lenis: null };
+
+/** Centra un elemento en la pantalla, con Lenis si está activo. */
+export function centrar(el: HTMLElement) {
+  if (desplazamiento.lenis) {
+    desplazamiento.lenis.scrollTo(el, { offset: -(window.innerHeight - el.offsetHeight) / 2 });
+  } else {
+    el.scrollIntoView({ behavior: "auto", block: "center" });
+  }
+}

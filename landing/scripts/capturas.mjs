@@ -39,7 +39,7 @@ async function foto(ruta, { ancho, alto, tema = "light", escala = 1, hasta, comp
 
 await foto("public/og.png", { ancho: 1200, alto: 630 });
 await foto("docs/escritorio-claro.jpg", { ancho: 1440, alto: 900, escala: 1 });
-await foto("docs/escritorio-oscuro.jpg", { ancho: 1440, alto: 900, tema: "dark" });
+await foto("docs/escritorio-escenas.jpg", { ancho: 1440, alto: 900, hasta: "como-funciona" });
 await foto("docs/escritorio-sabado.jpg", { ancho: 1440, alto: 900, hasta: "tu-sabado" });
 await foto("docs/movil-claro.jpg", { ancho: 375, alto: 812, escala: 2 });
 await foto("docs/movil-como-funciona.jpg", { ancho: 375, alto: 812, escala: 2, hasta: "como-funciona" });

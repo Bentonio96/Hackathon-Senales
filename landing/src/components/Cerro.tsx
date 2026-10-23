@@ -96,7 +96,7 @@ export function Cerro() {
           <rect width={ANCHO} height={ALTO} fill="var(--vista)" />
           {/* Sol de día, luna de noche: el mismo círculo cambia con el tema. */}
           <circle cx="560" cy="96" r="40" fill="var(--ventana)" />
-          <circle cx="560" cy="96" r="40" fill="var(--casa-amarillo)" className="dark:hidden" opacity="0.7" />
+          <circle cx="560" cy="96" r="40" fill="var(--casa-amarillo)" opacity="0.7" />
 
           {/* El cerro de atrás y el de adelante. */}
           <path d="M0 470 C 140 430, 260 330, 400 250 C 520 180, 620 120, 720 96 L720 600 L0 600 Z" fill="var(--cerro-2)" />

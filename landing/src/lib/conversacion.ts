@@ -8,14 +8,19 @@ export type Mensaje =
   | { de: "yo"; foto: true }
   | { de: "ella"; plan: true }
   | { de: "ella"; texto: string; botones: string[] }
-  | { de: "ella"; pasos: string[] };
+  | { de: "ella"; pasos: string[] }
+  | { de: "nota"; texto: string };
+
+export type Escena = "u" | "refri" | "carrete" | "cana" | "amigas" | "domingo";
 
 export type Momento = {
   id: string;
   hora: string;
   dia: string;
+  /** La situación de la vida real, en pocas palabras. */
   titulo: string;
-  detalle: string;
+  escena: Escena;
+  fondo: "amarillo" | "celeste" | "rosado" | "menta";
   mensajes: Mensaje[];
 };
 
@@ -24,66 +29,54 @@ export const MOMENTOS: Momento[] = [
     id: "jueves",
     dia: "Jueves",
     hora: "17:05",
-    titulo: "El jueves te pregunta si sales.",
-    detalle: "A las cinco, cuando vas saliendo de la U y todavía tienes la cabeza fresca.",
+    titulo: "Vas saliendo de la U",
+    escena: "u",
+    fondo: "amarillo",
     mensajes: [
-      { de: "ella", texto: "Hola. ¿Vas saliendo de la U? Pregunta rápida: ¿sales este finde?" },
-      { de: "yo", texto: "Sí, el viernes hay carrete donde la Coni" },
-      {
-        de: "ella",
-        texto: "Buena, que lo pasen increíble. Dejemos listo el sábado ahora, que estás lúcida.",
-      },
+      { de: "ella", texto: "hola! ¿sales este finde?" },
+      { de: "yo", texto: "sí, el viernes hay carrete donde la Coni" },
+      { de: "ella", texto: "anda tranqui, el sábado déjamelo a mí 🫶" },
     ],
   },
   {
     id: "refri",
     dia: "Jueves",
     hora: "17:09",
-    titulo: "Le mandas una foto de tu refri.",
-    detalle: "Y una de la despensa. Con eso ve qué tienes, sin que anotes nada.",
+    titulo: "Le sacas una foto al refri",
+    escena: "refri",
+    fondo: "celeste",
     mensajes: [
-      { de: "ella", texto: "¿Me mandas una foto del refri y otra de la despensa?" },
       { de: "yo", foto: true },
-      {
-        de: "ella",
-        texto: "Veo huevos, queso, media cebolla, tortillas y papas. Con eso sale algo rico.",
-      },
+      { de: "ella", texto: "con huevos, queso y tortillas te salen unas quesadillas" },
+      { de: "ella", plan: true },
     ],
   },
   {
-    id: "plan",
-    dia: "Jueves",
-    hora: "17:11",
-    titulo: "Te deja decidido el sábado.",
-    detalle:
-      "Un antojo planificado y una receta casera de 10 minutos, con lo que te falta y cuánto cuesta en el súper.",
-    mensajes: [
-      { de: "ella", plan: true },
-      { de: "yo", texto: "Me tinca. ¿Y si la pizza va en la comida y no al almuerzo?" },
-      { de: "ella", texto: "Hecho, lo cambié. El plan es tuyo: lo movemos cuando quieras." },
-    ],
+    id: "carrete",
+    dia: "Viernes",
+    hora: "02:40",
+    titulo: "El completo del carrete",
+    escena: "carrete",
+    fondo: "rosado",
+    mensajes: [{ de: "nota", texto: "Ami no te escribe de noche. Es tu carrete." }],
   },
   {
     id: "sabado",
     dia: "Sábado",
     hora: "11:20",
-    titulo: "El sábado te despierta con el plan.",
-    detalle: "La receta paso a paso o el botón para pedir tu antojo. Llega antes que las ganas de abrir la app.",
+    titulo: "Despiertas con caña",
+    escena: "cana",
+    fondo: "menta",
     mensajes: [
       {
         de: "ella",
-        texto: "Buenos días. El almuerzo ya está decidido: quesadillas en 10 minutos. ¿Te paso los pasos?",
-        botones: ["Ver la receta", "Pedir mi antojo"],
+        texto: "buenos días, sobreviviente 😅 tus quesadillas están a 10 minutos",
+        botones: ["Paso a paso", "Hoy prefiero pedir"],
       },
-      { de: "yo", texto: "Ver la receta" },
+      { de: "yo", texto: "paso a paso porfa" },
       {
         de: "ella",
-        pasos: [
-          "Bate 2 huevos con sal y revuélvelos con la cebolla picada.",
-          "Rellena 2 tortillas con el huevo y el queso.",
-          "Dóralas 2 minutos por lado en el sartén.",
-          "Tomate y cilantro arriba. Listo.",
-        ],
+        pasos: ["bate 2 huevos y revuélvelos", "rellena las tortillas con huevo y queso", "2 minutos por lado y listo"],
       },
     ],
   },
@@ -91,15 +84,24 @@ export const MOMENTOS: Momento[] = [
     id: "rompe",
     dia: "Sábado",
     hora: "15:40",
-    titulo: "Si el plan se rompe, sigue contigo.",
-    detalle: "Sin sermones ni cuentas que vuelvan a cero: seguimos desde tu próxima comida.",
+    titulo: "Al final piden sushi con las chiquillas",
+    escena: "amigas",
+    fondo: "amarillo",
     mensajes: [
-      { de: "yo", texto: "Al final pedimos completos con las chiquillas. Ya la embarré" },
-      {
-        de: "ella",
-        texto: "No hay nada que arreglar: comiste rico con tus amigas. Seguimos desde tu próxima comida.",
-      },
-      { de: "ella", texto: "La pizza de la noche sigue en pie. Las quesadillas quedan para mañana, si te tinca." },
+      { de: "yo", texto: "igual pedimos sushi. ya la embarré" },
+      { de: "ella", texto: "no la embarraste, comiste rico con tus amigas. seguimos desde tu próxima comida" },
+    ],
+  },
+  {
+    id: "domingo",
+    dia: "Domingo",
+    hora: "20:00",
+    titulo: "La culpa del domingo",
+    escena: "domingo",
+    fondo: "celeste",
+    mensajes: [
+      { de: "yo", texto: "mañana parto de nuevo" },
+      { de: "ella", texto: "no hay que partir de nada: mañana sigues con tu pauta, como siempre 🫶" },
     ],
   },
 ];
@@ -114,7 +116,7 @@ export const ANTOJOS = [
 export const ENVIO = 1990;
 
 export const RECETA = {
-  nombre: "Quesadillas con huevo",
+  nombre: "Quesadillas de huevo",
   minutos: 10,
   tienes: ["Huevos", "Queso", "Tortillas", "Cebolla"],
   faltan: [

@@ -45,7 +45,7 @@ function Opcion<T extends string>({
 function Comida({ turno, casero, antojo }: { turno: string; casero: boolean; antojo: (typeof ANTOJOS)[number] }) {
   const faltan = RECETA.faltan.reduce((s, f) => s + f.precio, 0);
   return (
-    <div className={`rounded-[1.6rem] px-5 py-4 transition-colors duration-300 ${casero ? "bg-menta" : "bg-amarillo"}`}>
+    <div className={`rounded-[24px_34px_26px_36px] px-5 py-4 transition-colors duration-300 ${casero ? "bg-menta" : "bg-amarillo"}`}>
       <p className="text-chico font-semibold">
         {turno} · {casero ? "casero" : "tu antojo"}
       </p>
@@ -55,7 +55,7 @@ function Comida({ turno, casero, antojo }: { turno: string; casero: boolean; ant
             {RECETA.nombre}, {RECETA.minutos} min
           </p>
           <p className="mt-2 text-chico">
-            Ya tienes: {RECETA.tienes.join(", ").toLowerCase()}. Te falta: {RECETA.faltan.map((f) => f.nombre.toLowerCase()).join(" y ")}, {pesos(faltan)} en el súper.
+            Con lo que ya tienes. Te falta {RECETA.faltan.map((f) => f.nombre.toLowerCase()).join(" y ")}: {pesos(faltan)}.
           </p>
         </>
       ) : (
@@ -64,7 +64,7 @@ function Comida({ turno, casero, antojo }: { turno: string; casero: boolean; ant
             {antojo.nombre} de {antojo.local}
           </p>
           <p className="mt-2 text-chico">
-            {pesos(antojo.precio)} más {pesos(ENVIO)} de envío. El botón para pedirlo te llega ese día.
+            {pesos(antojo.precio)} + {pesos(ENVIO)} de envío.
           </p>
         </>
       )}
@@ -92,8 +92,7 @@ export function TuSabado() {
             Tu sábado, decidido el jueves
           </h2>
           <p className="revela mt-6 max-w-[42ch]" style={{ ["--i" as string]: 1 }}>
-            Dos comidas: una es tu antojo, planificado y sin culpa; la otra es casera, rica y de 10 minutos, con lo que ya
-            tienes. Pruébalo: elige tu antojo y cuándo va.
+            Un antojo y una comida casera. Tú eliges cuál va primero.
           </p>
           <div className="revela mt-9 space-y-7" style={{ ["--i" as string]: 2 }}>
             <Opcion
@@ -117,23 +116,23 @@ export function TuSabado() {
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7">
-          <div className="revela rounded-[2.4rem] bg-cielo p-5 sm:p-8" style={{ ["--i" as string]: 1 }} aria-live="polite">
-            <p className="text-lead font-bold">El plan que te deja</p>
+          <div className="revela rounded-[36px_48px_40px_52px] bg-superficie p-5 sm:p-8" style={{ ["--i" as string]: 1 }} aria-live="polite">
+            <p className="font-titulo text-lead font-bold">Tu sábado</p>
             <div className="mt-5 grid gap-3">
               <Comida turno="Almuerzo" casero={turno !== "almuerzo"} antojo={antojo} />
               <Comida turno="Comida" casero={turno !== "comida"} antojo={antojo} />
             </div>
 
             <div className="mt-8">
-              <p className="font-semibold">Lo que sale el sábado</p>
+              <p className="font-semibold">Cuánto sale</p>
               <dl className="mt-4 space-y-4">
                 <div className="grid grid-cols-[1fr_auto] items-baseline gap-x-4">
-                  <dt>Si las dos comidas fueran delivery</dt>
+                  <dt>Todo por delivery</dt>
                   <dd className="font-bold tabular-nums">{pesos(todoDelivery)}</dd>
                   <dd className="col-span-2 mt-2 h-3 rounded-full bg-rosado" aria-hidden="true" />
                 </div>
                 <div className="grid grid-cols-[1fr_auto] items-baseline gap-x-4">
-                  <dt>Con tu plan, antojo incluido</dt>
+                  <dt>Con Ami, antojo incluido</dt>
                   <dd className="font-bold tabular-nums">{pesos(conPlan)}</dd>
                   <dd className="col-span-2 mt-2 h-3 rounded-full bg-chat-fondo" aria-hidden="true">
                     <div
@@ -144,9 +143,7 @@ export function TuSabado() {
                 </div>
               </dl>
               <p className="mt-5 text-lead font-bold">Te quedan {pesos(quedan)} para la semana.</p>
-              <p className="mt-2 text-chico text-tinta-suave">
-                Locales y precios de ejemplo. El otro delivery se calcula a {pesos(OTRO_DELIVERY)} más envío.
-              </p>
+              <p className="mt-2 text-chico text-tinta-suave">Precios de ejemplo.</p>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource-variable/bricolage-grotesque/opsz.css";
+@import "@fontsource-variable/figtree";
 
 /* ---------------------------------------------------------------------------
    «Cerro de calamina»
@@ -7,41 +8,42 @@
    una casa más, no un hoyo. Fondo de bruma de puerto, tinta azul bahía, campos
    del color de las casas y un solo verde para lo que se toca (hablar por
    WhatsApp, elegir, avanzar). Los bordes ondulados son el perfil de la calamina.
-   De noche: el puerto oscuro con las ventanas encendidas.
 --------------------------------------------------------------------------- */
 
 :root {
   color-scheme: light;
-  --cielo: #f4f7f6;
+  /* Paleta de Ami (la misma de los mockups): neblina de fondo, tinta,
+     amarillo ascensor, celeste cerro, rubor y azul puerto solo en lo que se toca. */
+  --cielo: #f2f4f1;
   --superficie: #ffffff;
-  --tinta: #13263f;
-  --tinta-suave: #3c4f66;
-  --amarillo: #fbe6a2;
-  --celeste: #d2e7f2;
-  --rosado: #f7d6d4;
-  --menta: #d4ecdd;
-  --accion: #127a4b;
-  --accion-fuerte: #0d6139;
+  --tinta: #1e2321;
+  --tinta-suave: #4a524e;
+  --amarillo: #fcefc6;
+  --celeste: #dceeef;
+  --rosado: #fbe3da;
+  --menta: #e3efe6;
+  --accion: #1f5f73;
+  --accion-fuerte: #163f4d;
   --accion-texto: #ffffff;
-  --chat-fondo: #e8efea;
-  --burbuja-yo: #d6f2de;
+  --chat-fondo: #f2f4f1;
+  --burbuja-yo: #dceeef;
   --burbuja-ella: #ffffff;
-  --linea: rgb(19 38 63 / 0.14);
+  --linea: rgb(30 35 33 / 0.12);
 
   /* Casas del cerro (solo ilustración). */
-  --casa-amarillo: #f2c84b;
-  --casa-celeste: #7db7d9;
-  --casa-rosado: #e98f8f;
-  --casa-menta: #7cc49a;
-  --casa-naranja: #f0a65a;
-  --casa-rojo: #d65b4f;
-  --casa-azul: #4f86c6;
-  --ventana: #fdf6e3;
-  --techo: #13263f;
-  --vista: #dcecf4;
-  --cerro: #c9dccf;
-  --cerro-2: #b4cfbd;
-  --mar: #a9cfe3;
+  --casa-amarillo: #f6c445;
+  --casa-celeste: #7fbfc4;
+  --casa-rosado: #ef8a6e;
+  --casa-menta: #9cc9a6;
+  --casa-naranja: #f2a65e;
+  --casa-rojo: #d9675a;
+  --casa-azul: #5b93b8;
+  --ventana: #fff8e6;
+  --techo: #1e2321;
+  --vista: #dceeef;
+  --cerro: #cfe2d4;
+  --cerro-2: #bcd6c3;
+  --mar: #9fcfd3;
 
   --margen: 1rem;
   --alto-header: 4rem;
@@ -56,41 +58,6 @@
 @media (min-width: 80rem) {
   :root {
     --margen: 3rem;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --cielo: #141a21;
-    --superficie: #1d252e;
-    --tinta: #eef2f5;
-    --tinta-suave: #b6c2cd;
-    --amarillo: #3a3220;
-    --celeste: #1b2d3b;
-    --rosado: #382427;
-    --menta: #1a3227;
-    --accion: #44c88b;
-    --accion-fuerte: #6ad8a5;
-    --accion-texto: #0a2016;
-    --chat-fondo: #172029;
-    --burbuja-yo: #1e4733;
-    --burbuja-ella: #25303b;
-    --linea: rgb(238 242 245 / 0.16);
-
-    --casa-amarillo: #a8873a;
-    --casa-celeste: #45708d;
-    --casa-rosado: #985a5c;
-    --casa-menta: #4b7d61;
-    --casa-naranja: #a36d3c;
-    --casa-rojo: #93433b;
-    --casa-azul: #3c5f8c;
-    --ventana: #ffd66e;
-    --techo: #0c1117;
-    --vista: #18232e;
-    --cerro: #22302a;
-    --cerro-2: #1b2722;
-    --mar: #1a2a38;
   }
 }
 
@@ -120,7 +87,8 @@
   --color-burbuja-ella: var(--burbuja-ella);
   --color-linea: var(--linea);
 
-  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-titulo: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
 
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-salto: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -163,6 +131,7 @@
   h1,
   h2,
   h3 {
+    font-family: var(--font-titulo);
     font-weight: 700;
     text-wrap: balance;
   }
@@ -246,12 +215,6 @@
     opacity: 0.06;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
     mix-blend-mode: multiply;
-  }
-  @media (prefers-color-scheme: dark) {
-    .grano::after {
-      mix-blend-mode: screen;
-      opacity: 0.05;
-    }
   }
 }
 
