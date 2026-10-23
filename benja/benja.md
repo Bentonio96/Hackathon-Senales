@@ -235,3 +235,30 @@ No toqué los títulos ni las notas que no son burbujas, como «El lunes ya no p
   - Los nombres internos de archivos y variables (`ami.md`, `ami.ts`, `AMI_MODELO`) y las claves de Redis.
   - Las notas antiguas de `benja/` y `esperanza/`.
 - **De aquí en adelante, escribe «Amy»** en los textos nuevos.
+
+### 2026-10-23 20:30 · para Esperanza (encargo de Benja para tu Claude)
+
+**Objetivo:** que mañana tengamos deploys disponibles para Amy (el agente) hasta el pitch. La cuenta de Vercel de Benja llegó hoy al límite de 100 deploys del plan gratis. **Prioridad: solo el agente.** El pitch quedó bien y se presenta desde el Mac de Benja (`npx serve pitch`), y la landing puede esperar.
+
+**1. Despliega `agente/` en tu Vercel, como respaldo para la demo web**
+- Crea un proyecto nuevo en tu cuenta. El dominio Benja lo usaría para la demo de mañana, así que elígelo claro, por ejemplo `amy-demo.vercel.app`.
+  - **Con la CLI**, que es lo más simple: dentro de `agente/` corre `npx vercel link` y después `npx vercel deploy --prod`.
+  - **Importando el repo desde tu Vercel:** probablemente no funcione, porque el repo es de Benja y la integración de GitHub tiene que estar autorizada en su cuenta.
+- Variables de entorno: las cargas tú en tu proyecto. **Nunca las escribas en el repo ni en este archivo.**
+  - `ANTHROPIC_API_KEY`: **la tuya**, de tu cuenta en platform.claude.com, con unos pocos dólares y un límite de gasto.
+  - `AMI_MODELO`: `claude-haiku-5-5` para probar; Benja decide cuándo pasar a `claude-opus-5-5` para el pitch.
+  - **Upstash Redis:** conéctalo desde el Marketplace de tu Vercel con el prefijo `KV`, para que se creen `KV_REST_API_URL` y `KV_REST_API_TOKEN`. Sin esto, Amy olvida la conversación entre mensajes.
+  - **No cargues Twilio.** WhatsApp sigue en el proyecto de Benja (`hola-ami-agente.vercel.app`), que tiene el webhook del sandbox. Tu deploy es solo para `/demo`, el chat web.
+- Prueba en `https://<tu-dominio>/demo`: escribe «hola», aprieta «Jueves 17:00» y prueba una alerta («mañana no como nada para compensar»). Anota aquí el dominio y si funcionó.
+
+**2. Reglas para no agotar los deploys (en las dos cuentas)**
+- **Prueba en local antes de subir:** en `agente/` crea un `.env.local` con tu clave y Upstash, corre `npm run dev` y prueba en `http://localhost:3000/demo`. Así iteras el tono sin gastar deploys.
+- **Junta cambios:** commitea en local las veces que quieras, pero haz `git push` a `main` de a bloques, no por cada ajuste.
+- **Un deploy por bloque de trabajo, como máximo uno por hora,** y avísalo aquí antes («voy a desplegar el agente»), para que Benja no despliegue al mismo tiempo.
+- **Despliega con la CLI solo cuando tengas un bloque probado.** En tu proyecto no hace falta conectar el repo, así un push no dispara deploys automáticos en tu cuenta.
+- **El proyecto de Benja despliega solo si cambia la carpeta** (Ignored Build Step). Un push que toque solo `esperanza/`, `benja/` o `pitch/` no gasta deploys del agente.
+- **Congelamiento:** el último deploy del agente es el sábado a más tardar a las 12:00. Después solo se corrigen errores que rompan la demo.
+
+**3. Lo que no va**
+- No muevas WhatsApp ni el webhook de Twilio a tu cuenta. Es la noche antes, y si se corta la cadena de WhatsApp no alcanzamos a arreglarla.
+- No despliegues el pitch ni la landing por ahora.
