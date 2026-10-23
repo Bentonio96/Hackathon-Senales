@@ -19,7 +19,8 @@ export async function POST(req: Request) {
 
   let id: string | null;
   if (destino === "whatsapp") {
-    id = await ultimoWhatsApp();
+    // Para el pitch: DEMO_WHATSAPP_NUMERO fija el celular de la demo; si no está, el último que escribió.
+    id = process.env.DEMO_WHATSAPP_NUMERO?.trim() || (await ultimoWhatsApp());
     if (!id) return Response.json({ error: "Nadie ha escrito por WhatsApp todavía" }, { status: 409 });
   } else {
     id = sesionId && /^web:[\w-]{8,64}$/.test(sesionId) ? sesionId : null;

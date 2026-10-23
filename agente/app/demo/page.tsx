@@ -72,7 +72,14 @@ export default function Demo() {
   const [texto, setTexto] = useState("");
   const [foto, setFoto] = useState<{ base64: string; url: string } | null>(null);
   const [pensando, setPensando] = useState(false);
-  const [destino, setDestino] = useState<"web" | "whatsapp">("web");
+  const [destino, setDestinoEstado] = useState<"web" | "whatsapp">("web");
+  // El destino del reloj se recuerda en este navegador (para el pitch queda en WhatsApp).
+  function setDestino(valor: "web" | "whatsapp") {
+    setDestinoEstado(valor);
+    try {
+      localStorage.setItem("ami-destino", valor);
+    } catch {}
+  }
   const [plan, setPlan] = useState<Plan>(null);
   const [error, setError] = useState<string | null>(null);
   const finRef = useRef<HTMLDivElement>(null);
@@ -90,6 +97,9 @@ export default function Demo() {
       } catch {}
     }
     setSesionId(id);
+    try {
+      if (localStorage.getItem("ami-destino") === "whatsapp") setDestinoEstado("whatsapp");
+    } catch {}
   }, []);
 
   useEffect(() => {
@@ -215,7 +225,7 @@ export default function Demo() {
             <input type="radio" checked={destino === "web"} onChange={() => setDestino("web")} /> este chat
           </label>
           <label>
-            <input type="radio" checked={destino === "whatsapp"} onChange={() => setDestino("whatsapp")} /> el último WhatsApp
+            <input type="radio" checked={destino === "whatsapp"} onChange={() => setDestino("whatsapp")} /> WhatsApp de la demo
           </label>
         </fieldset>
 
