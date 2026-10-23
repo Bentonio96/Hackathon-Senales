@@ -14,6 +14,10 @@ const PREGUNTAS = [
     r: "No. El carrete es parte del plan. Solo te pregunta si sales, para dejar listo el día siguiente.",
   },
   {
+    p: "¿Cuántos antojos tengo?",
+    r: "Un número fijo a la semana, que decides con Ami de antemano. Si un finde te pasas, no es una falla: no se descuenta nada y seguimos.",
+  },
+  {
     p: "¿Y si no sigo el plan?",
     r: "No pasa nada. No hay racha que se rompa ni nada que compensar. Te escribe «seguimos desde tu próxima comida», y sigues.",
   },
