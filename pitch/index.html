@@ -126,9 +126,6 @@
   .btn[hidden] { display: none; }
   .status { font-size: 22px; line-height: 1.45; min-height: 64px; max-width: 760px; margin: 0; }
   .status.is-error { color: #a3402a; }
-  .planb { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 20px 26px; border-radius: 26px; background: var(--superficie); max-width: 760px; transition: box-shadow 200ms var(--ease); }
-  .planb.is-urgent { box-shadow: 0 0 0 3px var(--casa-amarillo); }
-  .planb p { font-size: 20px; line-height: 1.4; color: var(--tinta-suave); flex: 1 1 260px; margin: 0; }
 
   /* deck chrome */
   .chrome { position: fixed; right: 20px; bottom: 16px; display: flex; align-items: center; gap: 8px; z-index: 10; font-size: 15px; color: var(--tinta-suave); opacity: .55; transition: opacity 200ms; }
@@ -138,7 +135,7 @@
   .count { min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
 
   @media (prefers-reduced-motion: reduce) {
-    .slide, .slide.is-active, .btn, .planb, .chrome { transition: none; }
+    .slide, .slide.is-active, .btn, .chrome { transition: none; }
   }
 </style>
 </head>
@@ -256,10 +253,6 @@
             <button class="btn" id="stop" type="button" hidden>Detener</button>
           </div>
           <p class="status" id="status" role="status" aria-live="polite">El WhatsApp de Antonia, en vivo: del jueves al sábado con caña.</p>
-          <div class="planb" id="planb">
-            <p><strong>Plan B:</strong> la misma Ami en la web, con un reloj para adelantar al sábado.</p>
-            <button class="btn" id="open-web" type="button">Abrir la demo web</button>
-          </div>
         </div>
       </div>
     </section>
@@ -314,9 +307,6 @@
 </nav>
 
 <script>
-  // Web demo of the agent (agente/, route /demo). Change it once there is a deploy.
-  const DEMO_URL = 'http://localhost:3000/demo';
-
   // --- Illustrations, ported from the landing (Cerro.tsx, Cierre.tsx) ---------
   const CASAS = [
     { corto: 'Lun', x: 22, base: 506, ancho: 84, alto: 104, color: 'var(--casa-celeste)', techo: 'dos-aguas' },
@@ -401,6 +391,7 @@
     count.textContent = `${current + 1} / ${slides.length}`;
     const hash = `#${current + 1}`;
     if (location.hash !== hash) history.replaceState(null, '', hash);
+    reportarEstado();
   }
 
   function fromHash() {
@@ -446,7 +437,6 @@
   const screen = document.getElementById('screen');
   const phone = document.getElementById('phone');
   const status = document.getElementById('status');
-  const planb = document.getElementById('planb');
   const connectBtn = document.getElementById('connect');
   const reconnectBtn = document.getElementById('reconnect');
   const stopBtn = document.getElementById('stop');
@@ -516,7 +506,6 @@
   function setStatus(text, isError) {
     status.textContent = text;
     status.classList.toggle('is-error', Boolean(isError));
-    planb.classList.toggle('is-urgent', Boolean(isError));
   }
 
   function setLive(live) {
@@ -538,8 +527,8 @@
   async function connectMirror() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
       setStatus(window.isSecureContext
-        ? 'Este navegador no puede compartir una ventana. Abre el pitch en Chrome, o usa el plan B.'
-        : 'Para compartir una ventana, abre el pitch desde localhost (npx serve pitch -l 4000), no como archivo. Mientras, usa el plan B.', true);
+        ? 'Este navegador no puede compartir una ventana. Abre el pitch en Chrome.'
+        : 'Para compartir una ventana, abre el pitch desde localhost (node pitch/servidor.mjs), no como archivo.', true);
       return;
     }
     try {
@@ -550,7 +539,7 @@
       const [track] = stream.getVideoTracks();
       // Fires when sharing is stopped from Chrome's own bar or the window closes.
       track.addEventListener('ended', () => {
-        if (stream === next) stopMirror('Se dejó de compartir la ventana. Vuelve a conectar, o usa el plan B.');
+        if (stream === next) stopMirror('Se dejó de compartir la ventana. Toca «¡Veamos la demo!» para volver a conectar.');
       });
       setLive(true);
       setStatus('Así se ve un finde con Ami.', false);
@@ -558,9 +547,9 @@
       if (error && error.name === 'NotAllowedError') {
         setStatus(stream
           ? 'Cancelaste el cambio: sigue la ventana de antes.'
-          : 'Cancelaste la selección. Toca «¡Veamos la demo!» de nuevo, o usa el plan B.', !stream);
+          : 'Cancelaste la selección. Toca «¡Veamos la demo!» de nuevo.', !stream);
       } else {
-        setStatus(`No se pudo conectar la ventana (${(error && error.message) || 'error desconocido'}). Usa el plan B.`, true);
+        setStatus(`No se pudo conectar la ventana (${(error && error.message) || 'error desconocido'}).`, true);
       }
     }
   }
@@ -568,9 +557,31 @@
   connectBtn.addEventListener('click', connectMirror);
   reconnectBtn.addEventListener('click', connectMirror);
   stopBtn.addEventListener('click', () => stopMirror());
-  document.getElementById('open-web').addEventListener('click', () => {
-    window.open(DEMO_URL, '_blank', 'noopener');
-  });
+
+  // --- Phone remote: commands arrive from servidor.mjs over Server-Sent Events --
+  // Opened with npx serve or as a file there is no /eventos: the remote just stays off.
+  let remotoConectado = false;
+
+  function reportarEstado() {
+    if (!remotoConectado) return;
+    fetch('/estado', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ n: current + 1, total: slides.length, titulo: slides[current].getAttribute('aria-label') }),
+    }).catch(() => {});
+  }
+
+  if (window.EventSource && location.protocol.startsWith('http')) {
+    const eventos = new EventSource('/eventos');
+    eventos.addEventListener('open', () => { remotoConectado = true; reportarEstado(); });
+    eventos.addEventListener('error', () => { if (!remotoConectado) eventos.close(); });
+    eventos.addEventListener('comando', (event) => {
+      const { accion } = JSON.parse(event.data);
+      if (accion === 'siguiente') show(current + 1);
+      else if (accion === 'anterior') show(current - 1);
+      else if (accion === 'inicio') show(0);
+    });
+  }
 
   fit();
   show(fromHash());

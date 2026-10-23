@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f4f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Ami · control remoto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --cielo: #f2f4f1;
+    --superficie: #ffffff;
+    --tinta: #1e2321;
+    --tinta-suave: #4a524e;
+    --celeste: #dceeef;
+    --accion: #1f5f73;
+    --accion-fuerte: #163f4d;
+    --error: #a3402a;
+    --display: 'Bricolage Grotesque', 'Avenir Next', system-ui, sans-serif;
+    --texto: Figtree, 'Avenir Next', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--cielo); color: var(--tinta); font-family: var(--texto); -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+  body { display: flex; flex-direction: column; gap: 16px; padding: max(20px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom)); min-height: 100dvh; }
+  header { display: flex; align-items: center; gap: 12px; }
+  header svg { width: 44px; height: 44px; flex-shrink: 0; }
+  .donde { display: flex; flex-direction: column; min-width: 0; }
+  .numero { font-family: var(--display); font-weight: 800; font-size: 34px; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .titulo { font-size: 16px; color: var(--tinta-suave); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .conexion { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--tinta-suave); }
+  .conexion::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #b9c1bd; }
+  .conexion.ok { color: var(--accion-fuerte); }
+  .conexion.ok::before { background: var(--accion); }
+  button { font-family: inherit; border: 0; cursor: pointer; touch-action: manipulation; }
+  button:focus-visible { outline: 3px solid var(--accion); outline-offset: 3px; }
+  #siguiente { flex-grow: 1; min-height: 240px; border-radius: 40px; background: var(--accion); color: #fff; font-family: var(--display); font-weight: 800; font-size: 44px; letter-spacing: -0.02em; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; transition: transform 120ms, background 120ms; }
+  #siguiente svg { width: 56px; height: 56px; }
+  #anterior { min-height: 96px; border-radius: 32px; background: var(--superficie); color: var(--accion); font-size: 24px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 120ms; }
+  #anterior svg { width: 28px; height: 28px; }
+  button:active { transform: scale(.97); }
+  #siguiente:active { background: var(--accion-fuerte); }
+  .pie { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  #inicio { background: transparent; color: var(--accion); font-size: 16px; font-weight: 700; min-height: 44px; padding: 0 4px; text-decoration: underline; text-underline-offset: 4px; }
+  #aviso { font-size: 15px; color: var(--tinta-suave); text-align: right; margin: 0; }
+  #aviso.error { color: var(--error); }
+  @media (prefers-reduced-motion: reduce) { button { transition: none; } button:active { transform: none; } }
+</style>
+</head>
+<body>
+  <header>
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="100" fill="#F7E9DF"/>
+      <path d="M90 50 C126 46 152 74 150 110 C148 146 122 164 90 160 C58 156 38 132 42 100 C46 70 62 53 90 50 Z" fill="#F6C445"/>
+      <path d="M152 108 C168 106 180 121 178 138 C176 156 161 165 146 161 C131 157 125 144 129 128 C132 115 140 109 152 108 Z" fill="#7FBFC4"/>
+      <path d="M73 98 Q79 91 85 98" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
+      <path d="M101 96 Q107 89 113 96" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
+      <path d="M83 116 Q93 125 103 115" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="145" cy="131" r="3.5" fill="#1E2321"/><circle cx="159" cy="130" r="3.5" fill="#1E2321"/>
+    </svg>
+    <div class="donde" aria-live="polite">
+      <span class="numero" id="numero">– / –</span>
+      <span class="titulo" id="titulo">Esperando el pitch…</span>
+    </div>
+    <span class="conexion" id="conexion">sin conexión</span>
+  </header>
+
+  <button type="button" id="siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Siguiente</button>
+  <button type="button" id="anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Anterior</button>
+
+  <div class="pie">
+    <button type="button" id="inicio">Volver al inicio</button>
+    <p id="aviso" role="status"></p>
+  </div>
+
+<script>
+  const clave = new URLSearchParams(location.search).get('k') || '';
+  const aviso = document.getElementById('aviso');
+  const conexion = document.getElementById('conexion');
+
+  function avisar(texto, error) {
+    aviso.textContent = texto;
+    aviso.classList.toggle('error', Boolean(error));
+  }
+
+  async function mandar(accion) {
+    if (navigator.vibrate) navigator.vibrate(12);
+    try {
+      const res = await fetch('/comando', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ k: clave, accion }),
+      });
+      if (res.status === 403) avisar('La clave no calza: abre el link que muestra la terminal.', true);
+      else if (!res.ok) avisar('No se pudo pasar la slide.', true);
+      else avisar('');
+    } catch {
+      avisar('Sin conexión con el Mac.', true);
+    }
+  }
+
+  document.getElementById('siguiente').addEventListener('click', () => mandar('siguiente'));
+  document.getElementById('anterior').addEventListener('click', () => mandar('anterior'));
+  document.getElementById('inicio').addEventListener('click', () => mandar('inicio'));
+
+  if (!clave) avisar('Falta la clave: abre el link que muestra la terminal.', true);
+
+  // Which slide the deck is showing, pushed by the server.
+  const eventos = new EventSource('/eventos');
+  eventos.addEventListener('open', () => { conexion.textContent = 'conectado'; conexion.classList.add('ok'); });
+  eventos.addEventListener('error', () => { conexion.textContent = 'sin conexión'; conexion.classList.remove('ok'); });
+  eventos.addEventListener('estado', (event) => {
+    const { n, total, titulo } = JSON.parse(event.data);
+    document.getElementById('numero').textContent = `${n} / ${total}`;
+    document.getElementById('titulo').textContent = titulo;
+  });
+</script>
+</body>
+</html>

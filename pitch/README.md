@@ -1,18 +1,35 @@
 # Pitch: Ami, caso Antonia
 
-Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo. La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
+Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
 ## Cómo abrirlo
 
-La slide 5 muestra en vivo la pantalla del iPhone. Para eso usa `getDisplayMedia`, que solo funciona en un contexto seguro. Si abres el archivo con doble clic (`file://`), el botón no conecta. Sírvelo desde localhost:
-
 ```bash
-npx serve pitch -l 4000
+node pitch/servidor.mjs
 ```
 
-Después abre `http://localhost:4000/#5` en Chrome. Usa el puerto 4000 porque el 3000 es de la demo web del agente (`npm run dev` en `agente/`), que es adonde apunta el plan B.
+No hay que instalar nada: es Node puro. La terminal imprime dos cosas:
 
-## Controles
+- **El pitch, para el Mac:** `http://localhost:4000/`. Ábrelo en Chrome.
+- **El control remoto, para el celular:** `http://<ip-del-mac>:4000/remoto?k=<clave>`. Ábrelo en el celular.
+
+Tiene que ser desde localhost. La slide 5 usa `getDisplayMedia`, que solo funciona en un contexto seguro, y abriendo el archivo con doble clic (`file://`) el botón no conecta. El puerto se cambia con `PORT=4100 node pitch/servidor.mjs`.
+
+Con `npx serve pitch` el pitch también funciona, pero sin control remoto.
+
+## Control remoto desde el celular
+
+1. El celular y el Mac tienen que estar en la **misma red Wi-Fi**.
+2. Abre en el celular el link `…/remoto?k=…` que imprimió la terminal. La clave cambia cada vez que levantas el servidor.
+3. Arriba se ve en qué slide va el pitch y si está «conectado». **Siguiente** es el botón grande, **Anterior** el de abajo, y **Volver al inicio** está al pie.
+
+Si la red del evento no deja que los equipos se vean entre sí (pasa en redes de eventos), activa el **Compartir Internet** del iPhone y conecta el Mac a esa red. Vuelve a levantar el servidor para que imprima la IP nueva.
+
+**Cuidado en la slide 5:** el iPhone es el que se proyecta. Mientras estás en esa slide, lo que abras en el teléfono (también el control remoto) se ve en la pantalla. Para salir de la demo, usa la flecha → del Mac, o vuelve al control remoto sabiendo que se va a ver un segundo.
+
+Desactiva el bloqueo automático del iPhone mientras presentas (Ajustes › Pantalla y brillo › Bloqueo automático), así la página del remoto no se apaga.
+
+## Controles en el Mac
 
 | Tecla | Qué hace |
 |---|---|
@@ -26,9 +43,10 @@ El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la
 ## Slide 5: el iPhone en vivo
 
 1. Toca **¡Veamos la demo!**.
-2. En el diálogo de Chrome, entra a la pestaña **Ventana** y elige la de **Duplicación del iPhone** (o la de QuickTime, más abajo).
+2. En el diálogo de Chrome, entra a la pestaña **Ventana** y elige la de **QuickTime Player** (o la de «Duplicación del iPhone»).
 3. **Cambiar ventana** abre el diálogo otra vez. **Detener** corta la transmisión. Si dejas de compartir desde la barra de Chrome, la slide vuelve sola al estado inicial.
-4. Si cancelas el diálogo o algo falla, el mensaje lo explica y el **plan B** se marca en amarillo.
+
+**La primera vez**, macOS pide permiso: Configuración del Sistema › Privacidad y seguridad › **Grabación de pantalla y audio del sistema** › activa Google Chrome. Después cierra Chrome por completo (⌘Q) y vuelve a abrirlo. Si no, en la pestaña Ventana solo aparece Chrome.
 
 **Recorte de la cabecera.** El video se recorta por arriba para esconder la barra de estado del iPhone y la cabecera del chat de WhatsApp (la foto y el nombre del número del sandbox). Solo se recorta: no se pinta nada encima. Se ajusta en vivo, en la slide 5:
 
@@ -40,29 +58,30 @@ El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la
 
 El valor por defecto es 15% de la altura de la ventana. El que ajustes queda guardado en este navegador para la próxima vez.
 
-**La primera vez**, macOS pide permiso: Configuración del Sistema › Privacidad y seguridad › **Grabación de pantalla y audio del sistema** › activa Google Chrome y reinícialo.
+### Opción 1: QuickTime con el iPhone por cable
 
-### Opción 1: Duplicación del iPhone (iPhone Mirroring)
-
-Requisitos: macOS Sequoia 15 o posterior en el Mac, iOS 18 o posterior en el iPhone, la misma cuenta de Apple en los dos, Bluetooth y Wi-Fi activados, y el iPhone bloqueado y cerca.
-
-1. En el Mac, abre la app **Duplicación del iPhone** (está en Aplicaciones, o búscala con Spotlight).
-2. La primera vez, sigue el asistente: desbloquea el iPhone cuando lo pida y acepta la conexión.
-3. Cuando aparezca la pantalla del iPhone en la ventana, abre WhatsApp en el chat con Ami.
-4. En el pitch, toca **¡Veamos la demo!** y elige la ventana «Duplicación del iPhone».
-
-Mientras se duplica, el iPhone tiene que quedar bloqueado. Si lo desbloqueas, la duplicación se corta.
-
-### Opción 2, de respaldo: QuickTime con el iPhone por cable
+Así el teléfono se usa en la mano y se ve todo lo que haces.
 
 1. Conecta el iPhone al Mac por cable y desbloquéalo. Si te pregunta, toca **Confiar**.
-2. Abre **QuickTime Player** › Archivo › **Nueva grabación de película**.
-3. En la ventana de grabación, toca la flecha junto al botón rojo y elige el **iPhone** como cámara. No hace falta grabar: basta con que se vea la pantalla.
+2. Abre **QuickTime Player** › Archivo › **Nueva grabación de video**.
+3. En la flecha (⌄) junto al botón rojo, en **Cámara**, elige el que tiene solo el nombre del iPhone (no «Cámara de iPhone…», que es la cámara de Continuidad). No hace falta grabar: basta con que se vea la pantalla.
 4. En el pitch, toca **¡Veamos la demo!** y elige la ventana de QuickTime Player.
 
-### Plan B: la demo web
+Si el iPhone no aparece en la lista, prueba otro cable (algunos solo cargan) o cierra y vuelve a abrir QuickTime con el iPhone conectado.
 
-El botón **Abrir la demo web** abre la ruta `/demo` del agente en otra pestaña. La URL está en la constante `DEMO_URL`, al principio del `<script>` de `index.html`, y hoy apunta a `http://localhost:3000/demo` (el `npm run dev` de `agente/`). Cuando haya un deploy, cámbiala ahí.
+### Opción 2: Duplicación del iPhone (iPhone Mirroring)
+
+Ojo: con esta opción el iPhone tiene que quedar bloqueado y se maneja desde el Mac. Sirve como respaldo, no para mostrar el teléfono en la mano.
+
+Requisitos: macOS Sequoia 15 o posterior, iOS 18 o posterior, la misma cuenta de Apple en los dos, Bluetooth y Wi-Fi activados.
+
+1. En el Mac, abre la app **Duplicación del iPhone** y sigue el asistente la primera vez.
+2. Abre WhatsApp en el chat con Ami.
+3. En el pitch, toca **¡Veamos la demo!** y elige la ventana «Duplicación del iPhone».
+
+## La demo web, aparte
+
+El chat web del agente ya no está en el pitch. Si el iPhone falla, ábrelo en otra ventana: con `npm run dev` en `agente/` queda en `http://localhost:3000/demo`.
 
 ## Pendientes
 
