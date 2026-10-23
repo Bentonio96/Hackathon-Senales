@@ -2,6 +2,8 @@
 
 Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, más una portada de Ami (nombre, frase y un celular con el chat) para dejar en pantalla durante las preguntas, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
+El guion, con tiempos, quién dice qué, el libreto de la demo y respuestas para las preguntas del jurado, está en [`guion.md`](guion.md).
+
 ## Cómo abrirlo
 
 ```bash

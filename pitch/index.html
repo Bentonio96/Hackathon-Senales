@@ -110,6 +110,11 @@
   .dia.domingo { background: var(--amarillo); }
   .dia.domingo span { color: var(--tinta); }
   .vuelta { position: absolute; right: 0; top: 0; width: 70px; height: 100%; }
+  /* 2 · tries and target */
+  .intentos { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .intentos .pildora { font-size: 23px; padding: 14px 22px; }
+  .atacamos { background: var(--superficie); border-radius: 40px 32px 44px 36px; padding: 36px 40px; display: flex; flex-direction: column; gap: 16px; }
+  .atacamos-frase { font-family: var(--display); font-weight: 800; font-size: 44px; line-height: 1.02; letter-spacing: -0.025em; margin: 0; }
   /* Cerro */
   .cerro { position: relative; width: 100%; }
   .cerro svg { display: block; width: 100%; height: auto; }
@@ -124,6 +129,8 @@
   /* Pills (landing «Lo que nunca hace») */
   .pildoras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; }
   .pildora { display: flex; align-items: center; gap: 16px; background: var(--superficie); border-radius: 22px; padding: 18px 24px; font-size: 25px; font-weight: 500; }
+  .exito { margin: 6px 0 0; font-size: 26px; max-width: 980px; }
+  .exito b { font-family: var(--display); font-weight: 800; }
   .pildora svg { width: 26px; height: 26px; flex-shrink: 0; }
 
   /* Evidence as things Ami says */
@@ -228,12 +235,23 @@
 
     <!-- 2 · Por qué le pasa -->
     <section class="slide amarillo grano" aria-label="Por qué le pasa">
-      <div class="split" style="margin-top: -60px; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr)">
-        <div class="stack">
-          <h2 class="titulo">«Ya la embarré con la semana, el lunes parto de nuevo.»</h2>
-          <p class="lead" style="max-width: 34ch">Un desliz anula la semana entera. Y nada de lo que ya probó tiene un plan para el finde.</p>
+      <div class="split" style="margin-top: -50px; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end">
+        <div class="stack" style="gap: 28px">
+          <h2 class="titulo" style="font-size: 72px">«Ya la embarré con la semana, el lunes parto de nuevo.»</h2>
+          <div class="stack" style="gap: 12px">
+            <p class="cuando" style="font-size: 20px; margin: 0">Ya lo intentó</p>
+            <div class="intentos">
+              <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Una app de recetas: la dejó a la semana</span>
+              <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Dos findes sin tomar</span>
+              <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Partir el lunes 1 de cada mes</span>
+            </div>
+          </div>
         </div>
-        <div class="dice"><svg class="av" style="width: 80px; height: 80px" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">Pucha, qué lata quedarte con esa sensación. El plan se puede mover 🫶</p></div>
+        <div class="atacamos">
+          <p class="cuando" style="font-size: 20px; margin: 0">Lo que atacamos</p>
+          <p class="atacamos-frase">No el completo del viernes. El «ya la embarré» del domingo.</p>
+          <p class="chico" style="font-size: 20px; color: var(--tinta)">Todo lo que probó le pide más disciplina. Nada tiene un plan para el finde.</p>
+        </div>
       </div>
       <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
@@ -255,12 +273,13 @@
     <section class="slide" aria-label="Ami">
       <div class="split">
         <div class="stack">
-          <h2 class="display" style="font-size: 108px">El lunes ya no partes de cero.</h2>
-          <p class="lead">Ami es una amiga en tu WhatsApp que el jueves te deja listo el sábado.</p>
-          <div class="stack" style="gap: 14px">
-            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 22px"><span class="cuando">jueves</span>Mándame una foto del refri y armamos tu sábado</p></div>
-            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 22px"><span class="cuando">si el plan se rompe</span>Seguimos desde tu próxima comida 🫶</p></div>
+          <h2 class="display" style="font-size: 92px">El lunes ya no partes de cero.</h2>
+          <div class="stack" style="gap: 12px">
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 21px"><span class="cuando">jueves, con calma</span>Mándame una foto del refri y armamos tu sábado</p></div>
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 21px"><span class="cuando">sábado, al despertar</span>Hola! Cómo amaneciste? Tus quesadillas están a 10 minutos 😅</p></div>
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 21px"><span class="cuando">si el plan cambia</span>Pucha, qué lata quedarte con esa sensación. Un finde que no sale como se pensó habla del plan, no de ti 🫶</p></div>
           </div>
+          <p class="chico" style="font-size: 19px">Con lo que ya tiene en el refri, un antojo y una casera rica, y cuánto le sale en el súper comparado con pedir.</p>
         </div>
         <figure class="cerro" data-cerro="entero" style="margin: 0" role="img" aria-label="La semana como una calle de casas de colores que sigue a los dos lados, sin un día de partida">
           <figcaption class="nota"><svg aria-hidden="true"><use href="#ami"/></svg><span><b>Sábado</b>Antojo y algo casero. Ya está decidido.</span></figcaption>
@@ -321,6 +340,10 @@
             <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">Seguimos desde tu próxima comida</p></div>
             <p class="chico">Tras un desliz, la autocompasión reduce el «qué más da».</p>
           </div>
+          <div class="razon">
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">Te escribo por aquí, como tus amigas 🌿</p></div>
+            <p class="chico">No es una app más: la de recetas la dejó a la semana. WhatsApp lo abre todos los días.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -335,7 +358,9 @@
           <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Calorías, peso ni cuerpo</span>
           <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Pedirle que no salga</span>
           <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Reemplazar a su nutricionista</span>
+          <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Decirle cuántos antojos tiene</span>
         </div>
+        <p class="exito"><b>Funcionó si</b> el domingo ya no escribe «el lunes parto de nuevo».</p>
       </div>
       <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
@@ -391,8 +416,8 @@
 
 <script>
   // --- Illustrations, after the landing (Cerro.tsx, Cierre.tsx) ---------------
-  // The week as a street of houses at the same height, starting on Friday and cut
-  // at both edges: it keeps going, and Monday is just another house, not a start.
+  // The week as a street of houses at the same height, Monday to Sunday, cut at
+  // both edges: it keeps going, and no house is higher than the others.
   const DIAS = {
     Lun: { color: 'var(--casa-celeste)', techo: 'dos-aguas', alto: 104 },
     Mar: { color: 'var(--casa-amarillo)', techo: 'plano', alto: 118 },
@@ -402,7 +427,7 @@
     Sáb: { color: 'var(--casa-azul)', techo: 'dos-aguas', alto: 128 },
     Dom: { color: 'var(--casa-rojo)', techo: 'media', alto: 110 },
   };
-  const CALLE = ['Jue', 'Vie', 'Sáb', 'Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie'].map((corto, i) => ({
+  const CALLE = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom', 'Lun'].map((corto, i) => ({
     corto,
     ...DIAS[corto],
     x: -46 + i * 89,
