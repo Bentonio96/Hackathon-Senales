@@ -5,7 +5,10 @@ import type { Sesion } from "./estado";
 import { ejecutarHerramienta, herramientas } from "./herramientas";
 
 const client = new Anthropic();
-const MODELO = "claude-opus-5-5";
+// Haiku 5.5 para probar barato; en el deploy del pitch se pone AMI_MODELO=claude-opus-5-5.
+const MODELO = process.env.AMI_MODELO || "claude-haiku-5-5";
+// El respaldo automático por rechazo existe en Opus, no en Haiku.
+const CON_RESPALDO = MODELO.startsWith("claude-opus");
 const MAX_VUELTAS_HERRAMIENTAS = 8;
 const MAX_TURNOS_POR_SESION = 120;
 
@@ -65,8 +68,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
       tools: herramientas,
       messages: sesion.historial,
       output_config: { effort: "medium" },
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
+      ...(CON_RESPALDO ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" as const } : {}),
     });
 
     if (respuesta.stop_reason === "refusal") {

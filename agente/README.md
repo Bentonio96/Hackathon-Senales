@@ -4,7 +4,7 @@ Ami es una amiga por WhatsApp que el jueves deja decidido el sábado de Antonia 
 
 ## Cómo funciona
 
-- **Cerebro:** Claude (`claude-opus-5-5`) con un loop de herramientas en `lib/ami.ts`. Las instrucciones están en `prompts/ami.md` (planificación, Benja) y `prompts/acompanamiento.md` (acompañamiento, Esperanza), más la pauta de ejemplo en `data/pauta-ejemplo.md`. Tiene activado el respaldo automático de modelo (`fallbacks: "default"`) por si una respuesta es rechazada.
+- **Cerebro:** Claude: `claude-haiku-5-5` por defecto para probar barato, y `claude-opus-5-5` para el pitch con `AMI_MODELO=claude-opus-5-5`. Corre un loop de herramientas en `lib/ami.ts`. Las instrucciones están en `prompts/ami.md` (planificación, Benja) y `prompts/acompanamiento.md` (acompañamiento, Esperanza), más la pauta de ejemplo en `data/pauta-ejemplo.md`. Con Opus se activa el respaldo automático de modelo (`fallbacks: "default"`) por si una respuesta es rechazada.
 - **Foto del refri:** se sube a la Files API de Anthropic y el historial guarda solo su id.
 - **Herramientas** (`lib/herramientas.ts`):
   - `buscar_precio_supermercado`: precio real en jumbo.cl; si falla, la tabla de ejemplo `data/precios-ejemplo.json`.
