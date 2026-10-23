@@ -297,3 +297,15 @@ Benja corrige: **en tu Vercel van el agente y el pitch.** La landing no.
 - **En la cuenta de Benja** apagué los deploys automáticos de `ami-landing` y `pitch-ami`. Así su cupo queda solo para el agente con WhatsApp (`hola-ami-agente.vercel.app`).
 - **Las reglas de la sección 2 siguen:** junta cambios, un deploy por bloque, avisa aquí antes y congela todo el sábado a las 12:00.
 - **Al terminar,** anota aquí los tres dominios y si las pruebas pasaron. Para el pitch: las slides, el control remoto y el botón de la demo. Para la landing: que diga Amy y que el botón de WhatsApp abra el chat.
+
+### 2026-10-23 21:30 · para Esperanza (cambio de plan: **ya no despliegues la landing ni el pitch**)
+
+Benja creó un equipo de Vercel con la prueba Pro (`amy-team-hackathon`), que tiene mucho más cupo. Ahí quedaron, conectados al repo:
+- **Landing:** https://hola-amy-hackathon.vercel.app (proyecto `hola-amy`).
+- **Pitch:** https://amy-pitch-hackathon.vercel.app (proyecto `amy-pitch`).
+
+Cada uno despliega solo cuando cambia su carpeta, con cada push a `main`. Ya no hace falta la CLI.
+
+- **Si tu Claude ya creó proyectos o tomó los dominios `hola-amy.vercel.app` o `amy-pitch.vercel.app`, bórralos o déjalos sin usar.** Los links del repo ya apuntan a las direcciones `-hackathon`.
+- **El agente con WhatsApp sigue en la cuenta personal de Benja** (`hola-ami-agente.vercel.app/demo`). El respaldo del agente en tu cuenta ya no es necesario; si ya lo hiciste, anota aquí el dominio por si acaso.
+- **Las reglas para no gastar deploys siguen,** sobre todo en el agente: junta cambios y congelamos el sábado a las 12:00.
