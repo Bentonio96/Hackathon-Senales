@@ -4,7 +4,7 @@
 
 Amy es una amiga por WhatsApp para Antonia. El jueves, con calma, antes del finde, deja decidido el sábado: un antojo y una comida casera rica hecha con lo que tiene en el refri. Si el plan se rompe, la acompaña sin juzgar, para que el fin de semana deje de sentirse como una caída.
 
-- **Landing:** https://hola-amy.vercel.app
+- **Landing:** https://hola-amy-hackathon.vercel.app
 - **Diseño de Amy** (avatar, voz y mockups): https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
 ## El problema que decidimos atacar
@@ -39,7 +39,7 @@ El detalle, con todas las fuentes, está en [`benja/investigacion-antonia.md`](b
 | Carpeta | Qué es |
 |---|---|
 | [`agente/`](agente/) | **Amy.** Next.js en Vercel con Claude y herramientas: lee la foto del refri, busca precios reales en Jumbo, revisa nutrientes por dentro y guarda el plan del sábado. Tiene el webhook de WhatsApp (sandbox de Twilio) y un chat web de respaldo en `/demo`, con un reloj para la demo en vivo. |
-| [`landing/`](landing/) | La landing de Amy (Vite, React y TypeScript), en línea en hola-amy.vercel.app. |
+| [`landing/`](landing/) | La landing de Amy (Vite, React y TypeScript), en línea en hola-amy-hackathon.vercel.app. |
 | [`pitch/`](pitch/) | El pitch en HTML, con una slide que muestra en vivo la pantalla del iPhone. |
 | [`benja/`](benja/), [`esperanza/`](esperanza/) | Las notas, decisiones e investigación de cada uno. Los Claude de los dos se coordinan por estos archivos (reglas en [`CLAUDE.md`](CLAUDE.md)). |
 
