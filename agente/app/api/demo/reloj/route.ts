@@ -29,7 +29,24 @@ export async function POST(req: Request) {
   try {
     return await enCola(sesionId_, async () => {
       const sesion = await cargarSesion(sesionId_, destino === "whatsapp" ? "whatsapp" : "web");
-      const respuestas = await turnoDeAmi(sesion, { texto: EVENTOS_RELOJ[momento] });
+      let respuestas: string[];
+      const nivelPrevio = sesion.derivacion_previa?.nivel;
+      if (sesion.modo === "pausa" && momento !== "jueves") {
+        // En pausa no se mandan los mensajes programados (diseño de Esperanza).
+        return Response.json({ respuestas: [], plan: sesion.plan ?? null, aviso: "Ami está en pausa: no escribe hasta el jueves." });
+      } else if (sesion.modo === "derivada" && (momento !== "jueves" || nivelPrevio !== "1")) {
+        // Después de una alerta, Ami no vuelve al plan por su cuenta.
+        return Response.json({ respuestas: [], plan: sesion.plan ?? null, aviso: "Hubo una alerta: Ami no manda mensajes programados." });
+      } else if (sesion.modo === "derivada") {
+        // El jueves después de una alerta de nivel 1 no abre con la receta.
+        sesion.modo = "normal";
+        respuestas = ["¿pudiste hablar con alguien? ¿quieres que sigamos con el finde o prefieres pausar? 🫶"];
+        sesion.historial.push({ role: "user", content: [{ type: "text", text: EVENTOS_RELOJ.jueves }] });
+        sesion.historial.push({ role: "assistant", content: [{ type: "text", text: respuestas[0] }] });
+      } else {
+        if (sesion.modo === "pausa") sesion.modo = "normal";
+        respuestas = await turnoDeAmi(sesion, { texto: EVENTOS_RELOJ[momento], esReloj: true });
+      }
       await guardarSesion(sesion);
       if (destino === "whatsapp") for (const r of respuestas) await enviarWhatsApp(sesionId_, r);
       return Response.json({ respuestas, plan: sesion.plan ?? null });

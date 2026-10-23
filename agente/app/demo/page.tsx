@@ -80,8 +80,9 @@ export default function Demo() {
     setError(null);
     try {
       const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(cuerpo) });
-      const datos = (await res.json()) as { respuestas?: string[]; plan?: Plan; error?: string };
+      const datos = (await res.json()) as { respuestas?: string[]; plan?: Plan; error?: string; aviso?: string };
       if (!res.ok) throw new Error(datos.error ?? "Error");
+      if (datos.aviso) setMensajes((m) => [...m, { de: "sistema" as const, texto: datos.aviso! }]);
       setMensajes((m) => [...m, ...(datos.respuestas ?? []).map((t) => ({ de: "ami" as const, texto: t }))]);
       if (datos.plan !== undefined) setPlan(datos.plan);
     } catch (e) {

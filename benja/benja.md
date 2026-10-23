@@ -99,3 +99,34 @@ Nota para la demo: en los mockups Ami escribe primero el jueves. En WhatsApp rea
 ### 2026-10-23 14:00 · para Esperanza
 
 Re: 2026-10-23 13:30. Quedó decidido el avatar B, «Abrazo», como lo conversaron con Benja. Lo anoté en `## Decisiones` (punto 4); anótalo también en tu archivo, porque el acuerdo es de los dos. Todas las pantallas del lienzo ya usan el B. Las preguntas sobre el tono y la escena «el plan se rompe» siguen abiertas.
+
+### 2026-10-23 14:30 · para Esperanza
+
+Re: 2026-10-23 11:10 y tus correcciones de las 11:28. **Integré tu parte entera.** `agente/prompts/acompanamiento.md` va primero en las instrucciones de Ami, y `ami.md` dice explícitamente que tu parte manda en tono y seguridad.
+
+**`agente/prompts/ami.md` reescrito para no chocar con lo tuyo:**
+- Sin «calza con tu pauta»: la revisión de nutrientes queda solo por dentro, sin explicarle por qué se eligió la receta.
+- Sin «contundente» ni nada que describa la comida por cuánto llena.
+- El sábado abre con «hola! ¿cómo amaneciste?» y, en otra burbuja, «¿te guío paso a paso o hoy pides? las dos están bien».
+- Si elige pedir: «dale, hoy se pide. que te caiga rico 🫶», sin antojos ni plata.
+- El domingo abre con «¿cómo amaneciste?».
+- El lunes y «partir de cero» quedan solo como contexto interno.
+- La foto del refri es una invitación, nunca un requisito, y no se afirma qué hay sin verla.
+- El número de antojos se dice una vez el jueves y nunca hay cuenta regresiva. **Por ahora quedó en «dos»** (`AMI_ANTOJOS_SEMANA`): lo cerramos juntos.
+
+**Tu sección 6, implementada en código** (`agente/lib/seguridad.ts`):
+- **Frases de nivel 2** (tu lista). Mandan el fijo sin esperar al clasificador. Probado: «estoy muerta», «la caña me mató», «me muero de hambre» y «el lunes parto de nuevo» no disparan.
+- **Clasificador aparte** con los últimos 20 mensajes. Devuelve el nivel y los datos para armar tus burbujas: cómo lo contó, días sin comer, alcohol sin comer, si sale hoy, si pide secreto, algo a mano y retractación. No usa `tool_choice` forzado, que el modelo actual rechaza: usa salida con esquema JSON, que da el mismo resultado. Si falla, sigue Ami con tu prompt.
+- **Mensajes fijos copiados textuales de tu prompt vivo** (1 a-e, 2a con algo a mano, retractaciones, ambiguo, 2b y 2c), con la regla del emoji. **Si cambias un texto de alerta en `acompanamiento.md`, avísame para copiarlo**, porque en el código están duplicados.
+- **Filtro de salida:** cifras con kcal, g o kg; peso, kilos, calorías, trampa, permitido, premio, castigo, compensar, perfecto; lunes, día uno, partir de cero, volver a empezar, retomar; sano, chatarra, contundente, liviano, de más; y «calza con tu pauta». Regenera una vez y, si vuelve a fallar, manda una respuesta neutra.
+- **Estado:** `modo` (normal, derivada o pausa) y `derivacion_previa`. «pausa» usa tus dos textos. Después de una alerta, el reloj no manda mensajes programados. El jueves después de un nivel 1 abre con «¿pudiste hablar con alguien? ¿quieres que sigamos con el finde o prefieres pausar?».
+- **Burbujas:** Ami las separa con una línea `---`, y el código las manda como mensajes separados.
+
+**Tu texto de la landing,** el de «si comer te está angustiando…», quedó cambiado a tu versión.
+
+**No implementé:**
+- Los botones: en el sandbox de WhatsApp no hay botones sin plantillas.
+- Los contadores de culpa y de pérdida de control: el clasificador ve los 20 mensajes y puede juzgar si algo se repite.
+- El contacto del día siguiente después de un B.
+
+Lo de arriba ya se probó sin la API, pero **el clasificador no se ha probado con la API**, porque falta la clave. Cuando Benja la tenga, corremos tus casos ★ de la sección 9.

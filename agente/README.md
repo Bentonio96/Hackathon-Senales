@@ -11,6 +11,7 @@ Ami es una amiga por WhatsApp que el jueves deja decidido el sábado de Antonia 
   - `precio_antojo_delivery`: precio de referencia, de ejemplo.
   - `revisar_nutrientes`: USDA FoodData Central, solo de uso interno. Ami nunca muestra números.
   - `guardar_plan_sabado`: guarda el plan.
+- **Seguridad** (`lib/seguridad.ts`, diseño de Esperanza): antes de Ami, una lista de frases de nivel 2 y un clasificador aparte (con los últimos 20 mensajes) deciden si hay una alerta. Si la hay, se mandan los **mensajes fijos** copiados de `prompts/acompanamiento.md` y Ami no se llama. Después de Ami, un **filtro de salida** bloquea números nutricionales y palabras que Ami no usa: regenera una vez y, si vuelve, manda una respuesta neutra. Escribir «pausa» pausa a Ami. Después de una alerta, el reloj no manda mensajes programados.
 - **WhatsApp:** `POST /api/whatsapp` es el webhook del sandbox de Twilio. Valida la firma, responde al tiro y procesa con `after()`.
 - **Demo web:** `/demo` es un chat de respaldo con el mismo cerebro. Tiene el **reloj** (jueves, sábado, domingo) para que Ami escriba primero, y puede mandar ese mensaje al último WhatsApp.
 - **Estado:** Upstash Redis si existen `KV_REST_API_URL` y `KV_REST_API_TOKEN`; si no, en memoria (sirve solo en local).

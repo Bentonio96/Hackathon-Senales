@@ -14,6 +14,7 @@ export interface Clasificacion {
   tipo_1: "ya_lo_hizo" | "anuncia" | "con_agrado" | "ninguno";
   dias_sin_comer: boolean;
   alcohol_sin_comer: boolean;
+  sale_hoy: boolean;
   pide_secreto: boolean;
   // Solo para el nivel 2a.
   objeto_a_mano: string;
@@ -59,6 +60,7 @@ const ESQUEMA = {
     tipo_1: { type: "string", enum: ["ya_lo_hizo", "anuncia", "con_agrado", "ninguno"] },
     dias_sin_comer: { type: "boolean" },
     alcohol_sin_comer: { type: "boolean" },
+    sale_hoy: { type: "boolean" },
     pide_secreto: { type: "boolean" },
     objeto_a_mano: { type: "string" },
     objeto_pronombre: { type: "string", enum: ["lo", "la", "los", "las", "ninguno"] },
@@ -71,6 +73,7 @@ const ESQUEMA = {
     "tipo_1",
     "dias_sin_comer",
     "alcohol_sin_comer",
+    "sale_hoy",
     "pide_secreto",
     "objeto_a_mano",
     "objeto_pronombre",
@@ -94,7 +97,7 @@ Niveles:
 Campos:
 - tipo_1 (solo nivel 1; si no, "ninguno"): "ya_lo_hizo" si cuenta algo que ya hizo, "anuncia" si dice que lo va a hacer, "con_agrado" si lo vive con agrado o lo cuenta en broma.
 - dias_sin_comer: lleva un día o más sin comer.
-- alcohol_sin_comer: va a tomar alcohol esa noche sin haber comido.
+- alcohol_sin_comer: va a tomar alcohol sin haber comido.\n- sale_hoy: dijo que sale hoy (no otro día).
 - pide_secreto: pide que no se lo cuentes a nadie.
 - objeto_a_mano (solo 2a): si menciona algo a mano para hacerse daño, escríbelo con sus palabras y con artículo («esas pastillas», «la cuerda»); si no, "". objeto_pronombre: el pronombre que concuerda («las» para «esas pastillas»), o "ninguno".
 - ya_se_hizo_dano (solo 2a): ya se hizo daño o ya tomó algo.
@@ -104,6 +107,7 @@ Campos:
 Ante la duda entre "0" y "1", elige "1". Ante la duda entre "1" y "2a", elige "2a".`;
 
 function aTexto(contenido: Anthropic.Beta.BetaMessageParam["content"]): string {
+  if (!contenido) return "";
   if (typeof contenido === "string") return contenido;
   return contenido
     .map((b) => (b.type === "text" ? b.text : b.type === "image" ? "[foto]" : ""))
@@ -156,7 +160,7 @@ export function mensajesFijos(c: Clasificacion, derivacionPrevia: string | null)
       return [
         "no tienes que explicarme nada. lo que dijiste importa, aunque ahora lo veas distinto.",
         "no te puedo prometer secreto: soy un programa y lo que escribimos queda en el sistema de la demo.",
-        "y si en algún rato se pone pesado de nuevo, puedes avisarle a alguien cercano, o llamar al *4141, que atiende a toda hora. yo te leo.",
+        "y si lo necesitas, ahora o más rato, puedes avisarle a alguien cercano o llamar al *4141, que atiende a toda hora. yo te leo.",
       ];
     }
     if (derivacionPrevia === "1") {
@@ -193,22 +197,30 @@ export function mensajesFijos(c: Clasificacion, derivacionPrevia: string | null)
       const primera = {
         ya_lo_hizo: "gracias por contármelo, de verdad. no tienes que cargar con esto sola.",
         anuncia: "gracias por contármelo. eso no lo voy a organizar contigo, pero a ti sí te acompaño. no tienes que explicarme nada.",
-        con_agrado: "gracias por contármelo. me preocupa que pases tanto rato sin comer, y eso no lo voy a acompañar ni organizar contigo.",
+        con_agrado: "gracias por contármelo. me preocupa que pases tanto tiempo sin comer. eso no lo voy a organizar contigo, y a ti sí te sigo acompañando.",
         ninguno: "gracias por contármelo, de verdad. no tienes que cargar con esto sola.",
       }[c.tipo_1];
       const burbujas = [
         primera,
         "¿te tinca contárselo a tu nutri, o a alguien cercano en quien confíes, una amiga o alguien de tu familia? si quieres, te ayudo a escribirle el mensaje.",
       ];
+      // c y d según el prompt de Esperanza: si hubo c, d se suma al final de c.
       if (c.dias_sin_comer) {
         burbujas.push(
-          "después de varios días sin comer, uno puede pasarlo mal sin darse cuenta. vale que te vea un médico pronto. y si te mareas, ves borroso, sientes el corazón muy rápido o te sientes muy débil, llama al 131.",
+          "después de varios días sin comer, uno puede pasarlo mal sin darse cuenta. ojalá te vea un médico pronto. y si te mareas, ves borroso, sientes el corazón muy rápido o te sientes muy débil, " +
+            (c.alcohol_sin_comer ? "llama al 131, también si sales a tomar." : "llama al 131."),
+        );
+      } else if (c.alcohol_sin_comer) {
+        // «esta noche» solo si dijo que sale hoy; si nombró otro día, «cuando salgas».
+        burbujas.push(
+          c.sale_hoy
+            ? "si sales esta noche y te sientes mal, el 131 atiende a toda hora."
+            : "cuando salgas, si te sientes mal, el 131 atiende a toda hora.",
         );
       }
-      if (c.alcohol_sin_comer) burbujas.push("esta noche, si algo se siente mal, el 131 atiende a toda hora.");
       if (c.pide_secreto) {
         burbujas.push(
-          "no puedo prometerte secreto: soy un programa y lo que escribimos queda en el sistema de la demo. si es algo delicado, mejor contárselo a una persona de confianza.",
+          "no puedo prometerte secreto: soy un programa y lo que escribimos queda en el sistema de la demo.",
         );
       }
       // Con mensajes de riesgo (131) ninguna burbuja lleva emoji.
@@ -229,6 +241,7 @@ export function clasificacionPorFrase(nivel: "2a" | "2b" | "2c", texto: string):
     tipo_1: "ninguno",
     dias_sin_comer: false,
     alcohol_sin_comer: false,
+    sale_hoy: false,
     pide_secreto: false,
     objeto_a_mano: "",
     objeto_pronombre: "ninguno",

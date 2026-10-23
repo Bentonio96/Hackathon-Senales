@@ -47,7 +47,7 @@ export function Reglas() {
           <div className="flex items-start gap-3">
             <AvatarAmi className="size-12 shrink-0" />
             <p className="rounded-[4px_18px_18px_18px] bg-superficie px-4 py-3">
-              si comer te está angustiando, merece a alguien que sepa más que yo. yo sigo aquí 🫶
+              si comer te está angustiando, ¿te tinca contárselo a tu nutri o a alguien cercano? te pueden acompañar mejor que yo 🫶
             </p>
           </div>
           <ul className="mt-6 grid gap-3 text-chico">

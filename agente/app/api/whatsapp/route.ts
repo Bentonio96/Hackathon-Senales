@@ -27,7 +27,7 @@ export async function POST(req: Request) {
         await recordarUltimoWhatsApp(de);
         if (texto.trim().toLowerCase() === "reiniciar") {
           await borrarSesion(de);
-          await enviarWhatsApp(de, "Listo, partimos de nuevo esta conversación ✨");
+          await enviarWhatsApp(de, "listo, borré esta conversación ✨");
           return;
         }
         const sesion = await cargarSesion(de, "whatsapp");
