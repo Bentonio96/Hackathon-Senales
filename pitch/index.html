@@ -52,6 +52,8 @@
   .slide.rosado { background: var(--rosado); }
   .slide.celeste { background: var(--celeste); }
   .slide.menta { background: var(--menta); }
+  .preguntas { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; margin-top: -70px; }
+  .preguntas-av { width: 260px; height: 260px; }
   /* The reveal: Ami says hi when the slide comes in (the deck's one orchestrated moment). */
   .presenta { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 72px; align-items: center; margin-top: -60px; }
   .presenta-av { width: 420px; height: 420px; }
@@ -94,7 +96,6 @@
   .pildoras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; }
   .pildora { display: flex; align-items: center; gap: 16px; background: var(--superficie); border-radius: 22px; padding: 18px 24px; font-size: 25px; font-weight: 500; }
   .pildora svg { width: 26px; height: 26px; flex-shrink: 0; }
-  .pildora.siguiente { background: transparent; border: 2.5px dashed var(--accion); color: var(--accion-fuerte); grid-column: 1 / -1; }
 
   /* Evidence as things Ami says */
   .razones { display: flex; flex-direction: column; gap: 26px; }
@@ -104,7 +105,6 @@
   .clave-bajada { font-size: 27px; line-height: 1.35; margin: 0; }
   .razon { display: flex; flex-direction: column; gap: 10px; }
 
-  .esperanza { border: 2.5px dashed var(--accion); border-radius: 18px; padding: 10px 16px; font-size: 18px; color: var(--accion-fuerte); background: rgba(255,255,255,.55); align-self: flex-start; }
 
   /* Demo */
   .demo { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 96px; align-items: center; }
@@ -183,7 +183,7 @@
           <h1 class="display">Antonia parte de cero cada lunes.</h1>
           <p class="lead">23 años, estudia en Valparaíso. Cumple su pauta de lunes a jueves. Van nueve ciclos.</p>
         </div>
-        <figure class="cerro" data-cerro="roto" style="margin: 0" role="img" aria-label="La semana como un cerro de casas: de lunes a jueves están de colores; viernes, sábado y domingo son casas vacías">
+        <figure class="cerro" data-cerro="roto" style="margin: 0" role="img" aria-label="La semana como una calle de casas que sigue a los dos lados: lunes a jueves de colores; viernes, sábado y domingo son casas vacías">
           <figcaption class="nota"><svg aria-hidden="true"><use href="#ami"/></svg><span><b>Domingo</b>«El lunes parto de nuevo.»</span></figcaption>
         </figure>
       </div>
@@ -196,7 +196,7 @@
           <h2 class="titulo">«Ya la embarré con la semana, el lunes parto de nuevo.»</h2>
           <p class="lead" style="max-width: 34ch">Un desliz anula la semana entera. Y nada de lo que ya probó tiene un plan para el finde.</p>
         </div>
-        <div class="dice"><svg class="av" style="width: 80px; height: 80px" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">el lunes no se parte de cero: se sigue 🫶</p></div>
+        <div class="dice"><svg class="av" style="width: 80px; height: 80px" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">Pucha, qué lata quedarte con esa sensación. El plan se puede mover 🫶</p></div>
       </div>
       <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
@@ -223,10 +223,9 @@
           <div class="stack" style="gap: 14px">
             <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 22px"><span class="cuando">jueves</span>mándame una foto del refri y armamos tu sábado</p></div>
             <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0; font-size: 22px"><span class="cuando">si el plan se rompe</span>seguimos desde tu próxima comida 🫶</p></div>
-            <span class="esperanza"><strong>[Esperanza]</strong> cómo acompaña Ami y cuándo deriva</span>
           </div>
         </div>
-        <figure class="cerro" data-cerro="entero" style="margin: 0" role="img" aria-label="La semana como un cerro de siete casas de colores que siempre sube">
+        <figure class="cerro" data-cerro="entero" style="margin: 0" role="img" aria-label="La semana como una calle de casas de colores que sigue a los dos lados, sin un día de partida">
           <figcaption class="nota"><svg aria-hidden="true"><use href="#ami"/></svg><span><b>Sábado</b>Antojo y algo casero. Ya está decidido.</span></figcaption>
         </figure>
       </div>
@@ -272,22 +271,18 @@
       <h2 class="titulo" style="font-size: 64px">Por qué Ami le cambiaría la vida a Antonia.</h2>
       <div class="split" style="grid-template-columns: minmax(0, 7fr) minmax(0, 6fr); align-items: start">
         <div class="clave">
-          <p class="clave-frase">decidir antes funciona.</p>
-          <p class="clave-bajada">planear «si pasa esto, hago esto» aumenta las probabilidades de cumplir una meta. es lo que hace Ami el jueves: «si despiertas con caña, te espera algo rico en casa».</p>
-          <p class="chico">Intenciones de implementación: Gollwitzer y Sheeran, 2006, metaanálisis de 94 estudios (d = 0,65). En alimentación ayuda más a sumar algo (d = 0,51) que a evitarlo (d = 0,29): Adriaanse y otros, 2011.</p>
+          <p class="clave-frase">Decidir antes funciona.</p>
+          <p class="clave-bajada">Hay evidencia de que planear «si pasa esto, hago esto» ayuda a cumplir una meta. Es lo que hace Ami el jueves.</p>
+          <p class="chico">Intenciones de implementación.</p>
         </div>
         <div class="razones">
           <div class="razon">
-            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">un finde no borra tu semana</p></div>
-            <p class="chico">Saltarse un día no afectó de forma importante el hábito. Lally y otros, 2010.</p>
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">Un finde no borra tu semana</p></div>
+            <p class="chico">Saltarse un día no borra un hábito en formación.</p>
           </div>
           <div class="razon">
-            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">seguimos desde tu próxima comida</p></div>
-            <p class="chico">Con autocompasión tras un desliz, universitarias comieron menos después. Adams y Leary, 2007.</p>
-          </div>
-          <div class="razon">
-            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">tus antojos, pocos y decididos antes</p></div>
-            <p class="chico">Una reserva limitada rindió más que la meta rígida o sin límite. Sharif y Shu, 2017: una pista, no una prueba.</p>
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">Seguimos desde tu próxima comida</p></div>
+            <p class="chico">Tras un desliz, la autocompasión reduce el «qué más da».</p>
           </div>
         </div>
       </div>
@@ -303,8 +298,18 @@
           <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Calorías, peso ni cuerpo</span>
           <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Pedirle que no salga</span>
           <span class="pildora"><svg aria-hidden="true"><use href="#x"/></svg>Reemplazar a su nutricionista</span>
-          <span class="pildora siguiente">Siguiente paso, con una alianza: pedir el antojo desde el chat</span>
         </div>
+      </div>
+      <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+    </section>
+
+    <!-- 8 · Preguntas: Ami stays on screen during Q&A -->
+    <section class="slide rosado grano" aria-label="Preguntas">
+      <div class="preguntas">
+        <svg class="preguntas-av" viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><use href="#ami"/></svg>
+        <h2 class="display" style="font-size: 150px">¿Preguntas?</h2>
+        <p class="burbuja" style="margin: 0; font-size: 30px">pregunten nomás, yo me quedo aquí 🫶</p>
+        <p class="chico" style="font-size: 22px; margin-top: 8px">Ami · hola-ami.vercel.app · Benja y Esperanza</p>
       </div>
       <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
@@ -314,22 +319,33 @@
 
 <nav class="chrome" aria-label="Navegación del pitch">
   <button type="button" id="prev" aria-label="Slide anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <span class="count" id="count" aria-live="polite">1 / 7</span>
+  <span class="count" id="count" aria-live="polite">1 / 8</span>
   <button type="button" id="next" aria-label="Slide siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button type="button" id="fullscreen" aria-label="Pantalla completa (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 V4 H9 M15 4 H20 V9 M20 15 V20 H15 M9 20 H4 V15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </nav>
 
 <script>
-  // --- Illustrations, ported from the landing (Cerro.tsx, Cierre.tsx) ---------
-  const CASAS = [
-    { corto: 'Lun', x: 22, base: 506, ancho: 84, alto: 104, color: 'var(--casa-celeste)', techo: 'dos-aguas' },
-    { corto: 'Mar', x: 118, base: 486, ancho: 78, alto: 118, color: 'var(--casa-amarillo)', techo: 'plano' },
-    { corto: 'Mié', x: 208, base: 452, ancho: 86, alto: 110, color: 'var(--casa-rosado)', techo: 'media' },
-    { corto: 'Jue', x: 306, base: 404, ancho: 80, alto: 128, color: 'var(--casa-menta)', techo: 'dos-aguas' },
-    { corto: 'Vie', x: 398, base: 346, ancho: 88, alto: 116, color: 'var(--casa-naranja)', techo: 'plano' },
-    { corto: 'Sáb', x: 498, base: 282, ancho: 84, alto: 130, color: 'var(--casa-azul)', techo: 'dos-aguas' },
-    { corto: 'Dom', x: 594, base: 222, ancho: 90, alto: 112, color: 'var(--casa-rojo)', techo: 'media' },
-  ];
+  // --- Illustrations, after the landing (Cerro.tsx, Cierre.tsx) ---------------
+  // The week as a street of houses at the same height, starting on Friday and cut
+  // at both edges: it keeps going, and Monday is just another house, not a start.
+  const DIAS = {
+    Lun: { color: 'var(--casa-celeste)', techo: 'dos-aguas', alto: 104 },
+    Mar: { color: 'var(--casa-amarillo)', techo: 'plano', alto: 118 },
+    Mié: { color: 'var(--casa-rosado)', techo: 'media', alto: 110 },
+    Jue: { color: 'var(--casa-menta)', techo: 'dos-aguas', alto: 126 },
+    Vie: { color: 'var(--casa-naranja)', techo: 'plano', alto: 114 },
+    Sáb: { color: 'var(--casa-azul)', techo: 'dos-aguas', alto: 128 },
+    Dom: { color: 'var(--casa-rojo)', techo: 'media', alto: 110 },
+  };
+  const CALLE = ['Jue', 'Vie', 'Sáb', 'Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie'].map((corto, i) => ({
+    corto,
+    ...DIAS[corto],
+    x: -46 + i * 89,
+    ancho: 80,
+    base: Math.round(470 + 9 * Math.sin(i * 0.9)),
+    borde: i === 0 || i === 8, // cut by the frame: the week goes on past both sides
+  }));
+  const FINDE = new Set(['Vie', 'Sáb', 'Dom']);
 
   function techo(c, fill) {
     const y = c.base - c.alto, izq = c.x - 6, der = c.x + c.ancho + 6;
@@ -340,7 +356,7 @@
 
   function casa(c, vacia, n) {
     const y = c.base - c.alto;
-    const label = `<text x="${c.x + c.ancho / 2}" y="${c.base + 30}" text-anchor="middle" font-size="19" font-family="Figtree, sans-serif" font-weight="600" fill="var(--tinta)" opacity="${vacia ? .5 : 1}">${c.corto}</text>`;
+    const label = c.borde ? '' : `<text x="${c.x + c.ancho / 2}" y="${c.base + 30}" text-anchor="middle" font-size="19" font-family="Figtree, sans-serif" font-weight="600" fill="var(--tinta)" opacity="${vacia ? .5 : 1}">${c.corto}</text>`;
     if (vacia) {
       // The weekend as a hole: just the dashed outline of a house.
       return `<g><rect x="${c.x}" y="${y}" width="${c.ancho}" height="${c.alto}" rx="4" fill="none" stroke="var(--tinta)" stroke-opacity=".35" stroke-width="3" stroke-dasharray="8 8"/>${label}</g>`;
@@ -360,11 +376,11 @@
       </defs>
       <g clip-path="url(#vista-${n})">
         <rect width="720" height="600" fill="var(--vista)"/>
-        <circle cx="560" cy="96" r="40" fill="var(--ventana)"/><circle cx="560" cy="96" r="40" fill="var(--casa-amarillo)" opacity=".7"/>
-        <path d="M0 470 C 140 430, 260 330, 400 250 C 520 180, 620 120, 720 96 L720 600 L0 600 Z" fill="var(--cerro-2)"/>
-        <path d="M0 530 C 150 512, 260 470, 380 400 C 500 330, 600 250, 720 212 L720 600 L0 600 Z" fill="var(--cerro)"/>
-        <path d="M72 530 h26 v-14 h26 v-14 h26 v-16 h26 v-16 h26 v-18 h26 v-18 h26 v-20 h26 v-20 h26 v-22 h26 v-22 h26 v-20 h26 v-22 h26 v-20 h26 v-18 h26 v-18" fill="none" stroke="var(--tinta)" stroke-opacity=".22" stroke-width="3" stroke-linejoin="round"/>
-        ${CASAS.map((c, i) => casa(c, roto && i >= 4, n)).join('')}
+        <circle cx="560" cy="110" r="40" fill="var(--ventana)"/><circle cx="560" cy="110" r="40" fill="var(--casa-amarillo)" opacity=".7"/>
+        <path d="M0 300 C 120 270, 240 320, 360 292 C 480 264, 600 312, 720 284 L720 600 L0 600 Z" fill="var(--cerro-2)"/>
+        <path d="M0 462 C 180 446, 360 486, 540 462 C 620 452, 680 466, 720 458 L720 600 L0 600 Z" fill="var(--cerro)"/>
+        <path d="M0 482 C 180 470, 360 500, 540 480 C 620 472, 680 484, 720 478" fill="none" stroke="var(--tinta)" stroke-opacity=".18" stroke-width="3"/>
+        ${CALLE.map((c) => casa(c, roto && FINDE.has(c.corto), n)).join('')}
         <path d="M0 556 ${mar} L720 600 L0 600 Z" fill="var(--mar)"/>
       </g>
     </svg>`;

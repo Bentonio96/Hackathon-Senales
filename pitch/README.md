@@ -1,6 +1,6 @@
 # Pitch: Ami, caso Antonia
 
-Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
+Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, más una portada de Ami para las preguntas, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
 ## Cómo abrirlo
 
@@ -85,7 +85,6 @@ El chat web del agente ya no está en el pitch. Si el iPhone falla, ábrelo en o
 
 ## Pendientes
 
-- **Esperanza:** completar el bloque punteado `[Esperanza]` de la slide 4. Es su parte: cómo acompaña Ami cuando el plan se rompe.
 - Las fuentes vienen de Google Fonts. Sin internet, el pitch cae a la letra del sistema: se ve más simple, pero funciona igual.
 
 ## Reglas que respeta
