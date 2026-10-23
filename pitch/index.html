@@ -249,8 +249,6 @@
           <h2 class="display" style="font-size: 104px">Un finde cualquiera, con Ami.</h2>
           <div class="controls">
             <button class="btn primary" id="connect" type="button">¡Veamos la demo!</button>
-            <button class="btn" id="reconnect" type="button" hidden>Cambiar ventana</button>
-            <button class="btn" id="stop" type="button" hidden>Detener</button>
           </div>
           <p class="status" id="status" role="status" aria-live="polite">El WhatsApp de Antonia, en vivo: del jueves al sábado con caña.</p>
         </div>
@@ -424,6 +422,13 @@
       case 'r': case 'R':
         if (slides[current].id === 'slide-demo') alternarRecorte();
         break;
+      // While live there are no buttons: V picks another window, D stops sharing.
+      case 'v': case 'V':
+        if (slides[current].id === 'slide-demo') connectMirror();
+        break;
+      case 'd': case 'D':
+        if (slides[current].id === 'slide-demo' && stream) stopMirror();
+        break;
     }
   });
   document.getElementById('prev').addEventListener('click', () => show(current - 1));
@@ -438,8 +443,6 @@
   const phone = document.getElementById('phone');
   const status = document.getElementById('status');
   const connectBtn = document.getElementById('connect');
-  const reconnectBtn = document.getElementById('reconnect');
-  const stopBtn = document.getElementById('stop');
   const idleText = 'El WhatsApp de Antonia, en vivo: del jueves al sábado con caña.';
   let stream = null;
 
@@ -512,8 +515,8 @@
     screen.classList.toggle('is-live', live);
     phone.classList.toggle('is-live', live);
     connectBtn.hidden = live;
-    reconnectBtn.hidden = !live;
-    stopBtn.hidden = !live;
+    // Live, the slide is only the phone: no buttons, no status line.
+    status.hidden = live;
   }
 
   function stopMirror(message) {
@@ -555,8 +558,6 @@
   }
 
   connectBtn.addEventListener('click', connectMirror);
-  reconnectBtn.addEventListener('click', connectMirror);
-  stopBtn.addEventListener('click', () => stopMirror());
 
   // --- Phone remote: commands arrive from servidor.mjs over Server-Sent Events --
   // Opened with npx serve or as a file there is no /eventos: the remote just stays off.

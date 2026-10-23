@@ -44,7 +44,7 @@ El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la
 
 1. Toca **¡Veamos la demo!**.
 2. En el diálogo de Chrome, entra a la pestaña **Ventana** y elige la de **QuickTime Player** (o la de «Duplicación del iPhone»).
-3. **Cambiar ventana** abre el diálogo otra vez. **Detener** corta la transmisión. Si dejas de compartir desde la barra de Chrome, la slide vuelve sola al estado inicial.
+3. En vivo, la slide muestra solo el teléfono: sin botones ni texto. Con la tecla **V** eliges otra ventana y con **D** detienes la transmisión. Si dejas de compartir desde la barra de Chrome, la slide vuelve sola al estado inicial.
 
 **La primera vez**, macOS pide permiso: Configuración del Sistema › Privacidad y seguridad › **Grabación de pantalla y audio del sistema** › activa Google Chrome. Después cierra Chrome por completo (⌘Q) y vuelve a abrirlo. Si no, en la pestaña Ventana solo aparece Chrome.
 
