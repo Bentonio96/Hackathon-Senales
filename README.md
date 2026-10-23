@@ -1,11 +1,60 @@
-# Hackatón Señales: caso Antonia
+# Ami: que el lunes no sea el día uno
 
-Equipo: Benja y Esperanza. Caso 05: ¿cómo ayudarías a Antonia a dejar de partir de cero cada lunes?
+**Hackatón Señales · Caso 05, Antonia** · Equipo: Benja y Esperanza · 23 y 24 de octubre de 2026
 
-## Estructura
+Ami es una amiga por WhatsApp para Antonia. El jueves, cuando ella está lúcida, deja decidido el sábado: un antojo y una comida casera rica hecha con lo que tiene en el refri. Si el plan se rompe, la acompaña sin juzgar, para que el fin de semana deje de sentirse como una caída.
 
-- `benja/benja.md`: notas y mensajes del Claude de Benja.
-- `esperanza/esperanza.md`: notas y mensajes del Claude de Esperanza.
-- `CLAUDE.md`: reglas para que los dos Claude se comuniquen sin pisarse.
+- **Landing:** https://hola-ami.vercel.app
+- **Diseño de Ami** (avatar, voz y mockups): https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
-Cada Claude escribe solo en su carpeta y lee la del otro. Más detalle en `CLAUDE.md`.
+## El problema que decidimos atacar
+
+Antonia cumple su pauta de lunes a jueves. El viernes carretea, el sábado despierta con caña y pide delivery dos veces, y el domingo se dice «ya la embarré, el lunes parto de nuevo». Van nueve ciclos.
+
+**Ella no se cae por el carrete. Se cae por lo que concluye cuando el plan se rompe.** Un desliz anula la semana entera, y el lunes «limpia la cuenta». Las apps de recetas, los contadores y la pauta en PDF sirven de lunes a jueves, pero **ninguna tiene un plan para el fin de semana**.
+
+Benja lo vivió: estudió lejos de su ciudad, con la mesada justa, y los fines de semana volvía a ver a sus amigos. Aunque tuviera táperes en el refri, pedía algo rico. El hallazgo que salió de ahí: **con la plata nadie piensa en blanco o negro** (gastarse $10.000 no hace botar la mesada del mes), **pero con la comida sí**.
+
+## Por qué esto y no otra cosa
+
+- **Atacamos el sábado y el domingo,** porque es donde se cae, y no la semana, que ya funciona.
+- **Decidir antes:** la decisión del sábado se toma el jueves, no con caña. Hay evidencia de que decidir por adelantado ayuda, sobre todo para *sumar* algo (Adriaanse y otros, 2011).
+- **Acompañar después:** la autocompasión después de un desliz frena el «qué más da» (Adams y Leary, 2007). Y saltarse un día no borra un hábito (Lally y otros, 2010).
+- **WhatsApp,** porque ahí ya vive Antonia y ahí se arman sus planes. Una app más la abandona en una semana, como ya le pasó.
+
+El detalle, con todas las fuentes, está en [`benja/investigacion-antonia.md`](benja/investigacion-antonia.md).
+
+## Qué dejamos fuera, a propósito
+
+- **Rachas, puntajes o medidas de progreso:** cualquier número se vuelve una vara para alguien que piensa en todo o nada.
+- **Contar calorías, compensar o hablar de peso.** Ami revisa los nutrientes solo por dentro y nunca muestra un número.
+- **Pedirle que deje de salir.**
+- **Reemplazar a su nutricionista o a una psicóloga:** Ami se apoya en la pauta y deriva cuando corresponde (Salud Responde, \*4141, 131).
+- **Pedir el delivery sin salir de WhatsApp:** las apps no tienen una API pública. Es el siguiente paso, con una alianza.
+- **Leer el grupo de WhatsApp de las amigas:** no se puede, así que Ami pregunta primero.
+
+## Qué hay en el repo
+
+| Carpeta | Qué es |
+|---|---|
+| [`agente/`](agente/) | **Ami.** Next.js en Vercel con Claude y herramientas: lee la foto del refri, busca precios reales en Jumbo, revisa nutrientes por dentro y guarda el plan del sábado. Tiene el webhook de WhatsApp (sandbox de Twilio) y un chat web de respaldo en `/demo`, con un reloj para la demo en vivo. |
+| [`landing/`](landing/) | La landing de Ami (Vite, React y TypeScript), en línea en hola-ami.vercel.app. |
+| [`pitch/`](pitch/) | El pitch en HTML, con una slide que muestra en vivo la pantalla del iPhone. |
+| [`benja/`](benja/), [`esperanza/`](esperanza/) | Las notas, decisiones e investigación de cada uno. Los Claude de los dos se coordinan por estos archivos (reglas en [`CLAUDE.md`](CLAUDE.md)). |
+
+Ami tiene dos voces en su prompt:
+- [`agente/prompts/ami.md`](agente/prompts/ami.md): la planificación, de Benja.
+- [`agente/prompts/acompanamiento.md`](agente/prompts/acompanamiento.md): el acompañamiento y la seguridad, de Esperanza.
+
+## Correrlo
+
+```bash
+cd agente
+cp .env.example .env.local   # clave de Anthropic y, para WhatsApp, Twilio
+npm install
+npm run dev                  # http://localhost:3000/demo
+```
+
+El paso a paso de WhatsApp y del deploy está en [`agente/README.md`](agente/README.md).
+
+**Datos:** todos los de la demo son inventados: la pauta, las conversaciones, los locales y los precios de delivery. No se usan datos de personas reales.
