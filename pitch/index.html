@@ -54,6 +54,8 @@
   .slide.menta { background: var(--menta); }
   /* 8 · cover for Q&A: the brand and a phone mockup, like the landing's hero */
   .portada { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; align-items: center; margin-top: -60px; }
+  .portada-link { align-self: flex-start; font-family: var(--display); font-weight: 800; font-size: 34px; letter-spacing: -0.02em; color: var(--accion-fuerte); text-decoration: none; background: var(--superficie); border-radius: 999px; padding: 12px 28px; margin-top: -6px; }
+  .portada-link::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--casa-amarillo); margin-right: 14px; vertical-align: middle; }
   .mock { width: 330px; height: 680px; border-radius: 56px; background: var(--tinta); padding: 12px; transform: rotate(3deg); justify-self: center; }
   .mock-pantalla { width: 100%; height: 100%; border-radius: 45px; overflow: hidden; background: var(--cielo); display: flex; flex-direction: column; }
   .mock-head { display: flex; align-items: center; gap: 10px; padding: 40px 18px 12px; background: var(--superficie); border-bottom: 1px solid rgb(30 35 33 / .08); }
@@ -329,7 +331,8 @@
             <h2 class="display" style="font-size: 200px; line-height: .85">Ami</h2>
           </div>
           <p class="lead" style="font-size: 40px; max-width: 18ch; font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1">Tu sábado, decidido desde el jueves.</p>
-          <p class="chico" style="font-size: 22px">Una amiga en tu WhatsApp · hola-ami.vercel.app</p>
+          <p class="chico" style="font-size: 24px">Una amiga en tu WhatsApp</p>
+          <a class="portada-link" href="https://hola-ami.vercel.app" target="_blank" rel="noopener">hola-ami.vercel.app</a>
         </div>
         <div class="mock" role="img" aria-label="Celular con un chat de WhatsApp entre Antonia y Ami">
           <div class="mock-pantalla">
