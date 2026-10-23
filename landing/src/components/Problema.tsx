@@ -25,7 +25,7 @@ export function Problema() {
           </p>
           <div className="flex items-end gap-3">
             <AvatarAmi className="size-14 shrink-0" />
-            <p className="rounded-[4px_22px_22px_22px] bg-superficie px-5 py-3">Pucha, qué lata quedarte con esa sensación. El plan se puede mover 🫶</p>
+            <p className="rounded-[4px_22px_22px_22px] bg-superficie px-5 py-3">Te entiendo. El finde también es parte de tu semana 🫶</p>
           </div>
         </div>
       </div>
