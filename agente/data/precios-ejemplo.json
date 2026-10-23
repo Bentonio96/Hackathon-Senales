@@ -1,0 +1,31 @@
+{
+  "_nota": "PRECIOS DE EJEMPLO para la demo. Se usan solo si la búsqueda en vivo falla. No son precios reales.",
+  "supermercado": {
+    "huevos 12 unidades": 3990,
+    "pan de hamburguesa 6 unidades": 2290,
+    "queso laminado 250 g": 2990,
+    "tomate 1 kg": 1890,
+    "lechuga": 1290,
+    "palta 1 kg": 4990,
+    "pechuga de pollo 1 kg": 6990,
+    "carne molida 500 g": 4490,
+    "tortillas de trigo 8 unidades": 2190,
+    "masa de pizza 2 unidades": 2490,
+    "salsa de tomate 200 g": 890,
+    "papas 2 kg": 2490,
+    "arroz 1 kg": 1690,
+    "fideos 400 g": 990,
+    "atún en lata": 1890,
+    "porotos en lata": 1490,
+    "cebolla 1 kg": 1290,
+    "yogur": 590
+  },
+  "antojos_delivery": {
+    "hamburguesa con papas": 11900,
+    "pizza mediana": 13900,
+    "sushi 30 piezas": 14900,
+    "completo italiano": 4500,
+    "burrito": 8900,
+    "pollo con papas fritas": 12900
+  }
+}

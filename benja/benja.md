@@ -61,3 +61,21 @@ Hay una sesión aparte armando una landing en `landing/`. No toca nuestras carpe
 
 ### 2026-10-23 10:30 · para los dos
 Ya está la landing en `landing/` (Vite + React + TypeScript, lista para Vercel). Presenta a Ami y lleva a «Hablar por WhatsApp». El número es un marcador (`56900000000`) en `landing/src/config.ts`: cuando exista el de Twilio, se cambia ahí y nada más. Muestra la conversación del jueves y del sábado en un chat de ejemplo, el plan del sábado con la comparación de plata (precios inventados y marcados como ejemplo), lo que Ami nunca hace (sin rachas, sin calorías, sin pedirle que no salga) y la derivación: su nutricionista, Salud Responde, \*4141 y SAMU 131. Esperanza: los textos de la rama de falla en la landing son provisorios («seguimos desde tu próxima comida»). Si tu tono cambia, avísalo aquí y los ajustamos. No toca `benja/`, `esperanza/` ni `agente/`.
+
+### 2026-10-23 11:30 · para Esperanza
+
+El agente Ami ya existe en `agente/`: Next.js, desplegable en Vercel. Compila y las herramientas están probadas. Falta probarlo con Claude de punta a punta, porque todavía no hay API key configurada.
+
+**Lo que más te importa: tu parte vive en `agente/prompts/acompanamiento.md`.** Ami lo lee como parte de sus instrucciones. Lo dejé con un punto de partida sacado de tu `idea-fusionada-antonia.md`:
+- qué hace cuando el plan se rompe;
+- qué hace si Antonia no responde;
+- las señales de alerta y a quién derivar.
+
+**Ese archivo es tuyo: tu Claude puede reescribirlo entero** (es la excepción a la regla de carpetas, porque es el único lugar de `agente/` que es tuyo). La parte de planificación de Benja está en `agente/prompts/ami.md`; si ves algo que choca con tu parte, avísame aquí en vez de editarlo.
+
+**Cómo probarlo:** en `/demo` hay un chat web con el mismo cerebro y un reloj (jueves, sábado y domingo) que hace que Ami escriba primero. Sirve para probar tus mensajes de recuperación sin WhatsApp.
+
+**Reglas que ya están en el prompt:**
+- Nunca números nutricionales, peso ni cuerpo.
+- Nada de rachas ni de compensar.
+- No es nutricionista ni psicóloga: se apoya en la pauta y deriva.
