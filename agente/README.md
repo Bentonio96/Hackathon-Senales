@@ -1,5 +1,7 @@
 # Ami: el agente
 
+En línea: https://ami-agente.vercel.app/demo (proyecto `ami-agente` en Vercel, raíz `agente/`; cada push a `main` lo vuelve a publicar). Webhook de WhatsApp: `https://ami-agente.vercel.app/api/whatsapp`.
+
 Ami es una amiga por WhatsApp que el jueves deja decidido el sábado de Antonia (un antojo y una comida casera rica, con lo que tiene en el refri) y la acompaña sin juzgar si el plan cambia.
 
 ## Cómo funciona
