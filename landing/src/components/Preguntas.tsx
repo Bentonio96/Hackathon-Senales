@@ -2,7 +2,7 @@ import { NOMBRE } from "../config";
 
 const PREGUNTAS = [
   { p: "¿Es una dieta?", r: "No. Trabaja con la pauta que ya te dio tu nutricionista." },
-  { p: "¿Cuántos antojos tengo?", r: "Un número fijo a la semana, que decides con Ami. Si te pasas, no es falla: seguimos." },
+  { p: "¿Y los antojos?", r: "Entran en el plan desde el jueves. Ami no los cuenta ni te dice cuántos te quedan: si quieres otro, el plan se acomoda." },
   { p: "¿Cuántos mensajes me manda?", r: "Pocos: el jueves en la tarde y el sábado al despertar." },
   { p: "¿Reemplaza a mi nutricionista?", r: `No. Si algo te preocupa, ${NOMBRE} te va a sugerir hablarlo con tu nutricionista o con otro profesional.` },
 ];

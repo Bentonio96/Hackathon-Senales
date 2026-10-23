@@ -18,7 +18,7 @@ export function Problema() {
         </div>
         <div className="revela flex items-end gap-3 lg:col-span-4 lg:col-start-9" style={{ ["--i" as string]: 2 }}>
           <AvatarAmi className="size-16 shrink-0" />
-          <p className="rounded-[4px_26px_24px_28px] bg-superficie px-5 py-4 text-lead">el lunes no se parte de cero: se sigue 🫶</p>
+          <p className="rounded-[4px_26px_24px_28px] bg-superficie px-5 py-4 text-lead">Pucha, qué lata quedarte con esa sensación. El plan se puede mover 🫶</p>
         </div>
       </div>
       <Onda className="text-cielo" />

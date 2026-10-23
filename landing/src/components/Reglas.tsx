@@ -47,7 +47,7 @@ export function Reglas() {
           <div className="flex items-start gap-3">
             <AvatarAmi className="size-12 shrink-0" />
             <p className="rounded-[4px_18px_18px_18px] bg-superficie px-4 py-3">
-              si comer te está angustiando, ¿te tinca contárselo a tu nutri o a alguien cercano? te pueden acompañar mejor que yo 🫶
+              Si comer te está angustiando, te tinca contárselo a tu nutri o a alguien cercano? Te pueden acompañar mejor que yo 🫶
             </p>
           </div>
           <ul className="mt-6 grid gap-3 text-chico">
@@ -57,8 +57,7 @@ export function Reglas() {
             <li>
               <a href="tel:6003607777" className="enlace font-bold">
                 Salud Responde, 600 360 7777
-              </a>{" "}
-              (opción 2, salud mental)
+              </a>
             </li>
             <li>
               <a href="tel:*4141" className="enlace font-bold">

@@ -35,7 +35,7 @@ export const MOMENTOS: Momento[] = [
     mensajes: [
       { de: "ella", texto: "hola! ¿sales este finde?" },
       { de: "yo", texto: "sí, el viernes hay carrete donde la Coni" },
-      { de: "ella", texto: "anda tranqui, el sábado déjamelo a mí 🫶" },
+      { de: "ella", texto: "Anda tranqui, y si quieres el sábado lo armamos juntas 🌿" },
     ],
   },
   {
@@ -70,7 +70,7 @@ export const MOMENTOS: Momento[] = [
     mensajes: [
       {
         de: "ella",
-        texto: "buenos días, sobreviviente 😅 tus quesadillas están a 10 minutos",
+        texto: "Hola! Cómo amaneciste? Tus quesadillas están a 10 minutos 😅",
         botones: ["Paso a paso", "Hoy prefiero pedir"],
       },
       { de: "yo", texto: "paso a paso porfa" },
@@ -89,7 +89,7 @@ export const MOMENTOS: Momento[] = [
     fondo: "amarillo",
     mensajes: [
       { de: "yo", texto: "igual pedimos sushi. ya la embarré" },
-      { de: "ella", texto: "no la embarraste, comiste rico con tus amigas. seguimos desde tu próxima comida" },
+      { de: "ella", texto: "Pucha, qué lata quedarte con esa sensación. Un finde que no sale como se pensó habla del plan, no de ti 🫶" },
     ],
   },
   {
@@ -101,7 +101,7 @@ export const MOMENTOS: Momento[] = [
     fondo: "celeste",
     mensajes: [
       { de: "yo", texto: "mañana parto de nuevo" },
-      { de: "ella", texto: "no hay que partir de nada: mañana sigues con tu pauta, como siempre 🫶" },
+      { de: "ella", texto: "Uf, suena a que te quedaste con una sensación pesada. Gracias por contármelo 🫶" },
     ],
   },
 ];
