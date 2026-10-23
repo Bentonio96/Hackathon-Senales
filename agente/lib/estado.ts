@@ -30,6 +30,8 @@ export interface Sesion {
   derivacion_previa?: { nivel: string; fecha: string } | null;
   // Cómo se llama y cómo tratarla gramaticalmente (lo infiere Ami del nombre o de cómo se nombra).
   perfil?: { nombre: string; trato: Trato };
+  // Último mensaje que escribió la persona (WhatsApp solo deja escribirle libremente hasta 24 horas después).
+  ultimo_mensaje_usuario?: string;
 }
 
 export type Trato = "femenino" | "masculino" | "neutro";
@@ -40,8 +42,13 @@ const redis =
     : null;
 
 // Sin Redis el estado vive en memoria: sirve para correrlo local, no en Vercel.
-const memoria = globalThis as unknown as { __amiSesiones?: Map<string, Sesion>; __amiUltimoWa?: string };
+const memoria = globalThis as unknown as {
+  __amiSesiones?: Map<string, Sesion>;
+  __amiUltimoWa?: string;
+  __amiUsuariosWa?: Set<string>;
+};
 memoria.__amiSesiones ??= new Map();
+memoria.__amiUsuariosWa ??= new Set();
 
 const clave = (id: string) => `ami:sesion:${id}`;
 
@@ -65,8 +72,19 @@ export async function borrarSesion(id: string): Promise<void> {
 
 // El panel de la demo dispara el reloj sobre el último número que escribió por WhatsApp.
 export async function recordarUltimoWhatsApp(numero: string): Promise<void> {
-  if (redis) await redis.set("ami:ultimo-whatsapp", numero);
-  else memoria.__amiUltimoWa = numero;
+  if (redis) {
+    await redis.set("ami:ultimo-whatsapp", numero);
+    await redis.sadd("ami:usuarios-wa", numero);
+  } else {
+    memoria.__amiUltimoWa = numero;
+    memoria.__amiUsuariosWa!.add(numero);
+  }
+}
+
+/** Todas las personas que le han escrito a Ami por WhatsApp (para los mensajes programados). */
+export async function usuariosWhatsApp(): Promise<string[]> {
+  if (redis) return redis.smembers("ami:usuarios-wa");
+  return [...memoria.__amiUsuariosWa!];
 }
 
 export async function ultimoWhatsApp(): Promise<string | null> {

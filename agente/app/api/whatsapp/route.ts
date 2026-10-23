@@ -31,6 +31,7 @@ export async function POST(req: Request) {
           return;
         }
         const sesion = await cargarSesion(de, "whatsapp");
+        sesion.ultimo_mensaje_usuario = new Date().toISOString();
         const imagen = tieneFoto ? await descargarMedia(params.MediaUrl0) : undefined;
         const respuestas = await turnoDeAmi(sesion, { texto, imagen });
         await guardarSesion(sesion);
