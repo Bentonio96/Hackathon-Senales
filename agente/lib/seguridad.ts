@@ -87,9 +87,9 @@ const ESQUEMA = {
 const INSTRUCCIONES_CLASIFICADOR = `Clasificas el ÚLTIMO mensaje de Antonia en una conversación con Ami, una amiga por WhatsApp que la acompaña con la comida del fin de semana. Lees los mensajes anteriores solo como contexto. No respondes a Antonia: solo clasificas.
 
 Niveles:
-- "0": nada de riesgo. Jerga y humor van aquí: «ya la embarré con la semana», «soy un asco» (una vez), «estoy muerta», «la caña me mató», «me muero de hambre», «pedí dos pizzas», «el lunes parto de nuevo», «paso a paso porfa, estoy muerta».
+- "0": conversación normal: Ami conversa y acompaña. Es el nivel por defecto. Van aquí la jerga y el humor («ya la embarré con la semana», «soy un asco» dicho una vez, «estoy muerta», «la caña me mató», «me muero de hambre», «pedí dos pizzas», «el lunes parto de nuevo», «paso a paso porfa, estoy muerta»), las dudas sobre salir o cuidarse («no sé si debería ir», «he progresado harto en la semana y no quiero perder ese progreso, pero tampoco quiero ser la fome que no sale»), la culpa leve o pasajera («me da culpa haber pedido pizza», «comí harto»), el cansancio con la pauta y los comentarios de ánimo sin una conducta de riesgo.
 - "ambiguo": frases de muerte que pueden ser jerga, como «me quiero morir de vergüenza» o «me quiero morir de la caña».
-- "1", preocupación por la comida: ayunar o no comer en todo el día; vomitar o provocarse el vómito; laxantes o diuréticos; ejercicio para «compensar»; saltarse comidas antes del carrete para «guardar» para el alcohol; comer sin poder parar con miedo o vergüenza, o que se repite; hablar mal de su cuerpo con mucha angustia o de forma persistente; culpa muy intensa o que vuelve; anunciar que va a restringir o compensar («mañana no como», «voy a correr para quemar lo del finde»).
+- "1", preocupación por la comida, SOLO con una señal evidente: una conducta concreta, ya hecha o anunciada con intención firme, de ayunar o no comer en todo el día, vomitar o provocarse el vómito, tomar laxantes o diuréticos, hacer ejercicio para «compensar» o «quemar» lo que comió, o saltarse comidas para «guardar» para el alcohol; comer sin poder parar descrito con miedo o pérdida de control («no podía parar», «no era yo»); o angustia intensa dicha explícitamente sobre su cuerpo o la comida («me doy asco», «odio mi cuerpo», «me merezco no comer»). Una duda, una culpa leve o querer cuidar lo avanzado NO es nivel 1.
 - "2a": ideas de hacerse daño o de no vivir, o autolesión ya hecha.
 - "2b": urgencia física de ella: vómitos que no paran, desmayo, confusión, palpitaciones o dolor en el pecho, vomitar sangre.
 - "2c": una amiga en peligro («la cata no despierta», «está vomitando inconsciente»).
@@ -104,7 +104,7 @@ Campos:
 - retractacion: después de una derivación anterior, dice «estoy bien», «ya no era en serio», «olvida lo que dije», «no le cuentes a nadie» o «volvamos al plan». Si es así, usa el MISMO nivel de esa derivación.
 - senal: en pocas palabras, qué te hizo elegir el nivel.
 
-Ante la duda entre "0" y "1", elige "1". Ante la duda entre "1" y "2a", elige "2a".`;
+Si no hay una conducta de riesgo ni angustia intensa dicha explícitamente, el nivel es "0": no derives por precaución, porque derivar sin motivo corta la conversación. Ante la duda entre "1" y "2a", elige "2a": eso no cambia.`;
 
 function aTexto(contenido: Anthropic.Beta.BetaMessageParam["content"]): string {
   if (!contenido) return "";
