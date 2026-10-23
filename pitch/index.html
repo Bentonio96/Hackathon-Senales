@@ -101,7 +101,7 @@
   .cuando { font-size: 17px; font-weight: 700; color: var(--tinta-suave); margin-bottom: 6px; display: block; }
 
   /* 1 · Antonia's week, straight from the case, looping back to Monday */
-  .semana { position: relative; display: flex; flex-direction: column; gap: 12px; padding-right: 76px; }
+  .semana { position: relative; display: flex; flex-direction: column; gap: 12px; }
   .dia { display: grid; grid-template-columns: 14px 64px minmax(0, 1fr) auto; align-items: center; gap: 14px; background: var(--superficie); border-radius: 22px; padding: 16px 22px; font-size: 22px; }
   .dia i { width: 14px; height: 14px; border-radius: 50%; }
   .dia b { font-family: var(--display); font-weight: 800; font-size: 24px; }
@@ -109,7 +109,8 @@
   .dia strong { font-family: var(--display); font-weight: 800; font-size: 30px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .dia.domingo { background: var(--amarillo); }
   .dia.domingo span { color: var(--tinta); }
-  .vuelta { position: absolute; right: 0; top: 0; width: 70px; height: 100%; }
+  .reinicio { display: flex; align-items: center; gap: 14px; border: 2.5px dashed #a3402a; color: #a3402a; border-radius: 22px; padding: 14px 22px; font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: -0.01em; }
+  .reinicio svg { width: 28px; height: 28px; flex-shrink: 0; }
   /* 2 · tries and target */
   .intentos { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
   .intentos .pildora { font-size: 23px; padding: 14px 22px; }
@@ -219,16 +220,13 @@
           <h1 class="display">Antonia parte de cero cada lunes.</h1>
           <p class="lead">23 años, estudia en Valparaíso. Cumple su pauta de lunes a jueves. Van nueve ciclos.</p>
         </div>
-        <div class="semana" role="img" aria-label="La semana de Antonia: lunes 100%, jueves 4 de 4, viernes un completo a las 02:40, sábado dos deliveries, domingo «el lunes parto de nuevo», y vuelve al lunes: ciclo 10">
+        <div class="semana" role="img" aria-label="La semana de Antonia: lunes 100%, jueves 4 de 4, viernes un completo a las 02:40, sábado dos deliveries, domingo «el lunes parto de nuevo», ciclo 10, y el lunes de vuelta a cero">
           <div class="dia"><i style="background: var(--casa-celeste)"></i><b>lun</b><span>retoma la pauta al pie de la letra</span><strong>100%</strong></div>
           <div class="dia"><i style="background: var(--casa-menta)"></i><b>jue</b><span>cuarto día seguido</span><strong>4/4</strong></div>
           <div class="dia"><i style="background: var(--casa-naranja)"></i><b>vie</b><span>carrete, y un completo</span><strong>02:40</strong></div>
           <div class="dia"><i style="background: var(--casa-azul)"></i><b>sáb</b><span>delivery al almuerzo y a la comida</span><strong>2×</strong></div>
           <div class="dia domingo"><i style="background: var(--casa-rojo)"></i><b>dom</b><span>«el lunes parto de nuevo»</span><strong>ciclo 10</strong></div>
-          <svg class="vuelta" viewBox="0 0 80 400" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M8 368 C 70 360, 74 40, 14 30" fill="none" stroke="var(--tinta)" stroke-opacity=".45" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
-            <path d="M26 20 L12 30 L26 42" fill="none" stroke="var(--tinta)" stroke-opacity=".55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <div class="reinicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 a8 8 0 1 1 -2.4 -5.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M18.5 2.5 v4.6 h-4.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Y el lunes, de vuelta a cero. Otra vez.</div>
         </div>
       </div>
     </section>
