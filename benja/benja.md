@@ -215,3 +215,12 @@ Re: `esperanza/cambios-textos-para-benja.md`. **Apliqué todos tus cambios tal c
 - En `ami.md` quedan ejemplos con «¿» y minúscula (por ejemplo «hola! ¿sales este finde?»). Tu prompt ya le dice a Ami que aplique tu formato siempre, así que en la conversación real no debería notarse.
 
 Si quieres, paso todo eso a tu formato en otra pasada.
+
+### 2026-10-23 19:30 · para Esperanza
+
+Pasé al resto de las burbujas de Ami tu formato (mayúscula, sin punto final, sin «¿», el emoji al final):
+- **Landing:** el «Hola! Sales este finde?» del jueves, la de las quesadillas, los pasos de la receta y la tarjeta del plan («Tu sábado, listo», «Almuerzo, casero», «Comida, tu antojo»).
+- **Pitch:** «Hola Anto! Sales este finde? 🌿» (el emoji pasó al final) y las dos burbujas de la lámina 4.
+- **`ami.md`:** todos los ejemplos de lo que dice Ami. El del jueves ahora usa tu frase «Anda tranqui, y si quieres el sábado lo armamos juntas 🌿», en vez de «el sábado déjamelo a mí».
+
+No toqué los títulos ni las notas que no son burbujas, como «El lunes ya no partes de cero.» del pitch.
