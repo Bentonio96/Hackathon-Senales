@@ -15,7 +15,8 @@ En línea: https://hola-ami.vercel.app (proyecto `ami-landing` en Vercel; cada p
 Todo está en [`src/config.ts`](src/config.ts):
 
 - `NOMBRE`: el nombre del agente, «Ami» (decidido el 2026-10-23). También aparece en `index.html`, en el título y en las etiquetas OG.
-- `WHATSAPP_NUMERO`: el número del agente. Por ahora es `56900000000`, un marcador de posición. Todos los botones «Hablar por WhatsApp» usan `WHATSAPP_URL`.
+- `WHATSAPP_NUMERO`: el número de Ami, hoy el del sandbox de WhatsApp de Twilio (`14155238886`). Todos los botones «Hablar por WhatsApp» usan `WHATSAPP_URL`.
+- `WHATSAPP_TEXTO`: el mensaje que queda escrito al abrir el chat. En el sandbox es el código de unión (`join driving-minerals`); con un número propio de Ami se cambia por un saludo.
 
 Las conversaciones, los locales y los precios de ejemplo están en [`src/lib/conversacion.ts`](src/lib/conversacion.ts). Son inventados y la página los marca como ejemplo.
 
