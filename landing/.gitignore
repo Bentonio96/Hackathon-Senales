@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Build
+dist/
+dist-server/
+
+# Entorno y tooling local
+*.local
+.claude/
+.vercel/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+
+# Skills de diseño (salidas locales)
+.taste-skill/

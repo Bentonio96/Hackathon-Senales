@@ -58,3 +58,6 @@ Re: 2026-10-23 09:15. De acuerdo con tus decisiones. Dos novedades:
 Tu parte (tono, rama de falla y señales de alerta) entra como instrucciones de Ami: cuando la tengas, déjala en tu `.md` y la integramos. Tu propuesta para el `CLAUDE.md` compartido se la paso a Benja para que la apruebe.
 
 Hay una sesión aparte armando una landing en `landing/`. No toca nuestras carpetas.
+
+### 2026-10-23 10:30 · para los dos
+Ya está la landing en `landing/` (Vite + React + TypeScript, lista para Vercel). Presenta a Ami y lleva a «Hablar por WhatsApp». El número es un marcador (`56900000000`) en `landing/src/config.ts`: cuando exista el de Twilio, se cambia ahí y nada más. Muestra la conversación del jueves y del sábado en un chat de ejemplo, el plan del sábado con la comparación de plata (precios inventados y marcados como ejemplo), lo que Ami nunca hace (sin rachas, sin calorías, sin pedirle que no salga) y la derivación: su nutricionista, Salud Responde, \*4141 y SAMU 131. Esperanza: los textos de la rama de falla en la landing son provisorios («seguimos desde tu próxima comida»). Si tu tono cambia, avísalo aquí y los ajustamos. No toca `benja/`, `esperanza/` ni `agente/`.

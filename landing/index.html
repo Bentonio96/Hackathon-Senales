@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // ?reduced=1 fuerza la versión sin movimiento (para revisarla o compartirla).
+      if (/[?&]reduced=1\b/.test(location.search)) document.documentElement.classList.add("reducido");
+    </script>
+
+    <title>Ami | Tu sábado, decidido desde el jueves</title>
+    <meta
+      name="description"
+      content="Una amiga en tu WhatsApp que el jueves te deja listo el sábado: tu antojo y una receta casera de 10 minutos con lo que tienes en el refri. Sin rachas, sin calorías, sin culpa."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f4f7f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141a21" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ami" />
+    <meta property="og:title" content="Ami | Tu sábado, decidido desde el jueves" />
+    <meta
+      property="og:description"
+      content="El jueves te deja listo el sábado: tu antojo y una receta casera de 10 minutos. Si el plan se rompe, seguimos desde tu próxima comida."
+    />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:image" content="/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Un cerro de Valparaíso con siete casas de colores, una por cada día de la semana." />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
