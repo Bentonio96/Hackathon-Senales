@@ -1,20 +1,20 @@
 /**
- * Lo que se cambia antes de presentar: el nombre del agente (Ami, decidido el
+ * Lo que se cambia antes de presentar: el nombre del agente (Amy, decidido el
  * 2026-10-23) y su número de WhatsApp.
- * El nombre también está en index.html (title y og): búscalo como "Ami".
+ * El nombre también está en index.html (title y og): búscalo como "Amy".
  */
-export const NOMBRE = "Ami";
+export const NOMBRE = "Amy";
 
 /**
  * Número en formato internacional, sin "+" ni espacios. Es el número del sandbox
- * de WhatsApp de Twilio (+1 415 523 8886), donde hoy vive Ami.
+ * de WhatsApp de Twilio (+1 415 523 8886), donde hoy vive Amy.
  */
 export const WHATSAPP_NUMERO = "14155238886";
 
 /**
  * Primer mensaje que queda escrito al abrir el chat. En el sandbox, el primer
- * mensaje tiene que ser el código de unión; después ya se conversa con Ami.
- * Con un número propio de Ami, cambiar por «Hola, quiero dejar listo mi finde».
+ * mensaje tiene que ser el código de unión; después ya se conversa con Amy.
+ * Con un número propio de Amy, cambiar por «Hola, quiero dejar listo mi finde».
  */
 export const WHATSAPP_TEXTO = "join driving-minerals";
 

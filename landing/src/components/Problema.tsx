@@ -2,7 +2,7 @@ import { useRevela } from "../lib/movimiento";
 import { AvatarAmi } from "./Avatar";
 import { Onda } from "./Onda";
 
-/** El problema en dos frases: lo que se dice el domingo y lo que contesta Ami. */
+/** El problema en dos frases: lo que se dice el domingo y lo que contesta Amy. */
 export function Problema() {
   const ref = useRevela<HTMLElement>();
   return (
@@ -13,7 +13,7 @@ export function Problema() {
             «Ya la embarré, el lunes parto de nuevo.»
           </h2>
           <p className="revela mt-6 max-w-[40ch] text-lead" style={{ ["--i" as string]: 1 }}>
-            Un completo a las tres de la mañana no borra tu semana. Con Ami, el finde ya viene en el plan.
+            Un completo a las tres de la mañana no borra tu semana. Con Amy, el finde ya viene en el plan.
           </p>
         </div>
         <div className="revela flex items-end gap-3 lg:col-span-4 lg:col-start-9" style={{ ["--i" as string]: 2 }}>

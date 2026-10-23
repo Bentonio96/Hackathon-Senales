@@ -14,9 +14,9 @@ En línea: https://hola-ami.vercel.app (proyecto `ami-landing` en Vercel; cada p
 
 Todo está en [`src/config.ts`](src/config.ts):
 
-- `NOMBRE`: el nombre del agente, «Ami» (decidido el 2026-10-23). También aparece en `index.html`, en el título y en las etiquetas OG.
-- `WHATSAPP_NUMERO`: el número de Ami, hoy el del sandbox de WhatsApp de Twilio (`14155238886`). Todos los botones «Hablar por WhatsApp» usan `WHATSAPP_URL`.
-- `WHATSAPP_TEXTO`: el mensaje que queda escrito al abrir el chat. En el sandbox es el código de unión (`join driving-minerals`); con un número propio de Ami se cambia por un saludo.
+- `NOMBRE`: el nombre del agente, «Amy» (decidido el 2026-10-23). También aparece en `index.html`, en el título y en las etiquetas OG.
+- `WHATSAPP_NUMERO`: el número de Amy, hoy el del sandbox de WhatsApp de Twilio (`14155238886`). Todos los botones «Hablar por WhatsApp» usan `WHATSAPP_URL`.
+- `WHATSAPP_TEXTO`: el mensaje que queda escrito al abrir el chat. En el sandbox es el código de unión (`join driving-minerals`); con un número propio de Amy se cambia por un saludo.
 
 Las conversaciones, los locales y los precios de ejemplo están en [`src/lib/conversacion.ts`](src/lib/conversacion.ts). Son inventados y la página los marca como ejemplo.
 
@@ -38,9 +38,9 @@ Ya está creado: el proyecto `ami-landing` en la cuenta personal, enlazado al re
 ## Decisiones
 
 - **Concepto «Borde costero».** La semana es una fila de siete casas de Valparaíso frente al mar, todas a la misma altura, y a los lados asoman casas sin nombre porque la semana sigue de largo: el domingo pasa al lunes sin salto. Antes era un cerro con las casas subiendo en diagonal («Cerro de calamina»), pero se leía como una montaña que hay que escalar, y del domingo, arriba, se «caía» al lunes, abajo: justo el «parto de cero» que se quiere evitar. Además chocaba con no mostrar progreso. Los bordes ondulados entre secciones son el perfil de la calamina.
-- **La paleta de Ami, solo en claro** (la misma de los mockups): neblina `#F2F4F1` de fondo, tinta `#1E2321`, amarillo ascensor, celeste cerro y rubor como campos, y el azul puerto `#1F5F73` solo en lo que se toca (hablar por WhatsApp, elegir, avanzar).
+- **La paleta de Amy, solo en claro** (la misma de los mockups): neblina `#F2F4F1` de fondo, tinta `#1E2321`, amarillo ascensor, celeste cerro y rubor como campos, y el azul puerto `#1F5F73` solo en lo que se toca (hablar por WhatsApp, elegir, avanzar).
 - **Letra:** Bricolage Grotesque para el nombre y los títulos, y Figtree para el texto, como en los mockups.
-- **Poco texto, escenas cotidianas:** el corazón de la página son seis escenas de un finde (saliendo de la U, la foto del refri, el completo del carrete, la caña, el sushi con las amigas, la culpa del domingo), cada una con su dibujo. Al tocarla, el chat muestra qué le escribe Ami en ese momento.
+- **Poco texto, escenas cotidianas:** el corazón de la página son seis escenas de un finde (saliendo de la U, la foto del refri, el completo del carrete, la caña, el sushi con las amigas, la culpa del domingo), cada una con su dibujo. Al tocarla, el chat muestra qué le escribe Amy en ese momento.
 - **Movimiento que responde a la persona.** El chat avanza con «Adelantar el reloj» o con el scroll (en escritorio el teléfono queda fijo y los pasos pasan al lado). Las casas responden al toque. No hay animaciones ambientales continuas, para que ande fluido en equipos modestos. La entrada del hero está en CSS puro. Lenis se carga aparte y solo con movimiento.
 - **Sin movimiento:** `prefers-reduced-motion` o `?reduced=1` apagan todo, y el contenido se ve igual.
 - **El revelado al hacer scroll solo desplaza, nunca anima la opacidad**, para que Lighthouse no lo lea como falta de contraste.

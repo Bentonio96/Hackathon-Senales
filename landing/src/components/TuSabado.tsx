@@ -48,8 +48,8 @@ function Sabado({
 }
 
 /**
- * La misma comparación que hace Ami el jueves: el sábado de siempre (dos
- * delivery) contra el sábado con Ami (el mismo antojo y una casera con lo que
+ * La misma comparación que hace Amy el jueves: el sábado de siempre (dos
+ * delivery) contra el sábado con Amy (el mismo antojo y una casera con lo que
  * ya tienes). El antojo no se toca; lo que cambia es el almuerzo con caña.
  */
 export function TuSabado() {
@@ -120,7 +120,7 @@ export function TuSabado() {
             <Sabado titulo="Un sábado de siempre" lineas={deSiempre} forma="rounded-[36px_48px_40px_52px]" />
           </div>
           <div className="revela" style={{ ["--i" as string]: 2 }}>
-            <Sabado titulo="Un sábado con Ami" lineas={conAmi} destacado forma="rounded-[48px_36px_52px_40px]" />
+            <Sabado titulo="Un sábado con Amy" lineas={conAmi} destacado forma="rounded-[48px_36px_52px_40px]" />
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 /**
- * Ami, avatar B («Abrazo»): la mancha amarilla con los ojos cerrados de
+ * Amy, avatar B («Abrazo»): la mancha amarilla con los ojos cerrados de
  * felicidad y, a su lado, la mancha celeste chica (tú). Elegido por Benja y
  * Esperanza el 2026-10-23. Sus colores son fijos: es el personaje, no la UI.
  */

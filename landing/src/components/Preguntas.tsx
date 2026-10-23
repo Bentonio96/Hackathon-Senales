@@ -2,12 +2,12 @@ import { NOMBRE } from "../config";
 
 const PREGUNTAS = [
   { p: "¿Es una dieta?", r: "No. Trabaja con la pauta que ya te dio tu nutricionista." },
-  { p: "¿Y los antojos?", r: "Entran en el plan desde el jueves. Ami no los cuenta ni te dice cuántos te quedan: si quieres otro, el plan se acomoda." },
+  { p: "¿Y los antojos?", r: "Entran en el plan desde el jueves. Amy no los cuenta ni te dice cuántos te quedan: si quieres otro, el plan se acomoda." },
   { p: "¿Cuántos mensajes me manda?", r: "Pocos: el jueves en la tarde y el sábado al despertar." },
   { p: "¿Reemplaza a mi nutricionista?", r: `No. Si algo te preocupa, ${NOMBRE} te va a sugerir hablarlo con tu nutricionista o con otro profesional.` },
 ];
 
-/** Las preguntas como un chat: tú preguntas en celeste, Ami responde en blanco. */
+/** Las preguntas como un chat: tú preguntas en celeste, Amy responde en blanco. */
 export function Preguntas() {
   return (
     <section id="preguntas" className="envoltura grid gap-10 py-20 md:py-28 lg:grid-cols-12 lg:gap-8" aria-labelledby="titulo-preguntas">

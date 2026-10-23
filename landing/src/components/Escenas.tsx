@@ -3,7 +3,7 @@ import type { Escena } from "../lib/conversacion";
 
 /**
  * Seis escenas de un finde cualquiera, dibujadas a mano en SVG con la paleta
- * de Ami. Son decoración: el texto de cada tarjeta dice lo mismo.
+ * de Amy. Son decoración: el texto de cada tarjeta dice lo mismo.
  */
 const T = "var(--tinta)";
 

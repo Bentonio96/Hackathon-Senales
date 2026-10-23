@@ -11,7 +11,7 @@
 
 :root {
   color-scheme: light;
-  /* Paleta de Ami (la misma de los mockups): neblina de fondo, tinta,
+  /* Paleta de Amy (la misma de los mockups): neblina de fondo, tinta,
      amarillo ascensor, celeste cerro, rubor y azul puerto solo en lo que se toca. */
   --cielo: #f2f4f1;
   --superficie: #ffffff;
@@ -293,7 +293,7 @@ html.lenis body {
   scroll-behavior: auto !important;
 }
 
-/* Ami saluda cuando pasas el mouse: un balanceo corto, solo como respuesta. */
+/* Amy saluda cuando pasas el mouse: un balanceo corto, solo como respuesta. */
 @media (hover: hover) and (pointer: fine) {
   .saludo {
     transition: transform 500ms var(--ease-salto);

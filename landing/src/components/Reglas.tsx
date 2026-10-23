@@ -14,7 +14,7 @@ export function Reglas() {
       <div className="envoltura grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-6">
           <h2 id="titulo-reglas" className="revela text-titulo">
-            Ami nunca
+            Amy nunca
           </h2>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {NUNCA.map((n, i) => (

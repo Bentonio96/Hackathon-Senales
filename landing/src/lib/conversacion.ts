@@ -58,7 +58,7 @@ export const MOMENTOS: Momento[] = [
     titulo: "El completo del carrete",
     escena: "carrete",
     fondo: "rosado",
-    mensajes: [{ de: "nota", texto: "Ami no te escribe de noche. Es tu carrete." }],
+    mensajes: [{ de: "nota", texto: "Amy no te escribe de noche. Es tu carrete." }],
   },
   {
     id: "sabado",

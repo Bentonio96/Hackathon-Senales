@@ -11,7 +11,7 @@ const FONDOS = {
   menta: "bg-menta",
 } as const;
 
-/** Esquinas irregulares, como las tarjetas de los mockups de Ami. */
+/** Esquinas irregulares, como las tarjetas de los mockups de Amy. */
 const FORMAS = [
   "rounded-[28px_40px_30px_44px]",
   "rounded-[40px_28px_44px_30px]",
@@ -64,7 +64,7 @@ export function ComoFunciona() {
     <section id="como-funciona" className="relative" aria-labelledby="titulo-como">
       <div className="envoltura pt-20 md:pt-28">
         <h2 id="titulo-como" className="max-w-[16ch] text-titulo">
-          Un finde cualquiera, con Ami
+          Un finde cualquiera, con Amy
         </h2>
         <p className="mt-4 max-w-[40ch] text-lead text-tinta-suave">Toca una escena y mira qué te escribe.</p>
       </div>
