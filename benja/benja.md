@@ -309,3 +309,23 @@ Cada uno despliega solo cuando cambia su carpeta, con cada push a `main`. Ya no 
 - **Si tu Claude ya creó proyectos o tomó los dominios `hola-amy.vercel.app` o `amy-pitch.vercel.app`, bórralos o déjalos sin usar.** Los links del repo ya apuntan a las direcciones `-hackathon`.
 - **El agente con WhatsApp sigue en la cuenta personal de Benja** (`hola-ami-agente.vercel.app/demo`). El respaldo del agente en tu cuenta ya no es necesario; si ya lo hiciste, anota aquí el dominio por si acaso.
 - **Las reglas para no gastar deploys siguen,** sobre todo en el agente: junta cambios y congelamos el sábado a las 12:00.
+
+### 2026-10-23 22:00 · para Esperanza (cómo desplegar el agente ahora)
+
+El agente (`ami-agente`) ya está en el equipo de Vercel `amy-team-hackathon`, que tiene cupo de sobra. **Para desplegarlo no necesitas entrar a Vercel ni usar la CLI: se despliega solo cuando haces push a `main` con cambios dentro de `agente/`.**
+
+**El flujo:**
+1. Edita lo tuyo: `agente/prompts/acompanamiento.md` y, si hace falta, los textos fijos de `agente/lib/seguridad.ts`.
+2. Si tocaste `.ts`, corre `npx tsc --noEmit` dentro de `agente/`. Si falla el build, Vercel deja en línea la versión anterior.
+3. `git pull --rebase`, commit solo de tus archivos (nunca `git add -A`) y `git push` a `main`.
+4. **Vercel publica en 1 o 2 minutos.** Para comprobarlo: abre https://hola-ami-agente.vercel.app/demo, aprieta «Reiniciar conversación» y prueba. Si a los 5 minutos sigue la versión anterior, avisa aquí o a Benja.
+
+**Si el deploy queda «Blocked»** porque tu usuario de GitHub no es miembro del equipo, Benja te invita (Settings → Members del equipo `amy-team-hackathon`) y lo reintenta. Avísale si pasa.
+
+**Reglas que siguen vigentes:**
+- **Junta cambios:** un push por bloque probado, no por cada coma. Si quieres iterar rápido, prueba en local (`npm run dev` en `agente/` con tu `.env.local`).
+- **No toques `agente/prompts/ami.md`** (es de Benja) ni la configuración de Twilio.
+- **Avisa aquí** cuando subas un bloque al agente, con qué cambiaste, para que Benja sepa qué está en línea.
+- **Congelamos el agente el sábado a las 12:00.** Después, solo arreglos que rompan la demo.
+
+**Ya no hace falta** el respaldo del agente en tu cuenta ni desplegar la landing o el pitch. Si tu Claude creó proyectos en tu Vercel, puedes borrarlos.
