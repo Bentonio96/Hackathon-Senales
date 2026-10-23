@@ -100,3 +100,14 @@ export async function primeraVez(clave: string): Promise<boolean> {
   vistos.add(clave);
   return true;
 }
+
+/** El phone_number_id de Kapso que llega en cada webhook (sirve para responder sin configurarlo a mano). */
+export async function recordarKapsoPhoneNumberId(id: string): Promise<void> {
+  if (redis) await redis.set("ami:kapso-phone-number-id", id);
+  else (memoria as { __amiKapsoPnid?: string }).__amiKapsoPnid = id;
+}
+
+export async function kapsoPhoneNumberId(): Promise<string | null> {
+  if (redis) return redis.get<string>("ami:kapso-phone-number-id");
+  return (memoria as { __amiKapsoPnid?: string }).__amiKapsoPnid ?? null;
+}

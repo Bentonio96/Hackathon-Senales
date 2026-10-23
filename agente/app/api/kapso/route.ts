@@ -2,7 +2,14 @@ import { after } from "next/server";
 import { turnoDeAmi } from "@/lib/ami";
 import { enviarA } from "@/lib/canal";
 import { enCola } from "@/lib/cola";
-import { borrarSesion, cargarSesion, guardarSesion, primeraVez, recordarUltimoWhatsApp } from "@/lib/estado";
+import {
+  borrarSesion,
+  cargarSesion,
+  guardarSesion,
+  primeraVez,
+  recordarKapsoPhoneNumberId,
+  recordarUltimoWhatsApp,
+} from "@/lib/estado";
 import { descargarMediaKapso, firmaKapsoValida } from "@/lib/kapso";
 
 export const maxDuration = 300;
@@ -22,7 +29,8 @@ interface MensajeKapso {
 
 interface EventoKapso {
   message?: MensajeKapso;
-  conversation?: { phone_number?: string };
+  conversation?: { phone_number?: string; phone_number_id?: string };
+  phone_number_id?: string;
 }
 
 // Webhook de Kapso (evento whatsapp.message.received). Responde al tiro y procesa después.
@@ -47,6 +55,8 @@ export async function POST(req: Request) {
   const eventos: EventoKapso[] = "message" in datos ? [datos as EventoKapso] : ((datos as { data?: EventoKapso[] }).data ?? []);
 
   for (const e of eventos) {
+    const pnid = e.phone_number_id ?? e.conversation?.phone_number_id;
+    if (pnid) await recordarKapsoPhoneNumberId(pnid);
     const m = e.message;
     if (!m || (m.kapso?.direction && m.kapso.direction !== "inbound")) continue;
     if (m.id && !(await primeraVez(`kapso-msg:${m.id}`))) continue;
