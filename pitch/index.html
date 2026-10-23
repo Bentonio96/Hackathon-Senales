@@ -227,11 +227,11 @@
         <div class="stack" style="gap: 28px">
           <h2 class="display" style="font-size: 104px">Un finde cualquiera, con Ami.</h2>
           <div class="controls">
-            <button class="btn primary" id="connect" type="button">Conectar iPhone</button>
+            <button class="btn primary" id="connect" type="button">¡Veamos la demo!</button>
             <button class="btn" id="reconnect" type="button" hidden>Cambiar ventana</button>
             <button class="btn" id="stop" type="button" hidden>Detener</button>
           </div>
-          <p class="status" id="status" role="status" aria-live="polite">Elige la ventana de QuickTime Player (o la de «Duplicación del iPhone»).</p>
+          <p class="status" id="status" role="status" aria-live="polite">El WhatsApp de Antonia, en vivo: del jueves al sábado con caña.</p>
           <div class="planb" id="planb">
             <p><strong>Plan B:</strong> la misma Ami en la web, con un reloj para adelantar al sábado.</p>
             <button class="btn" id="open-web" type="button">Abrir la demo web</button>
@@ -242,7 +242,7 @@
 
     <!-- 6 · Por qué cambiaría -->
     <section class="slide" aria-label="Por qué cambiaría">
-      <h2 class="titulo">Por qué esta vez sí.</h2>
+      <h2 class="titulo">Por qué Ami le cambiaría la vida a Antonia.</h2>
       <div class="razones">
         <div class="razon">
           <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">un finde no borra tu semana</p></div>
@@ -418,7 +418,7 @@
   const connectBtn = document.getElementById('connect');
   const reconnectBtn = document.getElementById('reconnect');
   const stopBtn = document.getElementById('stop');
-  const idleText = 'Elige la ventana de QuickTime Player (o la de «Duplicación del iPhone»).';
+  const idleText = 'El WhatsApp de Antonia, en vivo: del jueves al sábado con caña.';
   let stream = null;
 
   function setStatus(text, isError) {
@@ -461,12 +461,12 @@
         if (stream === next) stopMirror('Se dejó de compartir la ventana. Vuelve a conectar, o usa el plan B.');
       });
       setLive(true);
-      setStatus('Conectado. Abre WhatsApp en el chat con Ami.', false);
+      setStatus('Así se ve un finde con Ami.', false);
     } catch (error) {
       if (error && error.name === 'NotAllowedError') {
         setStatus(stream
           ? 'Cancelaste el cambio: sigue la ventana de antes.'
-          : 'Cancelaste la selección. Toca «Conectar iPhone» de nuevo, o usa el plan B.', !stream);
+          : 'Cancelaste la selección. Toca «¡Veamos la demo!» de nuevo, o usa el plan B.', !stream);
       } else {
         setStatus(`No se pudo conectar la ventana (${(error && error.message) || 'error desconocido'}). Usa el plan B.`, true);
       }

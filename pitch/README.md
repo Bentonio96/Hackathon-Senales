@@ -25,7 +25,7 @@ El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la
 
 ## Slide 5: el iPhone en vivo
 
-1. Toca **Conectar iPhone**.
+1. Toca **¡Veamos la demo!**.
 2. En el diálogo de Chrome, entra a la pestaña **Ventana** y elige la de **Duplicación del iPhone** (o la de QuickTime, más abajo).
 3. **Cambiar ventana** abre el diálogo otra vez. **Detener** corta la transmisión. Si dejas de compartir desde la barra de Chrome, la slide vuelve sola al estado inicial.
 4. Si cancelas el diálogo o algo falla, el mensaje lo explica y el **plan B** se marca en amarillo.
@@ -39,7 +39,7 @@ Requisitos: macOS Sequoia 15 o posterior en el Mac, iOS 18 o posterior en el iPh
 1. En el Mac, abre la app **Duplicación del iPhone** (está en Aplicaciones, o búscala con Spotlight).
 2. La primera vez, sigue el asistente: desbloquea el iPhone cuando lo pida y acepta la conexión.
 3. Cuando aparezca la pantalla del iPhone en la ventana, abre WhatsApp en el chat con Ami.
-4. En el pitch, toca **Conectar iPhone** y elige la ventana «Duplicación del iPhone».
+4. En el pitch, toca **¡Veamos la demo!** y elige la ventana «Duplicación del iPhone».
 
 Mientras se duplica, el iPhone tiene que quedar bloqueado. Si lo desbloqueas, la duplicación se corta.
 
@@ -48,7 +48,7 @@ Mientras se duplica, el iPhone tiene que quedar bloqueado. Si lo desbloqueas, la
 1. Conecta el iPhone al Mac por cable y desbloquéalo. Si te pregunta, toca **Confiar**.
 2. Abre **QuickTime Player** › Archivo › **Nueva grabación de película**.
 3. En la ventana de grabación, toca la flecha junto al botón rojo y elige el **iPhone** como cámara. No hace falta grabar: basta con que se vea la pantalla.
-4. En el pitch, toca **Conectar iPhone** y elige la ventana de QuickTime Player.
+4. En el pitch, toca **¡Veamos la demo!** y elige la ventana de QuickTime Player.
 
 ### Plan B: la demo web
 
