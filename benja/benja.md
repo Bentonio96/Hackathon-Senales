@@ -261,7 +261,7 @@ No toqué los títulos ni las notas que no son burbujas, como «El lunes ya no p
 
 **3. Lo que no va**
 - No muevas WhatsApp ni el webhook de Twilio a tu cuenta. Es la noche antes, y si se corta la cadena de WhatsApp no alcanzamos a arreglarla.
-- No despliegues la landing por ahora (el pitch sí, ver abajo).
+- La landing sí va en tu cuenta: ver el mensaje de las 21:00.
 
 ### 2026-10-23 20:45 · para Esperanza (corrección del encargo anterior)
 
@@ -276,3 +276,24 @@ Benja corrige: **en tu Vercel van el agente y el pitch.** La landing no.
 - La portada del final enlaza a `hola-ami.vercel.app` (la landing de Benja). Déjalo así.
 - **Cuándo desplegarlo:** una vez, cuando el pitch esté listo, y otra solo si cambia algo importante. Las reglas de la sección 2 valen igual: avisa aquí antes de desplegar.
 - Anota aquí el dominio del pitch y el del agente cuando los tengas.
+
+### 2026-10-23 21:00 · para Esperanza (encargo final de Benja, reemplaza a los dos anteriores donde choquen)
+
+**En tu Vercel van los tres: el agente, el pitch y la landing**, desplegados con la CLI desde cada carpeta (`npx vercel link` y `npx vercel deploy --prod`), sin conectar el repo, para que los push no disparen deploys.
+
+| Carpeta | Proyecto en tu cuenta | Dominio que hay que asignar (Settings → Domains) |
+|---|---|---|
+| `pitch/` | `amy-pitch` | **amy-pitch.vercel.app** |
+| `landing/` | `hola-amy` | **hola-amy.vercel.app** |
+| `agente/` | `amy-demo` (o el que prefieras) | el que elijas: anótalo aquí |
+
+- **Pitch y landing:** el cambio importante es que digan **Amy**, y ya está en `main`. También dejé listos los links:
+  - El enlace del final del pitch apunta a `https://hola-amy.vercel.app`.
+  - El canonical y la vista previa de la landing usan `hola-amy.vercel.app`.
+  - Los README y el README raíz tienen las direcciones nuevas.
+  - **Solo tienes que hacer `git pull` y desplegar.**
+- **Landing:** `npm install` y `npm run build` dentro de `landing/` antes de desplegar, para confirmar que compila (Vercel lo vuelve a construir solo). Es estática y no necesita variables.
+- **Agente:** igual que en el mensaje de las 20:30: tu clave de Anthropic, `AMI_MODELO`, Upstash con prefijo `KV` y sin Twilio. WhatsApp sigue en la cuenta de Benja.
+- **En la cuenta de Benja** apagué los deploys automáticos de `ami-landing` y `pitch-ami`. Así su cupo queda solo para el agente con WhatsApp (`hola-ami-agente.vercel.app`).
+- **Las reglas de la sección 2 siguen:** junta cambios, un deploy por bloque, avisa aquí antes y congela todo el sábado a las 12:00.
+- **Al terminar,** anota aquí los tres dominios y si las pruebas pasaron. Para el pitch: las slides, el control remoto y el botón de la demo. Para la landing: que diga Amy y que el botón de WhatsApp abra el chat.
