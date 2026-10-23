@@ -183,3 +183,35 @@ Benja pidió que Ami **se presente y pregunte el nombre la primera vez**, y que 
 - **Tus ejemplos están en femenino porque piensan en Antonia.** El prompt le dice a Ami que los adapte al trato y que, en neutro, arme frases sin marcar género.
 - **Tus mensajes fijos de alerta** (`seguridad.ts`) ahora usan el trato: «sola», «solo» o, en neutro, «sin compañía» («No tienes que cargar con esto sin compañía», «No te quedes sin compañía»). «No la dejes sola», el de la amiga en peligro, quedó igual. **Revisa si te gusta la versión neutra o prefieres otra frase.**
 - **Los textos fijos del código pasaron a tu formato nuevo** (mayúscula, sin punto final, sin «¿»): pausa, error, límite de la demo, respuesta neutra del filtro y el jueves después de una alerta.
+
+### 2026-10-23 19:00 · para Esperanza
+
+Re: `esperanza/cambios-textos-para-benja.md`. **Apliqué todos tus cambios tal cual: antojos invisibles.** Los textos van con tu formato (mayúscula, sin punto final, sin «¿»).
+
+**Landing** (commit `7b72731`, build y lint sin errores):
+- `Problema.tsx`: «Pucha, qué lata quedarte con esa sensación. El plan se puede mover 🫶».
+- `conversacion.ts`: las cuatro burbujas (jueves, sábado, sushi y domingo) con tus textos nuevos.
+- `Reglas.tsx`: tu texto de la ayuda, y Salud Responde sin «(opción 2, salud mental)».
+- `Preguntas.tsx`: «¿Y los antojos?» con tu respuesta. El «¿» se queda porque es la pregunta de una persona en la sección de preguntas frecuentes, no una burbuja de Ami.
+- `TuSabado.tsx` sigue igual, como indicaste.
+
+**Pitch:**
+- La burbuja de la lámina 2 tiene tu texto.
+- En «Por qué Ami le cambiaría la vida» quedan los tres argumentos sin cifras ni autores. Saqué la burbuja de los antojos y la línea de Sharif y Shu.
+- Dejé debajo de «Decidir antes funciona.» una línea chica que dice solo «Intenciones de implementación.», para que el jurado tenga el nombre del concepto si pregunta.
+- Lo revisé en el navegador y se ve bien. **Ojo:** estos cambios quedaron dentro del commit `de50087` de la sesión del pitch, que commiteó en el mismo momento en la misma carpeta. Están completos.
+
+**README** (commit `ccc6d70`):
+- «con calma, antes del finde».
+- Los argumentos sin autores, con «(fuentes en `benja/investigacion-antonia.md`)».
+- Agregué «Decirle cuántos antojos tiene» en «Qué dejamos fuera».
+
+**`agente/prompts/ami.md`** (commit `cc844e4`):
+- Los antojos van solo por dentro, con tu texto.
+- «Dale, hoy se pide. Que te caiga rico 🫶».
+
+**Lo que decidí no cambiar todavía, porque tu documento no lo nombra:**
+- En `landing/src/lib/conversacion.ts` y en el pitch quedan otras burbujas de Ami con el formato antiguo (minúscula inicial).
+- En `ami.md` quedan ejemplos con «¿» y minúscula (por ejemplo «hola! ¿sales este finde?»). Tu prompt ya le dice a Ami que aplique tu formato siempre, así que en la conversación real no debería notarse.
+
+Si quieres, paso todo eso a tu formato en otra pasada.
