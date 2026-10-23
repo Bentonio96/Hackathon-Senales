@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ami · guion del pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  /* Same tokens as the deck and the landing. */
+  :root {
+    --cielo: #f2f4f1;
+    --superficie: #ffffff;
+    --tinta: #1e2321;
+    --tinta-suave: #4a524e;
+    --amarillo: #fcefc6;
+    --celeste: #dceeef;
+    --accion: #1f5f73;
+    --linea: rgb(30 35 33 / .12);
+    --display: 'Bricolage Grotesque', 'Avenir Next', system-ui, sans-serif;
+    --texto: Figtree, 'Avenir Next', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--cielo); }
+  body { margin: 0; color: var(--tinta); font-family: var(--texto); font-size: 18px; line-height: 1.55; }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 96px; }
+  .marca { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-decoration: none; color: var(--tinta); font-family: var(--display); font-weight: 800; font-size: 22px; }
+  .marca svg { width: 40px; height: 40px; }
+  h1 { font-family: var(--display); font-weight: 800; font-size: clamp(36px, 6vw, 56px); line-height: 1; letter-spacing: -0.03em; margin: 0 0 24px; }
+  h2 { font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: -0.02em; line-height: 1.1; margin: 56px 0 16px; padding-top: 24px; border-top: 2px solid var(--linea); }
+  p, ul, ol { margin: 0 0 14px; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  strong { font-weight: 700; }
+  code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: .88em; background: var(--superficie); border-radius: 6px; padding: 1px 6px; }
+  a { color: var(--accion); text-underline-offset: 3px; }
+  /* What to say out loud: a card, easy to find while rehearsing. */
+  blockquote { margin: 16px 0; background: var(--superficie); border-radius: 6px 26px 24px 28px; padding: 18px 22px; font-size: 20px; line-height: 1.5; }
+  blockquote p:last-child { margin-bottom: 0; }
+  .tabla { overflow-x: auto; margin: 16px 0 8px; }
+  table { width: 100%; border-collapse: collapse; background: var(--superficie); border-radius: 18px; overflow: hidden; font-size: 17px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { font-family: var(--display); font-weight: 700; background: var(--amarillo); }
+  tr:last-child td { border-bottom: 0; }
+  .error { background: var(--superficie); border-radius: 18px; padding: 18px 22px; }
+  @media print { html { background: #fff; } blockquote, table { border: 1px solid var(--linea); } }
+</style>
+</head>
+<body>
+<main>
+  <a class="marca" href="./">
+    <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><path d="M90 50 C126 46 152 74 150 110 C148 146 122 164 90 160 C58 156 38 132 42 100 C46 70 62 53 90 50 Z" fill="#F6C445"/><path d="M152 108 C168 106 180 121 178 138 C176 156 161 165 146 161 C131 157 125 144 129 128 C132 115 140 109 152 108 Z" fill="#7FBFC4"/><path d="M73 98 Q79 91 85 98 M101 96 Q107 89 113 96 M83 116 Q93 125 103 115" fill="none" stroke="#1E2321" stroke-width="4" stroke-linecap="round"/><circle cx="145" cy="131" r="3.5" fill="#1E2321"/><circle cx="159" cy="130" r="3.5" fill="#1E2321"/></svg>
+    Ami · ver el pitch
+  </a>
+  <article id="guion" aria-live="polite"><p>Cargando el guion…</p></article>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+  // guion.md is the single source: edit it there, this page only renders it.
+  const destino = document.getElementById('guion');
+  fetch('guion.md', { cache: 'no-store' })
+    .then((res) => { if (!res.ok) throw new Error(res.status); return res.text(); })
+    .then((md) => {
+      destino.innerHTML = marked.parse(md);
+      // Wide tables scroll inside their own box on a phone.
+      destino.querySelectorAll('table').forEach((t) => {
+        const caja = document.createElement('div');
+        caja.className = 'tabla';
+        t.replaceWith(caja);
+        caja.appendChild(t);
+      });
+    })
+    .catch(() => {
+      destino.innerHTML = '<p class="error">No se pudo cargar el guion. Ábrelo directo en <a href="guion.md">guion.md</a>.</p>';
+    });
+</script>
+</body>
+</html>
