@@ -32,10 +32,10 @@ export function Cierre() {
       <div className="envoltura grid gap-10 pt-20 pb-10 md:pt-28 lg:grid-cols-12">
         <div className="lg:col-span-8">
           <h2 id="titulo-cierre" className="text-display font-extrabold">
-            Deja listo tu próximo sábado.
+            Disfruta el finde. El lunes, sigues.
           </h2>
           <p className="mt-6 max-w-[44ch] text-lead">
-            Escríbele hoy. El jueves te pregunta si sales.
+            Escríbele hoy. El jueves te pregunta si sales y arman el sábado con tus antojos incluidos.
           </p>
           <a
             href={WHATSAPP_URL}

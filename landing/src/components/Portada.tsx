@@ -60,12 +60,13 @@ export function Portada() {
   return (
     <section id="inicio" className="relative overflow-hidden" aria-labelledby="titulo-portada">
       <div className="envoltura grid items-center gap-10 pt-8 pb-14 md:pt-14 lg:grid-cols-12 lg:gap-6 lg:pb-20">
-        <div className="lg:col-span-6">
+        <div className="lg:col-span-7">
           <h1 id="titulo-portada" className="entra text-display font-extrabold" style={{ ["--i" as string]: 0 }}>
-            El lunes ya no partes de cero.
+            Darte un gusto no es empezar de cero.
           </h1>
-          <p className="entra mt-6 max-w-[34ch] text-lead" style={{ ["--i" as string]: 1 }}>
-            {NOMBRE} es una amiga en tu WhatsApp que el jueves te deja listo el sábado.
+          <p className="entra mt-6 max-w-[40ch] text-lead" style={{ ["--i" as string]: 1 }}>
+            {NOMBRE} es tu compañera en WhatsApp para el fin de semana. Te ayuda a planear tus antojos y comidas, para
+            que el lunes sigas con tu rutina, sin culpa.
           </p>
           <div className="entra mt-9 flex flex-wrap items-center gap-x-7 gap-y-4" style={{ ["--i" as string]: 2 }}>
             <BotonWhatsApp />
@@ -77,7 +78,7 @@ export function Portada() {
             Sin rachas ni calorías. No reemplaza a tu nutricionista.
           </p>
         </div>
-        <div className="lg:col-span-6">
+        <div className="lg:col-span-5">
           <BordeCostero />
           <p className="mt-3 text-center text-chico text-tinta-suave">Toca una casa.</p>
         </div>
