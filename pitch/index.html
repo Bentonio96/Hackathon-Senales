@@ -17,6 +17,7 @@
     --celeste: #7FBFC4;
     --celeste-claro: #DCEEEF;
     --rubor: #EF8A6E;
+    --ladrillo: #B24A2E;
     --durazno: #F7E9DF;
     --puerto: #1F5F73;
     --puerto-hondo: #163F4D;
@@ -34,55 +35,69 @@
   .viewport { position: fixed; inset: 0; overflow: hidden; }
   .stage { width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%; transform-origin: center; }
 
-  .slide { position: absolute; inset: 0; padding: 88px 112px 96px; display: flex; flex-direction: column; gap: 32px; overflow: hidden; visibility: hidden; opacity: 0; transform: translateY(16px); transition: opacity 360ms var(--ease), transform 360ms var(--ease), visibility 0s linear 360ms; }
+  .slide { position: absolute; inset: 0; padding: 84px 112px 96px; display: flex; flex-direction: column; gap: 36px; overflow: hidden; visibility: hidden; opacity: 0; transform: translateY(16px); transition: opacity 360ms var(--ease), transform 360ms var(--ease), visibility 0s linear 360ms; }
   .slide.is-active { visibility: visible; opacity: 1; transform: none; transition: opacity 360ms var(--ease), transform 360ms var(--ease); }
   .blob { position: absolute; pointer-events: none; z-index: 0; }
   .slide > *:not(.blob) { position: relative; z-index: 1; }
 
   h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; margin: 0; line-height: 1.02; }
-  h1 { font-size: 88px; }
-  h2 { font-size: 64px; max-width: 1180px; }
+  h1 { font-size: 96px; }
+  h2 { font-size: 64px; max-width: 1240px; }
   h3 { font-family: var(--display); font-weight: 700; font-size: 30px; margin: 0; letter-spacing: -0.01em; }
   p { margin: 0; }
-  .lead { font-size: 28px; line-height: 1.4; color: var(--tinta-suave); max-width: 1000px; }
-  .small { font-size: 18px; line-height: 1.45; color: var(--tinta-suave); }
+  .lead { font-size: 30px; line-height: 1.35; color: var(--tinta-suave); }
   .source { font-size: 16px; color: var(--tinta-suave); }
+  .bubble { background: var(--papel); border-radius: 6px 26px 26px 26px; padding: 16px 22px; font-size: 25px; line-height: 1.35; align-self: flex-start; }
+  .bubble.mine { background: var(--celeste-claro); border-radius: 26px 6px 26px 26px; align-self: flex-end; }
 
   /* Placeholder for Esperanza's part: deliberately visible so it is not shipped by accident. */
-  .esperanza { border: 2.5px dashed var(--puerto); border-radius: 26px 32px 28px 34px; padding: 20px 24px; font-size: 22px; line-height: 1.4; color: var(--puerto-hondo); background: rgba(220, 238, 239, .5); }
-  .esperanza strong { font-weight: 700; }
+  .esperanza { border: 2.5px dashed var(--puerto); border-radius: 22px 28px 24px 30px; padding: 14px 20px; font-size: 19px; line-height: 1.4; color: var(--puerto-hondo); background: rgba(220, 238, 239, .55); }
 
   /* 1 · week */
-  .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; margin-top: 12px; }
-  .day { display: flex; flex-direction: column; gap: 14px; }
-  .day-blob { height: 210px; display: grid; place-items: center; position: relative; }
+  .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; margin-top: auto; margin-bottom: auto; }
+  .day { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+  .day-blob { width: 230px; height: 230px; display: grid; place-items: center; position: relative; }
   .day-blob svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .day-value { position: relative; font-family: var(--display); font-weight: 700; font-size: 56px; letter-spacing: -0.02em; }
-  .day-name { font-family: var(--display); font-weight: 700; font-size: 26px; }
-  .day-text { font-size: 21px; line-height: 1.4; color: var(--tinta-suave); }
+  .day-value { position: relative; font-family: var(--display); font-weight: 700; font-size: 60px; letter-spacing: -0.02em; }
+  .day-name { font-family: var(--display); font-weight: 700; font-size: 30px; }
+  .day-text { font-size: 22px; line-height: 1.3; color: var(--tinta-suave); max-width: 220px; }
 
-  /* 2 · quote */
-  .quote { font-family: var(--display); font-weight: 500; font-size: 76px; line-height: 1.05; letter-spacing: -0.025em; max-width: 1200px; margin: 0; }
-  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; margin-top: auto; }
-  .two p { font-size: 24px; line-height: 1.45; }
+  /* 2 · reset line */
+  .quote { font-family: var(--display); font-weight: 500; font-size: 80px; line-height: 1.04; letter-spacing: -0.025em; max-width: 1240px; }
+  .timeline { margin-top: auto; display: flex; flex-direction: column; gap: 18px; }
+  .covers { display: grid; grid-template-columns: 4fr 3fr; gap: 28px; }
+  .cover { border-radius: 999px; padding: 14px 26px; font-size: 22px; font-weight: 600; text-align: center; }
+  .cover.ok { background: var(--celeste-claro); color: var(--puerto-hondo); }
+  .cover.none { border: 2.5px dashed var(--ladrillo); color: var(--ladrillo); }
+  .days7 { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 28px; }
+  .d7 { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 34px; }
+  .d7.on { background: var(--amarillo); }
+  .d7.off { background: var(--papel); border: 2.5px dashed #C6CDC9; color: #8A928E; }
 
-  /* 3 · story */
-  .story { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 72px; align-items: center; flex-grow: 1; }
-  .story-text { font-size: 30px; line-height: 1.45; }
-  .story-text p + p { margin-top: 20px; }
-  .finding { background: var(--papel); border-radius: 44px 36px 48px 40px; padding: 44px 48px; display: flex; flex-direction: column; gap: 22px; }
-  .finding .row { display: flex; gap: 18px; align-items: baseline; font-size: 26px; line-height: 1.35; }
-  .finding .tag { font-family: var(--display); font-weight: 700; font-size: 24px; min-width: 130px; }
+  /* 3 · money vs food */
+  .vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; flex-grow: 1; }
+  .chart { background: var(--papel); border-radius: 44px 36px 48px 40px; padding: 36px 40px 32px; display: flex; flex-direction: column; gap: 18px; }
+  .chart svg { width: 100%; height: 260px; }
+  .chart .what { font-size: 26px; line-height: 1.3; }
+  .burger { display: flex; align-items: center; gap: 22px; font-size: 30px; color: var(--tinta-suave); }
+  .burger svg { width: 84px; height: 84px; flex-shrink: 0; }
+  .burger strong { font-family: var(--display); font-size: 40px; color: var(--tinta); }
 
   /* 4 · Ami */
-  .ami-head { display: flex; align-items: center; gap: 28px; }
-  .ami-head svg { width: 132px; height: 132px; flex-shrink: 0; }
-  .moments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; flex-grow: 1; }
-  .moment { border-radius: 40px 34px 44px 38px; padding: 36px 40px; display: flex; flex-direction: column; gap: 18px; }
-  .moment.antes { background: var(--papel); }
-  .moment.despues { background: var(--celeste-claro); }
-  .moment ol, .moment ul { margin: 0; padding-left: 26px; display: flex; flex-direction: column; gap: 12px; font-size: 24px; line-height: 1.4; }
-  .bubble { align-self: flex-start; background: var(--papel); border-radius: 6px 26px 26px 26px; padding: 16px 22px; font-size: 26px; line-height: 1.35; }
+  .ami { display: grid; grid-template-columns: 330px minmax(0, 1fr) minmax(0, 1fr); gap: 44px; flex-grow: 1; align-items: stretch; }
+  .ami-id { display: flex; flex-direction: column; gap: 18px; justify-content: center; }
+  .ami-id svg { width: 300px; height: 300px; }
+  .chat { border-radius: 40px 34px 44px 38px; padding: 28px 28px; display: flex; flex-direction: column; gap: 12px; }
+  .chat.antes { background: var(--papel); }
+  .chat.despues { background: var(--celeste-claro); }
+  .chat-when { font-family: var(--display); font-weight: 700; font-size: 28px; margin-bottom: 4px; }
+  .chat .bubble { font-size: 21px; padding: 12px 18px; background: var(--neblina); }
+  .chat.despues .bubble { background: var(--papel); }
+  .chat .bubble.mine { background: var(--celeste-claro); }
+  .plan { align-self: flex-start; width: 100%; background: var(--neblina); border-radius: 6px 24px 24px 24px; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; font-size: 20px; line-height: 1.3; }
+  .plan-row { display: flex; gap: 12px; align-items: center; }
+  .plan-row svg { width: 34px; height: 34px; flex-shrink: 0; }
+  .price { display: flex; justify-content: space-between; font-size: 19px; }
 
   /* 5 · demo */
   .demo { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 88px; align-items: center; height: 100%; }
@@ -96,7 +111,7 @@
   .screen.is-live .screen-empty { display: none; }
   .live-pill { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--papel); color: var(--puerto-hondo); font-size: 15px; font-weight: 700; z-index: 2; }
   .live-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--puerto); }
-  .screen.is-live + .live-pill, .phone.is-live .live-pill { display: inline-flex; }
+  .phone.is-live .live-pill { display: inline-flex; }
   .demo-side { display: flex; flex-direction: column; gap: 28px; }
   .controls { display: flex; flex-wrap: wrap; gap: 14px; }
   .btn { min-height: 60px; padding: 0 30px; border-radius: 999px; font-size: 22px; font-weight: 600; border: 2px solid var(--puerto); background: var(--papel); color: var(--puerto); transition: background 200ms var(--ease), color 200ms var(--ease); }
@@ -105,32 +120,36 @@
   .btn.primary:hover { background: var(--puerto-hondo); }
   .btn[hidden] { display: none; }
   .status { font-size: 22px; line-height: 1.45; min-height: 64px; max-width: 760px; }
-  .status.is-error { color: #8A3B26; }
-  .planb { display: flex; flex-direction: column; gap: 14px; padding: 26px 30px; border-radius: 32px 26px 36px 28px; background: var(--papel); max-width: 760px; transition: box-shadow 200ms var(--ease); }
+  .status.is-error { color: var(--ladrillo); }
+  .planb { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 22px 28px; border-radius: 32px 26px 36px 28px; background: var(--papel); max-width: 760px; transition: box-shadow 200ms var(--ease); }
   .planb.is-urgent { box-shadow: 0 0 0 3px var(--amarillo); }
-  .planb p { font-size: 20px; line-height: 1.45; color: var(--tinta-suave); }
+  .planb p { font-size: 20px; line-height: 1.4; color: var(--tinta-suave); flex: 1 1 260px; }
 
   /* 6 · evidence */
-  .evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 48px; flex-grow: 1; }
-  .ev { display: flex; flex-direction: column; gap: 10px; padding-top: 22px; border-top: 2px solid var(--linea); }
-  .ev h3 { font-size: 28px; }
-  .ev p { font-size: 21px; line-height: 1.45; }
+  .evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 56px; flex-grow: 1; }
+  .ev { display: flex; flex-direction: column; gap: 14px; }
+  .ev h3 { font-size: 32px; }
   .ev .source { margin-top: auto; }
-  .ev.hint h3::after { content: ' (una pista, no una prueba)'; font-family: var(--texto); font-weight: 500; font-size: 19px; color: var(--tinta-suave); letter-spacing: 0; }
+  .ev-hint { font-family: var(--texto); font-weight: 500; font-size: 18px; color: var(--tinta-suave); letter-spacing: 0; }
+  .bars { display: flex; flex-direction: column; gap: 10px; }
+  .bar { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 16px; align-items: center; font-size: 20px; }
+  .bar-track { height: 34px; display: flex; align-items: center; }
+  .bar-fill { height: 100%; border-radius: 6px 18px 18px 6px; background: #C6CDC9; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .bar-fill.hi { background: var(--amarillo); }
+  .reset { display: flex; align-items: center; gap: 18px; }
+  .reset svg { width: 100%; height: 110px; }
 
   /* 7 · out of scope */
-  .out { display: flex; flex-direction: column; gap: 4px; max-width: 1240px; }
-  .out-row { display: grid; grid-template-columns: 430px minmax(0, 1fr); gap: 40px; padding: 18px 0; border-bottom: 2px solid var(--linea); align-items: baseline; }
-  .out-row strong { font-family: var(--display); font-weight: 700; font-size: 30px; letter-spacing: -0.01em; }
-  .out-row span { font-size: 22px; line-height: 1.45; color: var(--tinta-suave); }
-  .closing { font-family: var(--display); font-weight: 700; font-size: 44px; letter-spacing: -0.02em; line-height: 1.1; margin-top: auto; max-width: 1200px; }
+  .nope { display: flex; flex-wrap: wrap; gap: 18px; max-width: 1280px; }
+  .nope span { font-family: var(--display); font-weight: 700; font-size: 34px; padding: 16px 30px; border-radius: 999px; background: var(--papel); text-decoration: line-through; text-decoration-color: var(--ladrillo); text-decoration-thickness: 4px; color: var(--tinta-suave); }
+  .nope span.next { text-decoration: none; border: 2.5px dashed var(--puerto); background: transparent; color: var(--puerto-hondo); }
+  .closing { font-family: var(--display); font-weight: 700; font-size: 60px; letter-spacing: -0.025em; line-height: 1.05; margin-top: auto; max-width: 1080px; }
 
   /* deck chrome */
   .chrome { position: fixed; right: 20px; bottom: 16px; display: flex; align-items: center; gap: 8px; z-index: 10; font-size: 15px; color: var(--tinta-suave); }
   .chrome button { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--linea); background: var(--papel); color: var(--puerto); display: grid; place-items: center; }
   .chrome svg { width: 20px; height: 20px; }
   .count { min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   @media (prefers-reduced-motion: reduce) {
     .slide, .slide.is-active { transition: none; transform: none; }
@@ -154,6 +173,11 @@
       <circle cx="159" cy="130" r="3.5" fill="#1E2321"/>
     </g>
     <path id="mancha" d="M100 14 C160 10 192 60 188 108 C184 160 140 192 92 188 C44 184 10 150 14 100 C18 52 48 18 100 14 Z"/>
+    <g id="taper">
+      <rect x="6" y="20" width="52" height="34" rx="8" fill="#FFFFFF" stroke="#9CC3C9" stroke-width="3"/>
+      <rect x="4" y="12" width="56" height="12" rx="5" fill="#9CC3C9"/>
+      <circle cx="22" cy="38" r="4" fill="#F2CF6B"/><circle cx="34" cy="40" r="4" fill="#7FA35A"/><circle cx="44" cy="36" r="4" fill="#E0644A"/>
+    </g>
   </defs>
 </svg>
 
@@ -163,90 +187,126 @@
     <!-- 1 · Antonia -->
     <section class="slide" aria-label="Antonia: su semana">
       <svg class="blob" viewBox="0 0 200 200" style="right: -140px; top: -180px; width: 560px; height: 560px" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".2"/></svg>
-      <h1>Antonia, 23 años</h1>
-      <p class="lead">Estudia en Valparaíso y vive con dos amigas. Tiene una pauta de la nutricionista de la U y la cumple al pie de la letra… hasta el viernes.</p>
+      <div style="display: flex; align-items: baseline; gap: 32px; flex-wrap: wrap">
+        <h1>Antonia</h1>
+        <p class="lead">23 años, estudiante, Valparaíso</p>
+      </div>
       <div class="week">
         <div class="day">
           <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#DCEEEF"/></svg><span class="day-value">100%</span></div>
           <span class="day-name">lunes</span>
-          <span class="day-text">retoma la pauta al pie de la letra</span>
+          <span class="day-text">la pauta al pie de la letra</span>
         </div>
         <div class="day">
           <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#DCEEEF"/></svg><span class="day-value">4/4</span></div>
           <span class="day-name">jueves</span>
-          <span class="day-text">cuarto día seguido cumpliendo</span>
+          <span class="day-text">cuatro días perfectos</span>
         </div>
         <div class="day">
           <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F7E9DF"/></svg><span class="day-value">02:40</span></div>
           <span class="day-name">viernes</span>
-          <span class="day-text">carrete, y un completo a la salida</span>
+          <span class="day-text">carrete y completo</span>
         </div>
         <div class="day">
           <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F7E9DF"/></svg><span class="day-value">2×</span></div>
           <span class="day-name">sábado</span>
-          <span class="day-text">delivery al almuerzo y a la comida, con caña</span>
+          <span class="day-text">delivery con caña</span>
         </div>
         <div class="day">
-          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".55"/></svg><span class="day-value" style="font-size: 40px">ciclo 10</span></div>
+          <div class="day-blob"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".6"/></svg><span class="day-value" style="font-size: 44px">ciclo 10</span></div>
           <span class="day-name">domingo</span>
           <span class="day-text">«el lunes parto de nuevo»</span>
         </div>
       </div>
-      <p class="source">Ficha oficial del caso 05, Hackatón Señales.</p>
     </section>
 
     <!-- 2 · Por qué le pasa -->
     <section class="slide" aria-label="Por qué le pasa">
-      <svg class="blob" viewBox="0 0 200 200" style="left: -200px; bottom: -260px; width: 640px; height: 640px" aria-hidden="true"><use href="#mancha" fill="#7FBFC4" opacity=".18"/></svg>
       <p class="quote">«Ya la embarré con la semana, el lunes parto de nuevo.»</p>
-      <p class="lead">No le falta disciplina: le sobra. Un desliz anula la semana entera, y el lunes limpia la cuenta para volver a la vara perfecta.</p>
-      <div class="two">
-        <p><strong>Lo que dispara el atracón es sentir que rompió el plan,</strong> no lo que comió. Quienes creen que se pasaron comen más después.<br><span class="source">Polivy, Herman y Deo, Appetite, 2010.</span></p>
-        <p><strong>Todo lo que existe sirve de lunes a jueves.</strong> Apps de recetas, contadores de comida, la pauta en PDF: ninguno tiene un plan para el fin de semana, que es justo donde se cae.</p>
+      <div class="timeline">
+        <div class="covers">
+          <div class="cover ok">apps de recetas · contadores · la pauta en PDF</div>
+          <div class="cover none">sin plan</div>
+        </div>
+        <div class="days7" aria-hidden="true">
+          <div class="d7 on">L</div><div class="d7 on">M</div><div class="d7 on">M</div><div class="d7 on">J</div>
+          <div class="d7 off">V</div><div class="d7 off">S</div><div class="d7 off">D</div>
+        </div>
+        <svg viewBox="0 0 1376 90" style="width: 100%; height: 90px" role="img" aria-label="El domingo vuelve al lunes: vuelta a cero">
+          <path d="M1280 6 C1280 70 1200 78 690 78 C180 78 96 70 96 14" fill="none" stroke="#B24A2E" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+          <path d="M82 30 L96 10 L110 30" fill="none" stroke="#B24A2E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="690" y="66" text-anchor="middle" font-family="Figtree, sans-serif" font-weight="700" font-size="24" fill="#B24A2E">vuelta a cero</text>
+        </svg>
       </div>
     </section>
 
     <!-- 3 · Lo vivimos -->
     <section class="slide" aria-label="Lo vivimos">
-      <svg class="blob" viewBox="0 0 200 200" style="right: -120px; bottom: -200px; width: 560px; height: 560px" aria-hidden="true"><use href="#mancha" fill="#F6C445" opacity=".22"/></svg>
-      <h2>Esto no lo sacamos de la ficha. Lo vivimos.</h2>
-      <div class="story">
-        <div class="story-text">
-          <p>Benja estudió lejos de su ciudad, con una mesada. El fin de semana los amigos lo esperaban.</p>
-          <p>Aunque tuviera táperes en el refri, pedía algo rico: una hamburguesa de $10.000 que eran varios almuerzos.</p>
+      <h2>Lo vivimos</h2>
+      <div class="burger">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 28 C8 12 56 12 56 28 Z" fill="#E3A857"/><rect x="6" y="30" width="52" height="7" rx="3.5" fill="#7FA35A"/><rect x="8" y="37" width="48" height="8" rx="4" fill="#8A4B2E"/><path d="M8 47 L56 47 C56 55 8 55 8 47 Z" fill="#E3A857"/></svg>
+        <strong>$10.000 =</strong>
+        <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#taper"/></svg>
+        <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#taper"/></svg>
+        <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#taper"/></svg>
+        <span>Benja, estudiando lejos de casa, con mesada</span>
+      </div>
+      <div class="vs">
+        <div class="chart">
+          <h3>Con la plata</h3>
+          <svg viewBox="0 0 600 260" role="img" aria-label="La mesada baja con un gasto de más y sigue">
+            <line x1="20" y1="236" x2="580" y2="236" stroke="#DCE1DD" stroke-width="3"/>
+            <path d="M20 40 L200 80 L230 136 L400 172 L580 210" fill="none" stroke="#1F5F73" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="230" cy="136" r="12" fill="#F6C445"/>
+            <text x="250" y="118" font-family="Figtree, sans-serif" font-size="22" font-weight="600" fill="#1E2321">un gasto de más</text>
+          </svg>
+          <p class="what">Ajustas y sigues. Nadie bota la mesada.</p>
         </div>
-        <div class="finding">
-          <h3>Lo que descubrimos</h3>
-          <div class="row"><span class="tag" style="color: var(--puerto)">la plata</span><span>Si gastas de más un día, nadie bota la mesada. Ajustas y sigues.</span></div>
-          <div class="row"><span class="tag" style="color: #8A3B26">la comida</span><span>Un sábado de delivery «arruina» la semana completa.</span></div>
-          <p style="font-size: 24px; line-height: 1.4">Con la plata nadie piensa en blanco o negro. Con la comida, sí. Y las rachas que vuelven a cero lo empeoran.</p>
+        <div class="chart">
+          <h3>Con la comida</h3>
+          <svg viewBox="0 0 600 260" role="img" aria-label="Cuatro días suben y el fin de semana cae a cero, tres semanas seguidas">
+            <line x1="20" y1="236" x2="580" y2="236" stroke="#DCE1DD" stroke-width="3"/>
+            <path d="M20 236 L140 60 L160 236 L200 236 L320 60 L340 236 L380 236 L500 60 L520 236 L580 236" fill="none" stroke="#B24A2E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="150" y="40" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">ciclo 8</text>
+            <text x="330" y="40" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">ciclo 9</text>
+            <text x="510" y="40" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">ciclo 10</text>
+          </svg>
+          <p class="what">Un sábado «arruina» la semana entera.</p>
         </div>
       </div>
     </section>
 
     <!-- 4 · Ami -->
     <section class="slide" aria-label="Ami">
-      <div class="ami-head">
-        <svg viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
-        <div style="display: flex; flex-direction: column; gap: 10px">
+      <div class="ami">
+        <div class="ami-id">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
           <h1>Ami</h1>
-          <p class="lead" style="font-size: 26px">Una amiga en el WhatsApp que Antonia ya usa todos los días. No es una app más ni una coach.</p>
+          <p class="lead" style="font-size: 26px">una amiga en su WhatsApp</p>
         </div>
-      </div>
-      <div class="moments">
-        <div class="moment antes">
-          <h3>Antes: el jueves deja el sábado decidido</h3>
-          <ol>
-            <li>Antonia le manda una foto del refri y la despensa.</li>
-            <li>Ami arma el sábado: un antojo por delivery y una casera rica de 10 minutos con lo que ya tiene.</li>
-            <li>Le dice qué le falta y cuánto cuesta, comparado con pedir.</li>
-          </ol>
-          <p class="small">El sábado a las 15:00, con caña, Ami le escribe con la receta paso a paso. Nadie decide con caña.</p>
+
+        <div class="chat antes">
+          <span class="chat-when">jueves, antes</span>
+          <div class="bubble">¿sales este finde? mándame una foto del refri</div>
+          <div class="bubble mine" style="padding: 8px">
+            <svg viewBox="0 0 240 150" role="img" aria-label="Foto del refri (ilustración)" style="width: 220px; height: 138px; display: block; border-radius: 16px"><rect width="240" height="150" fill="#E4EBEC"/><rect x="10" y="8" width="220" height="134" rx="8" fill="#F7FAFA"/><line x1="14" y1="74" x2="226" y2="74" stroke="#C9D3D5" stroke-width="3"/><circle cx="40" cy="56" r="10" fill="#FBF3E6" stroke="#D9C6A5" stroke-width="2"/><circle cx="62" cy="56" r="10" fill="#FBF3E6" stroke="#D9C6A5" stroke-width="2"/><ellipse cx="110" cy="50" rx="14" ry="18" fill="#7FA35A"/><circle cx="110" cy="54" r="6" fill="#8A5A3B"/><circle cx="160" cy="56" r="11" fill="#E0644A"/><circle cx="184" cy="58" r="10" fill="#E0644A"/><path d="M40 126 L96 126 L96 96 Z" fill="#F2CF6B"/><rect x="120" y="98" width="70" height="30" rx="6" fill="#EFE2C4"/></svg>
+          </div>
+          <div class="plan">
+            <div class="plan-row"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#DCEEEF"/><path d="M11 21 Q20 30 29 21" fill="none" stroke="#1F5F73" stroke-width="2.6" stroke-linecap="round"/><line x1="10" y1="19" x2="30" y2="19" stroke="#1F5F73" stroke-width="2.6" stroke-linecap="round"/></svg><span>quesadillas en 10 min, con lo que tienes</span></div>
+            <div class="plan-row"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#FCEBC0"/><path d="M20 10 C24 15 27 18 27 22 C27 26 24 29 20 29 C16 29 13 26 13 22 C13 18 16 15 20 10 Z" fill="none" stroke="#8A5A12" stroke-width="2.4"/></svg><span>sushi por delivery: tu antojo</span></div>
+            <div class="price"><span>casera</span><strong>+$690</strong></div>
+            <div class="price" style="color: var(--tinta-suave)"><span>la misma por delivery</span><span>~$9.800</span></div>
+            <span class="source">precios de ejemplo</span>
+          </div>
         </div>
-        <div class="moment despues">
-          <h3>Después: si el plan se rompe</h3>
+
+        <div class="chat despues">
+          <span class="chat-when">si el plan se rompe</span>
+          <div class="bubble mine">ya la embarré con la semana</div>
           <div class="bubble">no la embarraste, comiste. seguimos desde tu próxima comida 🫶</div>
-          <div class="esperanza"><strong>[Esperanza]</strong> Cómo acompaña Ami cuando el plan se rompe: qué siente Antonia en ese momento, qué le dice Ami primero y cuándo deriva a la nutricionista o a Salud Responde.</div>
+          <div class="bubble">mañana, desayuno con el pan y la palta que te quedan</div>
+          <div class="bubble mine">ya po. gracias ami</div>
+          <div class="esperanza" style="margin-top: auto"><strong>[Esperanza]</strong> cómo acompaña Ami y cuándo deriva.</div>
         </div>
       </div>
     </section>
@@ -260,24 +320,22 @@
             <video id="mirror" autoplay muted playsinline aria-label="Pantalla del iPhone en vivo"></video>
             <div class="screen-empty">
               <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#ami-b"/></svg>
-              <p>Aquí se ve el iPhone en vivo, con el chat de Ami en WhatsApp.</p>
+              <p>Aquí se ve el iPhone en vivo.</p>
             </div>
           </div>
           <span class="live-pill">en vivo</span>
         </div>
         <div class="demo-side">
           <h2>Demo en vivo</h2>
-          <p class="lead" style="font-size: 26px">El WhatsApp de Antonia, tal cual. Jueves: la foto del refri. Sábado: la caña. Y qué pasa cuando el plan se rompe.</p>
           <div class="controls">
             <button class="btn primary" id="connect" type="button">Conectar iPhone</button>
             <button class="btn" id="reconnect" type="button" hidden>Cambiar ventana</button>
             <button class="btn" id="stop" type="button" hidden>Detener</button>
           </div>
-          <p class="status" id="status" role="status" aria-live="polite">Elige la ventana «Duplicación del iPhone» o la de QuickTime Player.</p>
+          <p class="status" id="status" role="status" aria-live="polite">Elige la ventana de QuickTime Player (o la de «Duplicación del iPhone»).</p>
           <div class="planb" id="planb">
-            <h3 style="font-size: 26px">Plan B</h3>
-            <p>Si el iPhone no conecta, la misma Ami corre en la web, con un reloj para adelantar al sábado.</p>
-            <div><button class="btn" id="open-web" type="button">Abrir la demo web</button></div>
+            <p><strong>Plan B:</strong> la misma Ami en la web, con un reloj para adelantar al sábado.</p>
+            <button class="btn" id="open-web" type="button">Abrir la demo web</button>
           </div>
         </div>
       </div>
@@ -285,43 +343,57 @@
 
     <!-- 6 · Por qué cambiaría -->
     <section class="slide" aria-label="Por qué cambiaría">
-      <h2>Por qué esta vez sí cambiaría</h2>
+      <h2>Por qué esta vez sí</h2>
       <div class="evidence">
         <div class="ev">
           <h3>Un finde no borra la semana</h3>
-          <p>Al formar un hábito, saltarse una oportunidad no afectó de forma importante el avance. Por eso Ami nunca vuelve a cero.</p>
-          <p class="source">Lally y otros, European Journal of Social Psychology, 2010.</p>
+          <div class="reset">
+            <svg viewBox="0 0 600 110" role="img" aria-label="Saltarse un día no devuelve el hábito a cero: la curva sigue subiendo">
+              <path d="M10 100 C120 90 200 60 300 46 C400 34 500 22 590 16" fill="none" stroke="#1F5F73" stroke-width="7" stroke-linecap="round"/>
+              <circle cx="300" cy="46" r="12" fill="#FFFFFF" stroke="#B24A2E" stroke-width="4"/>
+              <text x="300" y="88" text-anchor="middle" font-family="Figtree, sans-serif" font-size="20" font-weight="600" fill="#1E2321">un día saltado</text>
+            </svg>
+          </div>
+          <p class="source">Lally y otros, 2010: saltarse una oportunidad no afectó de forma importante el hábito.</p>
         </div>
         <div class="ev">
-          <h3>Sumar rinde más que prohibir</h3>
-          <p>Decidir por adelantado ayuda casi el doble a sumar algo rico y casero (d = 0,51) que a evitar algo (d = 0,29). Ami no prohíbe el delivery: suma una casera. Los autores advierten que el efecto puede estar inflado.</p>
-          <p class="source">Adriaanse y otros, Appetite, 2011.</p>
+          <h3>Sumar rinde casi el doble que evitar</h3>
+          <div class="bars">
+            <div class="bar"><span>sumar una casera</span><div class="bar-track"><div class="bar-fill hi" style="width: 100%">d = 0,51</div></div></div>
+            <div class="bar"><span>evitar el delivery</span><div class="bar-track"><div class="bar-fill" style="width: 57%">d = 0,29</div></div></div>
+          </div>
+          <p class="source">Adriaanse y otros, 2011, planificar en alimentación. Los autores advierten que puede estar inflado.</p>
         </div>
         <div class="ev">
-          <h3>Sin culpa se come mejor después</h3>
-          <p>Universitarias comieron un alimento «prohibido». Con un mensaje de autocompasión, las más restrictivas comieron menos después. Es el «seguimos desde tu próxima comida».</p>
-          <p class="source">Adams y Leary, Journal of Social and Clinical Psychology, 2007.</p>
+          <h3>Sin culpa, se come mejor después</h3>
+          <div class="bubble" style="font-size: 22px">seguimos desde tu próxima comida</div>
+          <p class="source">Adams y Leary, 2007: con autocompasión tras un desliz, las universitarias más restrictivas comieron menos después.</p>
         </div>
-        <div class="ev hint">
-          <h3>Antojos limitados</h3>
-          <p>Una meta con pocos días de reserva definidos de antemano se cumplió más (52,5%) que la rígida (21,1%) y que la flexible sin límite (33,9%). La tarea era digital y de 7 días, no de comida.</p>
-          <p class="source">Sharif y Shu, 2017.</p>
+        <div class="ev">
+          <h3>Antojos limitados <span class="ev-hint">(una pista, no una prueba)</span></h3>
+          <div class="bars">
+            <div class="bar"><span>reserva limitada</span><div class="bar-track"><div class="bar-fill hi" style="width: 100%">52,5%</div></div></div>
+            <div class="bar"><span>flexible sin límite</span><div class="bar-track"><div class="bar-fill" style="width: 64.6%">33,9%</div></div></div>
+            <div class="bar"><span>rígida</span><div class="bar-track"><div class="bar-fill" style="width: 40.2%">21,1%</div></div></div>
+          </div>
+          <p class="source">Sharif y Shu, 2017: cumplieron la meta. La tarea era digital y de 7 días, no de comida.</p>
         </div>
       </div>
-      <p class="small">Hablamos de romper el ciclo de culpa y de volver a partir de cero, no de resultados de peso.</p>
     </section>
 
     <!-- 7 · Qué dejamos fuera -->
     <section class="slide" aria-label="Qué dejamos fuera a propósito">
-      <svg class="blob" viewBox="0 0 200 200" style="right: -60px; top: 120px; width: 380px; height: 380px" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
+      <svg class="blob" viewBox="0 0 200 200" style="right: 60px; bottom: 80px; width: 340px; height: 340px" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#F7E9DF"/><use href="#ami-b"/></svg>
       <h2>Lo que dejamos fuera, a propósito</h2>
-      <div class="out">
-        <div class="out-row"><strong>Rachas</strong><span>Una racha que vuelve a cero es el «ya la embarré» hecho app.</span></div>
-        <div class="out-row"><strong>Contar calorías</strong><span>Ami revisa la pauta por dentro, pero le habla con palabras. Ni números ni peso.</span></div>
-        <div class="out-row"><strong>Pedirle que no salga</strong><span>Quiere sentirse bien sin ser «la fome que no sale». El carrete es parte del plan.</span></div>
-        <div class="out-row"><strong>Reemplazar a la nutricionista</strong><span>La pauta es de ella. Ami deriva cuando corresponde: a la nutricionista, a Salud Responde (600 360 7777) o al *4141.</span></div>
-        <div class="out-row"><strong>Pedir delivery desde el chat</strong><span>Es el siguiente paso, con una alianza. Hoy Ami deja el antojo decidido y Antonia lo pide como siempre.</span></div>
+      <div class="nope">
+        <span>rachas</span>
+        <span>calorías</span>
+        <span>peso</span>
+        <span>«no salgas»</span>
+        <span>reemplazar a la nutricionista</span>
+        <span class="next">pedir delivery desde el chat: el siguiente paso, con una alianza</span>
       </div>
+      <p class="source" style="font-size: 20px">Ami deriva cuando corresponde: a su nutricionista, a Salud Responde (600 360 7777) o al *4141.</p>
       <p class="closing">Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.</p>
     </section>
 
@@ -391,7 +463,7 @@
   window.addEventListener('resize', fit);
   window.addEventListener('hashchange', () => show(fromHash()));
 
-  // Live iPhone mirror: captures the iPhone Mirroring (or QuickTime) window.
+  // Live iPhone mirror: captures the QuickTime (or iPhone Mirroring) window.
   const video = document.getElementById('mirror');
   const screen = document.getElementById('screen');
   const phone = document.getElementById('phone');
@@ -400,7 +472,7 @@
   const connectBtn = document.getElementById('connect');
   const reconnectBtn = document.getElementById('reconnect');
   const stopBtn = document.getElementById('stop');
-  const idleText = 'Elige la ventana «Duplicación del iPhone» o la de QuickTime Player.';
+  const idleText = 'Elige la ventana de QuickTime Player (o la de «Duplicación del iPhone»).';
   let stream = null;
 
   function setStatus(text, isError) {
@@ -429,7 +501,7 @@
     if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
       setStatus(window.isSecureContext
         ? 'Este navegador no puede compartir una ventana. Abre el pitch en Chrome, o usa el plan B.'
-        : 'Para compartir una ventana, abre el pitch desde localhost (npx serve pitch), no como archivo. Mientras, usa el plan B.', true);
+        : 'Para compartir una ventana, abre el pitch desde localhost (npx serve pitch -l 4000), no como archivo. Mientras, usa el plan B.', true);
       return;
     }
     try {
