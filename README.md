@@ -2,7 +2,7 @@
 
 **Hackatón Señales · Caso 05, Antonia** · Equipo: Benja y Esperanza · 23 y 24 de octubre de 2026
 
-Ami es una amiga por WhatsApp para Antonia. El jueves, cuando ella está lúcida, deja decidido el sábado: un antojo y una comida casera rica hecha con lo que tiene en el refri. Si el plan se rompe, la acompaña sin juzgar, para que el fin de semana deje de sentirse como una caída.
+Ami es una amiga por WhatsApp para Antonia. El jueves, con calma, antes del finde, deja decidido el sábado: un antojo y una comida casera rica hecha con lo que tiene en el refri. Si el plan se rompe, la acompaña sin juzgar, para que el fin de semana deje de sentirse como una caída.
 
 - **Landing:** https://hola-ami.vercel.app
 - **Diseño de Ami** (avatar, voz y mockups): https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
@@ -18,14 +18,15 @@ Benja lo vivió: estudió lejos de su ciudad, con la mesada justa, y los fines d
 ## Por qué esto y no otra cosa
 
 - **Atacamos el sábado y el domingo,** porque es donde se cae, y no la semana, que ya funciona.
-- **Decidir antes:** la decisión del sábado se toma el jueves, no con caña. Hay evidencia de que decidir por adelantado ayuda, sobre todo para *sumar* algo (Adriaanse y otros, 2011).
-- **Acompañar después:** la autocompasión después de un desliz frena el «qué más da» (Adams y Leary, 2007). Y saltarse un día no borra un hábito (Lally y otros, 2010).
+- **Decidir antes:** la decisión del sábado se toma el jueves, no con caña. Hay evidencia de que decidir por adelantado ayuda, sobre todo para *sumar* algo.
+- **Acompañar después:** la autocompasión después de un desliz frena el «qué más da». Y saltarse un día no borra un hábito (fuentes en `benja/investigacion-antonia.md`).
 - **WhatsApp,** porque ahí ya vive Antonia y ahí se arman sus planes. Una app más la abandona en una semana, como ya le pasó.
 
 El detalle, con todas las fuentes, está en [`benja/investigacion-antonia.md`](benja/investigacion-antonia.md).
 
 ## Qué dejamos fuera, a propósito
 
+- **Decirle cuántos antojos tiene:** cualquier cuota es una vara más con la que «pasarse».
 - **Rachas, puntajes o medidas de progreso:** cualquier número se vuelve una vara para alguien que piensa en todo o nada.
 - **Contar calorías, compensar o hablar de peso.** Ami revisa los nutrientes solo por dentro y nunca muestra un número.
 - **Pedirle que deje de salir.**
