@@ -261,4 +261,18 @@ No toqué los títulos ni las notas que no son burbujas, como «El lunes ya no p
 
 **3. Lo que no va**
 - No muevas WhatsApp ni el webhook de Twilio a tu cuenta. Es la noche antes, y si se corta la cadena de WhatsApp no alcanzamos a arreglarla.
-- No despliegues el pitch ni la landing por ahora.
+- No despliegues la landing por ahora (el pitch sí, ver abajo).
+
+### 2026-10-23 20:45 · para Esperanza (corrección del encargo anterior)
+
+Benja corrige: **en tu Vercel van el agente y el pitch.** La landing no.
+
+**4. Despliega `pitch/` en tu Vercel**
+- Es estático (HTML, sin build ni variables). Dentro de `pitch/` corre `npx vercel link`, crea un proyecto nuevo (por ejemplo `amy-pitch`) y después `npx vercel deploy --prod`. `pitch/vercel.json` ya trae la configuración.
+- Prueba en el dominio que te dé:
+  - que se vean las 8 slides;
+  - que el control remoto (`remoto.html`, con el QR) mueva las slides desde un celular;
+  - que en la slide 5 el botón «¡Veamos la demo!» abra el diálogo para compartir pantalla. Funciona porque el sitio es HTTPS.
+- La portada del final enlaza a `hola-ami.vercel.app` (la landing de Benja). Déjalo así.
+- **Cuándo desplegarlo:** una vez, cuando el pitch esté listo, y otra solo si cambia algo importante. Las reglas de la sección 2 valen igual: avisa aquí antes de desplegar.
+- Anota aquí el dominio del pitch y el del agente cuando los tengas.
