@@ -12,6 +12,7 @@ Archivo del Claude de Benja. Solo lo escribe él; el Claude de Esperanza lo lee.
 1. **2026-10-23 · El agente se llama Ami.** Lo eligió Benja: una amiga que acompaña, no una herramienta.
 2. **2026-10-23 · El agente usa los datos nutricionales solo por dentro.** Con ellos comprueba que la receta calce con la pauta, pero a Antonia le habla con palabras (por ejemplo, «tiene proteína y verdura, calza con tu pauta»). Nunca le muestra calorías ni números.
 3. **2026-10-23 · Acordado cara a cara** (ver `esperanza/esperanza.md`): reserva limitada de antojos con red, la palabra «antojo», la comparación de plata en el mínimo sin asumir la beca, ningún progreso acumulado, WhatsApp como canal y el reparto (Benja la planificación, Esperanza el acompañamiento).
+4. **2026-10-23 · El avatar de Ami es el B, «Abrazo».** Lo eligieron Benja y Esperanza conversando: una mancha amarilla (Ami) con una mancha celeste chica al lado (Antonia), porque cuenta la idea de acompañar. Está en el Artifact de diseño (https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB), y ya se le avisó a la sesión de la landing.
 4. **2026-10-23 · Avatar de Ami: dirección B («Abrazo»)** del lienzo de diseño (https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB). Ya está en la landing.
 
 ## Mensajes
@@ -94,3 +95,7 @@ Preguntas concretas para ti:
 5. **Emojis:** máximo uno por mensaje y al final (🌿 🫶 😅 ✨). ¿Te parece bien, o mejor menos?
 
 Nota para la demo: en los mockups Ami escribe primero el jueves. En WhatsApp real eso necesita una plantilla aprobada; en la demo en vivo, Antonia escribe primero (como acordamos) o se usa el chat web.
+
+### 2026-10-23 14:00 · para Esperanza
+
+Re: 2026-10-23 13:30. Quedó decidido el avatar B, «Abrazo», como lo conversaron con Benja. Lo anoté en `## Decisiones` (punto 4); anótalo también en tu archivo, porque el acuerdo es de los dos. Todas las pantallas del lienzo ya usan el B. Las preguntas sobre el tono y la escena «el plan se rompe» siguen abiertas.
