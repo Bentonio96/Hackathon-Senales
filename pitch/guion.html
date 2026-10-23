@@ -43,6 +43,9 @@
   th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--linea); vertical-align: top; }
   th { font-family: var(--display); font-weight: 700; background: var(--amarillo); }
   tr:last-child td { border-bottom: 0; }
+  /* Who speaks each part: a tag right under the slide title. */
+  p.quien { margin: -4px 0 12px; }
+  p.quien strong { display: inline-block; background: var(--celeste); color: #163f4d; border-radius: 999px; padding: 4px 14px; font-size: 15px; }
   .error { background: var(--superficie); border-radius: 18px; padding: 18px 22px; }
   @media print { html { background: #fff; } blockquote, table { border: 1px solid var(--linea); } }
 </style>
@@ -63,6 +66,9 @@
     .then((res) => { if (!res.ok) throw new Error(res.status); return res.text(); })
     .then((md) => {
       destino.innerHTML = marked.parse(md);
+      destino.querySelectorAll('p').forEach((p) => {
+        if (/^(Lo dice|Maneja)/.test(p.textContent)) p.classList.add('quien');
+      });
       // Wide tables scroll inside their own box on a phone.
       destino.querySelectorAll('table').forEach((t) => {
         const caja = document.createElement('div');

@@ -184,6 +184,19 @@
   .chrome svg { width: 20px; height: 20px; }
   .count { min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
 
+  /* Phone remote overlay (M) */
+  .mando { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; background: rgb(30 35 33 / .35); padding: 16px; }
+  .mando[hidden] { display: none; }
+  .mando-caja { display: flex; flex-wrap: wrap; align-items: center; gap: 32px; max-width: 760px; background: var(--superficie); border-radius: 36px 30px 40px 32px; padding: 32px; }
+  .mando-qr { width: 240px; height: 240px; flex-shrink: 0; background: #fff; }
+  .mando-qr svg { width: 100%; height: 100%; display: block; }
+  .mando-texto { flex: 1 1 280px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .mando-texto h2 { font-family: var(--display); font-weight: 800; font-size: 32px; letter-spacing: -0.02em; line-height: 1.05; }
+  .mando-texto p { margin: 0; font-size: 17px; line-height: 1.45; color: var(--tinta-suave); }
+  #mando-link { font-size: 14px; color: var(--accion); word-break: break-all; }
+  .mando-estado { font-weight: 700; color: var(--tinta) !important; }
+  .mando-estado.ok { color: var(--accion-fuerte) !important; }
+  .mando .btn { min-height: 48px; font-size: 18px; padding: 0 22px; }
   @media (prefers-reduced-motion: reduce) {
     .slide, .slide.is-active, .btn, .chrome { transition: none; }
     .slide.is-active .presenta-av, .slide.is-active .presenta-hola { animation: none; }
@@ -409,8 +422,22 @@
   <button type="button" id="prev" aria-label="Slide anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <span class="count" id="count" aria-live="polite">1 / 8</span>
   <button type="button" id="next" aria-label="Slide siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button type="button" id="mando-boton" aria-label="Control remoto desde el celular (M)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 17.5 h2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   <button type="button" id="fullscreen" aria-label="Pantalla completa (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 V4 H9 M15 4 H20 V9 M20 15 V20 H15 M9 20 H4 V15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </nav>
+
+<div class="mando" id="mando" hidden role="dialog" aria-modal="false" aria-labelledby="mando-titulo">
+  <div class="mando-caja">
+    <div class="mando-qr" id="mando-qr" aria-hidden="true"></div>
+    <div class="mando-texto">
+      <h2 id="mando-titulo">Pasa las slides desde tu celular</h2>
+      <p>Escanea el código con la cámara del celular. Funciona en cualquier red con internet.</p>
+      <a id="mando-link" href="#" target="_blank" rel="noopener"></a>
+      <p class="mando-estado" id="mando-estado" role="status">Preparando…</p>
+      <button type="button" class="btn" id="mando-cerrar">Cerrar (M)</button>
+    </div>
+  </div>
+</div>
 
 <script>
   // --- Illustrations, after the landing (Cerro.tsx, Cierre.tsx) ---------------
@@ -678,29 +705,131 @@
 
   connectBtn.addEventListener('click', connectMirror);
 
-  // --- Phone remote: commands arrive from servidor.mjs over Server-Sent Events --
-  // Opened with npx serve or as a file there is no /eventos: the remote just stays off.
-  let remotoConectado = false;
+  // --- Phone remote --------------------------------------------------------
+  // With servidor.mjs (on the Mac) commands arrive over Server-Sent Events.
+  // Without it (published on Vercel) the phone connects straight to this page
+  // over WebRTC (PeerJS): M shows a QR with the link. Only slide commands travel.
+  let remotoConectado = false;   // server mode
+  let conexionesPeer = [];       // WebRTC mode
+
+  function aplicarComando(accion) {
+    if (accion === 'siguiente') show(current + 1);
+    else if (accion === 'anterior') show(current - 1);
+    else if (accion === 'inicio') show(0);
+  }
+
+  function estadoActual() {
+    return { n: current + 1, total: slides.length, titulo: slides[current].getAttribute('aria-label') };
+  }
 
   function reportarEstado() {
-    if (!remotoConectado) return;
-    fetch('/estado', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ n: current + 1, total: slides.length, titulo: slides[current].getAttribute('aria-label') }),
-    }).catch(() => {});
+    if (remotoConectado) {
+      fetch('/estado', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(estadoActual()) }).catch(() => {});
+    }
+    conexionesPeer.forEach((c) => { if (c.open) c.send({ tipo: 'estado', ...estadoActual() }); });
+  }
+
+  const mando = document.getElementById('mando');
+  const mandoQr = document.getElementById('mando-qr');
+  const mandoLink = document.getElementById('mando-link');
+  const mandoEstado = document.getElementById('mando-estado');
+
+  function abrirMando(abrir) {
+    mando.hidden = !abrir;
+    if (abrir && !window.Peer && !remotoConectado) cargarPeer();
+  }
+  document.getElementById('mando-boton').addEventListener('click', () => abrirMando(mando.hidden));
+  document.getElementById('mando-cerrar').addEventListener('click', () => abrirMando(false));
+  document.addEventListener('keydown', (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    if (event.key === 'm' || event.key === 'M') abrirMando(mando.hidden);
+    else if (event.key === 'Escape' && !mando.hidden) abrirMando(false);
+  });
+
+  function idDelPitch() {
+    let id = null;
+    try { id = localStorage.getItem('ami-pitch-peer'); } catch (e) { /* ignore */ }
+    if (!id) {
+      id = 'ami-pitch-' + Array.from(crypto.getRandomValues(new Uint8Array(5)), (b) => b.toString(16).padStart(2, '0')).join('');
+      try { localStorage.setItem('ami-pitch-peer', id); } catch (e) { /* ignore */ }
+    }
+    return id;
+  }
+
+  function pintarMando(id) {
+    const url = new URL('remoto', location.href);
+    url.search = `?p=${id}`;
+    url.hash = '';
+    mandoLink.textContent = url.href;
+    mandoLink.href = url.href;
+    if (window.qrcode) {
+      const qr = qrcode(0, 'M');
+      qr.addData(url.href);
+      qr.make();
+      mandoQr.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 0, scalable: true });
+    }
+  }
+
+  function contarConectados() {
+    conexionesPeer = conexionesPeer.filter((c) => c.open);
+    const n = conexionesPeer.length;
+    mandoEstado.textContent = n ? 'Celular conectado. Ya puedes cerrar esto (M).' : 'Esperando al celular…';
+    mandoEstado.classList.toggle('ok', n > 0);
+  }
+
+  function iniciarPeer() {
+    const id = idDelPitch();
+    pintarMando(id);
+    const peer = new Peer(id);
+    peer.on('open', () => { mandoEstado.textContent = 'Esperando al celular…'; });
+    peer.on('connection', (conn) => {
+      conn.on('open', () => { conexionesPeer.push(conn); contarConectados(); conn.send({ tipo: 'estado', ...estadoActual() }); });
+      conn.on('data', (data) => { if (data && data.tipo === 'comando') aplicarComando(data.accion); });
+      conn.on('close', contarConectados);
+    });
+    peer.on('disconnected', () => { if (!peer.destroyed) peer.reconnect(); });
+    peer.on('error', (err) => {
+      if (err.type === 'unavailable-id') {
+        // Someone else holds this id (another open copy of the deck): pick a new one.
+        try { localStorage.removeItem('ami-pitch-peer'); } catch (e) { /* ignore */ }
+        peer.destroy();
+        iniciarPeer();
+      } else if (['network', 'server-error', 'socket-error', 'socket-closed'].includes(err.type)) {
+        mandoEstado.textContent = 'Sin conexión para el control remoto. Revisa el internet del Mac.';
+      }
+    });
+  }
+
+  let peerCargando = false;
+  function cargarPeer() {
+    if (peerCargando) return;
+    peerCargando = true;
+    const libs = [
+      'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js',
+      'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js',
+    ];
+    Promise.all(libs.map((src) => new Promise((ok, mal) => {
+      const tag = document.createElement('script');
+      tag.src = src; tag.onload = ok; tag.onerror = mal;
+      document.head.appendChild(tag);
+    })))
+      .then(iniciarPeer)
+      .catch(() => { mandoEstado.textContent = 'No se pudo cargar el control remoto (sin internet).'; });
   }
 
   if (window.EventSource && location.protocol.startsWith('http')) {
     const eventos = new EventSource('/eventos');
-    eventos.addEventListener('open', () => { remotoConectado = true; reportarEstado(); });
-    eventos.addEventListener('error', () => { if (!remotoConectado) eventos.close(); });
-    eventos.addEventListener('comando', (event) => {
-      const { accion } = JSON.parse(event.data);
-      if (accion === 'siguiente') show(current + 1);
-      else if (accion === 'anterior') show(current - 1);
-      else if (accion === 'inicio') show(0);
+    eventos.addEventListener('open', () => {
+      remotoConectado = true;
+      reportarEstado();
+      mandoEstado.textContent = 'Usando el servidor del Mac: abre el link que imprimió la terminal.';
+      mandoQr.hidden = true;
+      mandoLink.hidden = true;
     });
+    eventos.addEventListener('error', () => { if (!remotoConectado) { eventos.close(); cargarPeer(); } });
+    eventos.addEventListener('comando', (event) => aplicarComando(JSON.parse(event.data).accion));
+  } else {
+    cargarPeer();
   }
 
   fit();

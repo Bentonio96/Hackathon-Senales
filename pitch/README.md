@@ -21,6 +21,19 @@ Con `npx serve pitch` el pitch también funciona, pero sin control remoto.
 
 ## Control remoto desde el celular
 
+Hay dos formas. Las dos usan la misma página del celular.
+
+### En el pitch publicado (pitch-ami.vercel.app), sin servidor
+
+1. Abre https://pitch-ami.vercel.app/ en Chrome y aprieta **M** (o el botón del celular, abajo a la derecha).
+2. Escanea el código QR con la cámara del celular. Abre el control remoto.
+3. Cuando el pitch diga «Celular conectado», cierra el cuadro con **M**.
+
+El celular se conecta directo al pitch por WebRTC (PeerJS), en cualquier red con internet: no necesitan estar en el mismo Wi-Fi. Solo viajan los comandos de pasar slide. El link del QR se mantiene entre recargas en el mismo navegador.
+
+### Con el servidor del Mac (sin depender de internet para el remoto)
+
+
 1. El celular y el Mac tienen que estar en la **misma red Wi-Fi**.
 2. Abre en el celular el link `…/remoto?k=…` que imprimió la terminal. La clave cambia cada vez que levantas el servidor.
 3. Arriba se ve en qué slide va el pitch y si está «conectado». **Siguiente** es el botón grande, **Anterior** el de abajo, y **Volver al inicio** está al pie.

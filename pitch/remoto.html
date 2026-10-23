@@ -75,47 +75,81 @@
     <p id="aviso" role="status"></p>
   </div>
 
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
-  const clave = new URLSearchParams(location.search).get('k') || '';
+  // Two ways to reach the deck:
+  //   ?k=<key>  servidor.mjs on the Mac (same Wi-Fi), over HTTP + Server-Sent Events
+  //   ?p=<id>   the published deck, straight over WebRTC (PeerJS), any network
+  const params = new URLSearchParams(location.search);
+  const clave = params.get('k') || '';
+  const destino = params.get('p') || '';
   const aviso = document.getElementById('aviso');
   const conexion = document.getElementById('conexion');
+  let mandar = () => avisar('Falta el link del pitch: escanea el código que muestra (tecla M).', true);
 
   function avisar(texto, error) {
     aviso.textContent = texto;
     aviso.classList.toggle('error', Boolean(error));
   }
 
-  async function mandar(accion) {
-    if (navigator.vibrate) navigator.vibrate(12);
-    try {
-      const res = await fetch('/comando', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ k: clave, accion }),
-      });
-      if (res.status === 403) avisar('La clave no calza: abre el link que muestra la terminal.', true);
-      else if (!res.ok) avisar('No se pudo pasar la slide.', true);
-      else avisar('');
-    } catch {
-      avisar('Sin conexión con el Mac.', true);
-    }
+  function conectado(si) {
+    conexion.textContent = si ? 'conectado' : 'sin conexión';
+    conexion.classList.toggle('ok', si);
   }
 
-  document.getElementById('siguiente').addEventListener('click', () => mandar('siguiente'));
-  document.getElementById('anterior').addEventListener('click', () => mandar('anterior'));
-  document.getElementById('inicio').addEventListener('click', () => mandar('inicio'));
-
-  if (!clave) avisar('Falta la clave: abre el link que muestra la terminal.', true);
-
-  // Which slide the deck is showing, pushed by the server.
-  const eventos = new EventSource('/eventos');
-  eventos.addEventListener('open', () => { conexion.textContent = 'conectado'; conexion.classList.add('ok'); });
-  eventos.addEventListener('error', () => { conexion.textContent = 'sin conexión'; conexion.classList.remove('ok'); });
-  eventos.addEventListener('estado', (event) => {
-    const { n, total, titulo } = JSON.parse(event.data);
+  function pintarEstado({ n, total, titulo }) {
     document.getElementById('numero').textContent = `${n} / ${total}`;
     document.getElementById('titulo').textContent = titulo;
-  });
+  }
+
+  if (destino && window.Peer) {
+    const peer = new Peer();
+    let conn = null;
+    const conectar = () => {
+      if (peer.destroyed || peer.disconnected) return;
+      conn = peer.connect(destino, { reliable: true });
+      conn.on('open', () => { conectado(true); avisar(''); });
+      conn.on('data', (data) => { if (data && data.tipo === 'estado') pintarEstado(data); });
+      conn.on('close', () => { conectado(false); setTimeout(conectar, 1500); });
+    };
+    peer.on('open', conectar);
+    peer.on('disconnected', () => { conectado(false); peer.reconnect(); });
+    peer.on('error', (err) => {
+      conectado(false);
+      if (err.type === 'peer-unavailable') { avisar('No encuentro el pitch: revisa que esté abierto.', true); setTimeout(conectar, 2500); }
+      else avisar('Sin conexión. Revisa el internet del celular.', true);
+    });
+    mandar = (accion) => {
+      if (conn && conn.open) { conn.send({ tipo: 'comando', accion }); avisar(''); }
+      else avisar('Conectando con el pitch…', true);
+    };
+  } else if (clave) {
+    mandar = async (accion) => {
+      try {
+        const res = await fetch('/comando', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ k: clave, accion }) });
+        if (res.status === 403) avisar('La clave no calza: abre el link que muestra la terminal.', true);
+        else if (!res.ok) avisar('No se pudo pasar la slide.', true);
+        else avisar('');
+      } catch {
+        avisar('Sin conexión con el Mac.', true);
+      }
+    };
+    // Which slide the deck is showing, pushed by the server.
+    const eventos = new EventSource('/eventos');
+    eventos.addEventListener('open', () => conectado(true));
+    eventos.addEventListener('error', () => conectado(false));
+    eventos.addEventListener('estado', (event) => pintarEstado(JSON.parse(event.data)));
+  } else {
+    avisar('Falta el link del pitch: escanea el código que muestra (tecla M).', true);
+  }
+
+  function tocar(accion) {
+    if (navigator.vibrate) navigator.vibrate(12);
+    mandar(accion);
+  }
+  document.getElementById('siguiente').addEventListener('click', () => tocar('siguiente'));
+  document.getElementById('anterior').addEventListener('click', () => tocar('anterior'));
+  document.getElementById('inicio').addEventListener('click', () => tocar('inicio'));
 </script>
 </body>
 </html>

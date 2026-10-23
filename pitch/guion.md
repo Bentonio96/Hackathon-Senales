@@ -23,9 +23,13 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 4
 
 ## 1 · Antonia parte de cero cada lunes (0:30)
 
+**Lo dice: Benja**
+
 > Antonia tiene 23 años y estudia en Valparaíso. De lunes a jueves cumple su pauta al pie de la letra: cuatro de cuatro. El viernes sale con sus amigas, a las 2:40 cae un completo, y el sábado con caña pide delivery dos veces. El domingo en la noche se dice «el lunes parto de nuevo». Van nueve ciclos.
 
 ## 2 · El «ya la embarré» (0:40) · Problema
+
+**Lo dice: Esperanza**
 
 > Ya intentó una app de recetas, que dejó a la semana. Dos findes sin tomar. Partir el lunes 1 de cada mes. Todo le pide más disciplina, y disciplina le sobra: de lunes a jueves es perfecta.
 >
@@ -33,15 +37,21 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 4
 
 ## 3 · Les presentamos a Ami (0:10)
 
+**Lo dice: Benja**
+
 > Por eso hicimos a Ami: una amiga en su WhatsApp, para que un finde ya no la haga partir de cero.
 
 ## 4 · El lunes ya no partes de cero (0:40) · Solución
+
+**Lo dice: Benja**
 
 > Ami hace dos cosas. Antes: el jueves, con la cabeza fresca, Antonia le manda una foto del refri y Ami arma el sábado con ella. Un antojo, que es parte del plan y no una trampa, y una comida casera rica de 10 minutos con lo que ya tiene. Le dice cuánto le sale en el súper comparado con pedir, porque anda con la plata justa.
 >
 > Y después: si el plan cambia, Ami no la juzga. Le dice que un finde que no sale como se pensó habla del plan, no de ella, y siguen desde la próxima comida. No hay cuenta que limpiar.
 
 ## 5 · Demo en vivo (1:50) · lo que más pesa
+
+**Maneja el celular: Benja · Narra: Esperanza**
 
 Antes de subir:
 - Tener corriendo `node pitch/servidor.mjs`.
@@ -63,11 +73,15 @@ Antes de subir:
 
 ## 6 · Por qué le cambiaría la vida (0:30) · Convicción
 
+**Lo dice: Esperanza**
+
 > Hay evidencia de que decidir antes ayuda: planear «si pasa esto, hago esto» aumenta las probabilidades de cumplir una meta. Eso es lo que hace Ami el jueves. Saltarse un día no borra un hábito en formación, y después de un desliz la autocompasión frena el «qué más da». Y Ami vive donde Antonia ya está: no es una app más que dejar a la semana, es su WhatsApp.
 
 Cuidado: no decir «está comprobado que Ami funciona». La evidencia es de que decidir por adelantado ayuda, no de esta combinación exacta.
 
 ## 7 · Lo que dejamos fuera y cierre (0:30)
+
+**Lo dice: Esperanza**
 
 > Dejamos fuera, a propósito, las rachas, las calorías y el peso, pedirle que no salga y decirle cuántos antojos tiene. Ami no reemplaza a su nutricionista: se apoya en su pauta y deriva cuando corresponde.
 >
@@ -77,29 +91,31 @@ Pasar a la slide 8 y dejarla durante las preguntas.
 
 ## Preguntas que pueden hacer
 
-**¿Por qué WhatsApp y no una app?**
+Quién responde cada una es una propuesta: Benja lo técnico, Esperanza lo del acompañamiento y la evidencia. Si una pregunta toca las dos cosas, responde uno y el otro completa en una frase.
+
+**¿Por qué WhatsApp y no una app? · responde Benja**
 Antonia dejó la app de recetas a la semana. WhatsApp lo abre todos los días y ahí arma los planes con sus amigas. Ami llega donde ella ya está.
 
-**¿Cómo saben que funciona?**
+**¿Cómo saben que funciona? · responde Esperanza**
 No lo sabemos todavía: es un prototipo de dos días. Lo que sí hay es evidencia de que decidir por adelantado y la autocompasión después de un desliz ayudan. Lo que mediríamos es si el domingo vuelve el «parto de nuevo» y si sigue respondiendo el jueves siguiente. Sin mostrarle a ella ningún número.
 
-**¿Y si no responde el jueves?**
+**¿Y si no responde el jueves? · responde Esperanza**
 Ami no insiste ni la reta. El jueves siguiente vuelve a preguntar, sin reproche, porque castigar la inactividad sería otra racha.
 
-**¿No es peligroso un bot hablando de comida?**
+**¿No es peligroso un bot hablando de comida? · responde Esperanza**
 Por eso la seguridad está en el código y no solo en el prompt:
 - Antes de que Ami responda, una lista de frases y un clasificador aparte revisan los últimos mensajes. Si hay una señal de alerta, se manda un mensaje fijo escrito por Esperanza y Ami no improvisa.
 - Después, un filtro bloquea cualquier número nutricional.
 - Deriva primero a la nutricionista o a alguien cercano. Después ofrece Salud Responde (600 360 7777), y el \*4141 si hay riesgo.
 
-**¿Cuántos antojos tiene?**
+**¿Cuántos antojos tiene? · responde Esperanza**
 Un número fijo, decidido con ella, pero Ami no se lo recuerda como cuota. Cualquier cuenta regresiva se vuelve otra vara con la que «pasarse».
 
-**¿De dónde salen los precios?**
+**¿De dónde salen los precios? · responde Benja**
 Los del súper se buscan en línea. Los de delivery son de referencia, y en la demo van marcados como ejemplo.
 
-**¿Qué datos guardan?**
+**¿Qué datos guardan? · responde Benja**
 La conversación y el plan del sábado, nada más. Ami no guarda peso ni registro de comidas, y escribir «pausa» la pausa.
 
-**¿Cuál es el siguiente paso?**
+**¿Cuál es el siguiente paso? · responde Benja**
 Pedir el antojo sin salir del chat, con una alianza (las apps de delivery no tienen una API abierta), y la plantilla aprobada de WhatsApp para que Ami escriba primero el jueves.
