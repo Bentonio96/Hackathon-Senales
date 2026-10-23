@@ -1,7 +1,7 @@
 import { enCola } from "@/lib/cola";
 import { cargarSesion, guardarSesion, usuariosWhatsApp } from "@/lib/estado";
 import { correrMomento } from "@/lib/programados";
-import { enviarWhatsApp } from "@/lib/twilio";
+import { enviarA } from "@/lib/canal";
 
 export const maxDuration = 300;
 
@@ -27,7 +27,7 @@ export async function GET(req: Request) {
         const { respuestas, aviso } = await correrMomento(sesion, "jueves");
         await guardarSesion(sesion);
         if (aviso) return aviso;
-        await enviarWhatsApp(numero, ...respuestas);
+        await enviarA(numero, ...respuestas);
         return "enviado";
       });
       resultados.push({ numero: enmascarado, estado });

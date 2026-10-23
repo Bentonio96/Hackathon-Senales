@@ -2,7 +2,7 @@ import { EVENTOS_RELOJ, type MomentoReloj } from "@/lib/ami";
 import { correrMomento } from "@/lib/programados";
 import { enCola } from "@/lib/cola";
 import { cargarSesion, guardarSesion, ultimoWhatsApp } from "@/lib/estado";
-import { enviarWhatsApp } from "@/lib/twilio";
+import { enviarA } from "@/lib/canal";
 
 export const maxDuration = 300;
 
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       const { respuestas, aviso } = await correrMomento(sesion, momento);
       if (aviso) return Response.json({ respuestas: [], plan: sesion.plan ?? null, aviso });
       await guardarSesion(sesion);
-      if (destino === "whatsapp") await enviarWhatsApp(sesionId_, ...respuestas);
+      if (destino === "whatsapp") await enviarA(sesionId_, ...respuestas);
       return Response.json({ respuestas, plan: sesion.plan ?? null });
     });
   } catch (error) {

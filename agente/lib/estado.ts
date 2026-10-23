@@ -91,3 +91,12 @@ export async function ultimoWhatsApp(): Promise<string | null> {
   if (redis) return redis.get<string>("ami:ultimo-whatsapp");
   return memoria.__amiUltimoWa ?? null;
 }
+
+/** true la primera vez que se ve una clave (para ignorar webhooks repetidos). */
+export async function primeraVez(clave: string): Promise<boolean> {
+  if (redis) return (await redis.set(`ami:visto:${clave}`, 1, { nx: true, ex: 60 * 60 * 24 })) === "OK";
+  const vistos = ((memoria as { __amiVistos?: Set<string> }).__amiVistos ??= new Set());
+  if (vistos.has(clave)) return false;
+  vistos.add(clave);
+  return true;
+}
