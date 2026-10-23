@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         const imagen = tieneFoto ? await descargarMedia(params.MediaUrl0) : undefined;
         const respuestas = await turnoDeAmi(sesion, { texto, imagen });
         await guardarSesion(sesion);
-        for (const r of respuestas) await enviarWhatsApp(de, r);
+        await enviarWhatsApp(de, ...respuestas);
       } catch (error) {
         console.error("Error procesando mensaje de WhatsApp:", error);
         await enviarWhatsApp(de, "Uy, se me enredó algo 😅. ¿Me lo mandas de nuevo?").catch(() => undefined);

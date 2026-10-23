@@ -42,15 +42,40 @@ function partir(texto: string, max = 1500): string[] {
   return partes.flatMap((p) => (p.length > max ? p.match(new RegExp(`[\\s\\S]{1,${max}}`, "g")) ?? [] : [p]));
 }
 
-export async function enviarWhatsApp(para: string, texto: string): Promise<void> {
+const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+async function enviarUno(para: string, texto: string): Promise<string> {
   const { sid, basic } = credenciales();
   const desde = process.env.TWILIO_WHATSAPP_FROM ?? "whatsapp:+14155238886";
-  for (const parte of partir(texto)) {
-    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
-      method: "POST",
-      headers: { Authorization: basic, "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ From: desde, To: para, Body: parte }),
-    });
-    if (!res.ok) throw new Error(`Twilio respondió ${res.status}: ${await res.text()}`);
+  const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
+    method: "POST",
+    headers: { Authorization: basic, "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ From: desde, To: para, Body: texto }),
+  });
+  if (!res.ok) throw new Error(`Twilio respondió ${res.status}: ${await res.text()}`);
+  return ((await res.json()) as { sid: string }).sid;
+}
+
+// Twilio no garantiza el orden entre mensajes separados: antes de mandar el siguiente,
+// se espera a que el anterior salga (o hasta ~4 s) y una pausa corta.
+async function esperarSalida(messageSid: string): Promise<void> {
+  const { sid, basic } = credenciales();
+  for (let i = 0; i < 8; i++) {
+    await esperar(500);
+    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages/${messageSid}.json`, {
+      headers: { Authorization: basic },
+    }).catch(() => null);
+    const estado = res?.ok ? ((await res.json()) as { status: string }).status : null;
+    if (estado && ["sent", "delivered", "read", "failed", "undelivered"].includes(estado)) break;
+  }
+  await esperar(600);
+}
+
+/** Manda una o varias burbujas en orden. */
+export async function enviarWhatsApp(para: string, ...textos: string[]): Promise<void> {
+  const partes = textos.flatMap((t) => partir(t));
+  for (let i = 0; i < partes.length; i++) {
+    const messageSid = await enviarUno(para, partes[i]);
+    if (i < partes.length - 1) await esperarSalida(messageSid);
   }
 }

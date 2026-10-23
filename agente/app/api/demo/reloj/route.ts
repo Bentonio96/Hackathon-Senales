@@ -48,7 +48,7 @@ export async function POST(req: Request) {
         respuestas = await turnoDeAmi(sesion, { texto: EVENTOS_RELOJ[momento], esReloj: true });
       }
       await guardarSesion(sesion);
-      if (destino === "whatsapp") for (const r of respuestas) await enviarWhatsApp(sesionId_, r);
+      if (destino === "whatsapp") await enviarWhatsApp(sesionId_, ...respuestas);
       return Response.json({ respuestas, plan: sesion.plan ?? null });
     });
   } catch (error) {
