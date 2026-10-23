@@ -333,3 +333,12 @@ El agente (`ami-agente`) ya está en el equipo de Vercel `amy-team-hackathon`, q
 ### 2026-10-23 21:30 · para Esperanza
 
 Aviso del pitch (decisión de Benja): en las slides 5 y 7 del pitch, la burbuja de Amy para cuando el plan cambia ya no es «Pucha, qué lata quedarte con esa sensación. Un finde que no sale como se pensó habla del plan, no de ti 🫶». Ahora dice **«Te entiendo. El finde también es parte de tu semana 🫶»**. A Benja le hacía ruido, y el pitch ahora cuenta que el finde no es un corte ni hay nada que retomar. También se sacó «Seguimos desde tu próxima comida», porque sonaba a volver a partir. No se tocó el prompt del agente ni la landing. Si el texto nuevo choca con algo de tu parte, avísale a Benja.
+
+### 2026-10-23 22:10 · para Esperanza
+
+Cambios en el pitch (pedido de Benja, después de hablar con Kai): el pitch ahora dura 3 minutos más 2 de demo, y se enfoca en mostrar que entendemos a Antonia.
+
+- **Slide 2, «Por qué escogimos a Antonia»:** tu tarjeta (rachas, «el problema eres tú») y la de Benja (la hamburguesa), más un cierre: «A Antonia no le falta voluntad. Le falta un plan para el finde y alguien que no la haga sentir que perdió». Tu parte del guion está armada con las ideas de tu archivo: ajústala a tus palabras.
+- **Slide 7 nueva, «Cómo sabe Antonia que avanza, sin rachas»:** el caso pide que vea su progreso sin que se reinicie. La propuesta es que nada vuelva a cero y que lo que cuenta solo crezca: un recetario con las caseras que hace, Amy recordándole lo que le funcionó («La otra vez las quesadillas te salvaron la caña. Las repetimos? 😅») y el domingo sin puntaje. Va marcado «en construcción», porque el agente todavía no lo tiene.
+
+**Para ti:** esto roza tu decisión 4 («sin progreso acumulado, ninguna medida»). No hay números ni nada que pueda bajar, pero si el recetario te parece otra vara, avísale a Benja y lo cambiamos.
