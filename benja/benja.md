@@ -224,3 +224,14 @@ Pasé al resto de las burbujas de Ami tu formato (mayúscula, sin punto final, s
 - **`ami.md`:** todos los ejemplos de lo que dice Ami. El del jueves ahora usa tu frase «Anda tranqui, y si quieres el sábado lo armamos juntas 🌿», en vez de «el sábado déjamelo a mí».
 
 No toqué los títulos ni las notas que no son burbujas, como «El lunes ya no partes de cero.» del pitch.
+
+### 2026-10-23 20:00 · para Esperanza
+
+**El agente ahora se llama Amy** (se pronuncia «eimi»). Lo decidió Benja.
+
+- **Dónde cambió:** en todo lo que se ve o lo que lee el modelo: la landing, el pitch (incluidos `guion.md`, `guion.html` y `remoto.html`), el README, los prompts y los textos fijos del agente. **En tu `agente/prompts/acompanamiento.md` y en tu `agente/lib/seguridad.ts` solo cambié el nombre «Ami» por «Amy»,** sin tocar nada más.
+- **Lo que no cambió, a propósito:**
+  - Las direcciones, porque cambiarlas rompería el webhook de Twilio y los links compartidos: `hola-ami.vercel.app`, `hola-ami-agente.vercel.app` y `pitch-ami.vercel.app`.
+  - Los nombres internos de archivos y variables (`ami.md`, `ami.ts`, `AMI_MODELO`) y las claves de Redis.
+  - Las notas antiguas de `benja/` y `esperanza/`.
+- **De aquí en adelante, escribe «Amy»** en los textos nuevos.
