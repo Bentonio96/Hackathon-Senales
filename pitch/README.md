@@ -1,6 +1,6 @@
 # Pitch: Ami, caso Antonia
 
-Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
+Es un archivo HTML autocontenido (`index.html`), sin build. Son 8 slides para 5 minutos de pitch con demo en vivo, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
 ## Cómo abrirlo
 
@@ -13,7 +13,7 @@ No hay que instalar nada: es Node puro. La terminal imprime dos cosas:
 - **El pitch, para el Mac:** `http://localhost:4000/`. Ábrelo en Chrome.
 - **El control remoto, para el celular:** `http://<ip-del-mac>:4000/remoto?k=<clave>`. Ábrelo en el celular.
 
-Tiene que ser desde localhost. La slide 5 usa `getDisplayMedia`, que solo funciona en un contexto seguro, y abriendo el archivo con doble clic (`file://`) el botón no conecta. El puerto se cambia con `PORT=4100 node pitch/servidor.mjs`.
+Tiene que ser desde localhost. La slide 6 usa `getDisplayMedia`, que solo funciona en un contexto seguro, y abriendo el archivo con doble clic (`file://`) el botón no conecta. El puerto se cambia con `PORT=4100 node pitch/servidor.mjs`.
 
 Con `npx serve pitch` el pitch también funciona, pero sin control remoto.
 
@@ -25,7 +25,7 @@ Con `npx serve pitch` el pitch también funciona, pero sin control remoto.
 
 Si la red del evento no deja que los equipos se vean entre sí (pasa en redes de eventos), activa el **Compartir Internet** del iPhone y conecta el Mac a esa red. Vuelve a levantar el servidor para que imprima la IP nueva.
 
-**Cuidado en la slide 5:** el iPhone es el que se proyecta. Mientras estás en esa slide, lo que abras en el teléfono (también el control remoto) se ve en la pantalla. Para salir de la demo, usa la flecha → del Mac, o vuelve al control remoto sabiendo que se va a ver un segundo.
+**Cuidado en la slide 6:** el iPhone es el que se proyecta. Mientras estás en esa slide, lo que abras en el teléfono (también el control remoto) se ve en la pantalla. Para salir de la demo, usa la flecha → del Mac, o vuelve al control remoto sabiendo que se va a ver un segundo.
 
 Desactiva el bloqueo automático del iPhone mientras presentas (Ajustes › Pantalla y brillo › Bloqueo automático), así la página del remoto no se apaga.
 
@@ -38,9 +38,9 @@ Desactiva el bloqueo automático del iPhone mientras presentas (Ajustes › Pant
 | Inicio / Fin | Primera / última |
 | F | Pantalla completa (o el botón de abajo a la derecha) |
 
-El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la misma slide.
+El número de slide queda en la URL (`#6`). Si recargas la página, vuelves a la misma slide.
 
-## Slide 5: el iPhone en vivo
+## Slide 6: el iPhone en vivo
 
 1. Toca **¡Veamos la demo!**.
 2. En el diálogo de Chrome, entra a la pestaña **Ventana** y elige la de **QuickTime Player** (o la de «Duplicación del iPhone»).
@@ -48,7 +48,7 @@ El número de slide queda en la URL (`#5`). Si recargas la página, vuelves a la
 
 **La primera vez**, macOS pide permiso: Configuración del Sistema › Privacidad y seguridad › **Grabación de pantalla y audio del sistema** › activa Google Chrome. Después cierra Chrome por completo (⌘Q) y vuelve a abrirlo. Si no, en la pestaña Ventana solo aparece Chrome.
 
-**Recorte de la cabecera.** El video se recorta por arriba para esconder la barra de estado del iPhone y la cabecera del chat de WhatsApp (la foto y el nombre del número del sandbox). Solo se recorta: no se pinta nada encima. Se ajusta en vivo, en la slide 5:
+**Recorte de la cabecera.** El video se recorta por arriba para esconder la barra de estado del iPhone y la cabecera del chat de WhatsApp (la foto y el nombre del número del sandbox). Solo se recorta: no se pinta nada encima. Se ajusta en vivo, en la slide 6:
 
 | Control | Qué hace |
 |---|---|
@@ -85,7 +85,7 @@ El chat web del agente ya no está en el pitch. Si el iPhone falla, ábrelo en o
 
 ## Pendientes
 
-- **Esperanza:** completar el bloque punteado `[Esperanza]` de la slide 4. Es su parte: cómo acompaña Ami cuando el plan se rompe.
+- **Esperanza:** completar el bloque punteado `[Esperanza]` de la slide 5. Es su parte: cómo acompaña Ami cuando el plan se rompe.
 - **Benja:** revisar la historia de la slide 3 con sus propias palabras.
 - Las fuentes vienen de Google Fonts. Sin internet, el pitch cae a la letra del sistema: se ve más simple, pero funciona igual.
 

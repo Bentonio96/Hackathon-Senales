@@ -51,6 +51,15 @@
   .slide.amarillo { background: var(--amarillo); }
   .slide.rosado { background: var(--rosado); }
   .slide.celeste { background: var(--celeste); }
+  .slide.menta { background: var(--menta); }
+  /* The reveal: Ami says hi when the slide comes in (the deck's one orchestrated moment). */
+  .presenta { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 72px; align-items: center; margin-top: -60px; }
+  .presenta-av { width: 420px; height: 420px; }
+  .presenta-hola { align-self: flex-start; margin: 0; font-size: 30px; }
+  .slide.is-active .presenta-av { animation: saludo 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .slide.is-active .presenta-hola { animation: aparece 500ms var(--ease) 700ms both; }
+  @keyframes saludo { from { transform: scale(.6) rotate(-8deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes aparece { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
   /* Paper grain, as in the landing's colored fields. */
   .grano::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .07; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 
@@ -140,6 +149,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .slide, .slide.is-active, .btn, .chrome { transition: none; }
+    .slide.is-active .presenta-av, .slide.is-active .presenta-hola { animation: none; }
   }
 </style>
 </head>
@@ -206,7 +216,20 @@
       </div>
     </section>
 
-    <!-- 4 · Ami -->
+    <!-- 4 · Presentamos a Ami -->
+    <section class="slide menta grano" aria-label="Les presentamos a Ami">
+      <div class="presenta">
+        <svg class="presenta-av" viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><use href="#ami"/></svg>
+        <div class="stack" style="gap: 28px">
+          <h2 class="display" style="font-size: 112px">Les presentamos a Ami.</h2>
+          <p class="lead">Una amiga en el WhatsApp de Antonia. No es una app más ni una coach.</p>
+          <p class="burbuja presenta-hola">hola Anto 🌿 ¿sales este finde?</p>
+        </div>
+      </div>
+      <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+    </section>
+
+    <!-- 5 · Ami -->
     <section class="slide" aria-label="Ami">
       <div class="split">
         <div class="stack">
@@ -224,7 +247,7 @@
       </div>
     </section>
 
-    <!-- 5 · Demo en vivo -->
+    <!-- 6 · Demo en vivo -->
     <section class="slide celeste" aria-label="Demo en vivo" id="slide-demo">
       <div class="demo">
         <div class="phone" id="phone">
@@ -259,7 +282,7 @@
       </div>
     </section>
 
-    <!-- 6 · Por qué cambiaría -->
+    <!-- 7 · Por qué cambiaría -->
     <section class="slide" aria-label="Por qué cambiaría">
       <h2 class="titulo" style="font-size: 64px">Por qué Ami le cambiaría la vida a Antonia.</h2>
       <div class="split" style="grid-template-columns: minmax(0, 7fr) minmax(0, 6fr); align-items: start">
@@ -285,7 +308,7 @@
       </div>
     </section>
 
-    <!-- 7 · Qué dejamos fuera + cierre -->
+    <!-- 8 · Qué dejamos fuera + cierre -->
     <section class="slide amarillo grano" aria-label="Lo que dejamos fuera y cierre">
       <svg style="position: absolute; right: 110px; top: 150px; width: 300px; height: 300px" aria-hidden="true"><use href="#ami"/></svg>
       <div class="stack" style="margin-top: -90px">
@@ -306,7 +329,7 @@
 
 <nav class="chrome" aria-label="Navegación del pitch">
   <button type="button" id="prev" aria-label="Slide anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <span class="count" id="count" aria-live="polite">1 / 7</span>
+  <span class="count" id="count" aria-live="polite">1 / 8</span>
   <button type="button" id="next" aria-label="Slide siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button type="button" id="fullscreen" aria-label="Pantalla completa (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 V4 H9 M15 4 H20 V9 M20 15 V20 H15 M9 20 H4 V15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </nav>
