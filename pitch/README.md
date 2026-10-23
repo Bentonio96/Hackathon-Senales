@@ -7,10 +7,10 @@ Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 
 La slide 5 muestra en vivo la pantalla del iPhone. Para eso usa `getDisplayMedia`, que solo funciona en un contexto seguro. Si abres el archivo con doble clic (`file://`), el botón no conecta. Sírvelo desde localhost:
 
 ```bash
-npx serve pitch
+npx serve pitch -l 4000
 ```
 
-Después abre en Chrome la dirección que imprime (por ejemplo, `http://localhost:3000`). Si la demo web del agente ya está ocupando el puerto 3000, `serve` elige otro y te lo dice.
+Después abre `http://localhost:4000/#5` en Chrome. Usa el puerto 4000 porque el 3000 es de la demo web del agente (`npm run dev` en `agente/`), que es adonde apunta el plan B.
 
 ## Controles
 
