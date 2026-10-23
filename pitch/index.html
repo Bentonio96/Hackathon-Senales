@@ -431,7 +431,7 @@
     <div class="mando-qr" id="mando-qr" aria-hidden="true"></div>
     <div class="mando-texto">
       <h2 id="mando-titulo">Pasa las slides desde tu celular</h2>
-      <p>Escanea el código con la cámara del celular. Funciona en cualquier red con internet.</p>
+      <p>Escanea el código con la cámara del celular. Funciona en cualquier red con internet: el Mac y el celular no necesitan estar en el mismo Wi-Fi.</p>
       <a id="mando-link" href="#" target="_blank" rel="noopener"></a>
       <p class="mando-estado" id="mando-estado" role="status">Preparando…</p>
       <button type="button" class="btn" id="mando-cerrar">Cerrar (M)</button>
@@ -707,10 +707,13 @@
 
   // --- Phone remote --------------------------------------------------------
   // With servidor.mjs (on the Mac) commands arrive over Server-Sent Events.
-  // Without it (published on Vercel) the phone connects straight to this page
-  // over WebRTC (PeerJS): M shows a QR with the link. Only slide commands travel.
-  let remotoConectado = false;   // server mode
-  let conexionesPeer = [];       // WebRTC mode
+  // Without it (published on Vercel) deck and phone talk over plain HTTPS through
+  // a ntfy.sh topic with a random name: works on any network, no NAT issues.
+  // Only slide commands and the slide number travel. M shows a QR with the link.
+  const NTFY = 'https://ntfy.sh';
+  let remotoConectado = false; // server mode
+  let canal = null;            // ntfy mode: topic base name
+  let ultimoEstado = '';
 
   function aplicarComando(accion) {
     if (accion === 'siguiente') show(current + 1);
@@ -722,11 +725,17 @@
     return { n: current + 1, total: slides.length, titulo: slides[current].getAttribute('aria-label') };
   }
 
-  function reportarEstado() {
+  function reportarEstado(forzar) {
+    const estado = estadoActual();
     if (remotoConectado) {
-      fetch('/estado', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(estadoActual()) }).catch(() => {});
+      fetch('/estado', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(estado) }).catch(() => {});
     }
-    conexionesPeer.forEach((c) => { if (c.open) c.send({ tipo: 'estado', ...estadoActual() }); });
+    // ntfy: only when it changes (or the phone asks), to stay well under its rate limits.
+    const texto = JSON.stringify(estado);
+    if (canal && (forzar || texto !== ultimoEstado)) {
+      ultimoEstado = texto;
+      fetch(`${NTFY}/${canal}-e`, { method: 'POST', body: texto }).catch(() => {});
+    }
   }
 
   const mando = document.getElementById('mando');
@@ -736,7 +745,7 @@
 
   function abrirMando(abrir) {
     mando.hidden = !abrir;
-    if (abrir && !window.Peer && !remotoConectado) cargarPeer();
+    if (abrir && !remotoConectado && !canal) iniciarCanal();
   }
   document.getElementById('mando-boton').addEventListener('click', () => abrirMando(mando.hidden));
   document.getElementById('mando-cerrar').addEventListener('click', () => abrirMando(false));
@@ -746,75 +755,54 @@
     else if (event.key === 'Escape' && !mando.hidden) abrirMando(false);
   });
 
-  function idDelPitch() {
+  function nombreCanal() {
     let id = null;
-    try { id = localStorage.getItem('ami-pitch-peer'); } catch (e) { /* ignore */ }
+    try { id = localStorage.getItem('ami-pitch-canal'); } catch (e) { /* ignore */ }
     if (!id) {
-      id = 'ami-pitch-' + Array.from(crypto.getRandomValues(new Uint8Array(5)), (b) => b.toString(16).padStart(2, '0')).join('');
-      try { localStorage.setItem('ami-pitch-peer', id); } catch (e) { /* ignore */ }
+      id = 'ami-pitch-' + Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, '0')).join('');
+      try { localStorage.setItem('ami-pitch-canal', id); } catch (e) { /* ignore */ }
     }
     return id;
   }
 
-  function pintarMando(id) {
+  function pintarMando() {
     const url = new URL('remoto', location.href);
-    url.search = `?p=${id}`;
+    url.search = `?c=${canal}`;
     url.hash = '';
     mandoLink.textContent = url.href;
     mandoLink.href = url.href;
-    if (window.qrcode) {
+    const dibujar = () => {
       const qr = qrcode(0, 'M');
       qr.addData(url.href);
       qr.make();
       mandoQr.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 0, scalable: true });
-    }
+    };
+    if (window.qrcode) { dibujar(); return; }
+    const tag = document.createElement('script');
+    tag.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
+    tag.onload = dibujar;
+    tag.onerror = () => { mandoQr.hidden = true; };
+    document.head.appendChild(tag);
   }
 
-  function contarConectados() {
-    conexionesPeer = conexionesPeer.filter((c) => c.open);
-    const n = conexionesPeer.length;
-    mandoEstado.textContent = n ? 'Celular conectado. Ya puedes cerrar esto (M).' : 'Esperando al celular…';
-    mandoEstado.classList.toggle('ok', n > 0);
-  }
-
-  function iniciarPeer() {
-    const id = idDelPitch();
-    pintarMando(id);
-    const peer = new Peer(id);
-    peer.on('open', () => { mandoEstado.textContent = 'Esperando al celular…'; });
-    peer.on('connection', (conn) => {
-      conn.on('open', () => { conexionesPeer.push(conn); contarConectados(); conn.send({ tipo: 'estado', ...estadoActual() }); });
-      conn.on('data', (data) => { if (data && data.tipo === 'comando') aplicarComando(data.accion); });
-      conn.on('close', contarConectados);
-    });
-    peer.on('disconnected', () => { if (!peer.destroyed) peer.reconnect(); });
-    peer.on('error', (err) => {
-      if (err.type === 'unavailable-id') {
-        // Someone else holds this id (another open copy of the deck): pick a new one.
-        try { localStorage.removeItem('ami-pitch-peer'); } catch (e) { /* ignore */ }
-        peer.destroy();
-        iniciarPeer();
-      } else if (['network', 'server-error', 'socket-error', 'socket-closed'].includes(err.type)) {
-        mandoEstado.textContent = 'Sin conexión para el control remoto. Revisa el internet del Mac.';
+  function iniciarCanal() {
+    if (canal) return;
+    canal = nombreCanal();
+    pintarMando();
+    const comandos = new EventSource(`${NTFY}/${canal}-c/sse`);
+    comandos.addEventListener('open', () => { mandoEstado.textContent = 'Esperando al celular…'; });
+    comandos.addEventListener('error', () => { mandoEstado.textContent = 'Reconectando… (revisa el internet del Mac)'; });
+    comandos.addEventListener('message', (event) => {
+      let datos;
+      try { datos = JSON.parse(JSON.parse(event.data).message); } catch (e) { return; }
+      if (datos.accion === 'hola') {
+        mandoEstado.textContent = 'Celular conectado. Ya puedes cerrar esto (M).';
+        mandoEstado.classList.add('ok');
+        reportarEstado(true);
+      } else {
+        aplicarComando(datos.accion);
       }
     });
-  }
-
-  let peerCargando = false;
-  function cargarPeer() {
-    if (peerCargando) return;
-    peerCargando = true;
-    const libs = [
-      'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js',
-      'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js',
-    ];
-    Promise.all(libs.map((src) => new Promise((ok, mal) => {
-      const tag = document.createElement('script');
-      tag.src = src; tag.onload = ok; tag.onerror = mal;
-      document.head.appendChild(tag);
-    })))
-      .then(iniciarPeer)
-      .catch(() => { mandoEstado.textContent = 'No se pudo cargar el control remoto (sin internet).'; });
   }
 
   if (window.EventSource && location.protocol.startsWith('http')) {
@@ -826,10 +814,10 @@
       mandoQr.hidden = true;
       mandoLink.hidden = true;
     });
-    eventos.addEventListener('error', () => { if (!remotoConectado) { eventos.close(); cargarPeer(); } });
+    eventos.addEventListener('error', () => { if (!remotoConectado) { eventos.close(); iniciarCanal(); } });
     eventos.addEventListener('comando', (event) => aplicarComando(JSON.parse(event.data).accion));
   } else {
-    cargarPeer();
+    iniciarCanal();
   }
 
   fit();

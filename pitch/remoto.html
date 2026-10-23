@@ -75,14 +75,14 @@
     <p id="aviso" role="status"></p>
   </div>
 
-<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
   // Two ways to reach the deck:
-  //   ?k=<key>  servidor.mjs on the Mac (same Wi-Fi), over HTTP + Server-Sent Events
-  //   ?p=<id>   the published deck, straight over WebRTC (PeerJS), any network
+  //   ?k=<key>      servidor.mjs on the Mac (same Wi-Fi), over HTTP + Server-Sent Events
+  //   ?c=<channel>  the published deck, through a ntfy.sh topic over plain HTTPS (any network)
+  const NTFY = 'https://ntfy.sh';
   const params = new URLSearchParams(location.search);
   const clave = params.get('k') || '';
-  const destino = params.get('p') || '';
+  const canal = params.get('c') || '';
   const aviso = document.getElementById('aviso');
   const conexion = document.getElementById('conexion');
   let mandar = () => avisar('Falta el link del pitch: escanea el código que muestra (tecla M).', true);
@@ -102,27 +102,25 @@
     document.getElementById('titulo').textContent = titulo;
   }
 
-  if (destino && window.Peer) {
-    const peer = new Peer();
-    let conn = null;
-    const conectar = () => {
-      if (peer.destroyed || peer.disconnected) return;
-      conn = peer.connect(destino, { reliable: true });
-      conn.on('open', () => { conectado(true); avisar(''); });
-      conn.on('data', (data) => { if (data && data.tipo === 'estado') pintarEstado(data); });
-      conn.on('close', () => { conectado(false); setTimeout(conectar, 1500); });
+  if (canal) {
+    const publicar = (datos) => fetch(`${NTFY}/${canal}-c`, { method: 'POST', body: JSON.stringify(datos) });
+    mandar = async (accion) => {
+      try {
+        const res = await publicar({ accion });
+        if (res.status === 429) avisar('Muchos toques seguidos: espera un segundo.', true);
+        else if (!res.ok) avisar('No se pudo pasar la slide.', true);
+        else avisar('');
+      } catch {
+        avisar('Sin conexión. Revisa el internet del celular.', true);
+      }
     };
-    peer.on('open', conectar);
-    peer.on('disconnected', () => { conectado(false); peer.reconnect(); });
-    peer.on('error', (err) => {
-      conectado(false);
-      if (err.type === 'peer-unavailable') { avisar('No encuentro el pitch: revisa que esté abierto.', true); setTimeout(conectar, 2500); }
-      else avisar('Sin conexión. Revisa el internet del celular.', true);
+    // The deck answers «hola» with the slide it is showing, and reports every change.
+    const estados = new EventSource(`${NTFY}/${canal}-e/sse`);
+    estados.addEventListener('open', () => { publicar({ accion: 'hola' }).catch(() => {}); });
+    estados.addEventListener('error', () => conectado(false));
+    estados.addEventListener('message', (event) => {
+      try { pintarEstado(JSON.parse(JSON.parse(event.data).message)); conectado(true); } catch (e) { /* ignore */ }
     });
-    mandar = (accion) => {
-      if (conn && conn.open) { conn.send({ tipo: 'comando', accion }); avisar(''); }
-      else avisar('Conectando con el pitch…', true);
-    };
   } else if (clave) {
     mandar = async (accion) => {
       try {

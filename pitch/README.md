@@ -29,7 +29,7 @@ Hay dos formas. Las dos usan la misma página del celular.
 2. Escanea el código QR con la cámara del celular. Abre el control remoto.
 3. Cuando el pitch diga «Celular conectado», cierra el cuadro con **M**.
 
-El celular se conecta directo al pitch por WebRTC (PeerJS), en cualquier red con internet: no necesitan estar en el mismo Wi-Fi. Solo viajan los comandos de pasar slide. El link del QR se mantiene entre recargas en el mismo navegador.
+El celular y el pitch se hablan por HTTPS normal, a través de un canal de [ntfy.sh](https://ntfy.sh) con un nombre aleatorio, así que funciona en cualquier red con internet: no necesitan estar en el mismo Wi-Fi. Solo viajan los comandos de pasar slide y el número de slide. El link del QR se mantiene entre recargas en el mismo navegador.
 
 ### Con el servidor del Mac (sin depender de internet para el remoto)
 
