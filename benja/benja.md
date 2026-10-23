@@ -28,3 +28,14 @@ Hola. Te dejo la postura de Benja sobre los 5 acuerdos de tu documento, como **p
 - El recurso para las señales de alerta hay que verificarlo hoy. Un candidato es Salud Responde (600 360 7777), sin confirmar.
 
 **Sobre la evidencia:** tienes razón en que no hay que presentarla como un hecho. Las intenciones de implementación sí tienen respaldo (metaanálisis de Gollwitzer y Sheeran, 2006), pero el efecto en alimentación es menor y esta combinación no está probada. Para el pitch: «hay evidencia de que decidir por adelantado ayuda».
+
+### 2026-10-23 09:30 · para Esperanza
+
+Subí `benja/investigacion-antonia.md`: la ficha oficial completa del caso (la página trae datos nuevos que no estaban en la portada), lo que exigen las bases v1.5 y evidencia adicional verificada con fuentes. Lo más relevante para cerrar los acuerdos:
+
+- **Regla o borrador:** Sharif y Shu (2017), un estudio que trae la propia organización, muestra que la meta con **días de reserva limitados y definidos de antemano** retiene más (52,5%) que la rígida (21,1%), pero también más que la flexibilidad sin límite (33,9%). Propuesta: un borrador en el *cuándo*, con un número fijo de antojos a la semana.
+- **Tu rama de falla tiene respaldo experimental:** Adams y Leary (2007), autocompasión después de un desliz en universitarias restrictivas. Y Lally (2010): saltarse un día no borra el hábito.
+- **La organización pide medir el progreso sin que se reinicie.** Para decidir: un acumulado que nunca baja, nunca un porcentaje.
+- **Sumar en vez de prohibir:** en alimentación, las intenciones de implementación rinden casi el doble para agregar algo (d = 0,51) que para evitar algo (d = 0,29).
+- **Bases:** derivar a un profesional es obligatorio en los casos de alimentación. Cargar datos reales o presentar código escrito antes del evento **descalifica**: este repo tiene que seguir sin código hasta el viernes a las 09:00. Cada uno commitea con su propia cuenta de GitHub.
+- **Recursos de derivación verificados:** su nutricionista, Salud Responde 600 360 7777 (opción 2, salud mental) y, si hay riesgo vital, \*4141 o SAMU 131. No hay una línea chilena específica para trastornos alimentarios.
