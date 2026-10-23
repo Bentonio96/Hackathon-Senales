@@ -2,7 +2,7 @@
 
 La puerta de entrada al agente del caso Antonia: presenta qué hace y lleva a activarlo en WhatsApp. Es una sola página en Vite, React 19, TypeScript y Tailwind v4, prerenderizada a HTML estático.
 
-En línea: https://hola-amy.vercel.app, en la cuenta de Vercel de Esperanza, desplegada con la CLI desde esta carpeta (`npx vercel deploy --prod`). El proyecto `ami-landing` de la cuenta de Benja (hola-ami.vercel.app) quedó con los deploys automáticos apagados para ahorrar cupo.
+En línea: https://hola-amy-hackathon.vercel.app (proyecto `hola-amy` del equipo de Vercel `amy-team-hackathon`; despliega solo cuando cambia esta carpeta). El proyecto `ami-landing` de la cuenta de Benja (hola-ami.vercel.app) quedó con los deploys automáticos apagados para ahorrar cupo.
 
 ![Escritorio, modo claro](docs/escritorio-claro.jpg)
 
