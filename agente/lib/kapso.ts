@@ -41,7 +41,8 @@ function partir(texto: string, max = 4000): string[] {
 }
 
 const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const BURBUJAS_JUNTAS = process.env.AMI_WHATSAPP_BURBUJAS !== "separadas";
+// Kapso tiene cupo de sobra: por defecto cada burbuja va en su propio mensaje (AMI_KAPSO_BURBUJAS=juntas para juntarlas).
+const BURBUJAS_JUNTAS = process.env.AMI_KAPSO_BURBUJAS === "juntas";
 
 /** Manda las burbujas de Amy por Kapso, en orden. `numero` va sin «+», por ejemplo 56912345678. */
 export async function enviarKapso(numero: string, ...textos: string[]): Promise<void> {
