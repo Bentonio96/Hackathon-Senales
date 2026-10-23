@@ -14,12 +14,12 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 4
 |---|---|---|---|
 | 1 | Antonia parte de cero cada lunes | 0:30 | Benja |
 | 2 | «Ya la embarré…» y lo que atacamos | 0:40 | Esperanza |
-| 3 | Les presentamos a Ami | 0:10 | Benja |
+| 3 | Les presentamos a Amy | 0:10 | Benja |
 | 4 | El lunes ya no partes de cero | 0:40 | Benja |
 | 5 | Demo en vivo | 1:50 | Benja maneja, Esperanza narra |
 | 6 | Por qué le cambiaría la vida | 0:30 | Esperanza |
 | 7 | Lo que dejamos fuera y cierre | 0:30 | Esperanza |
-| 8 | Portada de Ami | (preguntas) | — |
+| 8 | Portada de Amy | (preguntas) | — |
 
 ## 1 · Antonia parte de cero cada lunes (0:30)
 
@@ -35,19 +35,19 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 4
 >
 > Lo que la hace caer no es el completo del viernes. Es el «ya la embarré» del domingo: sentir que rompió el plan hace que el resto del finde dé lo mismo, y el lunes limpia la cuenta. Eso es lo que atacamos. Y ninguna de las cosas que probó tiene un plan para el fin de semana.
 
-## 3 · Les presentamos a Ami (0:10)
+## 3 · Les presentamos a Amy (0:10)
 
 **Lo dice: Benja**
 
-> Por eso hicimos a Ami: una amiga en su WhatsApp, para que un finde ya no la haga partir de cero.
+> Por eso hicimos a Amy: una amiga en su WhatsApp, para que un finde ya no la haga partir de cero.
 
 ## 4 · El lunes ya no partes de cero (0:40) · Solución
 
 **Lo dice: Benja**
 
-> Ami hace dos cosas. Antes: el jueves, con la cabeza fresca, Antonia le manda una foto del refri y Ami arma el sábado con ella. Un antojo, que es parte del plan y no una trampa, y una comida casera rica de 10 minutos con lo que ya tiene. Le dice cuánto le sale en el súper comparado con pedir, porque anda con la plata justa.
+> Amy hace dos cosas. Antes: el jueves, con la cabeza fresca, Antonia le manda una foto del refri y Amy arma el sábado con ella. Un antojo, que es parte del plan y no una trampa, y una comida casera rica de 10 minutos con lo que ya tiene. Le dice cuánto le sale en el súper comparado con pedir, porque anda con la plata justa.
 >
-> Y después: si el plan cambia, Ami no la juzga. Le dice que un finde que no sale como se pensó habla del plan, no de ella, y siguen desde la próxima comida. No hay cuenta que limpiar.
+> Y después: si el plan cambia, Amy no la juzga. Le dice que un finde que no sale como se pensó habla del plan, no de ella, y siguen desde la próxima comida. No hay cuenta que limpiar.
 
 ## 5 · Demo en vivo (1:50) · lo que más pesa
 
@@ -58,32 +58,32 @@ Antes de subir:
 - Abrir QuickTime con la pantalla del iPhone.
 - Volver a unir el iPhone al sandbox de Twilio.
 - Activar No molestar.
-- Dejar abierto el chat con Ami.
+- Dejar abierto el chat con Amy.
 - Ajustar el recorte con ↓/↑ hasta que no se vea la foto del sandbox.
 
 1. **«¡Veamos la demo!»** y elegir la ventana de QuickTime.
-2. **Jueves.** Antonia escribe primero (WhatsApp no deja que Ami inicie sin plantilla aprobada): «hola, el viernes salgo con las chiquillas». Ami pregunta por el finde y le pide la foto.
-3. **La foto del refri.** Mandar una foto preparada (refri con huevos, queso, tortillas, palta). Ami propone el sábado: la casera de 10 minutos, el antojo y la comparación de precio.
-   > Narrar: «Ami revisa la pauta por dentro, pero nunca le muestra un número».
+2. **Jueves.** Antonia escribe primero (WhatsApp no deja que Amy inicie sin plantilla aprobada): «hola, el viernes salgo con las chiquillas». Amy pregunta por el finde y le pide la foto.
+3. **La foto del refri.** Mandar una foto preparada (refri con huevos, queso, tortillas, palta). Amy propone el sábado: la casera de 10 minutos, el antojo y la comparación de precio.
+   > Narrar: «Amy revisa la pauta por dentro, pero nunca le muestra un número».
 4. **Sábado.** Escribir «estoy con caña» y pedir la receta paso a paso.
 5. **El plan cambia.** Escribir «igual pedimos sushi, ya la embarré». Que el jurado lea la respuesta en silencio dos segundos.
 6. Salir con la flecha → del Mac. Si se usa el control remoto, la pantalla del celular se ve un segundo.
 
-**Si WhatsApp falla:** abrir la demo web en la otra ventana (`hola-ami-agente.vercel.app/demo`) y usar el reloj para adelantar al sábado. Decirlo sin drama: «es el mismo cerebro de Ami, en la web».
+**Si WhatsApp falla:** abrir la demo web en la otra ventana (`hola-ami-agente.vercel.app/demo`) y usar el reloj para adelantar al sábado. Decirlo sin drama: «es el mismo cerebro de Amy, en la web».
 
 ## 6 · Por qué le cambiaría la vida (0:30) · Convicción
 
 **Lo dice: Esperanza**
 
-> Hay evidencia de que decidir antes ayuda: planear «si pasa esto, hago esto» aumenta las probabilidades de cumplir una meta. Eso es lo que hace Ami el jueves. Saltarse un día no borra un hábito en formación, y después de un desliz la autocompasión frena el «qué más da». Y Ami vive donde Antonia ya está: no es una app más que dejar a la semana, es su WhatsApp.
+> Hay evidencia de que decidir antes ayuda: planear «si pasa esto, hago esto» aumenta las probabilidades de cumplir una meta. Eso es lo que hace Amy el jueves. Saltarse un día no borra un hábito en formación, y después de un desliz la autocompasión frena el «qué más da». Y Amy vive donde Antonia ya está: no es una app más que dejar a la semana, es su WhatsApp.
 
-Cuidado: no decir «está comprobado que Ami funciona». La evidencia es de que decidir por adelantado ayuda, no de esta combinación exacta.
+Cuidado: no decir «está comprobado que Amy funciona». La evidencia es de que decidir por adelantado ayuda, no de esta combinación exacta.
 
 ## 7 · Lo que dejamos fuera y cierre (0:30)
 
 **Lo dice: Esperanza**
 
-> Dejamos fuera, a propósito, las rachas, las calorías y el peso, pedirle que no salga y decirle cuántos antojos tiene. Ami no reemplaza a su nutricionista: se apoya en su pauta y deriva cuando corresponde.
+> Dejamos fuera, a propósito, las rachas, las calorías y el peso, pedirle que no salga y decirle cuántos antojos tiene. Amy no reemplaza a su nutricionista: se apoya en su pauta y deriva cuando corresponde.
 >
 > El caso dice que funciona si Antonia deja de partir de cero cada lunes. Para nosotros, funcionó si el domingo ya no escribe «el lunes parto de nuevo». Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.
 
@@ -94,28 +94,28 @@ Pasar a la slide 8 y dejarla durante las preguntas.
 Quién responde cada una es una propuesta: Benja lo técnico, Esperanza lo del acompañamiento y la evidencia. Si una pregunta toca las dos cosas, responde uno y el otro completa en una frase.
 
 **¿Por qué WhatsApp y no una app? · responde Benja**
-Antonia dejó la app de recetas a la semana. WhatsApp lo abre todos los días y ahí arma los planes con sus amigas. Ami llega donde ella ya está.
+Antonia dejó la app de recetas a la semana. WhatsApp lo abre todos los días y ahí arma los planes con sus amigas. Amy llega donde ella ya está.
 
 **¿Cómo saben que funciona? · responde Esperanza**
 No lo sabemos todavía: es un prototipo de dos días. Lo que sí hay es evidencia de que decidir por adelantado y la autocompasión después de un desliz ayudan. Lo que mediríamos es si el domingo vuelve el «parto de nuevo» y si sigue respondiendo el jueves siguiente. Sin mostrarle a ella ningún número.
 
 **¿Y si no responde el jueves? · responde Esperanza**
-Ami no insiste ni la reta. El jueves siguiente vuelve a preguntar, sin reproche, porque castigar la inactividad sería otra racha.
+Amy no insiste ni la reta. El jueves siguiente vuelve a preguntar, sin reproche, porque castigar la inactividad sería otra racha.
 
 **¿No es peligroso un bot hablando de comida? · responde Esperanza**
 Por eso la seguridad está en el código y no solo en el prompt:
-- Antes de que Ami responda, una lista de frases y un clasificador aparte revisan los últimos mensajes. Si hay una señal de alerta, se manda un mensaje fijo escrito por Esperanza y Ami no improvisa.
+- Antes de que Amy responda, una lista de frases y un clasificador aparte revisan los últimos mensajes. Si hay una señal de alerta, se manda un mensaje fijo escrito por Esperanza y Amy no improvisa.
 - Después, un filtro bloquea cualquier número nutricional.
 - Deriva primero a la nutricionista o a alguien cercano. Después ofrece Salud Responde (600 360 7777), y el \*4141 si hay riesgo.
 
 **¿Cuántos antojos tiene? · responde Esperanza**
-Un número fijo, decidido con ella, pero Ami no se lo recuerda como cuota. Cualquier cuenta regresiva se vuelve otra vara con la que «pasarse».
+Un número fijo, decidido con ella, pero Amy no se lo recuerda como cuota. Cualquier cuenta regresiva se vuelve otra vara con la que «pasarse».
 
 **¿De dónde salen los precios? · responde Benja**
 Los del súper se buscan en línea. Los de delivery son de referencia, y en la demo van marcados como ejemplo.
 
 **¿Qué datos guardan? · responde Benja**
-La conversación y el plan del sábado, nada más. Ami no guarda peso ni registro de comidas, y escribir «pausa» la pausa.
+La conversación y el plan del sábado, nada más. Amy no guarda peso ni registro de comidas, y escribir «pausa» la pausa.
 
 **¿Cuál es el siguiente paso? · responde Benja**
-Pedir el antojo sin salir del chat, con una alianza (las apps de delivery no tienen una API abierta), y la plantilla aprobada de WhatsApp para que Ami escriba primero el jueves.
+Pedir el antojo sin salir del chat, con una alianza (las apps de delivery no tienen una API abierta), y la plantilla aprobada de WhatsApp para que Amy escriba primero el jueves.

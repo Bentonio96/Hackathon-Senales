@@ -1,6 +1,6 @@
-# Pitch: Ami, caso Antonia
+# Pitch: Amy, caso Antonia
 
-Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, más una portada de Ami (nombre, frase y un celular con el chat) para dejar en pantalla durante las preguntas, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Ami (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
+Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, más una portada de Amy (nombre, frase y un celular con el chat) para dejar en pantalla durante las preguntas, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Amy (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
 El guion, con tiempos, quién dice qué, el libreto de la demo y respuestas para las preguntas del jurado, está en [`guion.md`](guion.md). Publicado, se lee con formato en https://pitch-ami.vercel.app/guion (la página `guion.html` dibuja el mismo `guion.md`, así que basta con editar el `.md`).
 
@@ -91,7 +91,7 @@ Ojo: con esta opción el iPhone tiene que quedar bloqueado y se maneja desde el 
 Requisitos: macOS Sequoia 15 o posterior, iOS 18 o posterior, la misma cuenta de Apple en los dos, Bluetooth y Wi-Fi activados.
 
 1. En el Mac, abre la app **Duplicación del iPhone** y sigue el asistente la primera vez.
-2. Abre WhatsApp en el chat con Ami.
+2. Abre WhatsApp en el chat con Amy.
 3. En el pitch, toca **¡Veamos la demo!** y elige la ventana «Duplicación del iPhone».
 
 ## La demo web, aparte
