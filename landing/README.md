@@ -37,7 +37,7 @@ Ya está creado: el proyecto `ami-landing` en la cuenta personal, enlazado al re
 
 ## Decisiones
 
-- **Concepto «Cerro de calamina».** La semana es un cerro de Valparaíso con siete casas que siempre suben. El viernes y el sábado son casas como las demás, no un hoyo, y el cerro nunca baja: el lunes se sigue, no se parte de cero. Es una imagen, no un marcador de progreso (acordamos no medir progreso acumulado). Los bordes ondulados entre secciones son el perfil de la calamina.
+- **Concepto «Borde costero».** La semana es una fila de siete casas de Valparaíso frente al mar, todas a la misma altura, y a los lados asoman casas sin nombre porque la semana sigue de largo: el domingo pasa al lunes sin salto. Antes era un cerro con las casas subiendo en diagonal («Cerro de calamina»), pero se leía como una montaña que hay que escalar, y del domingo, arriba, se «caía» al lunes, abajo: justo el «parto de cero» que se quiere evitar. Además chocaba con no mostrar progreso. Los bordes ondulados entre secciones son el perfil de la calamina.
 - **La paleta de Ami, solo en claro** (la misma de los mockups): neblina `#F2F4F1` de fondo, tinta `#1E2321`, amarillo ascensor, celeste cerro y rubor como campos, y el azul puerto `#1F5F73` solo en lo que se toca (hablar por WhatsApp, elegir, avanzar).
 - **Letra:** Bricolage Grotesque para el nombre y los títulos, y Figtree para el texto, como en los mockups.
 - **Poco texto, escenas cotidianas:** el corazón de la página son seis escenas de un finde (saliendo de la U, la foto del refri, el completo del carrete, la caña, el sushi con las amigas, la culpa del domingo), cada una con su dibujo. Al tocarla, el chat muestra qué le escribe Ami en ese momento.

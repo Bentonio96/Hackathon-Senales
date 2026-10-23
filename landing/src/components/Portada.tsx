@@ -1,5 +1,5 @@
 import { NOMBRE, WHATSAPP_URL } from "../config";
-import { Cerro } from "./Cerro";
+import { BordeCostero } from "./BordeCostero";
 import { AvatarAmi } from "./Avatar";
 import { IconoChat } from "./Icono";
 import { Onda } from "./Onda";
@@ -78,7 +78,7 @@ export function Portada() {
           </p>
         </div>
         <div className="lg:col-span-6">
-          <Cerro />
+          <BordeCostero />
           <p className="mt-3 text-center text-chico text-tinta-suave">Toca una casa.</p>
         </div>
       </div>

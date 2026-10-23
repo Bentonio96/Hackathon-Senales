@@ -2,8 +2,10 @@ import { useState } from "react";
 import { AvatarAmi } from "./Avatar";
 
 /**
- * La semana como un cerro de Valparaíso: siete casas que suben, una por día.
- * El viernes y el sábado son casas como las otras, y el cerro nunca baja.
+ * La semana como el borde costero de Valparaíso: siete casas en fila, a la
+ * misma altura, frente al mar. No hay subida ni cima: el sábado y el domingo
+ * son casas como las otras, y a los lados asoman casas sin nombre porque la
+ * semana sigue de largo (el domingo pasa al lunes sin salto).
  * Cada casa es un botón: al tocarla dice qué le toca a ese día en el plan.
  */
 type Casa = {
@@ -18,18 +20,26 @@ type Casa = {
   nota: string;
 };
 
+const BASE = 318;
+
 const CASAS: Casa[] = [
-  { dia: "Lunes", corto: "Lun", x: 22, base: 506, ancho: 84, alto: 104, color: "var(--casa-celeste)", techo: "dos-aguas", nota: "Tu pauta, como siempre." },
-  { dia: "Martes", corto: "Mar", x: 118, base: 486, ancho: 78, alto: 118, color: "var(--casa-amarillo)", techo: "plano", nota: "Tu pauta, a tu ritmo." },
-  { dia: "Miércoles", corto: "Mié", x: 208, base: 452, ancho: 86, alto: 110, color: "var(--casa-rosado)", techo: "media", nota: "Tu pauta. Un día normal, y está bien." },
-  { dia: "Jueves", corto: "Jue", x: 306, base: 404, ancho: 80, alto: 128, color: "var(--casa-menta)", techo: "dos-aguas", nota: "Dejas listo el sábado, con la cabeza fresca." },
-  { dia: "Viernes", corto: "Vie", x: 398, base: 346, ancho: 88, alto: 116, color: "var(--casa-naranja)", techo: "plano", nota: "Carrete con tus amigas. Es parte del plan." },
-  { dia: "Sábado", corto: "Sáb", x: 498, base: 282, ancho: 84, alto: 130, color: "var(--casa-azul)", techo: "dos-aguas", nota: "Antojo y algo casero. Ya está decidido." },
-  { dia: "Domingo", corto: "Dom", x: 594, base: 222, ancho: 90, alto: 112, color: "var(--casa-rojo)", techo: "media", nota: "Sigues donde quedaste. No hay cuenta que limpiar." },
+  { dia: "Lunes", corto: "Lun", x: 57, base: BASE, ancho: 78, alto: 112, color: "var(--casa-celeste)", techo: "dos-aguas", nota: "Tu pauta, como siempre." },
+  { dia: "Martes", corto: "Mar", x: 145, base: BASE, ancho: 78, alto: 128, color: "var(--casa-amarillo)", techo: "plano", nota: "Tu pauta, a tu ritmo." },
+  { dia: "Miércoles", corto: "Mié", x: 233, base: BASE, ancho: 78, alto: 104, color: "var(--casa-rosado)", techo: "media", nota: "Tu pauta. Un día normal, y está bien." },
+  { dia: "Jueves", corto: "Jue", x: 321, base: BASE, ancho: 78, alto: 122, color: "var(--casa-menta)", techo: "dos-aguas", nota: "Dejas listo el sábado, con la cabeza fresca." },
+  { dia: "Viernes", corto: "Vie", x: 409, base: BASE, ancho: 78, alto: 116, color: "var(--casa-naranja)", techo: "plano", nota: "Carrete con tus amigas. Es parte del plan." },
+  { dia: "Sábado", corto: "Sáb", x: 497, base: BASE, ancho: 78, alto: 126, color: "var(--casa-azul)", techo: "dos-aguas", nota: "Antojo y algo casero. Ya está decidido." },
+  { dia: "Domingo", corto: "Dom", x: 585, base: BASE, ancho: 78, alto: 108, color: "var(--casa-rojo)", techo: "media", nota: "Un día tranquilo. Mañana sigues igual que siempre." },
+];
+
+/** Casas sin nombre a los lados: la semana sigue antes y después. */
+const VECINAS: Casa[] = [
+  { dia: "", corto: "", x: -31, base: BASE, ancho: 78, alto: 118, color: "var(--casa-rojo)", techo: "media", nota: "" },
+  { dia: "", corto: "", x: 673, base: BASE, ancho: 78, alto: 110, color: "var(--casa-celeste)", techo: "dos-aguas", nota: "" },
 ];
 
 const ANCHO = 720;
-const ALTO = 600;
+const ALTO = 440;
 
 function Techo({ c }: { c: Casa }) {
   const y = c.base - c.alto;
@@ -75,7 +85,7 @@ function Ventanas({ c, encendida }: { c: Casa; encendida: boolean }) {
   );
 }
 
-export function Cerro() {
+export function BordeCostero() {
   const [activa, setActiva] = useState(5);
   const casa = CASAS[activa];
 
@@ -88,41 +98,38 @@ export function Cerro() {
           </pattern>
           {/* La vista recortada como una mancha, no como un rectángulo. */}
           <clipPath id="vista">
-            <path d="M34 150 C 30 60, 150 22, 380 20 C 600 18, 706 56, 708 190 L 714 520 C 714 588, 640 600, 360 598 C 80 596, 6 590, 8 500 Z" />
+            <path d="M30 110 C 28 40, 150 14, 380 14 C 600 14, 704 40, 708 130 L 712 372 C 712 428, 640 438, 360 436 C 80 434, 8 430, 8 366 Z" />
           </clipPath>
         </defs>
 
         <g clipPath="url(#vista)">
           <rect width={ANCHO} height={ALTO} fill="var(--vista)" />
-          {/* Sol de día, luna de noche: el mismo círculo cambia con el tema. */}
-          <circle cx="560" cy="96" r="40" fill="var(--ventana)" />
-          <circle cx="560" cy="96" r="40" fill="var(--casa-amarillo)" opacity="0.7" />
+          <circle cx="604" cy="78" r="34" fill="var(--casa-amarillo)" opacity="0.75" />
 
-          {/* El cerro de atrás y el de adelante. */}
-          <path d="M0 470 C 140 430, 260 330, 400 250 C 520 180, 620 120, 720 96 L720 600 L0 600 Z" fill="var(--cerro-2)" />
-          <path d="M0 530 C 150 512, 260 470, 380 400 C 500 330, 600 250, 720 212 L720 600 L0 600 Z" fill="var(--cerro)" />
-
-          {/* La escalera que sube entre las casas. */}
+          {/* Los cerros de atrás: lomas parejas, ninguna más alta que otra. */}
           <path
-            d="M72 530 h26 v-14 h26 v-14 h26 v-16 h26 v-16 h26 v-18 h26 v-18 h26 v-20 h26 v-20 h26 v-22 h26 v-22 h26 v-20 h26 v-22 h26 v-20 h26 v-18 h26 v-18"
-            fill="none"
-            stroke="var(--tinta)"
-            strokeOpacity="0.22"
-            strokeWidth="3"
-            strokeLinejoin="round"
+            d={`M0 232 ${Array.from({ length: 4 }, (_, k) => `Q${k * 180 + 90} 190 ${k * 180 + 180} 232`).join(" ")} L720 440 L0 440 Z`}
+            fill="var(--cerro-2)"
           />
+
+          {/* El paseo frente al mar, de lado a lado. */}
+          <rect x="0" y={BASE} width={ANCHO} height="54" fill="var(--cerro)" />
+
+          {VECINAS.map((c) => (
+            <g key={c.x} opacity="0.45">
+              <Techo c={c} />
+              <rect x={c.x} y={c.base - c.alto} width={c.ancho} height={c.alto} rx={4} fill={c.color} />
+              <Ventanas c={c} encendida={false} />
+            </g>
+          ))}
 
           {CASAS.map((c, i) => {
             const sel = i === activa;
             return (
-              <g
-                key={c.dia}
-                className="casa-entra"
-                style={{ ["--i" as string]: i }}
-              >
+              <g key={c.dia} className="casa-entra" style={{ ["--i" as string]: i }}>
                 <g
                   style={{
-                    transform: sel ? "translateY(-10px)" : "none",
+                    transform: sel ? "translateY(-8px)" : "none",
                     transition: "transform 380ms var(--ease-salto)",
                   }}
                 >
@@ -131,25 +138,20 @@ export function Cerro() {
                   <rect x={c.x} y={c.base - c.alto} width={c.ancho} height={c.alto} rx={4} fill="url(#calamina)" />
                   <Ventanas c={c} encendida={sel} />
                 </g>
-                <text
-                  x={c.x + c.ancho / 2}
-                  y={c.base + 30}
-                  textAnchor="middle"
-                  fontSize="19"
-                  fontWeight={sel ? 700 : 500}
-                  fill="var(--tinta)"
-                >
+                <text x={c.x + c.ancho / 2} y={c.base + 34} textAnchor="middle" fontSize="23" fontWeight={sel ? 700 : 500} fill="var(--tinta)">
                   {c.corto}
                 </text>
               </g>
             );
           })}
 
-          {/* El mar, con el mismo borde de calamina. */}
+          {/* El mar, con el borde de calamina, y un bote. */}
           <path
-            d={`M0 556 ${Array.from({ length: 19 }, (_, k) => `Q${k * 40 + 10} 544 ${k * 40 + 20} 556 T${k * 40 + 40} 556`).join(" ")} L720 600 L0 600 Z`}
+            d={`M0 380 ${Array.from({ length: 18 }, (_, k) => `Q${k * 40 + 10} 368 ${k * 40 + 20} 380 T${k * 40 + 40} 380`).join(" ")} L720 440 L0 440 Z`}
             fill="var(--mar)"
           />
+          <path d="M470 400h56l-8 12h-40z" fill="var(--superficie)" />
+          <path d="M498 400v-26l18 22z" fill="var(--casa-amarillo)" />
         </g>
       </svg>
 
@@ -169,7 +171,7 @@ export function Cerro() {
               left: `${((c.x - 8) / ANCHO) * 100}%`,
               top: `${((c.base - c.alto - 34) / ALTO) * 100}%`,
               width: `${((c.ancho + 16) / ANCHO) * 100}%`,
-              height: `${((c.alto + 72) / ALTO) * 100}%`,
+              height: `${((c.alto + 78) / ALTO) * 100}%`,
             }}
           />
         ))}
@@ -177,7 +179,7 @@ export function Cerro() {
 
       <figcaption
         aria-live="polite"
-        className="absolute top-[2%] left-0 flex max-w-[66%] items-start gap-3 rounded-[1.4rem] rounded-bl-md bg-superficie py-3 pr-4 pl-3 text-chico sm:text-cuerpo"
+        className="mt-3 flex items-start gap-3 rounded-[4px_22px_22px_22px] bg-superficie py-3 pr-4 pl-3 text-chico sm:absolute sm:top-[2%] sm:left-[4%] sm:mt-0 sm:max-w-[60%] sm:text-cuerpo"
       >
         <AvatarAmi className="size-10 shrink-0 sm:size-12" />
         <span>

@@ -3,7 +3,7 @@ import { AvatarAmi } from "./Avatar";
 import { IconoChat } from "./Icono";
 import { Onda } from "./Onda";
 
-/** El cerro vuelve al final, en silueta: siete casas, una por día. */
+/** El borde costero vuelve al final, en silueta: una fila de casas que sigue de largo. */
 const SILUETA = [
   [0, 64, 70],
   [70, 82, 92],
