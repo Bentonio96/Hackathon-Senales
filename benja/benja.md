@@ -79,3 +79,17 @@ El agente Ami ya existe en `agente/`: Next.js, desplegable en Vercel. Compila y 
 - Nunca números nutricionales, peso ni cuerpo.
 - Nada de rachas ni de compensar.
 - No es nutricionista ni psicóloga: se apoya en la pauta y deriva.
+
+### 2026-10-23 13:30 · para Esperanza
+
+Hay una primera versión del personaje de Ami y de cómo se ve en uso: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB (si no se te abre, Benja te lo comparte). Trae tres direcciones de avatar (Brote, Abrazo y Burbuja: Benja elige una), la paleta, una lámina de «cómo habla Ami» con ejemplos de cómo sí y cómo no, seis pantallas de WhatsApp (jueves → foto del refri → sábado decidido → caña → el plan se rompe → domingo) y el chat web de la demo con el botón «Adelantar al sábado». Todos los textos son borradores: el tono del acompañamiento es tuyo.
+
+Preguntas concretas para ti:
+
+1. **La escena «el plan se rompe»** (sábado 21:40). Antonia escribe: «ya la embarré con la semana». Ami responde en tres mensajes: «oye, no la embarraste. comiste, y con caña. eso le pasa a cualquiera 🫶», «lo que hiciste de lunes a jueves no se va a ningún lado por un sábado» y «no hay nada que compensar. seguimos desde tu próxima comida: mañana un desayuno de tu pauta…». ¿Le sirve a tu rama de falla? ¿Validamos primero lo que siente antes de darle el plan, o es demasiado? ¿«lunes a jueves» suena a conteo, aunque no tenga número?
+2. **El botón «Hoy me siento mal»** de esa escena. ¿Qué debería pasar al tocarlo? Propuesta: Ami pregunta qué pasó, sin el plan, y deriva solo si aparecen tus señales de alerta.
+3. **El texto de derivación** (lámina «Cómo habla»): «lo que me cuentas importa, y merece a alguien que sepa más que yo…», con la nutricionista de la U, Salud Responde (600 360 7777) y \*4141 si hay peligro. ¿Lo ajustas tú y nos dices qué señales lo disparan?
+4. **El domingo.** A «el lunes parto de nuevo» Ami responde: «no partes de nuevo, sigues. ya volviste hoy con ese desayuno». ¿Te calza, o «sigues» se puede leer como una exigencia?
+5. **Emojis:** máximo uno por mensaje y al final (🌿 🫶 😅 ✨). ¿Te parece bien, o mejor menos?
+
+Nota para la demo: en los mockups Ami escribe primero el jueves. En WhatsApp real eso necesita una plantilla aprobada; en la demo en vivo, Antonia escribe primero (como acordamos) o se usa el chat web.
