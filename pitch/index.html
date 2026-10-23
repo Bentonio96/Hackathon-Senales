@@ -88,7 +88,11 @@
   .pildora.siguiente { background: transparent; border: 2.5px dashed var(--accion); color: var(--accion-fuerte); grid-column: 1 / -1; }
 
   /* Evidence as things Ami says */
-  .razones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px; }
+  .razones { display: flex; flex-direction: column; gap: 26px; }
+  /* Slide 6: the key idea, implementation intentions, read at a glance. */
+  .clave { background: var(--amarillo); border-radius: 44px 36px 48px 40px; padding: 44px 48px; display: flex; flex-direction: column; gap: 20px; }
+  .clave-frase { font-family: var(--display); font-weight: 800; font-size: 88px; line-height: .95; letter-spacing: -0.04em; margin: 0; }
+  .clave-bajada { font-size: 27px; line-height: 1.35; margin: 0; }
   .razon { display: flex; flex-direction: column; gap: 10px; }
 
   .esperanza { border: 2.5px dashed var(--accion); border-radius: 18px; padding: 10px 16px; font-size: 18px; color: var(--accion-fuerte); background: rgba(255,255,255,.55); align-self: flex-start; }
@@ -257,23 +261,26 @@
 
     <!-- 6 · Por qué cambiaría -->
     <section class="slide" aria-label="Por qué cambiaría">
-      <h2 class="titulo">Por qué Ami le cambiaría la vida a Antonia.</h2>
-      <div class="razones">
-        <div class="razon">
-          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">un finde no borra tu semana</p></div>
-          <p class="chico">Saltarse un día no afectó de forma importante el hábito. Lally y otros, 2010.</p>
+      <h2 class="titulo" style="font-size: 64px">Por qué Ami le cambiaría la vida a Antonia.</h2>
+      <div class="split" style="grid-template-columns: minmax(0, 7fr) minmax(0, 6fr); align-items: start">
+        <div class="clave">
+          <p class="clave-frase">decidir antes funciona.</p>
+          <p class="clave-bajada">planear «si pasa esto, hago esto» aumenta las probabilidades de cumplir una meta. es lo que hace Ami el jueves: «si despiertas con caña, te espera algo rico en casa».</p>
+          <p class="chico">Intenciones de implementación: Gollwitzer y Sheeran, 2006, metaanálisis de 94 estudios (d = 0,65). En alimentación ayuda más a sumar algo (d = 0,51) que a evitarlo (d = 0,29): Adriaanse y otros, 2011.</p>
         </div>
-        <div class="razon">
-          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">sumar una casera rica, no prohibir el delivery</p></div>
-          <p class="chico">Planificar rinde casi el doble para sumar que para evitar. Adriaanse y otros, 2011.</p>
-        </div>
-        <div class="razon">
-          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">seguimos desde tu próxima comida</p></div>
-          <p class="chico">Con autocompasión tras un desliz, universitarias comieron menos después. Adams y Leary, 2007.</p>
-        </div>
-        <div class="razon">
-          <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">tus antojos, pocos y decididos antes</p></div>
-          <p class="chico">Una reserva limitada rindió más que la meta rígida o sin límite. Sharif y Shu, 2017: una pista, no una prueba.</p>
+        <div class="razones">
+          <div class="razon">
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">un finde no borra tu semana</p></div>
+            <p class="chico">Saltarse un día no afectó de forma importante el hábito. Lally y otros, 2010.</p>
+          </div>
+          <div class="razon">
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">seguimos desde tu próxima comida</p></div>
+            <p class="chico">Con autocompasión tras un desliz, universitarias comieron menos después. Adams y Leary, 2007.</p>
+          </div>
+          <div class="razon">
+            <div class="dice"><svg class="av" aria-hidden="true"><use href="#ami"/></svg><p class="burbuja" style="margin: 0">tus antojos, pocos y decididos antes</p></div>
+            <p class="chico">Una reserva limitada rindió más que la meta rígida o sin límite. Sharif y Shu, 2017: una pista, no una prueba.</p>
+          </div>
         </div>
       </div>
     </section>
