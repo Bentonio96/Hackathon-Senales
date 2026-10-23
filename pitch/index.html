@@ -52,8 +52,25 @@
   .slide.rosado { background: var(--rosado); }
   .slide.celeste { background: var(--celeste); }
   .slide.menta { background: var(--menta); }
-  .preguntas { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; margin-top: -70px; }
-  .preguntas-av { width: 260px; height: 260px; }
+  /* 8 · cover for Q&A: the brand and a phone mockup, like the landing's hero */
+  .portada { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 80px; align-items: center; margin-top: -60px; }
+  .mock { width: 330px; height: 680px; border-radius: 56px; background: var(--tinta); padding: 12px; transform: rotate(3deg); justify-self: center; }
+  .mock-pantalla { width: 100%; height: 100%; border-radius: 45px; overflow: hidden; background: var(--cielo); display: flex; flex-direction: column; }
+  .mock-head { display: flex; align-items: center; gap: 10px; padding: 40px 18px 12px; background: var(--superficie); border-bottom: 1px solid rgb(30 35 33 / .08); }
+  .mock-head svg { width: 38px; height: 38px; }
+  .mock-head b { display: block; font-family: var(--display); font-size: 19px; }
+  .mock-head span { font-size: 13px; color: var(--tinta-suave); }
+  .mock-chat { flex-grow: 1; display: flex; flex-direction: column; gap: 8px; padding: 14px 12px; overflow: hidden; }
+  .mock-dia { align-self: center; background: var(--superficie); border-radius: 999px; padding: 3px 12px; font-size: 12px; color: var(--tinta-suave); }
+  .mock-msg { align-self: flex-start; max-width: 82%; margin: 0; background: var(--superficie); border-radius: 4px 18px 18px 18px; padding: 9px 13px; font-size: 15px; line-height: 1.35; }
+  .mock-msg.yo { align-self: flex-end; background: var(--celeste); border-radius: 18px 4px 18px 18px; }
+  .mock-foto { padding: 4px; }
+  .mock-foto svg { display: block; width: 190px; height: 119px; border-radius: 14px; }
+  .mock-plan { display: flex; flex-direction: column; gap: 4px; width: 82%; }
+  .mock-plan b { font-family: var(--display); font-size: 16px; }
+  .mock-input { display: flex; align-items: center; gap: 8px; padding: 10px 12px 26px; }
+  .mock-input span { flex-grow: 1; background: var(--superficie); border-radius: 999px; padding: 10px 14px; font-size: 14px; color: var(--tinta-suave); }
+  .mock-input i { width: 38px; height: 38px; border-radius: 50%; background: var(--accion); }
   /* The reveal: Ami says hi when the slide comes in (the deck's one orchestrated moment). */
   .presenta { display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 72px; align-items: center; margin-top: -60px; }
   .presenta-av { width: 420px; height: 420px; }
@@ -303,13 +320,40 @@
       <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
 
-    <!-- 8 · Preguntas: Ami stays on screen during Q&A -->
-    <section class="slide rosado grano" aria-label="Preguntas">
-      <div class="preguntas">
-        <svg class="preguntas-av" viewBox="0 0 200 200" role="img" aria-label="Ami, una mancha amarilla con Antonia, una mancha celeste, a su lado"><use href="#ami"/></svg>
-        <h2 class="display" style="font-size: 150px">¿Preguntas?</h2>
-        <p class="burbuja" style="margin: 0; font-size: 30px">pregunten nomás, yo me quedo aquí 🫶</p>
-        <p class="chico" style="font-size: 22px; margin-top: 8px">Ami · hola-ami.vercel.app · Benja y Esperanza</p>
+    <!-- 8 · Portada: Ami on screen during Q&A -->
+    <section class="slide celeste grano" aria-label="Ami">
+      <div class="portada">
+        <div class="stack" style="gap: 26px">
+          <div style="display: flex; align-items: center; gap: 28px">
+            <svg style="width: 150px; height: 150px; flex-shrink: 0" viewBox="0 0 200 200" aria-hidden="true"><use href="#ami"/></svg>
+            <h2 class="display" style="font-size: 200px; line-height: .85">Ami</h2>
+          </div>
+          <p class="lead" style="font-size: 40px; max-width: 18ch; font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1">Tu sábado, decidido desde el jueves.</p>
+          <p class="chico" style="font-size: 22px">Una amiga en tu WhatsApp · hola-ami.vercel.app</p>
+        </div>
+        <div class="mock" role="img" aria-label="Celular con un chat de WhatsApp entre Antonia y Ami">
+          <div class="mock-pantalla">
+            <div class="mock-head">
+              <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#ami"/></svg>
+              <div><b>Ami</b><span>en línea</span></div>
+            </div>
+            <div class="mock-chat">
+              <span class="mock-dia">jueves</span>
+              <p class="mock-msg">hola Anto 🌿 ¿sales este finde?</p>
+              <p class="mock-msg yo">obvio po, el viernes hay carrete</p>
+              <p class="mock-msg">bacán. mándame una foto del refri y armamos tu sábado</p>
+              <div class="mock-msg yo mock-foto">
+                <svg viewBox="0 0 240 150" aria-hidden="true"><rect width="240" height="150" fill="#E4EBEC"/><rect x="10" y="8" width="220" height="134" rx="8" fill="#F7FAFA"/><line x1="14" y1="74" x2="226" y2="74" stroke="#C9D3D5" stroke-width="3"/><circle cx="40" cy="56" r="10" fill="#FBF3E6" stroke="#D9C6A5" stroke-width="2"/><circle cx="62" cy="56" r="10" fill="#FBF3E6" stroke="#D9C6A5" stroke-width="2"/><ellipse cx="110" cy="50" rx="14" ry="18" fill="#7FA35A"/><circle cx="110" cy="54" r="6" fill="#8A5A3B"/><circle cx="160" cy="56" r="11" fill="#E0644A"/><circle cx="184" cy="58" r="10" fill="#E0644A"/><path d="M40 126 L96 126 L96 96 Z" fill="#F2CF6B"/><rect x="120" y="98" width="70" height="30" rx="6" fill="#EFE2C4"/></svg>
+              </div>
+              <div class="mock-msg mock-plan">
+                <b>tu sábado, ya decidido</b>
+                <span>quesadillas en 10 min, con lo que tienes</span>
+                <span>sushi por delivery: tu antojo</span>
+              </div>
+            </div>
+            <div class="mock-input"><span>Mensaje</span><i></i></div>
+          </div>
+        </div>
       </div>
       <svg class="silueta" data-silueta viewBox="0 0 1600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
     </section>
