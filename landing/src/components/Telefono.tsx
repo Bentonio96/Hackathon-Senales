@@ -32,17 +32,17 @@ function Refri() {
 function Plan() {
   return (
     <div className="space-y-2">
-      <p className="font-titulo font-bold">tu sábado, listo</p>
+      <p className="font-titulo font-bold">Tu sábado, listo</p>
       <div className="rounded-[14px_18px_14px_18px] bg-menta px-3 py-2">
-        <p className="text-[0.8125rem] font-semibold">almuerzo, casero</p>
+        <p className="text-[0.8125rem] font-semibold">Almuerzo, casero</p>
         <p>
-          {RECETA.nombre.toLowerCase()}, {RECETA.minutos} min · te falta tomate y cilantro, {pesos(faltan)}
+          {RECETA.nombre}, {RECETA.minutos} min · te falta tomate y cilantro, {pesos(faltan)}
         </p>
       </div>
       <div className="rounded-[18px_14px_18px_14px] bg-amarillo px-3 py-2">
-        <p className="text-[0.8125rem] font-semibold">comida, tu antojo</p>
+        <p className="text-[0.8125rem] font-semibold">Comida, tu antojo</p>
         <p>
-          {pizza.nombre.toLowerCase()} de {pizza.local}, {pesos(pizza.precio + ENVIO)}
+          {pizza.nombre} de {pizza.local}, {pesos(pizza.precio + ENVIO)}
         </p>
       </div>
       <p className="text-[0.8125rem] text-tinta-suave">Precios de ejemplo.</p>

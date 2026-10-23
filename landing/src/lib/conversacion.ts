@@ -33,7 +33,7 @@ export const MOMENTOS: Momento[] = [
     escena: "u",
     fondo: "amarillo",
     mensajes: [
-      { de: "ella", texto: "hola! ¿sales este finde?" },
+      { de: "ella", texto: "Hola! Sales este finde?" },
       { de: "yo", texto: "sí, el viernes hay carrete donde la Coni" },
       { de: "ella", texto: "Anda tranqui, y si quieres el sábado lo armamos juntas 🌿" },
     ],
@@ -47,7 +47,7 @@ export const MOMENTOS: Momento[] = [
     fondo: "celeste",
     mensajes: [
       { de: "yo", foto: true },
-      { de: "ella", texto: "con huevos, queso y tortillas te salen unas quesadillas" },
+      { de: "ella", texto: "Con huevos, queso y tortillas te salen unas quesadillas" },
       { de: "ella", plan: true },
     ],
   },
@@ -76,7 +76,7 @@ export const MOMENTOS: Momento[] = [
       { de: "yo", texto: "paso a paso porfa" },
       {
         de: "ella",
-        pasos: ["bate 2 huevos y revuélvelos", "rellena las tortillas con huevo y queso", "2 minutos por lado y listo"],
+        pasos: ["Bate 2 huevos y revuélvelos", "Rellena las tortillas con huevo y queso", "2 minutos por lado y listo"],
       },
     ],
   },
