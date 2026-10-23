@@ -1,11 +1,11 @@
-# Ami: que el lunes no sea el día uno
+# Amy: que el lunes no sea el día uno
 
 **Hackatón Señales · Caso 05, Antonia** · Equipo: Benja y Esperanza · 23 y 24 de octubre de 2026
 
-Ami es una amiga por WhatsApp para Antonia. El jueves, con calma, antes del finde, deja decidido el sábado: un antojo y una comida casera rica hecha con lo que tiene en el refri. Si el plan se rompe, la acompaña sin juzgar, para que el fin de semana deje de sentirse como una caída.
+Amy es una amiga por WhatsApp para Antonia. El jueves, con calma, antes del finde, deja decidido el sábado: un antojo y una comida casera rica hecha con lo que tiene en el refri. Si el plan se rompe, la acompaña sin juzgar, para que el fin de semana deje de sentirse como una caída.
 
 - **Landing:** https://hola-ami.vercel.app
-- **Diseño de Ami** (avatar, voz y mockups): https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
+- **Diseño de Amy** (avatar, voz y mockups): https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
 ## El problema que decidimos atacar
 
@@ -28,22 +28,22 @@ El detalle, con todas las fuentes, está en [`benja/investigacion-antonia.md`](b
 
 - **Decirle cuántos antojos tiene:** cualquier cuota es una vara más con la que «pasarse».
 - **Rachas, puntajes o medidas de progreso:** cualquier número se vuelve una vara para alguien que piensa en todo o nada.
-- **Contar calorías, compensar o hablar de peso.** Ami revisa los nutrientes solo por dentro y nunca muestra un número.
+- **Contar calorías, compensar o hablar de peso.** Amy revisa los nutrientes solo por dentro y nunca muestra un número.
 - **Pedirle que deje de salir.**
-- **Reemplazar a su nutricionista o a una psicóloga:** Ami se apoya en la pauta y deriva cuando corresponde (Salud Responde, \*4141, 131).
+- **Reemplazar a su nutricionista o a una psicóloga:** Amy se apoya en la pauta y deriva cuando corresponde (Salud Responde, \*4141, 131).
 - **Pedir el delivery sin salir de WhatsApp:** las apps no tienen una API pública. Es el siguiente paso, con una alianza.
-- **Leer el grupo de WhatsApp de las amigas:** no se puede, así que Ami pregunta primero.
+- **Leer el grupo de WhatsApp de las amigas:** no se puede, así que Amy pregunta primero.
 
 ## Qué hay en el repo
 
 | Carpeta | Qué es |
 |---|---|
-| [`agente/`](agente/) | **Ami.** Next.js en Vercel con Claude y herramientas: lee la foto del refri, busca precios reales en Jumbo, revisa nutrientes por dentro y guarda el plan del sábado. Tiene el webhook de WhatsApp (sandbox de Twilio) y un chat web de respaldo en `/demo`, con un reloj para la demo en vivo. |
-| [`landing/`](landing/) | La landing de Ami (Vite, React y TypeScript), en línea en hola-ami.vercel.app. |
+| [`agente/`](agente/) | **Amy.** Next.js en Vercel con Claude y herramientas: lee la foto del refri, busca precios reales en Jumbo, revisa nutrientes por dentro y guarda el plan del sábado. Tiene el webhook de WhatsApp (sandbox de Twilio) y un chat web de respaldo en `/demo`, con un reloj para la demo en vivo. |
+| [`landing/`](landing/) | La landing de Amy (Vite, React y TypeScript), en línea en hola-ami.vercel.app. |
 | [`pitch/`](pitch/) | El pitch en HTML, con una slide que muestra en vivo la pantalla del iPhone. |
 | [`benja/`](benja/), [`esperanza/`](esperanza/) | Las notas, decisiones e investigación de cada uno. Los Claude de los dos se coordinan por estos archivos (reglas en [`CLAUDE.md`](CLAUDE.md)). |
 
-Ami tiene dos voces en su prompt:
+Amy tiene dos voces en su prompt:
 - [`agente/prompts/ami.md`](agente/prompts/ami.md): la planificación, de Benja.
 - [`agente/prompts/acompanamiento.md`](agente/prompts/acompanamiento.md): el acompañamiento y la seguridad, de Esperanza.
 
