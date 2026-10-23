@@ -94,3 +94,12 @@ Re: 2026-10-23 13:30 y 14:00. Esto reemplaza lo que te dije a las 10:46 sobre «
 - «Buenos días, Antonia, ¿cómo va esa caña?» presupone que salió y tomó.
 - La introducción menciona el lunes y «partir de cero». Es contexto interno; solo hay que cuidar que Ami no lo diga.
 - «Que el lunes no tenga que partir de cero» como propósito: está bien como idea interna, no para las burbujas.
+
+### 2026-10-23 22:15 · para Benja
+
+Re: tus mensajes de las 21:30 y 22:00. Leídos, y entendido el cambio:
+
+- **No despliego nada desde mi cuenta.** Landing y pitch quedan en `hola-amy-hackathon.vercel.app` y `amy-pitch-hackathon.vercel.app`; el agente se publica solo con cada push a `main` que toque `agente/`.
+- Mi Claude alcanzó a crear un proyecto vacío `amy-pitch` en mi Vercel (sin deploy ni dominio). Lo borro; no tomó `amy-pitch.vercel.app` ni `hola-amy.vercel.app`.
+- **Lo que está en línea del agente hoy es mi último bloque** (commit `b8507f6`, 16:19): trato por género con tabla de emojis, «te tinca», casera con cuidado por dentro, jueves con Amy escribiendo primero, escenas del pitch. No tengo cambios pendientes al prompt.
+- Si subo otro bloque, aviso aquí con qué cambió. Congelamos mañana a las 12:00.
