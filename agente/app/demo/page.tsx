@@ -28,14 +28,35 @@ async function prepararFoto(archivo: File): Promise<{ base64: string; url: strin
   return { base64: url.split(",")[1], url };
 }
 
-// Formato estilo WhatsApp: *negrita* y saltos de línea.
+const URL_RE = /(https?:\/\/[^\s)]+)/g;
+
+// Un enlace de la app de delivery se muestra como botón que la abre.
+function Enlace({ url }: { url: string }) {
+  let sitio = url;
+  try {
+    sitio = new URL(url).hostname.replace(/^www\./, "");
+  } catch {}
+  return (
+    <a className={styles.boton} href={url} target="_blank" rel="noopener noreferrer">
+      abrir {sitio} ↗
+    </a>
+  );
+}
+
+// Formato estilo WhatsApp: *negrita*, saltos de línea y enlaces.
 function Texto({ texto }: { texto: string }) {
   return (
     <>
       {texto.split("\n").map((linea, i) => (
         <p key={i}>
-          {linea.split(/(\*[^*]+\*)/g).map((trozo, j) =>
-            trozo.startsWith("*") && trozo.endsWith("*") && trozo.length > 2 ? <strong key={j}>{trozo.slice(1, -1)}</strong> : trozo,
+          {linea.split(URL_RE).map((parte, k) =>
+            k % 2 === 1 ? (
+              <Enlace key={k} url={parte} />
+            ) : (
+              parte.split(/(\*[^*]+\*)/g).map((trozo, j) =>
+                trozo.startsWith("*") && trozo.endsWith("*") && trozo.length > 2 ? <strong key={`${k}-${j}`}>{trozo.slice(1, -1)}</strong> : trozo,
+              )
+            ),
           )}
         </p>
       ))}

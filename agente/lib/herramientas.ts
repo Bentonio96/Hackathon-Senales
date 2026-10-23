@@ -12,6 +12,13 @@ const preciosEjemplo: PreciosEjemplo = JSON.parse(
   readFileSync(path.join(process.cwd(), "data", "precios-ejemplo.json"), "utf8"),
 );
 
+// Solo abren la app (o su web): no hay API pública para buscar menús ni hacer pedidos.
+export const ENLACES_DELIVERY = {
+  pedidosya: "https://www.pedidosya.cl",
+  ubereats: "https://www.ubereats.com/cl",
+  rappi: "https://www.rappi.cl",
+} as const;
+
 export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
   {
     name: "buscar_precio_supermercado",
@@ -38,8 +45,13 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
       type: "object",
       properties: {
         antojo: { type: "string", description: "El antojo, por ejemplo 'hamburguesa con papas' o 'pizza mediana'." },
+        app: {
+          type: "string",
+          enum: ["pedidosya", "ubereats", "rappi", "no_sabe"],
+          description: "La app de delivery que usa Antonia, si la dijo.",
+        },
       },
-      required: ["antojo"],
+      required: ["antojo", "app"],
       additionalProperties: false,
     },
     strict: true,
@@ -204,12 +216,13 @@ export async function ejecutarHerramienta(nombre: string, entrada: unknown, sesi
       );
     }
     case "precio_antojo_delivery": {
-      const { antojo } = entrada as { antojo: string };
+      const { antojo, app } = entrada as { antojo: string; app: keyof typeof ENLACES_DELIVERY | "no_sabe" };
       const ejemplo = precioEjemploMasParecido(preciosEjemplo.antojos_delivery, antojo);
       return JSON.stringify({
         precio_de_ejemplo: true,
         referencia: ejemplo ? { nombre: ejemplo[0], precio: ejemplo[1] } : null,
-        enlace_para_pedir: "https://www.pedidosya.cl/",
+        enlace_para_pedir: app === "no_sabe" ? null : ENLACES_DELIVERY[app],
+        ...(app === "no_sabe" ? { nota_app: "Pregúntale qué app usa antes de darle el enlace." } : {}),
         nota: "Precio de referencia, no de un local real.",
       });
     }

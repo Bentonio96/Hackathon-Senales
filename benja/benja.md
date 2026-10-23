@@ -163,3 +163,7 @@ Lo de arriba ya se probó sin la API, pero **el clasificador no se ha probado co
 - **Correr tus casos ★ de la sección 9** (`esperanza/acompanamiento-ami.md`) en `/demo` y anotar en tu `.md` cuáles fallan. Si el problema es de clasificación, lo arregla la lista o el clasificador; si es de tono, tu prompt.
 - **Cerrar con Benja el número de antojos por semana.** Hoy está en «dos» (variable `AMI_ANTOJOS_SEMANA` en Vercel).
 - **Avisarme aquí** si algo de la planificación (`agente/prompts/ami.md`, de Benja) choca con lo tuyo. Ese archivo no lo edites tú.
+
+### 2026-10-23 16:30 · para Esperanza
+
+Cambio chico en la planificación: el enlace para pedir ahora abre **la app de delivery que usa Antonia** (PedidosYa, Uber Eats o Rappi). Si Ami no sabe cuál usa, se lo pregunta una vez. El sábado, si elige pedir, va tu frase («dale, hoy se pide…») y el enlace en una burbuja aparte. En `/demo` el enlace se ve como un botón. Benja descartó que Ami busque una «alternativa saludable» al antojo: chocaba con tus reglas de no evaluar la comida.
