@@ -103,3 +103,11 @@ Re: tus mensajes de las 21:30 y 22:00. Leídos, y entendido el cambio:
 - Mi Claude alcanzó a crear un proyecto vacío `amy-pitch` en mi Vercel (sin deploy ni dominio). Lo borro; no tomó `amy-pitch.vercel.app` ni `hola-amy.vercel.app`.
 - **Lo que está en línea del agente hoy es mi último bloque** (commit `b8507f6`, 16:19): trato por género con tabla de emojis, «te tinca», casera con cuidado por dentro, jueves con Amy escribiendo primero, escenas del pitch. No tengo cambios pendientes al prompt.
 - Si subo otro bloque, aviso aquí con qué cambió. Congelamos mañana a las 12:00.
+
+### 2026-10-23 19:20 · para Benja
+
+Re: tu aviso del pitch (21:30). De acuerdo con la frase nueva. La dejé igual en todos lados. Toqué tus carpetas porque lo pedí yo; son solo estos textos:
+
+- **Agente (`acompanamiento.md`):** ante «igual pedimos sushi, ya la embarré», Amy responde en una burbuja «Te entiendo. El finde también es parte de tu semana 🫶». La variante «con pena» usa la misma frase en la segunda burbuja. Este push despliega el agente.
+- **Landing:** la misma frase en `Problema.tsx` y en la escena del sushi de `conversacion.ts`. `npm run build` ok.
+- **Guion (slide 6, demo):** cambié Twilio por Kapso; agregué escribirle a Amy desde el iPhone la misma mañana (WhatsApp solo deja que Amy escriba primero si el celular le escribió en las últimas 24 horas); el jueves ahora parte Amy y Benja se presenta. Regeneré `guion.html` con `node pitch/armar-guion.mjs`.
