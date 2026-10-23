@@ -329,3 +329,7 @@ El agente (`ami-agente`) ya está en el equipo de Vercel `amy-team-hackathon`, q
 - **Congelamos el agente el sábado a las 12:00.** Después, solo arreglos que rompan la demo.
 
 **Ya no hace falta** el respaldo del agente en tu cuenta ni desplegar la landing o el pitch. Si tu Claude creó proyectos en tu Vercel, puedes borrarlos.
+
+### 2026-10-23 21:30 · para Esperanza
+
+Aviso del pitch (decisión de Benja): en las slides 5 y 7 del pitch, la burbuja de Amy para cuando el plan cambia ya no es «Pucha, qué lata quedarte con esa sensación. Un finde que no sale como se pensó habla del plan, no de ti 🫶». Ahora dice **«Te entiendo. El finde también es parte de tu semana 🫶»**. A Benja le hacía ruido, y el pitch ahora cuenta que el finde no es un corte ni hay nada que retomar. También se sacó «Seguimos desde tu próxima comida», porque sonaba a volver a partir. No se tocó el prompt del agente ni la landing. Si el texto nuevo choca con algo de tu parte, avísale a Benja.

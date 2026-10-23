@@ -58,7 +58,7 @@ Esperanza: esto está armado con las ideas de tu archivo (rachas, «el problema 
 
 > Amy hace dos cosas. Antes: el jueves, con la cabeza fresca, Antonia le manda una foto del refri y Amy arma el sábado con ella. Un antojo, que es parte del plan y no una trampa, y una comida casera rica de 10 minutos con lo que ya tiene. Le dice cuánto le sale en el súper comparado con pedir, porque anda con la plata justa.
 >
-> Y después: si el plan cambia, Amy no la juzga ni le pide compensar. Le dice que un finde que no sale como se pensó habla del plan, no de ella. El finde es parte de su semana, no un corte: no hay nada que retomar ni una cuenta que limpiar.
+> Y después: si el plan cambia, Amy no la juzga ni le pide compensar. Le dice: «Te entiendo. El finde también es parte de tu semana». No es un corte: no hay nada que retomar ni una cuenta que limpiar.
 
 ## 6 · Demo en vivo (1:40) · lo que más pesa
 
