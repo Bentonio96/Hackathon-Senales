@@ -71,9 +71,14 @@ async function esperarSalida(messageSid: string): Promise<void> {
   await esperar(600);
 }
 
-/** Manda una o varias burbujas en orden. */
+// La cuenta de prueba de Twilio permite 50 mensajes al día y cada burbuja cuenta como uno.
+// Con AMI_WHATSAPP_BURBUJAS=separadas cada burbuja va en su propio mensaje; por defecto van juntas.
+const BURBUJAS_JUNTAS = process.env.AMI_WHATSAPP_BURBUJAS !== "separadas";
+
+/** Manda una o varias burbujas en orden (juntas en un solo mensaje, salvo que se pida lo contrario). */
 export async function enviarWhatsApp(para: string, ...textos: string[]): Promise<void> {
-  const partes = textos.flatMap((t) => partir(t));
+  const grupos = BURBUJAS_JUNTAS ? [textos.filter(Boolean).join("\n\n")] : textos;
+  const partes = grupos.flatMap((t) => partir(t));
   for (let i = 0; i < partes.length; i++) {
     const messageSid = await enviarUno(para, partes[i]);
     if (i < partes.length - 1) await esperarSalida(messageSid);
