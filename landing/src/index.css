@@ -330,3 +330,14 @@ html.lenis body {
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
+
+/* Ami saluda cuando pasas el mouse: un balanceo corto, solo como respuesta. */
+@media (hover: hover) and (pointer: fine) {
+  .saludo {
+    transition: transform 500ms var(--ease-salto);
+    transform-origin: 50% 80%;
+  }
+  .saludo:hover {
+    transform: rotate(-6deg) scale(1.04);
+  }
+}

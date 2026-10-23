@@ -1,6 +1,7 @@
 import { AnimatePresence, LazyMotion, MotionConfig, domAnimation, m as motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { NOMBRE } from "../config";
+import { AvatarAmi } from "./Avatar";
 import { ANTOJOS, ENVIO, RECETA, pesos, type Mensaje, type Momento } from "../lib/conversacion";
 
 const pizza = ANTOJOS[0];
@@ -102,10 +103,7 @@ export function Telefono({ momento, animar }: { momento: Momento; animar: boolea
       className="mx-auto flex h-full w-full lg:h-[min(38rem,72svh)] max-w-[23rem] flex-col overflow-hidden rounded-[2.6rem] border-[10px] border-tinta bg-chat-fondo"
     >
       <div className="flex items-center gap-3 bg-superficie px-4 pt-4 pb-3">
-        <svg viewBox="0 0 40 40" className="size-10 shrink-0" aria-hidden="true">
-          <path d="M20 2c9 0 17 6 17 16s-6 20-17 20S3 30 3 19 11 2 20 2Z" fill="var(--casa-menta)" />
-          <path d="M11 22 20 13l9 9v8H11z" fill="var(--superficie)" />
-        </svg>
+        <AvatarAmi className="size-10 shrink-0" />
         <div className="leading-tight">
           <p className="font-bold">{NOMBRE}</p>
           <p className="text-[0.8125rem] text-tinta-suave">en línea</p>

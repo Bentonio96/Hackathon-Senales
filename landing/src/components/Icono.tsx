@@ -12,14 +12,3 @@ export function IconoChat({ className = "size-5" }: { className?: string }) {
     </svg>
   );
 }
-
-/** Casita del logotipo: techo a dos aguas y una ventana. */
-export function IconoCasa({ className = "size-6" }: { className?: string }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 32 32" className={className}>
-      <path d="M4 14.5 16 5l12 9.5V28H4z" fill="var(--casa-amarillo)" />
-      <path d="M2.5 15.2 16 4.6l13.5 10.6" fill="none" stroke="var(--tinta)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="12.5" y="16" width="7" height="7" rx="1.5" fill="var(--tinta)" />
-    </svg>
-  );
-}

@@ -1,6 +1,7 @@
 import { NOMBRE, WHATSAPP_URL } from "../config";
 import { Cerro } from "./Cerro";
-import { IconoCasa, IconoChat } from "./Icono";
+import { AvatarAmi } from "./Avatar";
+import { IconoChat } from "./Icono";
 import { Onda } from "./Onda";
 
 const LINKS = [
@@ -25,7 +26,7 @@ export function Barra() {
     <header className="sticky top-0 z-30 bg-cielo">
       <div className="envoltura flex h-(--alto-header) items-center justify-between gap-6">
         <a href="#inicio" className="flex items-center gap-2 text-lead font-bold tracking-tight" aria-label={`${NOMBRE}, inicio`}>
-          <IconoCasa className="size-7" />
+          <AvatarAmi className="size-9" />
           {NOMBRE}
         </a>
         <nav aria-label="Secciones" className="hidden lg:block">

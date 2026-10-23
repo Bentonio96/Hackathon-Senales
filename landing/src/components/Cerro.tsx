@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AvatarAmi } from "./Avatar";
 
 /**
  * La semana como un cerro de Valparaíso: siete casas que suben, una por día.
@@ -176,10 +177,13 @@ export function Cerro() {
 
       <figcaption
         aria-live="polite"
-        className="absolute top-[2%] left-0 max-w-[60%] rounded-[1.4rem] rounded-bl-md bg-superficie px-4 py-3 text-chico sm:text-cuerpo"
+        className="absolute top-[2%] left-0 flex max-w-[66%] items-start gap-3 rounded-[1.4rem] rounded-bl-md bg-superficie py-3 pr-4 pl-3 text-chico sm:text-cuerpo"
       >
-        <span className="block font-bold">{casa.dia}</span>
-        {casa.nota}
+        <AvatarAmi className="size-10 shrink-0 sm:size-12" />
+        <span>
+          <span className="block font-bold">{casa.dia}</span>
+          {casa.nota}
+        </span>
       </figcaption>
     </figure>
   );

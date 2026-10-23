@@ -1,4 +1,5 @@
 import { NOMBRE, WHATSAPP_URL } from "../config";
+import { AvatarAmi } from "./Avatar";
 import { IconoChat } from "./Icono";
 import { Onda } from "./Onda";
 
@@ -46,6 +47,9 @@ export function Cierre() {
             Hablar por WhatsApp
             <span className="sr-only"> (se abre en otra pestaña)</span>
           </a>
+        </div>
+        <div className="hidden items-center justify-center lg:col-span-4 lg:flex">
+          <AvatarAmi className="saludo w-full max-w-[20rem]" />
         </div>
       </div>
       <svg viewBox="0 0 1440 130" preserveAspectRatio="xMidYMax slice" className="block h-24 w-full md:h-32" aria-hidden="true">
