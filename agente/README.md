@@ -42,6 +42,8 @@ Escribir `reiniciar` por WhatsApp borra la conversación.
 
 ## Límites conocidos
 
+- La regla de Vercel que salta los deploys sin cambios en `agente/` también salta un «Redeploy» del mismo commit. Después de cambiar variables de entorno, hay que subir un cambio en esta carpeta (o redesplegar desde el panel con «Redeploy» sin caché).
+
 - Sin Redis, en Vercel cada instancia tiene su propia memoria: para la demo en Vercel hay que conectar Upstash.
 - El orden de los mensajes se respeta dentro de una misma instancia, no entre instancias.
 - `/api/chat` es público: cada sesión tiene un tope de 120 turnos para acotar el gasto.
