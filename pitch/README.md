@@ -2,7 +2,7 @@
 
 Es un archivo HTML autocontenido (`index.html`), sin build. Son 7 slides para 5 minutos de pitch con demo en vivo, más una portada de Amy (nombre, frase y un celular con el chat) para dejar en pantalla durante las preguntas, con el mismo estilo de la landing (hola-ami.vercel.app). La identidad visual de Amy (el avatar B «Abrazo», la paleta y la voz) está en el Artifact de diseño: https://claude.ai/artifact/AY1jt7PAMbP8JC2P69BXsB
 
-El guion, con tiempos, quién dice qué, el libreto de la demo y respuestas para las preguntas del jurado, está en [`guion.md`](guion.md). Publicado, se lee con formato en https://amy-pitch.vercel.app/guion (la página `guion.html` dibuja el mismo `guion.md`, así que basta con editar el `.md`).
+El guion, con tiempos, quién dice qué, el libreto de la demo y respuestas para las preguntas del jurado, está en [`guion.md`](guion.md). Publicado, se lee con formato en https://amy-pitch.vercel.app/guion (la página `guion.html` dibuja el mismo `guion.md`, así que basta con editar el `.md` y correr `node pitch/armar-guion.mjs`, que copia el texto dentro de `guion.html` para que también se abra como archivo).
 
 ## Cómo abrirlo
 
