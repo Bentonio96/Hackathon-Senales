@@ -158,74 +158,74 @@ export function mensajesFijos(c: Clasificacion, derivacionPrevia: string | null)
   if (c.retractacion && derivacionPrevia) {
     if (derivacionPrevia === "2a") {
       return [
-        "no tienes que explicarme nada. lo que dijiste importa, aunque ahora lo veas distinto.",
-        "no te puedo prometer secreto: soy un programa y lo que escribimos queda en el sistema de la demo.",
-        "y si lo necesitas, ahora o más rato, puedes avisarle a alguien cercano o llamar al *4141, que atiende a toda hora. yo te leo.",
+        "No tienes que explicarme nada. Lo que dijiste importa, aunque ahora lo veas distinto",
+        "No te puedo prometer secreto: soy un programa y lo que escribimos queda en el sistema de la demo",
+        "Y si lo necesitas, ahora o más rato, puedes avisarle a alguien cercano o llamar al *4141, que atiende a toda hora. Yo te leo",
       ];
     }
     if (derivacionPrevia === "1") {
-      return ["gracias por responderme. lo que me contaste importa, aunque ahora lo veas distinto. te leo."];
+      return ["Gracias por responderme. Lo que me contaste importa, aunque ahora lo veas distinto. Te leo"];
     }
   }
 
   switch (c.nivel) {
     case "ambiguo":
-      return ["oye, te pregunto en serio: ¿lo dices por la caña o estás pensando en hacerte daño o en no estar?"];
+      return ["Oye, te pregunto en serio: lo dices por la caña o estás pensando en hacerte daño o en no estar?"];
 
     case "2a": {
       const burbujas = [
-        "gracias por decírmelo, de verdad. quiero que alguien cercano esté contigo ahora: una amiga, alguien de tu familia, quien tengas más a mano. ¿puedes avisarle ahora mismo?",
-        "y si quieres hablar con alguien que sabe de esto, el *4141 es una línea del Minsal que atiende a toda hora, desde el celular, y te escuchan sin juzgar. yo te leo mientras tanto.",
+        "Gracias por decírmelo, de verdad. Quiero que alguien cercano esté contigo ahora: una amiga, alguien de tu familia, quien tengas más a mano. Puedes avisarle ahora mismo?",
+        "Y si quieres hablar con alguien que sabe de esto, el *4141 es una línea del Minsal que atiende a toda hora, desde el celular, y te escuchan sin juzgar. Yo te leo mientras tanto",
       ];
       if (c.objeto_a_mano && c.objeto_pronombre !== "ninguno") {
         burbujas.push(
-          `si puedes, deja ahora ${c.objeto_a_mano} en otra pieza o pídele a alguien que ${c.objeto_pronombre} guarde lejos de ti. y si ya tomaste algo, llama al 131 ya y no te quedes sola.`,
+          `Si puedes, deja ahora ${c.objeto_a_mano} en otra pieza o pídele a alguien que ${c.objeto_pronombre} guarde lejos de ti. Y si ya tomaste algo, llama al 131 ya y no te quedes sola`,
         );
       } else if (c.ya_se_hizo_dano) {
-        burbujas.push("llama al 131 ya y no te quedes sola.");
+        burbujas.push("Llama al 131 ya y no te quedes sola");
       }
       return burbujas;
     }
 
     case "2b":
-      return ["eso necesita atención ahora. llama al 131 (es el SAMU) o pídele a alguien que te lleve a urgencias. no te quedes sola."];
+      return ["Eso necesita atención ahora. Llama al 131 (es el SAMU) o pídele a alguien que te lleve a urgencias. No te quedes sola"];
 
     case "2c":
-      return ["llama al 131 ahora y no la dejes sola: ellos te dicen qué hacer mientras llegan."];
+      return ["Llama al 131 ahora y no la dejes sola: ellos te dicen qué hacer mientras llegan"];
 
     case "1": {
       const primera = {
-        ya_lo_hizo: "gracias por contármelo, de verdad. no tienes que cargar con esto sola.",
-        anuncia: "gracias por contármelo. eso no lo voy a organizar contigo, pero a ti sí te acompaño. no tienes que explicarme nada.",
-        con_agrado: "gracias por contármelo. me preocupa que pases tanto tiempo sin comer. eso no lo voy a organizar contigo, y a ti sí te sigo acompañando.",
-        ninguno: "gracias por contármelo, de verdad. no tienes que cargar con esto sola.",
+        ya_lo_hizo: "Gracias por contármelo, de verdad. No tienes que cargar con esto sola",
+        anuncia: "Gracias por contármelo. Eso no lo voy a organizar contigo, pero a ti sí te acompaño. No tienes que explicarme nada",
+        con_agrado: "Gracias por contármelo. Me preocupa que pases tanto tiempo sin comer. Eso no lo voy a organizar contigo, y a ti sí te sigo acompañando",
+        ninguno: "Gracias por contármelo, de verdad. No tienes que cargar con esto sola",
       }[c.tipo_1];
       const burbujas = [
         primera,
-        "¿te tinca contárselo a tu nutri, o a alguien cercano en quien confíes, una amiga o alguien de tu familia? si quieres, te ayudo a escribirle el mensaje.",
+        "Te tinca contárselo a tu nutri, o a alguien cercano en quien confíes, una amiga o alguien de tu familia? Si quieres, te ayudo a escribirle el mensaje",
       ];
       // c y d según el prompt de Esperanza: si hubo c, d se suma al final de c.
       if (c.dias_sin_comer) {
         burbujas.push(
-          "después de varios días sin comer, uno puede pasarlo mal sin darse cuenta. ojalá te vea un médico pronto. y si te mareas, ves borroso, sientes el corazón muy rápido o te sientes muy débil, " +
-            (c.alcohol_sin_comer ? "llama al 131, también si sales a tomar." : "llama al 131."),
+          "Después de varios días sin comer, uno puede pasarlo mal sin darse cuenta. Ojalá te vea un médico pronto. Y si te mareas, ves borroso, sientes el corazón muy rápido o te sientes muy débil, " +
+            (c.alcohol_sin_comer ? "llama al 131, también si sales a tomar" : "llama al 131"),
         );
       } else if (c.alcohol_sin_comer) {
         // «esta noche» solo si dijo que sale hoy; si nombró otro día, «cuando salgas».
         burbujas.push(
           c.sale_hoy
-            ? "si sales esta noche y te sientes mal, el 131 atiende a toda hora."
-            : "cuando salgas, si te sientes mal, el 131 atiende a toda hora.",
+            ? "Si sales esta noche y te sientes mal, el 131 atiende a toda hora"
+            : "Cuando salgas, si te sientes mal, el 131 atiende a toda hora",
         );
       }
       if (c.pide_secreto) {
         burbujas.push(
-          "no puedo prometerte secreto: soy un programa y lo que escribimos queda en el sistema de la demo.",
+          "No puedo prometerte secreto: soy un programa y lo que escribimos queda en el sistema de la demo",
         );
       }
       // Con mensajes de riesgo (131) ninguna burbuja lleva emoji.
       const conEmoji = !c.dias_sin_comer && !c.alcohol_sin_comer;
-      burbujas.push(`y si prefieres hablar con alguien hoy, Salud Responde (600 360 7777) te orienta a toda hora${conEmoji ? " 🫶" : ""}`);
+      burbujas.push(`Y si prefieres hablar con alguien hoy, Salud Responde (600 360 7777) te orienta a toda hora${conEmoji ? "" : ""}`);
       return burbujas;
     }
 
