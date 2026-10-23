@@ -28,7 +28,7 @@ export interface Sesion {
   // Estado interno del acompañamiento (diseño de Esperanza). Nunca se le muestra a Antonia.
   modo?: "normal" | "derivada" | "pausa";
   derivacion_previa?: { nivel: string; fecha: string } | null;
-  // Cómo se llama y cómo tratarla gramaticalmente (lo infiere Ami del nombre o de cómo se nombra).
+  // Cómo se llama y cómo tratarla gramaticalmente (lo infiere Amy del nombre o de cómo se nombra).
   perfil?: { nombre: string; trato: Trato };
   // Último mensaje que escribió la persona (WhatsApp solo deja escribirle libremente hasta 24 horas después).
   ultimo_mensaje_usuario?: string;
@@ -81,7 +81,7 @@ export async function recordarUltimoWhatsApp(numero: string): Promise<void> {
   }
 }
 
-/** Todas las personas que le han escrito a Ami por WhatsApp (para los mensajes programados). */
+/** Todas las personas que le han escrito a Amy por WhatsApp (para los mensajes programados). */
 export async function usuariosWhatsApp(): Promise<string[]> {
   if (redis) return redis.smembers("ami:usuarios-wa");
   return [...memoria.__amiUsuariosWa!];

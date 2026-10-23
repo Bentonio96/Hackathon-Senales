@@ -5,11 +5,11 @@ import { enviarWhatsApp } from "@/lib/twilio";
 
 export const maxDuration = 300;
 
-// WhatsApp solo deja que Ami escriba libremente hasta 24 horas después del último mensaje
+// WhatsApp solo deja que Amy escriba libremente hasta 24 horas después del último mensaje
 // de la persona. Fuera de esa ventana haría falta una plantilla aprobada por Meta.
 const VENTANA_MS = 23.5 * 60 * 60 * 1000;
 
-/** Cron de Vercel: el jueves a las 18:00 de Chile, Ami pregunta por el finde (ver vercel.json). */
+/** Cron de Vercel: el jueves a las 18:00 de Chile, Amy pregunta por el finde (ver vercel.json). */
 export async function GET(req: Request) {
   const secreto = process.env.CRON_SECRET;
   if (!secreto || req.headers.get("authorization") !== `Bearer ${secreto}`) {

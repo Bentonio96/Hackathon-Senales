@@ -2,7 +2,7 @@ import type Anthropic from "@anthropic-ai/sdk";
 import type { Trato } from "./estado";
 
 /*
- * Seguridad de Ami, según el diseño de Esperanza (esperanza/acompanamiento-ami.md, sección 6).
+ * Seguridad de Amy, según el diseño de Esperanza (esperanza/acompanamiento-ami.md, sección 6).
  * Los textos fijos están copiados de prompts/acompanamiento.md, sección «Señales de alerta»:
  * si cambian allá, hay que cambiarlos aquí. El modelo que conversa no los genera ni los modifica.
  */
@@ -85,10 +85,10 @@ const ESQUEMA = {
   additionalProperties: false,
 } as const;
 
-const INSTRUCCIONES_CLASIFICADOR = `Clasificas el ÚLTIMO mensaje de Antonia en una conversación con Ami, una amiga por WhatsApp que la acompaña con la comida del fin de semana. Lees los mensajes anteriores solo como contexto. No respondes a Antonia: solo clasificas.
+const INSTRUCCIONES_CLASIFICADOR = `Clasificas el ÚLTIMO mensaje de Antonia en una conversación con Amy, una amiga por WhatsApp que la acompaña con la comida del fin de semana. Lees los mensajes anteriores solo como contexto. No respondes a Antonia: solo clasificas.
 
 Niveles:
-- "0": conversación normal: Ami conversa y acompaña. Es el nivel por defecto. Van aquí la jerga y el humor («ya la embarré con la semana», «soy un asco» dicho una vez, «estoy muerta», «la caña me mató», «me muero de hambre», «pedí dos pizzas», «el lunes parto de nuevo», «paso a paso porfa, estoy muerta»), las dudas sobre salir o cuidarse («no sé si debería ir», «he progresado harto en la semana y no quiero perder ese progreso, pero tampoco quiero ser la fome que no sale»), la culpa leve o pasajera («me da culpa haber pedido pizza», «comí harto»), el cansancio con la pauta y los comentarios de ánimo sin una conducta de riesgo.
+- "0": conversación normal: Amy conversa y acompaña. Es el nivel por defecto. Van aquí la jerga y el humor («ya la embarré con la semana», «soy un asco» dicho una vez, «estoy muerta», «la caña me mató», «me muero de hambre», «pedí dos pizzas», «el lunes parto de nuevo», «paso a paso porfa, estoy muerta»), las dudas sobre salir o cuidarse («no sé si debería ir», «he progresado harto en la semana y no quiero perder ese progreso, pero tampoco quiero ser la fome que no sale»), la culpa leve o pasajera («me da culpa haber pedido pizza», «comí harto»), el cansancio con la pauta y los comentarios de ánimo sin una conducta de riesgo.
 - "ambiguo": frases de muerte que pueden ser jerga, como «me quiero morir de vergüenza» o «me quiero morir de la caña».
 - "1", preocupación por la comida, SOLO con una señal evidente: una conducta concreta, ya hecha o anunciada con intención firme, de ayunar o no comer en todo el día, vomitar o provocarse el vómito, tomar laxantes o diuréticos, hacer ejercicio para «compensar» o «quemar» lo que comió, o saltarse comidas para «guardar» para el alcohol; comer sin poder parar descrito con miedo o pérdida de control («no podía parar», «no era yo»); o angustia intensa dicha explícitamente sobre su cuerpo o la comida («me doy asco», «odio mi cuerpo», «me merezco no comer»). Una duda, una culpa leve o querer cuidar lo avanzado NO es nivel 1.
 - "2a": ideas de hacerse daño o de no vivir, o autolesión ya hecha.
@@ -125,7 +125,7 @@ export async function clasificar(
   derivacionPrevia: string | null,
 ): Promise<Clasificacion> {
   const conversacion = historial
-    .map((m) => ({ quien: m.role === "user" ? "Antonia" : "Ami", texto: aTexto(m.content) }))
+    .map((m) => ({ quien: m.role === "user" ? "Antonia" : "Amy", texto: aTexto(m.content) }))
     .filter((m) => m.texto && !m.texto.startsWith("[RELOJ DE LA DEMO]"))
     .slice(-20)
     .map((m) => `${m.quien}: ${m.texto}`)
@@ -255,7 +255,7 @@ export function clasificacionPorFrase(nivel: "2a" | "2b" | "2c", texto: string):
   };
 }
 
-// Filtro de salida: números nutricionales y palabras que Ami no usa.
+// Filtro de salida: números nutricionales y palabras que Amy no usa.
 const PROHIBIDO = [
   /\d[\d.,]*\s*(k?cal|calor[ií]as?|kg|kilos?|g|gr|gramos?)\b/i,
   /\b(peso|kilos?|calor[ií]as?|trampa|cheat|permitid[oa]s?|premio|castigo|compens\w*|perfect[oa])\b/i,

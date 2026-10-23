@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ami · demo",
-  description: "Ami, una amiga que te deja el sábado resuelto desde el jueves.",
+  title: "Amy · demo",
+  description: "Amy, una amiga que te deja el sábado resuelto desde el jueves.",
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };

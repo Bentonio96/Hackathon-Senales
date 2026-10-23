@@ -143,18 +143,18 @@ export default function Demo() {
 
   return (
     <main className={styles.pagina}>
-      <section className={styles.telefono} aria-label="Conversación con Ami">
+      <section className={styles.telefono} aria-label="Conversación con Amy">
         <header className={styles.cabecera}>
           <div className={styles.avatar} aria-hidden>A</div>
           <div>
-            <h1>Ami</h1>
+            <h1>Amy</h1>
             <p>{pensando ? "escribiendo…" : "tu amiga del finde"}</p>
           </div>
         </header>
 
         <div className={styles.chat} aria-live="polite">
           {mensajes.length === 0 && (
-            <p className={styles.vacio}>Escríbele a Ami o adelanta el reloj al jueves para que ella parta.</p>
+            <p className={styles.vacio}>Escríbele a Amy o adelanta el reloj al jueves para que ella parta.</p>
           )}
           {mensajes.map((m, i) => (
             <div key={i} className={`${styles.burbuja} ${styles[m.de]}`}>
@@ -192,7 +192,7 @@ export default function Demo() {
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
             placeholder="Escribe un mensaje"
-            aria-label="Mensaje para Ami"
+            aria-label="Mensaje para Amy"
           />
           <button type="submit" className={styles.enviar} disabled={pensando} aria-label="Enviar">➤</button>
         </form>
@@ -200,7 +200,7 @@ export default function Demo() {
 
       <aside className={styles.panel}>
         <h2>Reloj de la demo</h2>
-        <p className={styles.ayuda}>Hace que Ami escriba primero, como si fuera ese momento de la semana.</p>
+        <p className={styles.ayuda}>Hace que Amy escriba primero, como si fuera ese momento de la semana.</p>
         <div className={styles.botones}>
           {(Object.keys(ETIQUETAS) as Momento[]).map((m) => (
             <button key={m} onClick={() => adelantar(m)} disabled={pensando || !sesionId}>
@@ -210,7 +210,7 @@ export default function Demo() {
         </div>
 
         <fieldset className={styles.destino}>
-          <legend>Mandar el mensaje de Ami a</legend>
+          <legend>Mandar el mensaje de Amy a</legend>
           <label>
             <input type="radio" checked={destino === "web"} onChange={() => setDestino("web")} /> este chat
           </label>
@@ -235,7 +235,7 @@ export default function Demo() {
 
         {error && <p className={styles.error} role="alert">{error}</p>}
         <button className={styles.reiniciar} onClick={reiniciar}>Reiniciar conversación</button>
-        <p className={styles.nota}>Datos de ejemplo. Ami no reemplaza a tu nutricionista.</p>
+        <p className={styles.nota}>Datos de ejemplo. Amy no reemplaza a tu nutricionista.</p>
       </aside>
     </main>
   );

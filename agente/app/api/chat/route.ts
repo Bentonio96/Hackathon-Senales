@@ -39,6 +39,6 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.error("Error en el chat web:", error);
-    return Response.json({ error: "Ami no pudo responder. Intenta de nuevo." }, { status: 502 });
+    return Response.json({ error: "Amy no pudo responder. Intenta de nuevo." }, { status: 502 });
   }
 }

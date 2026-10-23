@@ -2,16 +2,16 @@ import { EVENTOS_RELOJ, turnoDeAmi, type MomentoReloj } from "./ami";
 import type { Sesion } from "./estado";
 
 /**
- * Lo que Ami escribe por su cuenta en un momento de la semana (jueves, sábado o domingo).
+ * Lo que Amy escribe por su cuenta en un momento de la semana (jueves, sábado o domingo).
  * Lo usan el reloj de la demo y el cron del jueves. Respeta la pausa y las alertas (diseño de Esperanza).
  */
 export async function correrMomento(sesion: Sesion, momento: MomentoReloj): Promise<{ respuestas: string[]; aviso?: string }> {
   const nivelPrevio = sesion.derivacion_previa?.nivel;
   if (sesion.modo === "pausa" && momento !== "jueves") {
-    return { respuestas: [], aviso: "Ami está en pausa: no escribe hasta el jueves." };
+    return { respuestas: [], aviso: "Amy está en pausa: no escribe hasta el jueves." };
   }
   if (sesion.modo === "derivada" && (momento !== "jueves" || nivelPrevio !== "1")) {
-    return { respuestas: [], aviso: "Hubo una alerta: Ami no manda mensajes programados." };
+    return { respuestas: [], aviso: "Hubo una alerta: Amy no manda mensajes programados." };
   }
   if (sesion.modo === "derivada") {
     // El jueves después de una alerta de nivel 1 no abre con la receta.

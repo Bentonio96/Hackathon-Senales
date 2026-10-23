@@ -6,7 +6,7 @@ import { enviarWhatsApp } from "@/lib/twilio";
 
 export const maxDuration = 300;
 
-// "Adelantar el reloj": hace que Ami escriba primero como si fuera jueves, sábado o domingo.
+// "Adelantar el reloj": hace que Amy escriba primero como si fuera jueves, sábado o domingo.
 export async function POST(req: Request) {
   const { momento, destino, sesionId } = (await req.json()) as {
     momento?: MomentoReloj;

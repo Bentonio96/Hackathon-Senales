@@ -52,7 +52,7 @@ export const EVENTOS_RELOJ = {
 
 export type MomentoReloj = keyof typeof EVENTOS_RELOJ;
 
-/** Agrega al historial un intercambio cuyo lado de Ami es fijo (no lo generó el modelo). */
+/** Agrega al historial un intercambio cuyo lado de Amy es fijo (no lo generó el modelo). */
 function registrarFijo(sesion: Sesion, contenido: Anthropic.Beta.BetaContentBlockParam[], burbujas: string[]) {
   sesion.historial.push({ role: "user", content: contenido });
   sesion.historial.push({ role: "assistant", content: [{ type: "text", text: burbujas.join("\n---\n") }] });
@@ -107,7 +107,7 @@ const enBurbujas = (textos: string[]) =>
   textos.flatMap((t) => t.split(SEPARADOR_BURBUJAS)).map((b) => b.trim()).filter(Boolean);
 
 /**
- * Corre un turno de Ami y devuelve las burbujas para Antonia.
+ * Corre un turno de Amy y devuelve las burbujas para Antonia.
  * Orden (diseño de Esperanza): detección de alertas antes del modelo, filtro de salida después.
  */
 export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<string[]> {
@@ -169,7 +169,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
       content: [
         {
           type: "text",
-          text: `[REVISIÓN INTERNA, no es de Antonia] Tu último mensaje usó «${violacion}», que Ami no dice. Antonia no lo vio. Escribe de nuevo ese mensaje sin eso, siguiendo las reglas del acompañamiento.`,
+          text: `[REVISIÓN INTERNA, no es de Antonia] Tu último mensaje usó «${violacion}», que Amy no dice. Antonia no lo vio. Escribe de nuevo ese mensaje sin eso, siguiendo las reglas del acompañamiento.`,
         },
       ],
     });
