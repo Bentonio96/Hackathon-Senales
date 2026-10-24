@@ -50,7 +50,7 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
   {
     name: "precio_antojo_delivery",
     description:
-      "Da un precio de referencia por delivery para un antojo (hamburguesa, pizza, sushi, etc.) y un enlace para pedir. Los precios son de ejemplo: díselo así a Antonia.",
+      "Da un precio de referencia por delivery para un antojo (hamburguesa, pizza, sushi, etc.) y el enlace general de la app. Para PedidosYa, el enlace directo a un local se busca con web_search; este enlace general es el respaldo. Los precios son de ejemplo: díselo así a Antonia.",
     input_schema: {
       type: "object",
       properties: {
@@ -211,6 +211,15 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
       additionalProperties: false,
     },
     strict: true,
+  },
+  // Búsqueda web de Anthropic, solo en PedidosYa: así Amy encuentra el local y manda su enlace directo.
+  // (pedidosya.cl bloquea las consultas automáticas desde el servidor, pero su índice de búsqueda sí está.)
+  {
+    type: "web_search_20250305",
+    name: "web_search",
+    max_uses: 2,
+    allowed_domains: ["pedidosya.cl"],
+    user_location: { type: "approximate", city: "Valparaíso", region: "Valparaíso", country: "CL", timezone: "America/Santiago" },
   },
 ];
 

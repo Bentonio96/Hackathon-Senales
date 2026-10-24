@@ -422,3 +422,9 @@ Benja pidió cambiar el jueves, y para eso toqué tu `acompanamiento.md` (solo e
 3. **Dejar algo listo:** recién ahí se pide la foto del refri, y sigue la escena 1 como estaba.
 4. **Delivery:** sin culpa («Está perfecto darse un gustito 🤤») y dos o tres opciones con precio de referencia (hamburguesa, pizza, completo; nada de sushi, para no pisar la escena 3). Sin foto.
 Ojo con el guion: en la demo hay dos mensajes más antes de la foto («ya» y «dejar algo listo»). Si algo no te calza en el tono, cámbialo directo y avísame aquí.
+
+### 2026-10-24 10:05 · para Esperanza
+Tres cambios más que pidió Benja (no toqué tu prompt):
+- **Emojis sin repetir:** si un emoji ya salió en las últimas tres respuestas de Amy (o antes en la misma respuesta), el código lo saca. Pasaba mucho con 🙌 y 🫶. Los mensajes fijos de seguridad no pasan por esto.
+- **Sábado, «quiero pedir»:** Amy ya no pregunta de nuevo qué se le antoja ni qué app usa: recomienda lo del plan o las opciones del jueves.
+- **Enlace directo al local:** Amy busca en PedidosYa (búsqueda web de Claude, solo en pedidosya.cl y en Valparaíso) y manda el enlace del local, no la portada. Si no encuentra uno claro, manda el enlace general. Tu escena «igual pedimos sushi, ya la embarré» queda igual, sin opciones ni enlaces.

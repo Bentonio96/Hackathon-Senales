@@ -86,9 +86,17 @@ async function correrModelo(sesion: Sesion, esfuerzo: Esfuerzo, signal?: AbortSi
 
     // Se guarda el contenido completo (incluido thinking) y nunca se edita después.
     sesion.historial.push({ role: "assistant", content: respuesta.content });
+    // Con citas (búsqueda web) una misma frase llega partida en varios bloques de texto seguidos: se juntan.
+    let tramo = "";
     for (const bloque of respuesta.content) {
-      if (bloque.type === "text" && bloque.text.trim()) textos.push(bloque.text.trim());
+      if (bloque.type === "text") {
+        tramo += bloque.text;
+        continue;
+      }
+      if (tramo.trim()) textos.push(tramo.trim());
+      tramo = "";
     }
+    if (tramo.trim()) textos.push(tramo.trim());
 
     if (respuesta.stop_reason === "pause_turn") continue;
     if (respuesta.stop_reason !== "tool_use") break;
@@ -123,6 +131,37 @@ const enBurbujas = (textos: string[]) => {
       return true;
     });
 };
+
+// Emojis variados: el modelo tiende a repetir los de los ejemplos (🙌, 🫶). Un emoji que Amy ya usó en
+// sus últimas respuestas, o que ya salió en esta, se saca.
+const EMOJI = /\p{Extended_Pictographic}\uFE0F?/gu;
+function emojisRecientes(historial: Sesion["historial"], respuestas = 3): Set<string> {
+  const vistos = new Set<string>();
+  let contadas = 0;
+  for (let i = historial.length - 1; i >= 0 && contadas < respuestas; i--) {
+    const m = historial[i];
+    if (m.role !== "assistant" || typeof m.content === "string") continue;
+    const texto = m.content.map((b) => (b.type === "text" ? b.text : "")).join("");
+    if (!texto.trim()) continue;
+    contadas++;
+    for (const e of texto.match(EMOJI) ?? []) vistos.add(e.replace("\uFE0F", ""));
+  }
+  return vistos;
+}
+function sinEmojisRepetidos(burbujas: string[], recientes: Set<string>): string[] {
+  const usados = new Set(recientes);
+  return burbujas.map((b) =>
+    b
+      .replace(EMOJI, (e) => {
+        const clave = e.replace("\uFE0F", "");
+        if (usados.has(clave)) return "";
+        usados.add(clave);
+        return e;
+      })
+      .replace(/[ \t]+$/gm, "")
+      .replace(/ {2,}/g, " "),
+  ).filter((b) => b.trim());
+}
 
 /**
  * Corre un turno de Amy y devuelve las burbujas para Antonia.
@@ -189,6 +228,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
 
   // 2. El modelo que conversa (mientras el clasificador termina).
   const largoAntes = sesion.historial.length;
+  const recientes = emojisRecientes(sesion.historial);
   // Lo que las herramientas pueden cambiar en la sesión durante el turno (se restaura si gana la alerta).
   const antes = { plan: sesion.plan, perfil: sesion.perfil };
   sesion.historial.push({ role: "user", content: contenido });
@@ -233,5 +273,5 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
       burbujas = ["Perdón, se me enredó la respuesta. Me cuentas de nuevo? 😅"];
     }
   }
-  return burbujas;
+  return sinEmojisRepetidos(burbujas, recientes);
 }
