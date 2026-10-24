@@ -10,7 +10,7 @@ import {
   recordarKapsoPhoneNumberId,
   recordarUltimoWhatsApp,
 } from "@/lib/estado";
-import { descargarMediaKapso, firmaKapsoValida } from "@/lib/kapso";
+import { descargarMediaKapso, firmaKapsoValida, marcarLeidoEscribiendo } from "@/lib/kapso";
 
 export const maxDuration = 300;
 
@@ -67,7 +67,10 @@ export async function POST(req: Request) {
     const urlFoto = m.type === "image" ? (m.kapso?.media_url ?? m.kapso?.media_data?.url) : undefined;
 
     after(() =>
-      enCola(id, async () => {
+      Promise.all([
+        // Ticks azules y «escribiendo…» al tiro, a la vez que Amy empieza a pensar.
+        m.id ? marcarLeidoEscribiendo(m.id) : undefined,
+        enCola(id, async () => {
         try {
           await recordarUltimoWhatsApp(id);
           if (texto.trim().toLowerCase() === "reiniciar") {
@@ -85,7 +88,8 @@ export async function POST(req: Request) {
           console.error("Error procesando mensaje de Kapso:", error);
           await enviarA(id, "Uy, se me enredó algo. Me lo mandas de nuevo? 😅").catch(() => undefined);
         }
-      }),
+        }),
+      ]),
     );
   }
 

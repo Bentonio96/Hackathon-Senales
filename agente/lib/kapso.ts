@@ -41,6 +41,30 @@ function partir(texto: string, max = 4000): string[] {
 }
 
 const esperar = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Apenas llega un mensaje: lo marca como leído (ticks azules) y muestra «escribiendo…» mientras Amy
+ * piensa, como haría una amiga. WhatsApp quita el indicador al llegar la respuesta o a los 25 s.
+ * Si falla, no importa: es solo para que se sienta inmediato.
+ */
+export async function marcarLeidoEscribiendo(messageId: string): Promise<void> {
+  try {
+    const res = await fetch(`${API}/${await phoneNumberId()}/messages`, {
+      method: "POST",
+      headers: { "X-API-Key": apiKey(), "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        status: "read",
+        message_id: messageId,
+        typing_indicator: { type: "text" },
+      }),
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!res.ok) console.warn("Kapso no marcó leído/escribiendo:", res.status, await res.text());
+  } catch (error) {
+    console.warn("Kapso no marcó leído/escribiendo:", error);
+  }
+}
 // Kapso tiene cupo de sobra: por defecto cada burbuja va en su propio mensaje (AMI_KAPSO_BURBUJAS=juntas para juntarlas).
 const BURBUJAS_JUNTAS = process.env.AMI_KAPSO_BURBUJAS === "juntas";
 
@@ -58,6 +82,6 @@ export async function enviarKapso(numero: string, ...textos: string[]): Promise<
     });
     if (!res.ok) throw new Error(`Kapso respondió ${res.status}: ${await res.text()}`);
     // Pausa corta para que las burbujas lleguen en orden.
-    if (i < partes.length - 1) await esperar(1200);
+    if (i < partes.length - 1) await esperar(700);
   }
 }

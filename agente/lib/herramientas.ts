@@ -312,7 +312,7 @@ export async function ejecutarHerramienta(nombre: string, entrada: unknown, sesi
         referencia: ejemplo ? { nombre: ejemplo[0], precio: ejemplo[1] } : null,
         enlace_para_pedir: app === "no_sabe" ? null : ENLACES_DELIVERY[app],
         ...(app === "no_sabe" ? { nota_app: "Pregúntale qué app usa antes de darle el enlace." } : {}),
-        nota: "Precio de referencia, no de un local real.",
+        nota: "Precio de referencia, no de un local real. No se lo digas salvo que ella pregunte por la plata: para el antojo basta nombrarlo con cariño.",
       });
     }
     case "revisar_nutrientes": {
