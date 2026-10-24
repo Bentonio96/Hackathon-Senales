@@ -176,6 +176,8 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
 
   // 2. El modelo que conversa (mientras el clasificador termina).
   const largoAntes = sesion.historial.length;
+  // Lo que las herramientas pueden cambiar en la sesión durante el turno (se restaura si gana la alerta).
+  const antes = { plan: sesion.plan, perfil: sesion.perfil };
   sesion.historial.push({ role: "user", content: contenido });
   const corte = new AbortController();
   let textos = correrModelo(sesion, esfuerzo, corte.signal);
@@ -187,8 +189,10 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     if (resultado && resultado.nivel !== "0") {
       corte.abort();
       await textos.catch(() => {});
-      // Lo que el modelo alcanzó a agregar en este turno nunca se mostró: se descarta.
+      // Lo que el modelo alcanzó a agregar o cambiar en este turno nunca se mostró: se descarta.
       sesion.historial.length = largoAntes;
+      sesion.plan = antes.plan;
+      sesion.perfil = antes.perfil;
       const fijas = responderConAlerta(resultado);
       if (fijas) return fijas;
       // Nivel sin mensaje fijo: se responde normal (y pasa igual por el filtro de salida).
