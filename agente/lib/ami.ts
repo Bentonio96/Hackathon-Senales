@@ -181,6 +181,7 @@ const enBurbujas = (textos: string[]) => {
 
 // Emojis variados: el modelo tiende a repetir los de los ejemplos (🙌, 🫶). Un emoji que Amy ya usó en
 // sus últimas respuestas, o que ya salió en esta, se saca.
+const EMOJIS_PERMITIDOS = new Set([..."😊🙂😉😄😅😋🤤🤗🥲🥰🙌👏👌🤞👍💪🫶✨⭐"]);
 const EMOJI = /\p{Extended_Pictographic}\uFE0F?/gu;
 function emojisRecientes(historial: Sesion["historial"], respuestas = 3): Set<string> {
   const vistos = new Set<string>();
@@ -201,6 +202,8 @@ function sinEmojisRepetidos(burbujas: string[], recientes: Set<string>): string[
     b
       .replace(EMOJI, (e, i: number, todo: string) => {
         const clave = e.replace("\uFE0F", "");
+        // Solo caras, manitos y estrellas (regla de Esperanza): 🍔 o ❤️ se sacan.
+        if (!EMOJIS_PERMITIDOS.has(clave)) return "";
         if (!usados.has(clave)) {
           usados.add(clave);
           return e;
@@ -212,6 +215,8 @@ function sinEmojisRepetidos(burbujas: string[], recientes: Set<string>): string[
       })
       .replace(/(\p{L}) \.(?=\s|$)/gu, "$1.")
       .replace(/[ \t]+$/gm, "")
+      // Sin punto final en la burbuja (los «...» se quedan).
+      .replace(/(?<!\.)\.$/, "")
       .replace(/ {2,}/g, " "),
   ).filter((b) => b.trim());
 }
