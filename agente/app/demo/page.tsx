@@ -8,10 +8,16 @@ type Plan = {
   hora_despertar: string;
   comidas: { momento: string; tipo: string; nombre: string; costo_estimado: number }[];
 } | null;
-type Momento = "jueves" | "sabado" | "domingo";
+type Momento = "jueves" | "sabado" | "domingo" | "siguiente_jueves";
 type Receta = { nombre: string; cuando: string };
+type Recuerdo = { tipo: string; dato: string };
 
-const ETIQUETAS: Record<Momento, string> = { jueves: "Jueves 17:00", sabado: "Sábado al despertar", domingo: "Domingo 20:00" };
+const ETIQUETAS: Record<Momento, string> = {
+  jueves: "Jueves 17:00",
+  sabado: "Sábado al despertar",
+  domingo: "Domingo 20:00",
+  siguiente_jueves: "Jueves siguiente · Amy recuerda",
+};
 
 function nuevoId() {
   return "web:" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
@@ -83,6 +89,7 @@ export default function Demo() {
   }
   const [plan, setPlan] = useState<Plan>(null);
   const [recetario, setRecetario] = useState<Receta[]>([]);
+  const [memoria, setMemoria] = useState<Recuerdo[]>([]);
   const [error, setError] = useState<string | null>(null);
   const finRef = useRef<HTMLDivElement>(null);
   const archivoRef = useRef<HTMLInputElement>(null);
@@ -113,12 +120,20 @@ export default function Demo() {
     setError(null);
     try {
       const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(cuerpo) });
-      const datos = (await res.json()) as { respuestas?: string[]; plan?: Plan; recetario?: Receta[]; error?: string; aviso?: string };
+      const datos = (await res.json()) as {
+        respuestas?: string[];
+        plan?: Plan;
+        recetario?: Receta[];
+        memoria?: Recuerdo[];
+        error?: string;
+        aviso?: string;
+      };
       if (!res.ok) throw new Error(datos.error ?? "Error");
       if (datos.aviso) setMensajes((m) => [...m, { de: "sistema" as const, texto: datos.aviso! }]);
       setMensajes((m) => [...m, ...(datos.respuestas ?? []).map((t) => ({ de: "ami" as const, texto: t }))]);
       if (datos.plan !== undefined) setPlan(datos.plan);
       if (datos.recetario) setRecetario(datos.recetario);
+      if (datos.memoria) setMemoria(datos.memoria);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Algo falló");
     } finally {
@@ -152,6 +167,7 @@ export default function Demo() {
     setMensajes([]);
     setPlan(null);
     setRecetario([]);
+    setMemoria([]);
     setError(null);
   }
 
@@ -258,6 +274,19 @@ export default function Demo() {
           </ul>
         ) : (
           <p className={styles.ayuda}>Las caseras que cocine quedan aquí. Solo crece: nunca se borra ni se cuenta.</p>
+        )}
+
+        <h2>Lo que Amy sabe de ella</h2>
+        {memoria.length > 0 ? (
+          <ul className={styles.plan}>
+            {memoria.map((r, i) => (
+              <li key={i}>
+                <strong>{r.tipo.replaceAll("_", " ")}</strong>: {r.dato}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.ayuda}>Lo que ella le cuente de sí misma. Nada de salud ni peso, y lo borra si se lo pide.</p>
         )}
 
         {error && <p className={styles.error} role="alert">{error}</p>}

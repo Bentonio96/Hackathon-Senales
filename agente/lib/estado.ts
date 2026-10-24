@@ -119,6 +119,55 @@ export async function agregarAlRecetario(id: string, receta: Omit<RecetaGuardada
   return true;
 }
 
+// Lo que Amy va sabiendo de la persona, solo lo que ella misma contó (nada de salud, peso ni cuerpo).
+// Igual que el recetario: aparte de la sesión y sin vencimiento. Ella puede pedir verlo u olvidarlo.
+export const TIPOS_RECUERDO = ["hora_despertar", "antojo_favorito", "app_delivery", "le_gusta", "no_le_gusta", "rutina", "otro"] as const;
+export type TipoRecuerdo = (typeof TIPOS_RECUERDO)[number];
+// Estos tienen un solo valor: si cambia, se reemplaza. Los demás se acumulan.
+const UNICOS: TipoRecuerdo[] = ["hora_despertar", "antojo_favorito", "app_delivery"];
+
+export interface Recuerdo {
+  tipo: TipoRecuerdo;
+  dato: string;
+  guardado_en: string;
+}
+
+const claveMemoria = (id: string) => `ami:memoria:${id}`;
+const memoriasEnMemoria = () => ((memoria as { __amiMemorias?: Map<string, Recuerdo[]> }).__amiMemorias ??= new Map());
+
+export async function cargarMemoria(id: string): Promise<Recuerdo[]> {
+  if (redis) return (await redis.get<Recuerdo[]>(claveMemoria(id))) ?? [];
+  return memoriasEnMemoria().get(id) ?? [];
+}
+
+async function escribirMemoria(id: string, recuerdos: Recuerdo[]): Promise<void> {
+  if (redis) await redis.set(claveMemoria(id), recuerdos);
+  else memoriasEnMemoria().set(id, recuerdos);
+}
+
+export async function recordar(id: string, tipo: TipoRecuerdo, dato: string): Promise<void> {
+  const normal = (s: string) => s.trim().toLowerCase();
+  let recuerdos = await cargarMemoria(id);
+  if (UNICOS.includes(tipo)) recuerdos = recuerdos.filter((r) => r.tipo !== tipo);
+  else if (recuerdos.some((r) => r.tipo === tipo && normal(r.dato) === normal(dato))) return;
+  recuerdos.push({ tipo, dato, guardado_en: new Date().toISOString() });
+  await escribirMemoria(id, recuerdos);
+}
+
+/**
+ * Lo que ella pide olvidar: un tipo de recuerdo, su recetario o todo. Nada se borra solo:
+ * solo cuando ella lo pide.
+ */
+export async function olvidar(id: string, tipo: TipoRecuerdo | "recetario" | "todo"): Promise<void> {
+  if (tipo === "recetario" || tipo === "todo") {
+    if (redis) await redis.del(claveRecetario(id));
+    else recetariosEnMemoria().delete(id);
+  }
+  if (tipo === "recetario") return;
+  const recuerdos = tipo === "todo" ? [] : (await cargarMemoria(id)).filter((r) => r.tipo !== tipo);
+  await escribirMemoria(id, recuerdos);
+}
+
 /** true la primera vez que se ve una clave (para ignorar webhooks repetidos). */
 export async function primeraVez(clave: string): Promise<boolean> {
   if (redis) return (await redis.set(`ami:visto:${clave}`, 1, { nx: true, ex: 60 * 60 * 24 })) === "OK";

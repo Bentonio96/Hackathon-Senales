@@ -1,7 +1,7 @@
 import { EVENTOS_RELOJ, type MomentoReloj } from "@/lib/ami";
 import { correrMomento } from "@/lib/programados";
 import { enCola } from "@/lib/cola";
-import { cargarRecetario, cargarSesion, guardarSesion, ultimoWhatsApp } from "@/lib/estado";
+import { cargarMemoria, cargarRecetario, cargarSesion, guardarSesion, ultimoWhatsApp } from "@/lib/estado";
 import { enviarA } from "@/lib/canal";
 
 export const maxDuration = 300;
@@ -35,7 +35,8 @@ export async function POST(req: Request) {
       if (aviso) return Response.json({ respuestas: [], plan: sesion.plan ?? null, aviso });
       await guardarSesion(sesion);
       if (destino === "whatsapp") await enviarA(sesionId_, ...respuestas);
-      return Response.json({ respuestas, plan: sesion.plan ?? null, recetario: await cargarRecetario(sesionId_) });
+      const [recetario, memoria] = await Promise.all([cargarRecetario(sesionId_), cargarMemoria(sesionId_)]);
+      return Response.json({ respuestas, plan: sesion.plan ?? null, recetario, memoria });
     });
   } catch (error) {
     console.error("Error al adelantar el reloj:", error);

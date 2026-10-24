@@ -1,5 +1,16 @@
 import { EVENTOS_RELOJ, turnoDeAmi, type MomentoReloj } from "./ami";
-import type { Sesion } from "./estado";
+import { cargarMemoria, cargarRecetario, type Sesion } from "./estado";
+
+/** Lo que Amy ya sabe de la persona, para que lo use al escribir primero (no depende de que lo busque). */
+async function loQueSabe(id: string): Promise<string> {
+  const [recuerdos, recetas] = await Promise.all([cargarMemoria(id), cargarRecetario(id)]);
+  if (recuerdos.length === 0 && recetas.length === 0) return "";
+  const lineas = [
+    ...recuerdos.map((r) => `- ${r.tipo.replaceAll("_", " ")}: ${r.dato}`),
+    ...recetas.map((r) => `- en su recetario: ${r.nombre} (${r.cuando})`),
+  ];
+  return `\n\n[LO QUE YA SABES DE ELLA, de otras conversaciones. Úsalo con naturalidad, sin enumerarlo y sin contar nada]\n${lineas.join("\n")}`;
+}
 
 /**
  * Lo que Amy escribe por su cuenta en un momento de la semana (jueves, sábado o domingo).
@@ -7,10 +18,11 @@ import type { Sesion } from "./estado";
  */
 export async function correrMomento(sesion: Sesion, momento: MomentoReloj): Promise<{ respuestas: string[]; aviso?: string }> {
   const nivelPrevio = sesion.derivacion_previa?.nivel;
-  if (sesion.modo === "pausa" && momento !== "jueves") {
+  const esJueves = momento === "jueves" || momento === "siguiente_jueves";
+  if (sesion.modo === "pausa" && !esJueves) {
     return { respuestas: [], aviso: "Amy está en pausa: no escribe hasta el jueves." };
   }
-  if (sesion.modo === "derivada" && (momento !== "jueves" || nivelPrevio !== "1")) {
+  if (sesion.modo === "derivada" && (!esJueves || nivelPrevio !== "1")) {
     return { respuestas: [], aviso: "Hubo una alerta: Amy no manda mensajes programados." };
   }
   if (sesion.modo === "derivada") {
@@ -22,5 +34,6 @@ export async function correrMomento(sesion: Sesion, momento: MomentoReloj): Prom
     return { respuestas };
   }
   if (sesion.modo === "pausa") sesion.modo = "normal";
-  return { respuestas: await turnoDeAmi(sesion, { texto: EVENTOS_RELOJ[momento], esReloj: true }) };
+  const texto = EVENTOS_RELOJ[momento] + (await loQueSabe(sesion.id));
+  return { respuestas: await turnoDeAmi(sesion, { texto, esReloj: true }) };
 }

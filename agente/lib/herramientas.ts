@@ -1,7 +1,17 @@
 import type Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { agregarAlRecetario, cargarRecetario, type PlanSabado, type Sesion } from "./estado";
+import {
+  agregarAlRecetario,
+  cargarMemoria,
+  cargarRecetario,
+  olvidar,
+  recordar,
+  TIPOS_RECUERDO,
+  type PlanSabado,
+  type Sesion,
+  type TipoRecuerdo,
+} from "./estado";
 
 interface PreciosEjemplo {
   supermercado: Record<string, number>;
@@ -168,6 +178,40 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
     input_schema: { type: "object", properties: {}, required: [], additionalProperties: false },
     strict: true,
   },
+  {
+    name: "recordar_sobre_ti",
+    description:
+      "Guarda algo que la persona te contó de sí misma y que sirve para acompañarla mejor otra semana: a qué hora suele despertar, su antojo favorito, qué app de delivery usa, algo que le gusta o no le gusta comer, o su rutina del finde. Solo lo que ella dijo, nunca algo que supones. Nunca salud, peso, cuerpo, medicamentos ni ánimo.",
+    input_schema: {
+      type: "object",
+      properties: {
+        tipo: { type: "string", enum: [...TIPOS_RECUERDO] },
+        dato: { type: "string", description: "Con sus palabras y corto. Ej: 'despierta como a las 14:00', 'el sushi', 'no le gusta el cilantro'." },
+      },
+      required: ["tipo", "dato"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
+    name: "ver_lo_que_se_de_ti",
+    description:
+      "Devuelve lo que ya sabes de la persona (lo que te contó otras veces) y su recetario. Úsala cuando ella pregunte qué sabes de ella.",
+    input_schema: { type: "object", properties: {}, required: [], additionalProperties: false },
+    strict: true,
+  },
+  {
+    name: "olvidar_sobre_ti",
+    description:
+      "Borra lo que la persona te pida olvidar: un tipo de dato, su recetario o todo. Úsala apenas lo pida, sin preguntar por qué.",
+    input_schema: {
+      type: "object",
+      properties: { que: { type: "string", enum: [...TIPOS_RECUERDO, "recetario", "todo"] } },
+      required: ["que"],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
 ];
 
 interface ProductoJumbo {
@@ -295,6 +339,24 @@ export async function ejecutarHerramienta(nombre: string, entrada: unknown, sesi
       return JSON.stringify(
         nueva ? { guardado: true } : { guardado: false, nota: "Ya estaba en su recetario: no hace falta decírselo." },
       );
+    }
+    case "recordar_sobre_ti": {
+      const { tipo, dato } = entrada as { tipo: TipoRecuerdo; dato: string };
+      await recordar(sesion.id, tipo, dato);
+      return JSON.stringify({ guardado: true, nota: "No le anuncies que lo guardaste: úsalo con naturalidad más adelante." });
+    }
+    case "ver_lo_que_se_de_ti": {
+      const [recuerdos, recetas] = await Promise.all([cargarMemoria(sesion.id), cargarRecetario(sesion.id)]);
+      return JSON.stringify({
+        recuerdos: recuerdos.map(({ tipo, dato }) => ({ tipo, dato })),
+        recetario: recetas.map(({ nombre, cuando }) => ({ nombre, cuando })),
+        nota: "Si te preguntó, díselo en palabras simples y recuérdale que puede pedirte olvidar algo. Sin números ni conteos.",
+      });
+    }
+    case "olvidar_sobre_ti": {
+      const { que } = entrada as { que: TipoRecuerdo | "recetario" | "todo" };
+      await olvidar(sesion.id, que);
+      return JSON.stringify({ olvidado: que });
     }
     case "ver_recetario": {
       const recetas = await cargarRecetario(sesion.id);
