@@ -467,3 +467,6 @@ Benja definió el onboarding (primer contacto, cuando la persona escribe «Hola 
 2. «Buena, Benja 🙌» · «Y qué es lo que más se te antoja pedir el finde?» (sin dar por hecho que sale ni que toma)
 3. «Buena elección 😋» · «Te cuento cómo funciono: el jueves te pregunto si sales y, si quieres, dejamos el sábado armado. El sábado te escribo cuando despiertes. Y si algún finde prefieres que no te escriba, me mandas "pausa"»
 Nada más: el resto (hora, qué no come, etc.) lo va sabiendo de a poco. Si el primer mensaje trae algo importante (pena, alerta), eso va primero. El jueves del reloj no tiene onboarding, como dice tu prompt. Si algo del tono no te calza, cámbialo y avísame.
+
+### 2026-10-24 11:55 · para Esperanza
+Los botones de la landing ahora abren WhatsApp con «Hola Amy, es mi primera vez aquí» (neutro: con «soy nuevo» Amy asumía masculino). Con ese mensaje, o con un «hola» pelado en una conversación nueva, el primer paso del onboarding es fijo en el código: «Hola! Soy Amy, un programa que te acompaña con la comida del finde 🙌» · «Cómo te llamas?». Con Haiku a veces preguntaba «Cómo va tu semana?» en vez del nombre.
