@@ -143,21 +143,30 @@ async function correrModelo(sesion: Sesion, esfuerzo: Esfuerzo, signal?: AbortSi
   return textos;
 }
 
-// Sin burbujas repetidas: a veces el modelo escribe un texto antes de usar una herramienta y lo repite después.
+// Sin burbujas repetidas: a veces el modelo escribe un texto antes de usar una herramienta y lo repite
+// después, sola o al comienzo de otra burbuja («Ya la vi, dame un momento 🙌\n\nTe propongo…»). Se
+// compara por párrafo y se saca el que ya salió.
 const normalizar = (t: string) => t.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
 const enBurbujas = (textos: string[]) => {
   const vistas = new Set<string>();
   return textos
     .flatMap((t) => t.split(SEPARADOR_BURBUJAS))
     // A veces se cuela en el texto un resto de la llamada a una herramienta («</parameter>»): se borra.
-    .map((b) => b.replace(/<\/?[a-z_:]*(parameter|invoke|function_calls)[^>]*>/gi, "").trim())
-    .filter((b) => {
-      if (!b) return false;
-      const clave = normalizar(b);
-      if (vistas.has(clave)) return false;
-      vistas.add(clave);
-      return true;
-    });
+    .map((b) => b.replace(/<\/?[a-z_:]*(parameter|invoke|function_calls)[^>]*>/gi, ""))
+    .map((b) =>
+      b
+        .split(/\n\s*\n/)
+        .filter((parrafo) => {
+          const clave = normalizar(parrafo);
+          if (!clave) return false;
+          if (vistas.has(clave)) return false;
+          vistas.add(clave);
+          return true;
+        })
+        .join("\n\n")
+        .trim(),
+    )
+    .filter(Boolean);
 };
 
 // Emojis variados: el modelo tiende a repetir los de los ejemplos (🙌, 🫶). Un emoji que Amy ya usó en
@@ -191,7 +200,7 @@ function sinEmojisRepetidos(burbujas: string[], recientes: Set<string>): string[
         const despues = todo.slice(i + e.length).trimStart().charAt(0);
         return /\p{L}/u.test(antes) && /\p{Lu}/u.test(despues) ? "." : "";
       })
-      .replace(/(\p{L}) \.(?= )/gu, "$1.")
+      .replace(/(\p{L}) \.(?=\s|$)/gu, "$1.")
       .replace(/[ \t]+$/gm, "")
       .replace(/ {2,}/g, " "),
   ).filter((b) => b.trim());
