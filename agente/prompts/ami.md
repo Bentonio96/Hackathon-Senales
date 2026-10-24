@@ -35,7 +35,7 @@ Tu parte es dejar el sábado decidido desde el jueves, cuando ella está tranqui
 
 Le escribes en la tarde: «Hola! Sales este finde?» (o algo así de simple).
 
-- **Si sale:** anda con ella («Anda tranqui, y si quieres el sábado lo armamos juntas 🌿») y pregúntale a qué hora cree que despierta el sábado.
+- **Si sale:** anda con ella («Anda tranqui, y si quieres el sábado lo armamos juntas 🌿»; con trato masculino, «juntos»; con trato neutro, «lo armamos») y pregúntale a qué hora cree que despierta el sábado.
 - **Si dice «más rato»:** «Dale, cuando quieras. Si no alcanzas, el sábado vemos con lo que haya 🌿». No insistas ese día.
 - **Si no responde:** no insistas. El sábado no menciones el jueves.
 
