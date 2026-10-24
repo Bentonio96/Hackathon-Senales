@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { Sesion } from "./estado";
 import { ejecutarHerramienta, herramientas } from "./herramientas";
-import { clasificacionPorFrase, clasificar, frasesNivel2, mensajesFijos, violaFiltro } from "./seguridad";
+import { type Clasificacion, clasificacionPorFrase, clasificar, frasesNivel2, mensajesFijos, violaFiltro } from "./seguridad";
 
 const client = new Anthropic();
 // Haiku 5.5 para probar barato; en el deploy del pitch se pone AMI_MODELO=claude-opus-5-5.
@@ -61,8 +61,10 @@ function registrarFijo(sesion: Sesion, contenido: Anthropic.Beta.BetaContentBloc
   sesion.historial.push({ role: "assistant", content: [{ type: "text", text: burbujas.join("\n---\n") }] });
 }
 
+type Esfuerzo = "low" | "medium";
+
 /** Corre el modelo que conversa, con herramientas, sobre el historial actual. Devuelve sus textos. */
-async function correrModelo(sesion: Sesion): Promise<string[]> {
+async function correrModelo(sesion: Sesion, esfuerzo: Esfuerzo, signal?: AbortSignal): Promise<string[]> {
   const textos: string[] = [];
   for (let vuelta = 0; vuelta < MAX_VUELTAS_HERRAMIENTAS; vuelta++) {
     const respuesta = await client.beta.messages.create({
@@ -71,9 +73,9 @@ async function correrModelo(sesion: Sesion): Promise<string[]> {
       system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
       tools: herramientas,
       messages: sesion.historial,
-      output_config: { effort: "medium" },
+      output_config: { effort: esfuerzo },
       ...(CON_RESPALDO ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" as const } : {}),
-    });
+    }, { signal });
 
     if (respuesta.stop_reason === "refusal") {
       const texto = "Uy, eso no te lo sé responder bien. Si es algo de salud, tu nutri o Salud Responde (600 360 7777) te pueden orientar";
@@ -133,35 +135,68 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     return burbujas;
   }
 
-  // 1. Detección: frases de nivel 2 primero; si no, el clasificador con los últimos 20 mensajes.
+  // Pensar más solo cuando llega la foto del refri (es cuando arma el plan); si no, responde más rápido.
+  const esfuerzo: Esfuerzo = entrada.imagen ? "medium" : "low";
+
+  // 1. Detección (diseño de Esperanza): frases de nivel 2 primero; si calza una, va el mensaje fijo sin
+  // llamar al modelo. Si no, el clasificador (últimos 20 mensajes) corre A LA VEZ que el modelo, para
+  // que Amy responda antes: si hay alerta, la respuesta del modelo se corta y se descarta.
+  let clasificacion: Clasificacion | null = null;
+  let pendiente: Promise<Clasificacion | null> | null = null;
   if (!entrada.esReloj && texto) {
     const porFrase = frasesNivel2(texto);
-    let clasificacion = porFrase ? clasificacionPorFrase(porFrase, texto) : null;
-    if (!clasificacion) {
-      try {
-        clasificacion = await clasificar(client, MODELO_CLASIFICADOR, sesion.historial, texto, previa);
-      } catch (error) {
+    if (porFrase) {
+      clasificacion = clasificacionPorFrase(porFrase, texto);
+    } else {
+      pendiente = clasificar(client, MODELO_CLASIFICADOR, sesion.historial.slice(), texto, previa).catch((error) => {
         // Si el clasificador falla, sigue el modelo que conversa, que tiene las mismas reglas en su prompt.
         console.error("Clasificador falló:", error);
-      }
-    }
-    if (clasificacion && clasificacion.nivel !== "0") {
-      const burbujas = mensajesFijos(clasificacion, previa, sesion.perfil?.trato ?? "neutro");
-      if (burbujas.length > 0) {
-        if (clasificacion.nivel !== "ambiguo") {
-          sesion.modo = "derivada";
-          sesion.derivacion_previa = { nivel: clasificacion.nivel, fecha: new Date().toISOString() };
-        }
-        console.info("Alerta detectada:", clasificacion.nivel, clasificacion.senal);
-        registrarFijo(sesion, contenido, burbujas);
-        return burbujas;
-      }
+        return null;
+      });
     }
   }
 
-  // 2. El modelo que conversa.
+  const responderConAlerta = (c: Clasificacion): string[] | null => {
+    if (c.nivel === "0") return null;
+    const fijas = mensajesFijos(c, previa, sesion.perfil?.trato ?? "neutro");
+    if (fijas.length === 0) return null;
+    if (c.nivel !== "ambiguo") {
+      sesion.modo = "derivada";
+      sesion.derivacion_previa = { nivel: c.nivel, fecha: new Date().toISOString() };
+    }
+    console.info("Alerta detectada:", c.nivel, c.senal);
+    registrarFijo(sesion, contenido, fijas);
+    return fijas;
+  };
+
+  if (clasificacion) {
+    const fijas = responderConAlerta(clasificacion);
+    if (fijas) return fijas;
+  }
+
+  // 2. El modelo que conversa (mientras el clasificador termina).
+  const largoAntes = sesion.historial.length;
   sesion.historial.push({ role: "user", content: contenido });
-  let burbujas = enBurbujas(await correrModelo(sesion));
+  const corte = new AbortController();
+  let textos = correrModelo(sesion, esfuerzo, corte.signal);
+  // Si falla antes de que termine el clasificador, que no quede como rechazo sin manejar: el error
+  // llega igual más abajo, en el await.
+  textos.catch(() => {});
+  if (pendiente) {
+    const resultado = await pendiente;
+    if (resultado && resultado.nivel !== "0") {
+      corte.abort();
+      await textos.catch(() => {});
+      // Lo que el modelo alcanzó a agregar en este turno nunca se mostró: se descarta.
+      sesion.historial.length = largoAntes;
+      const fijas = responderConAlerta(resultado);
+      if (fijas) return fijas;
+      // Nivel sin mensaje fijo: se responde normal (y pasa igual por el filtro de salida).
+      sesion.historial.push({ role: "user", content: contenido });
+      textos = correrModelo(sesion, esfuerzo);
+    }
+  }
+  let burbujas = enBurbujas(await textos);
 
   // 3. Filtro de salida: si aparece algo prohibido, se regenera una vez; si vuelve, respuesta neutra.
   const violacion = violaFiltro(burbujas.join("\n"));
@@ -176,7 +211,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
         },
       ],
     });
-    burbujas = enBurbujas(await correrModelo(sesion));
+    burbujas = enBurbujas(await correrModelo(sesion, esfuerzo));
     if (violaFiltro(burbujas.join("\n"))) {
       burbujas = ["Perdón, se me enredó la respuesta. Me cuentas de nuevo? 🌿"];
     }

@@ -223,7 +223,7 @@ interface ProductoJumbo {
 async function buscarEnJumbo(producto: string): Promise<ProductoJumbo[]> {
   const res = await fetch(`https://www.jumbo.cl/busqueda?ft=${encodeURIComponent(producto)}`, {
     headers: { "User-Agent": "Mozilla/5.0 (compatible; AmiHackaton/0.1)" },
-    signal: AbortSignal.timeout(8000),
+    signal: AbortSignal.timeout(4000),
   });
   if (!res.ok) throw new Error(`Jumbo respondió ${res.status}`);
   const html = await res.text();
@@ -265,7 +265,7 @@ function precioEjemploMasParecido(tabla: Record<string, number>, consulta: strin
 async function nutrientesFdc(nombre: string, gramos: number) {
   const key = process.env.FDC_API_KEY || "DEMO_KEY";
   const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(nombre)}&pageSize=1&dataType=Foundation,SR%20Legacy&api_key=${key}`;
-  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
   if (!res.ok) throw new Error(`FDC respondió ${res.status}`);
   const datos = (await res.json()) as {
     foods?: { description: string; foodNutrients: { nutrientName: string; unitName: string; value: number }[] }[];
