@@ -65,8 +65,8 @@ export function Portada() {
             Darte un gusto no es empezar de cero.
           </h1>
           <p className="entra mt-6 max-w-[40ch] text-lead" style={{ ["--i" as string]: 1 }}>
-            {NOMBRE} es una compañera en WhatsApp, con tono de amiga, que te acompaña con la comida del finde. El
-            jueves dejan el sábado decidido, para que el lunes sigas con tu rutina, sin culpa.
+            {NOMBRE} te acompaña por WhatsApp durante la semana, para que salir el viernes o darte un gusto el finde no
+            te haga sentir que botaste tu progreso.
           </p>
           <div className="entra mt-9 flex flex-wrap items-center gap-x-7 gap-y-4" style={{ ["--i" as string]: 2 }}>
             <BotonWhatsApp />

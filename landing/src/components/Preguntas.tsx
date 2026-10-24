@@ -3,7 +3,7 @@ import { NOMBRE } from "../config";
 const PREGUNTAS = [
   {
     p: "¿Cómo empiezo?",
-    r: `Le escribes «Hola ${NOMBRE}» con el botón. Se conocen en tres mensajes: tu nombre, tu rutina de comida en la semana y cómo funciona.`,
+    r: `Le escribes «Hola ${NOMBRE}» con el botón. Se conocen en tres mensajes: tu nombre, tu rutina de comida en la semana y cómo te va a acompañar.`,
   },
   { p: "¿Es una dieta?", r: "No. Trabaja con la pauta que ya te dio tu nutricionista. Sin rachas, sin calorías, sin contar." },
   { p: "¿Cuántos mensajes me manda?", r: "Pocos: el jueves, el sábado cuando despiertas y el domingo en la noche." },

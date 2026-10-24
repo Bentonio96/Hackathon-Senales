@@ -35,7 +35,7 @@ export function Cierre() {
             Disfruta el finde. El lunes, sigues.
           </h2>
           <p className="mt-6 max-w-[44ch] text-lead">
-            Escríbele «Hola {NOMBRE}». El jueves te pregunta si sales y, si quieres, dejan el sábado listo.
+            Escríbele «Hola {NOMBRE}». Te acompaña en la semana y, el jueves, te pregunta si sales.
           </p>
           <a
             href={WHATSAPP_URL}

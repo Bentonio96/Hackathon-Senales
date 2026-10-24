@@ -22,7 +22,7 @@ const FORMAS = [
 const PASOS = [
   {
     titulo: `Le escribes «Hola ${NOMBRE}»`,
-    texto: "Se conocen en tres mensajes: tu nombre, tu rutina de comida en la semana y cómo funciona.",
+    texto: "Se conocen en tres mensajes: tu nombre, tu rutina de comida en la semana y para qué está: que un carrete o un antojo no te haga sentir que botaste todo lo que hiciste.",
   },
   {
     titulo: "El jueves te pregunta si sales",
