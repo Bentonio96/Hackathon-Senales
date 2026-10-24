@@ -82,6 +82,16 @@ function esSiDelJueves(sesion: Sesion, texto: string): boolean {
   return false;
 }
 
+// El primer paso del onboarding también es fijo: con el mensaje de la landing («Hola Amy, es mi primera
+// vez aquí») o un saludo pelado en una conversación nueva, Amy se presenta y pregunta el nombre.
+const RESPUESTA_ONBOARDING = ["Hola! Soy Amy, un programa que te acompaña con la comida del finde 🙌", "Cómo te llamas?"];
+function esInicioOnboarding(sesion: Sesion, texto: string): boolean {
+  const limpio = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z ]+/g, " ").trim();
+  if (/\bprimera vez\b/.test(limpio) && limpio.length <= 60) return true;
+  const yaHablaron = sesion.historial.some((m) => m.role === "assistant");
+  return !yaHablaron && /^(hola|holi|hello|hey|buenas)( amy)?$/.test(limpio.replace(/\s+/g, " "));
+}
+
 type Esfuerzo = "low" | "medium";
 
 /** Corre el modelo que conversa, con herramientas, sobre el historial actual. Devuelve sus textos. */
@@ -230,6 +240,10 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     return burbujas;
   }
 
+  if (!entrada.esReloj && !entrada.imagen && esInicioOnboarding(sesion, texto)) {
+    registrarFijo(sesion, contenido, RESPUESTA_ONBOARDING);
+    return RESPUESTA_ONBOARDING;
+  }
   if (!entrada.esReloj && !entrada.imagen && esSiDelJueves(sesion, texto)) {
     registrarFijo(sesion, contenido, RESPUESTA_SI_JUEVES);
     return RESPUESTA_SI_JUEVES;
