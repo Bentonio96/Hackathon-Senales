@@ -152,12 +152,18 @@ function sinEmojisRepetidos(burbujas: string[], recientes: Set<string>): string[
   const usados = new Set(recientes);
   return burbujas.map((b) =>
     b
-      .replace(EMOJI, (e) => {
+      .replace(EMOJI, (e, i: number, todo: string) => {
         const clave = e.replace("\uFE0F", "");
-        if (usados.has(clave)) return "";
-        usados.add(clave);
-        return e;
+        if (!usados.has(clave)) {
+          usados.add(clave);
+          return e;
+        }
+        // Si el emoji separaba dos oraciones («...hamburguesa 🙌 Te dejo...»), queda un punto en su lugar.
+        const antes = todo.slice(0, i).trimEnd().slice(-1);
+        const despues = todo.slice(i + e.length).trimStart().charAt(0);
+        return /\p{L}/u.test(antes) && /\p{Lu}/u.test(despues) ? "." : "";
       })
+      .replace(/(\p{L}) \.(?= )/gu, "$1.")
       .replace(/[ \t]+$/gm, "")
       .replace(/ {2,}/g, " "),
   ).filter((b) => b.trim());
