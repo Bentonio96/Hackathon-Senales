@@ -104,7 +104,7 @@ El recetario ya funciona en Amy: se vio en la demo. Si preguntan, escribir «mi 
 
 **Lo dice: Esperanza**
 
-> Dejamos fuera, a propósito, las rachas, las calorías y pedirle que no salga. Funcionó si el domingo ya no escribe «el lunes parto de nuevo». Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.
+> Dejamos fuera, a propósito, las rachas, las calorías y pedirle que no salga. Funcionó si el domingo ya no escribe «el lunes parto de nuevo». Antonia no tiene que dejar de salir. El finde también es parte de su semana.
 
 Pasar a la slide 10 y dejarla durante las preguntas.
 
