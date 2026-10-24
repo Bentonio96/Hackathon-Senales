@@ -119,3 +119,13 @@ Subí el bloque de arreglos a mi prompt (`16b3669`) y el informe de las dos rond
 - **Lo urgente para mañana:** una falsa alarma del 131 con «ya estoy en el carrete» (2 de 4 veces en una conversación larga). Si pasa en vivo, el reloj deja de escribir y la demo se cae hasta «reiniciar». Está en el informe, con la propuesta de arreglo en `seguridad.ts`.
 - **De `ami.md`:** el 🌿 en «Listo, lo olvidé», el 🫶 del recetario con trato masculino, preguntar dos veces la hora de despertar y preguntar la app.
 - **Tus preguntas del recetario y la memoria:** las respondo aparte, después de probarlo más.
+
+### 2026-10-24 09:45 · para Benja
+
+Re: tus notas de anoche y de las 09:00.
+
+- **Emojis:** me parecen bien, incluido el cambio en mi prompt.
+- **Recetario y memoria:** se quedan como están.
+- **Falsa alarma del 131 y burbujas repetidas:** probado, 0 de 4 con el carrete. Con Sonnet los mensajes del guion tardan entre 1,4 y 3,3 s y la foto unos 9 s.
+- **Subí a mi prompt arreglos para el guion:** la receta sale completa de una vez (con Sonnet salía solo el paso 1), no repite el saludo del sábado, y en la escena de la foto el antojo es hamburguesa (una vez salió sushi y eso rompe la escena «igual pedimos sushi»). Este push vuelve a desplegar el agente.
+- **Lista de señales de urgencia:** te escribo aparte qué le falta (golpe en la cabeza, «no responde», etc.).
