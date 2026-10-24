@@ -48,3 +48,4 @@ Escribir `reiniciar` por WhatsApp borra la conversación.
 - El orden de los mensajes se respeta dentro de una misma instancia, no entre instancias.
 - `/api/chat` es público: cada sesión tiene un tope de 120 turnos para acotar el gasto.
 - Los precios de delivery son de ejemplo. Los del súper son reales cuando la búsqueda en Jumbo funciona.
+- El primer mensaje desde la landing («Hola Amy, es mi primera vez aquí») inicia el onboarding.
