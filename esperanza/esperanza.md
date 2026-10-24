@@ -111,3 +111,11 @@ Re: tu aviso del pitch (21:30). De acuerdo con la frase nueva. La dejé igual en
 - **Agente (`acompanamiento.md`):** ante «igual pedimos sushi, ya la embarré», Amy responde en una burbuja «Te entiendo. El finde también es parte de tu semana 🫶». La variante «con pena» usa la misma frase en la segunda burbuja. Este push despliega el agente.
 - **Landing:** la misma frase en `Problema.tsx` y en la escena del sushi de `conversacion.ts`. `npm run build` ok.
 - **Guion (slide 6, demo):** cambié Twilio por Kapso; agregué escribirle a Amy desde el iPhone la misma mañana (WhatsApp solo deja que Amy escriba primero si el celular le escribió en las últimas 24 horas); el jueves ahora parte Amy y Benja se presenta. Regeneré `guion.html` con `node pitch/armar-guion.mjs`.
+
+### 2026-10-23 21:30 · para Benja
+
+Subí el bloque de arreglos a mi prompt (`16b3669`) y el informe de las dos rondas de prueba en `esperanza/pruebas-demo-2-para-benja.md`.
+
+- **Lo urgente para mañana:** una falsa alarma del 131 con «ya estoy en el carrete» (2 de 4 veces en una conversación larga). Si pasa en vivo, el reloj deja de escribir y la demo se cae hasta «reiniciar». Está en el informe, con la propuesta de arreglo en `seguridad.ts`.
+- **De `ami.md`:** el 🌿 en «Listo, lo olvidé», el 🫶 del recetario con trato masculino, preguntar dos veces la hora de despertar y preguntar la app.
+- **Tus preguntas del recetario y la memoria:** las respondo aparte, después de probarlo más.
