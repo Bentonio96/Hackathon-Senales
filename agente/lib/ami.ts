@@ -61,6 +61,27 @@ function registrarFijo(sesion: Sesion, contenido: Anthropic.Beta.BetaContentBloc
   sesion.historial.push({ role: "assistant", content: [{ type: "text", text: burbujas.join("\n---\n") }] });
 }
 
+// El «sí» al aviso del jueves tiene una respuesta fija (la del guion del pitch), para que no se desvíe.
+const RESPUESTA_SI_JUEVES = ["Dale, pásalo bien! 😉", "Te tinca que dejemos algo armado para pasar la caña el sábado?"];
+const DICE_QUE_SI = /\b(si|sip|sipo|obvio|claro|ya|dale|salgo|carrete|seguro|yes)\b/;
+// Cualquier duda, pena o presentación va al modelo, que sabe conversar eso.
+const NO_ES_SOLO_SI = /\b(no|nop|nunca|tampoco|quizas|capaz|depende|se|mal|triste|pena|cansad[oa]|soy|llamo|pero)\b|\?/;
+
+/** True si el mensaje es un «sí» simple a la pregunta del jueves («Sales este finde?»), justo después del aviso. */
+function esSiDelJueves(sesion: Sesion, texto: string): boolean {
+  const limpio = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  if (!limpio || limpio.length > 80 || !DICE_QUE_SI.test(limpio) || NO_ES_SOLO_SI.test(limpio)) return false;
+  // El último mensaje de la persona (o del reloj) en el historial tiene que ser el aviso del jueves.
+  for (let i = sesion.historial.length - 1; i >= 0; i--) {
+    const m = sesion.historial[i];
+    if (m.role !== "user" || typeof m.content === "string") continue;
+    const textoUsuario = m.content.find((b) => b.type === "text");
+    if (!textoUsuario || textoUsuario.type !== "text") continue; // resultados de herramientas
+    return textoUsuario.text === EVENTOS_RELOJ.jueves;
+  }
+  return false;
+}
+
 type Esfuerzo = "low" | "medium";
 
 /** Corre el modelo que conversa, con herramientas, sobre el historial actual. Devuelve sus textos. */
@@ -198,6 +219,11 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     ];
     registrarFijo(sesion, contenido, burbujas);
     return burbujas;
+  }
+
+  if (!entrada.esReloj && !entrada.imagen && esSiDelJueves(sesion, texto)) {
+    registrarFijo(sesion, contenido, RESPUESTA_SI_JUEVES);
+    return RESPUESTA_SI_JUEVES;
   }
 
   // Pensar más solo cuando llega la foto del refri (es cuando arma el plan); si no, responde más rápido.

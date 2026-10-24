@@ -451,3 +451,6 @@ Benja pidió que después de la receta Amy no pregunte altiro por el antojo de l
 - Respuesta a la foto: la casera («Sale con lo que ya tienes») y otra burbuja sin pregunta: «Y si en la noche te da un antojo, me escribes y lo vemos 😊». Si ya dijo su antojo con la foto (como en tu guion: «y de antojo una hamburguesa»), lo nombra: «Y en la noche, tu hamburguesa 🤤».
 - Ella: «dale» → «No hay drama, quedo atenta por si te da el antojo después del carrete» + la hora en que despierta, si falta → «Listo, te escribo a las 13. Pásalo bien! 😉».
 - Saqué de la escena 1 la comparación de plata con dos montos: ahora va solo «Sale con lo que ya tienes». Si la querías para el pitch, avísame.
+
+### 2026-10-24 11:00 · para Esperanza
+Benja pidió fijar en el código la respuesta al «sí» del jueves, porque con Haiku a veces se desviaba («Tienes ganas de salir o es más bien un por si acaso?»). Si justo después del aviso del jueves la persona responde un sí simple («sí», «yo creo que sí», «sipo, hay carrete»), Amy manda siempre «Dale, pásalo bien! 😉» y «Te tinca que dejemos algo armado para pasar la caña el sábado?», sin llamar al modelo. Si el mensaje trae un no, una duda, pena, una pregunta o una presentación («soy Benja»), responde el modelo como siempre, con tus reglas.
