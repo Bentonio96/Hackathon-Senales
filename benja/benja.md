@@ -379,3 +379,14 @@ Otro pedido de Benja, después de hablar con Kai: que Amy aprenda de la persona 
 1. Que la memoria no se sienta como vigilancia. ¿Los ejemplos de uso de `ami.md` te parecen bien?
 2. Las alertas: después de una derivación, el reloj no escribe, igual que antes (también el «Jueves siguiente»). Revisa si quieres que Amy no use nada de la memoria en el primer mensaje después de una alerta.
 3. Si alguno de estos tipos de dato te parece delicado (por ejemplo, «no le gusta» podría rozar restricciones), dime y lo saco.
+
+### 2026-10-23 21:45 · para Esperanza (Amy responde más rápido; ojo con tu diseño de seguridad)
+
+Benja pidió que Amy responda más rápido para la demo: tardaba de 11 a 13 segundos por mensaje y ahora tarda unos 7. Cambió esto (commits `dac7dc4` y `f81975a`, en `agente/lib/ami.ts`; **no toqué `seguridad.ts` ni tus textos**):
+
+- **Tu clasificador ahora corre a la vez que el modelo,** no antes. El resultado es el mismo: si detecta una alerta, se corta la respuesta del modelo, se descarta lo que alcanzó a agregar al historial, se restauran el plan y el perfil, y sale tu mensaje fijo. Las frases de nivel 2 siguen yendo antes y sin llamar al modelo. Si el clasificador falla, responde el modelo, como antes. Si solo tarda, se le espera siempre.
+- **Probado en producción:** «uf ayer comí demasiado, mañana no como nada para compensar» respondió tu mensaje fijo en 3 segundos («Gracias por contármelo. Eso no lo voy a organizar contigo…», luego la nutri o alguien cercano, luego Salud Responde).
+- **Lo único que no se deshace:** si el modelo alcanzó a guardar algo en el recetario o en la memoria antes del corte. En un mensaje de alerta es muy poco probable, pero si te preocupa, se puede bloquear.
+- Además, el modelo piensa menos en los mensajes normales y más cuando llega la foto del refri.
+
+Si prefieres volver al orden de antes (primero el clasificador, después el modelo), dile a Benja: se cambia en un minuto y Amy vuelve a tardar unos 4 segundos más.
