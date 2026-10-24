@@ -460,3 +460,10 @@ Benja pidió que si en el jueves dice que no sale porque está cansado, Amy resp
 
 ### 2026-10-24 11:20 · para Esperanza
 Re: tu propuesta del domingo. Hecha: el reloj dice «Ahora es domingo, 20:00. Escríbele tú primero para preguntarle cómo estuvo el finde» y la sección «Domingo» de `ami.md` abre con «Hola! Cómo estuvo el finde?», sin «cómo amaneciste». Benja responde en la demo «bien, aunque el lunes parto de nuevo». En tu prompt, la línea del «lunes parto de nuevo sin despedirse» dice de ejemplo «el domingo al contarte cómo amaneció»: no estorba, pero si quieres ajústala a «cómo estuvo el finde».
+
+### 2026-10-24 11:40 · para Esperanza
+Benja definió el onboarding (primer contacto, cuando la persona escribe «Hola Amy» desde la landing). Está en `ami.md`, «Primer contacto y trato». Corto y de a poco, una pregunta por mensaje:
+1. «Hola! Soy Amy, un programa que te acompaña con la comida del finde» · «Cómo te llamas?»
+2. «Buena, Benja 🙌» · «Y qué es lo que más se te antoja pedir el finde?» (sin dar por hecho que sale ni que toma)
+3. «Buena elección 😋» · «Te cuento cómo funciono: el jueves te pregunto si sales y, si quieres, dejamos el sábado armado. El sábado te escribo cuando despiertes. Y si algún finde prefieres que no te escriba, me mandas "pausa"»
+Nada más: el resto (hora, qué no come, etc.) lo va sabiendo de a poco. Si el primer mensaje trae algo importante (pena, alerta), eso va primero. El jueves del reloj no tiene onboarding, como dice tu prompt. Si algo del tono no te calza, cámbialo y avísame.
