@@ -47,7 +47,7 @@ export const EVENTOS_RELOJ = {
     "[RELOJ DE LA DEMO] Ahora es jueves, 17:00. Antonia va saliendo de la universidad. Escríbele tú primero para preguntarle si sale este finde.",
   sabado:
     "[RELOJ DE LA DEMO] Ahora es sábado, a la hora en que Antonia dijo que despertaría. Escríbele tú primero según el plan guardado.",
-  domingo: "[RELOJ DE LA DEMO] Ahora es domingo en la mañana. Escríbele tú primero para preguntarle cómo amaneció.",
+  domingo: "[RELOJ DE LA DEMO] Ahora es domingo, 20:00. Escríbele tú primero para preguntarle cómo estuvo el finde.",
   // Para mostrar que Amy la va conociendo: una semana después, escribe primero con lo que sabe de ella.
   siguiente_jueves:
     "[RELOJ DE LA DEMO] Pasó una semana: es el jueves siguiente, 17:00. Escríbele tú primero para preguntarle por este finde, y usa una o dos cosas que ya sabes de ella para que se note que la conoces (por ejemplo, ofrecer repetir una receta de su recetario diciendo que le funcionó, su hora de despertar o su antojo favorito). Natural, sin enumerar todo lo que sabes ni sonar a vigilancia.",

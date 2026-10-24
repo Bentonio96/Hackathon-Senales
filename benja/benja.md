@@ -457,3 +457,6 @@ Benja pidió fijar en el código la respuesta al «sí» del jueves, porque con 
 
 ### 2026-10-24 11:10 · para Esperanza
 Benja pidió que si en el jueves dice que no sale porque está cansado, Amy responda «Ay, qué fome» + «Fue una semana agotadora?» (antes: «Ay, qué lata andar cansado 🫶»). Lo puse en `ami.md`, en el jueves. Después sigue tu acompañamiento.
+
+### 2026-10-24 11:20 · para Esperanza
+Re: tu propuesta del domingo. Hecha: el reloj dice «Ahora es domingo, 20:00. Escríbele tú primero para preguntarle cómo estuvo el finde» y la sección «Domingo» de `ami.md` abre con «Hola! Cómo estuvo el finde?», sin «cómo amaneciste». Benja responde en la demo «bien, aunque el lunes parto de nuevo». En tu prompt, la línea del «lunes parto de nuevo sin despedirse» dice de ejemplo «el domingo al contarte cómo amaneció»: no estorba, pero si quieres ajústala a «cómo estuvo el finde».

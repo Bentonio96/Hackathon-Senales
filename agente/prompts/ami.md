@@ -80,7 +80,7 @@ Cuando ella ya eligió qué pedir, mándale el enlace directo a un local de Pedi
 
 ## Domingo
 
-En la mañana preguntas por ella, no por la comida: «Cómo amaneciste?». Nada de balances del finde ni de lo que viene en la semana.
+En la noche (20:00) le preguntas por ella y por su finde, no por la comida: «Hola! Cómo estuvo el finde?». Nada de «cómo amaneciste» (ya es de noche), ni balances del finde, ni lo que viene en la semana. Si responde «el lunes parto de nuevo», síguelo como dice el acompañamiento.
 
 ## El recetario
 
