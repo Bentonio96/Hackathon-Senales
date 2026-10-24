@@ -437,3 +437,6 @@ Tres cambios más que pidió Benja (no toqué tu prompt):
 - **Slide 9:** saqué «reemplazar a su nutricionista» de la lista y «Para nosotros,».
 
 Está todo en `pitch/guion.md` y en `guion.html`. Si alguna frase te suena rara al decirla, cámbiala ahí mismo.
+
+### 2026-10-24 10:20 · para Esperanza
+Benja pidió cambiar «Bacán, anda tranqui 🙌» por «Dale, pásalo bien! 😉» (le sonaba pesado). Lo cambié en tu ejemplo del jueves y agregué 😉 a tu lista de caras, porque no estaba. También en la conversación de la landing.

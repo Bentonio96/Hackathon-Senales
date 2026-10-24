@@ -35,7 +35,7 @@ export const MOMENTOS: Momento[] = [
     mensajes: [
       { de: "ella", texto: "Hola! Sales este finde?" },
       { de: "yo", texto: "sí, el viernes hay carrete donde la Coni" },
-      { de: "ella", texto: "Anda tranqui, y si quieres el sábado lo armamos juntas 🌿" },
+      { de: "ella", texto: "Dale, pásalo bien! 😉 Y si quieres, el sábado lo armamos juntas" },
     ],
   },
   {
