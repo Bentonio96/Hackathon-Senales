@@ -73,12 +73,14 @@ Antes de subir:
 - Activar No molestar.
 - Dejar abierto el chat con Amy.
 - Ajustar el recorte con ↓/↑ hasta que solo se vea el chat.
+- **La noche antes, un ensayo completo con ese mismo iPhone,** y en el sábado del ensayo escribir «ya hice las quesadillas, quedaron ricas». Así quedan en su recetario. El recetario no se borra con `reiniciar`, y en la demo del jueves Amy puede ofrecer repetirlas.
 
 1. **«¡Veamos la demo!»** y elegir la ventana de QuickTime.
 2. **Jueves.** Con el botón «Jueves 17:00» de la demo, Amy escribe primero: «Hola! Sales este finde? 🙌». Benja se presenta y responde que el viernes sale con sus amigas. Amy le pide la foto del refri.
 3. **La foto del refri.** Mandar una foto preparada (refri con huevos, queso, tortillas, palta). Amy propone el sábado: la casera de 10 minutos, el antojo y la comparación de precio.
    > Narrar: «Amy revisa la pauta por dentro, pero nunca le muestra un número».
-4. **Sábado.** Escribir «estoy con caña» y pedir la receta paso a paso.
+4. **Sábado.** Escribir «estoy con caña» y pedir la receta paso a paso. Después: «ya las hice, quedaron ricas». Amy responde «Quedó en tu recetario 🫶».
+   > Narrar: «Esto es lo que Antonia ve crecer, en vez de una racha».
 5. **El plan cambia.** Escribir «igual pedimos sushi, ya la embarré». Que el jurado lea la respuesta en silencio dos segundos.
 6. Salir con la flecha → del Mac. Si se usa el control remoto, la pantalla del celular se ve un segundo.
 
@@ -90,7 +92,7 @@ Antes de subir:
 
 > El caso pide que Antonia vea su progreso sin que se reinicie. Por eso en Amy nada vuelve a cero: cada casera que hace queda en su recetario, que solo crece. Amy le recuerda lo que le funcionó, como las quesadillas de la caña. Y el domingo no hay puntaje: hay lo que ella eligió esa semana.
 
-Cuidado: el recetario está en construcción (en la slide dice «en construcción»). Hoy Amy guarda el plan del sábado. Si preguntan, decirlo así: es lo siguiente que sumamos.
+El recetario ya funciona en Amy: se vio en la demo. Si preguntan, escribir «mi recetario» en el chat y Amy lo muestra.
 
 ## 8 · Por qué le cambiaría la vida (0:15) · Convicción
 

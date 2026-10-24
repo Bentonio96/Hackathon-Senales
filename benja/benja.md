@@ -342,3 +342,24 @@ Cambios en el pitch (pedido de Benja, después de hablar con Kai): el pitch ahor
 - **Slide 7 nueva, «Cómo sabe Antonia que avanza, sin rachas»:** el caso pide que vea su progreso sin que se reinicie. La propuesta es que nada vuelva a cero y que lo que cuenta solo crezca: un recetario con las caseras que hace, Amy recordándole lo que le funcionó («La otra vez las quesadillas te salvaron la caña. Las repetimos? 😅») y el domingo sin puntaje. Va marcado «en construcción», porque el agente todavía no lo tiene.
 
 **Para ti:** esto roza tu decisión 4 («sin progreso acumulado, ninguna medida»). No hay números ni nada que pueda bajar, pero si el recetario te parece otra vara, avísale a Benja y lo cambiamos.
+
+### 2026-10-23 21:05 · para Esperanza (el recetario ya está en Amy)
+
+Benja pidió construir el recetario para mostrarlo en la demo de mañana. Ya está en línea (commits `b7ce832` y `e7c6dfb`, publicado en `hola-ami-agente.vercel.app`). **No toqué `prompts/acompanamiento.md` ni `lib/seguridad.ts`.** Todo va en la parte de Benja (`prompts/ami.md`, sección «El recetario») y en dos herramientas nuevas.
+
+**Qué hace:**
+- Cuando la persona cuenta que **cocinó** una casera («ya la hice», «quedó rica»), Amy la guarda con el momento en sus palabras («quesadillas de huevo y palta, el sábado con caña») y responde «Quedó en tu recetario 🫶». Lo que solo planearon no se guarda.
+- El jueves, antes de proponer el sábado, Amy mira el recetario. Si una receta se puede hacer con lo que hay, la propone diciendo que ya le funcionó: «La otra vez las quesadillas te salvaron la caña. Las repetimos?». Es opcional.
+- Si la persona escribe «mi recetario», Amy se lo muestra, una receta por guion.
+- **Solo crece:** se guarda aparte de la conversación, sin vencimiento, así que «reiniciar» no lo borra.
+- **Nunca se cuenta:** Amy no dice cuántas recetas tiene, no compara semanas, no habla de lo que no cocinó, no lo usa para consolar cuando el plan cambió y no lo trae el domingo salvo que se lo pidan.
+- En la demo web aparece en el panel lateral, «Su recetario».
+
+**Probado en producción:** guarda, muestra, sobrevive a «reiniciar» y el jueves vuelve a proponer la receta.
+
+**Para que lo revises (es lo que roza tu decisión 4, «sin progreso acumulado»):**
+1. ¿El recetario se siente como una vara? No hay número, pero una lista también se puede comparar. Si te parece que sí, se puede dejar solo el recuerdo del jueves («La otra vez…») y quitar el «mi recetario».
+2. ¿«Quedó en tu recetario 🫶» te suena bien, o prefieres otra confirmación?
+3. Si en tu prompt hay algo que choque (por ejemplo, no traer lo que comió a la conversación), dime y lo ajusto en `ami.md`.
+
+**Bug que vi en las pruebas, no del recetario:** con Benja (trato masculino), Amy dijo «lo armamos juntas». Es la frase de ejemplo del jueves en `ami.md`, que viene en femenino. Lo dejo anotado para corregirlo en la próxima pasada del prompt.
