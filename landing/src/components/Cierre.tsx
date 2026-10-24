@@ -35,7 +35,7 @@ export function Cierre() {
             Disfruta el finde. El lunes, sigues.
           </h2>
           <p className="mt-6 max-w-[44ch] text-lead">
-            Escríbele hoy. El jueves te pregunta si sales y arman el sábado con tus antojos incluidos.
+            Escríbele «Hola {NOMBRE}». El jueves te pregunta si sales y, si quieres, dejan el sábado listo.
           </p>
           <a
             href={WHATSAPP_URL}
@@ -77,7 +77,7 @@ export function Pie() {
             <a href="#preguntas" className="enlace">Preguntas</a>
           </li>
         </ul>
-        <p className="text-tinta-suave sm:text-right">Conversaciones, locales y precios son de ejemplo. 2026</p>
+        <p className="text-tinta-suave sm:text-right">Las conversaciones son de ejemplo. 2026</p>
       </div>
     </footer>
   );

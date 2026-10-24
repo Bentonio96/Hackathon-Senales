@@ -2,10 +2,7 @@ import { LazyMotion, MotionConfig, domAnimation, m as motion } from "motion/reac
 import { useEffect, useRef } from "react";
 import { NOMBRE } from "../config";
 import { AvatarAmi } from "./Avatar";
-import { ANTOJOS, ENVIO, RECETA, pesos, type Mensaje, type Momento } from "../lib/conversacion";
-
-const pizza = ANTOJOS[0];
-const faltan = RECETA.faltan.reduce((s, f) => s + f.precio, 0);
+import { RECETA, type Mensaje, type Momento } from "../lib/conversacion";
 
 function Refri() {
   return (
@@ -34,18 +31,12 @@ function Plan() {
     <div className="space-y-2">
       <p className="font-titulo font-bold">Tu sábado, listo</p>
       <div className="rounded-[14px_18px_14px_18px] bg-menta px-3 py-2">
-        <p className="text-[0.8125rem] font-semibold">Almuerzo, casero</p>
+        <p className="text-[0.8125rem] font-semibold">Algo rico de tu refri</p>
         <p>
-          {RECETA.nombre}, {RECETA.minutos} min · te falta tomate y cilantro, {pesos(faltan)}
+          {RECETA.nombre}, {RECETA.minutos} min, con lo que ya tienes
         </p>
       </div>
-      <div className="rounded-[18px_14px_18px_14px] bg-amarillo px-3 py-2">
-        <p className="text-[0.8125rem] font-semibold">Comida, tu antojo</p>
-        <p>
-          {pizza.nombre} de {pizza.local}, {pesos(pizza.precio + ENVIO)}
-        </p>
-      </div>
-      <p className="text-[0.8125rem] text-tinta-suave">Precios de ejemplo.</p>
+      <p className="text-[0.8125rem] text-tinta-suave">Si el sábado prefieres pedir, te mando el enlace</p>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { NOMBRE } from "../config";
 import { MOMENTOS } from "../lib/conversacion";
 import { centrar, hayMovimiento } from "../lib/movimiento";
 import { DibujoEscena } from "./Escenas";
@@ -18,8 +19,23 @@ const FORMAS = [
   "rounded-[32px_44px_28px_38px]",
 ];
 
+const PASOS = [
+  {
+    titulo: `Le escribes «Hola ${NOMBRE}»`,
+    texto: "Se conocen en tres mensajes: tu nombre, tu rutina de comida en la semana y cómo funciona.",
+  },
+  {
+    titulo: "El jueves te pregunta si sales",
+    texto: "Si quieres, dejan el sábado armado: le mandas una foto del refri o eliges pedir.",
+  },
+  {
+    titulo: "El sábado te escribe al despertar",
+    texto: "Con tu casera paso a paso o el enlace para pedir. El domingo en la noche te pregunta cómo estuvo el finde.",
+  },
+];
+
 /**
- * Un finde cualquiera, en escenas. Cada escena es un botón que pone el chat en
+ * Tres pasos y, debajo, un finde cualquiera en escenas. Cada escena es un botón que pone el chat en
  * ese momento. En escritorio el teléfono queda fijo y la escena del centro de
  * la pantalla manda; en celular las escenas son una fila que se desliza.
  */
@@ -64,8 +80,24 @@ export function ComoFunciona() {
     <section id="como-funciona" className="relative" aria-labelledby="titulo-como">
       <div className="envoltura pt-20 md:pt-28">
         <h2 id="titulo-como" className="max-w-[16ch] text-titulo">
-          Un finde cualquiera, con Amy
+          Cómo funciona
         </h2>
+        <ol className="mt-10 grid gap-4 md:grid-cols-3">
+          {PASOS.map((p, i) => (
+            <li key={p.titulo} className={`flex flex-col gap-2 p-6 ${["bg-amarillo", "bg-celeste", "bg-menta"][i]} ${FORMAS[i]}`}>
+              <span className="font-titulo text-[2rem] leading-none font-bold" aria-hidden="true">
+                {i + 1}
+              </span>
+              <h3 className="text-lead">{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-6 text-tinta-suave">
+          Si algún finde no quieres que te escriba, le mandas <strong className="font-semibold text-tinta">«pausa»</strong>.
+        </p>
+
+        <h3 className="mt-20 max-w-[18ch] text-titulo">Un finde cualquiera, con {NOMBRE}</h3>
         <p className="mt-4 max-w-[40ch] text-lead text-tinta-suave">Toca una escena y mira qué te escribe.</p>
       </div>
 

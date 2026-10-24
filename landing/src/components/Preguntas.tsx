@@ -1,9 +1,14 @@
 import { NOMBRE } from "../config";
 
 const PREGUNTAS = [
-  { p: "¿Es una dieta?", r: "No. Trabaja con la pauta que ya te dio tu nutricionista." },
-  { p: "¿Y los antojos?", r: "Entran en el plan desde el jueves. Amy no los cuenta ni te dice cuántos te quedan: si quieres otro, el plan se acomoda." },
-  { p: "¿Cuántos mensajes me manda?", r: "Pocos: el jueves en la tarde y el sábado al despertar." },
+  {
+    p: "¿Cómo empiezo?",
+    r: `Le escribes «Hola ${NOMBRE}» con el botón. Se conocen en tres mensajes: tu nombre, tu rutina de comida en la semana y cómo funciona.`,
+  },
+  { p: "¿Es una dieta?", r: "No. Trabaja con la pauta que ya te dio tu nutricionista. Sin rachas, sin calorías, sin contar." },
+  { p: "¿Cuántos mensajes me manda?", r: "Pocos: el jueves, el sábado cuando despiertas y el domingo en la noche." },
+  { p: "¿Y si un finde no quiero que me escriba?", r: "Le mandas «pausa» y ese finde no te escribe." },
+  { p: "¿Y los antojos?", r: `Entran en el plan desde el jueves. ${NOMBRE} no los cuenta ni te dice cuántos te quedan: si quieres otro, el plan se acomoda.` },
   { p: "¿Reemplaza a mi nutricionista?", r: `No. Si algo te preocupa, ${NOMBRE} te va a sugerir hablarlo con tu nutricionista o con otro profesional.` },
 ];
 

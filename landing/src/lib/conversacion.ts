@@ -1,6 +1,6 @@
 /**
- * La conversación de ejemplo del mockup. Todo es inventado: el refri, los
- * locales y los precios. Nunca calorías ni nada sobre el cuerpo.
+ * La conversación de ejemplo del mockup, fiel a lo que Amy hace hoy. Todo es
+ * inventado: el refri y los locales. Nunca calorías, precios ni nada sobre el cuerpo.
  */
 
 export type Mensaje =
@@ -58,7 +58,7 @@ export const MOMENTOS: Momento[] = [
     titulo: "El completo del carrete",
     escena: "carrete",
     fondo: "rosado",
-    mensajes: [{ de: "nota", texto: "Amy no te escribe de noche. Es tu carrete." }],
+    mensajes: [{ de: "nota", texto: "El viernes Amy no te escribe. Es tu carrete." }],
   },
   {
     id: "sabado",
@@ -96,12 +96,13 @@ export const MOMENTOS: Momento[] = [
     id: "domingo",
     dia: "Domingo",
     hora: "20:00",
-    titulo: "La culpa del domingo",
+    titulo: "Amy pregunta cómo estuvo el finde",
     escena: "domingo",
     fondo: "celeste",
     mensajes: [
-      { de: "yo", texto: "mañana parto de nuevo" },
-      { de: "ella", texto: "Uf, suena a que te quedaste con una sensación pesada. Gracias por contármelo 🫶" },
+      { de: "ella", texto: "Hola! Cómo estuvo el finde?" },
+      { de: "yo", texto: "bien! las quesadillas quedaron ricas" },
+      { de: "ella", texto: "Qué bueno! Ya quedaron en tu recetario 🫶" },
     ],
   },
 ];

@@ -18,7 +18,7 @@ Todo está en [`src/config.ts`](src/config.ts):
 - `WHATSAPP_NUMERO`: el número de Amy, hoy el del sandbox de WhatsApp de Kapso (`56920403095`). Solo responde a celulares activados en ese sandbox. Todos los botones «Hablar por WhatsApp» usan `WHATSAPP_URL`.
 - `WHATSAPP_TEXTO`: el mensaje que queda escrito al abrir el chat («Hola Amy»).
 
-Las conversaciones, los locales y los precios de ejemplo están en [`src/lib/conversacion.ts`](src/lib/conversacion.ts). Son inventados y la página los marca como ejemplo.
+Las conversaciones de ejemplo están en [`src/lib/conversacion.ts`](src/lib/conversacion.ts). Son inventadas, siguen lo que Amy hace hoy y la página las marca como ejemplo.
 
 ## Correr
 
