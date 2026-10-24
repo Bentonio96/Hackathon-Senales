@@ -84,7 +84,7 @@ function esSiDelJueves(sesion: Sesion, texto: string): boolean {
 
 // El primer paso del onboarding también es fijo: con el mensaje de la landing («Hola Amy, es mi primera
 // vez aquí») o un saludo pelado en una conversación nueva, Amy se presenta y pregunta el nombre.
-const RESPUESTA_ONBOARDING = ["Hola! Soy Amy, un programa que te acompaña con la comida del finde 🙌", "Cómo te llamas?"];
+const RESPUESTA_ONBOARDING = ["Hola! Soy Amy, un programa que te acompaña con la comida 🙌", "Cómo te llamas?"];
 function esInicioOnboarding(sesion: Sesion, texto: string): boolean {
   const limpio = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z ]+/g, " ").trim();
   if (/\b(primera vez|soy nuev[oa]|recien llegad[oa])\b/.test(limpio) && limpio.length <= 60) return true;
