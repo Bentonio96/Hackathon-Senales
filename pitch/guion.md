@@ -82,7 +82,9 @@ Antes de subir:
 4. **Sábado.** Escribir «estoy con caña» y pedir la receta paso a paso. Después: «ya las hice, quedaron ricas». Amy responde «Quedó en tu recetario 🫶».
    > Narrar: «Esto es lo que Antonia ve crecer, en vez de una racha».
 5. **El plan cambia.** Escribir «igual pedimos sushi, ya la embarré». Que el jurado lea la respuesta en silencio dos segundos.
-6. Salir con la flecha → del Mac. Si se usa el control remoto, la pantalla del celular se ve un segundo.
+6. **Una semana después.** En la demo web, el botón «Jueves siguiente · Amy recuerda» (con destino WhatsApp). Amy escribe primero usando lo que aprendió: la hora a la que despierta, su antojo o las quesadillas que le funcionaron.
+   > Narrar: «Amy la va conociendo. Nadie le tuvo que repetir nada».
+7. Salir con la flecha → del Mac. Si se usa el control remoto, la pantalla del celular se ve un segundo.
 
 **Si WhatsApp falla:** abrir la demo web en la otra ventana (`hola-ami-agente.vercel.app/demo`) y usar el reloj para adelantar al sábado. Decirlo sin drama: «es el mismo cerebro de Amy, en la web».
 
@@ -90,7 +92,7 @@ Antes de subir:
 
 **Lo dice: Benja**
 
-> El caso pide que Antonia vea su progreso sin que se reinicie. Por eso en Amy nada vuelve a cero: cada casera que hace queda en su recetario, que solo crece. Amy le recuerda lo que le funcionó, como las quesadillas de la caña. Y el domingo no hay puntaje: hay lo que ella eligió esa semana.
+> El caso pide que Antonia vea su progreso sin que se reinicie. Por eso en Amy nada vuelve a cero: cada casera que hace queda en su recetario, que solo crece. Y Amy la va conociendo: su hora, su antojo, lo que le funcionó. Como vieron en la demo, el jueves siguiente le escribe con eso, sin que ella tenga que repetirlo. El domingo no hay puntaje: hay lo que ella eligió esa semana.
 
 El recetario ya funciona en Amy: se vio en la demo. Si preguntan, escribir «mi recetario» en el chat y Amy lo muestra.
 
@@ -137,7 +139,7 @@ Un número fijo, decidido con ella, pero Amy no se lo recuerda como cuota. Cualq
 Los del súper se buscan en línea. Los de delivery son de referencia, y en la demo van marcados como ejemplo.
 
 **¿Qué datos guardan? · responde Benja**
-La conversación y el plan del sábado, nada más. Amy no guarda peso ni registro de comidas, y escribir «pausa» la pausa.
+La conversación, el plan del sábado, su recetario y lo que ella misma cuenta (a qué hora despierta, su antojo, qué app usa). Nunca salud, peso ni cuerpo, y no hay registro de lo que come. Si escribe «qué sabes de mí», Amy se lo muestra; con «olvida eso», lo borra; y «pausa» la pausa.
 
 **¿Cuál es el siguiente paso? · responde Benja**
 Pedir el antojo sin salir del chat, con una alianza (las apps de delivery no tienen una API abierta), y la plantilla aprobada de WhatsApp para que Amy escriba primero el jueves.

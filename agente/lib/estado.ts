@@ -92,6 +92,17 @@ export async function ultimoWhatsApp(): Promise<string | null> {
   return memoria.__amiUltimoWa ?? null;
 }
 
+// Amy puede llamar varias herramientas a la vez: sin esto, dos escrituras de la misma persona
+// leen el mismo estado y la última pisa a la otra. Encadena las escrituras por clave.
+const enCurso = new Map<string, Promise<unknown>>();
+function enSerie<T>(clave: string, tarea: () => Promise<T>): Promise<T> {
+  const anterior = enCurso.get(clave) ?? Promise.resolve();
+  const actual = anterior.catch(() => {}).then(tarea);
+  enCurso.set(clave, actual);
+  actual.finally(() => { if (enCurso.get(clave) === actual) enCurso.delete(clave); }).catch(() => {});
+  return actual;
+}
+
 // El recetario: las caseras que la persona contó que cocinó. Vive aparte de la sesión y sin
 // vencimiento, así que «reiniciar» no lo borra. Solo crece: no se cuenta ni se le muestra un número.
 export interface RecetaGuardada {
@@ -109,7 +120,11 @@ export async function cargarRecetario(id: string): Promise<RecetaGuardada[]> {
 }
 
 /** Agrega una receta si no estaba (por nombre). Devuelve false si ya estaba. */
-export async function agregarAlRecetario(id: string, receta: Omit<RecetaGuardada, "guardada_en">): Promise<boolean> {
+export function agregarAlRecetario(id: string, receta: Omit<RecetaGuardada, "guardada_en">): Promise<boolean> {
+  return enSerie(claveRecetario(id), () => agregarSinCola(id, receta));
+}
+
+async function agregarSinCola(id: string, receta: Omit<RecetaGuardada, "guardada_en">): Promise<boolean> {
   const recetario = await cargarRecetario(id);
   const normal = (s: string) => s.trim().toLowerCase();
   if (recetario.some((r) => normal(r.nombre) === normal(receta.nombre))) return false;
@@ -145,7 +160,11 @@ async function escribirMemoria(id: string, recuerdos: Recuerdo[]): Promise<void>
   else memoriasEnMemoria().set(id, recuerdos);
 }
 
-export async function recordar(id: string, tipo: TipoRecuerdo, dato: string): Promise<void> {
+export function recordar(id: string, tipo: TipoRecuerdo, dato: string): Promise<void> {
+  return enSerie(claveMemoria(id), () => recordarSinCola(id, tipo, dato));
+}
+
+async function recordarSinCola(id: string, tipo: TipoRecuerdo, dato: string): Promise<void> {
   const normal = (s: string) => s.trim().toLowerCase();
   let recuerdos = await cargarMemoria(id);
   if (UNICOS.includes(tipo)) recuerdos = recuerdos.filter((r) => r.tipo !== tipo);
@@ -158,7 +177,11 @@ export async function recordar(id: string, tipo: TipoRecuerdo, dato: string): Pr
  * Lo que ella pide olvidar: un tipo de recuerdo, su recetario o todo. Nada se borra solo:
  * solo cuando ella lo pide.
  */
-export async function olvidar(id: string, tipo: TipoRecuerdo | "recetario" | "todo"): Promise<void> {
+export function olvidar(id: string, tipo: TipoRecuerdo | "recetario" | "todo"): Promise<void> {
+  return enSerie(claveMemoria(id), () => olvidarSinCola(id, tipo));
+}
+
+async function olvidarSinCola(id: string, tipo: TipoRecuerdo | "recetario" | "todo"): Promise<void> {
   if (tipo === "recetario" || tipo === "todo") {
     if (redis) await redis.del(claveRecetario(id));
     else recetariosEnMemoria().delete(id);
