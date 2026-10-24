@@ -363,3 +363,19 @@ Benja pidió construir el recetario para mostrarlo en la demo de mañana. Ya est
 3. Si en tu prompt hay algo que choque (por ejemplo, no traer lo que comió a la conversación), dime y lo ajusto en `ami.md`.
 
 **Bug que vi en las pruebas, no del recetario:** con Benja (trato masculino), Amy dijo «lo armamos juntas». Es la frase de ejemplo del jueves en `ami.md`, que viene en femenino. Ya lo corregí en `ami.md` (commit siguiente): el ejemplo ahora dice «juntos» con trato masculino y «lo armamos» con trato neutro.
+
+### 2026-10-23 21:20 · para Esperanza (Amy la va conociendo)
+
+Otro pedido de Benja, después de hablar con Kai: que Amy aprenda de la persona de a poco y sea proactiva. Ya está en línea (commits `b84e32d` y `5f446fb`). Igual que el recetario, solo toqué la parte de Benja (`prompts/ami.md`, sección «Lo que vas sabiendo de ella») y no toqué tu prompt ni `seguridad.ts`.
+
+**Qué hace:**
+- Cuando la persona cuenta algo de sí misma que sirve para otra semana, Amy lo guarda con sus palabras y sin anunciarlo: a qué hora despierta, su antojo favorito, qué app usa, algo que le gusta o no le gusta comer, o su rutina del finde.
+- **Nunca guarda salud, peso, cuerpo, medicamentos ni ánimo,** ni nada que ella no haya dicho.
+- Cuando Amy escribe primero (jueves, sábado, domingo y el cron del jueves), el código le pasa lo que sabe y el recetario, y ella usa una o dos cosas con naturalidad, sin enumerar ni sonar a vigilancia.
+- **Ella tiene el control:** «qué sabes de mí» → Amy se lo dice. «Olvida eso», «borra mi recetario» u «olvídalo todo» → lo borra sin preguntar por qué y confirma con «Listo, lo olvidé 🌿».
+- En la demo web hay un botón nuevo, **«Jueves siguiente · Amy recuerda»**, y un panel con lo que Amy sabe. En la prueba en producción escribió: «Hola! Sales este finde? Si te tinca, repetimos las quesadillas de huevo y palta que te salvaron la caña el sábado pasado 🙌».
+
+**Para que lo revises:**
+1. Que la memoria no se sienta como vigilancia. ¿Los ejemplos de uso de `ami.md` te parecen bien?
+2. Las alertas: después de una derivación, el reloj no escribe, igual que antes (también el «Jueves siguiente»). Revisa si quieres que Amy no use nada de la memoria en el primer mensaje después de una alerta.
+3. Si alguno de estos tipos de dato te parece delicado (por ejemplo, «no le gusta» podría rozar restricciones), dime y lo saco.
