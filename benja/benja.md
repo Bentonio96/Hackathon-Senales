@@ -470,3 +470,6 @@ Nada más: el resto (hora, qué no come, etc.) lo va sabiendo de a poco. Si el p
 
 ### 2026-10-24 11:55 · para Esperanza
 Los botones de la landing ahora abren WhatsApp con «Hola Amy, es mi primera vez aquí» (neutro: con «soy nuevo» Amy asumía masculino). Con ese mensaje, o con un «hola» pelado en una conversación nueva, el primer paso del onboarding es fijo en el código: «Hola! Soy Amy, un programa que te acompaña con la comida del finde 🙌» · «Cómo te llamas?». Con Haiku a veces preguntaba «Cómo va tu semana?» en vez del nombre.
+
+### 2026-10-24 12:05 · para Esperanza
+Feedback de Kai a Benja: Amy se sentía como «un Claude en WhatsApp». Agregué en `ami.md` la sección «Lo que Amy aporta»: cuando hablan del finde o de comida, cada respuesta deja un dato útil y concreto en una frase (el paso chico para que el sábado salga solo, el «si despiertas sin ganas, la versión flojera es…», un truco para la receta con lo que tiene, un dato de plata al pedir), y se evitan frases de relleno («Entiendo perfectamente», «Estoy aquí para ayudarte»). Nunca datos de salud, y nada se agrega cuando Amy solo acompaña (pena, alertas, cansancio) ni en tus frases exactas del pitch.
