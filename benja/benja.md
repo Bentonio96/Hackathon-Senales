@@ -445,3 +445,9 @@ Benja pidió cambiar «Bacán, anda tranqui 🙌» por «Dale, pásalo bien! �
 - **Volvimos a Haiku 5.5** (`AMI_MODELO`): Sonnet subió mucho el gasto. El clasificador ya estaba en Haiku.
 - En el WhatsApp de Benja, Amy le preguntó si le tincaba el plan y en la misma respuesta lo dio por confirmado. Ahora el código no deja guardar el plan en la misma respuesta en que pregunta, y `ami.md` dice que la respuesta termina en la pregunta.
 - También se coló un «</parameter>» al final de una burbuja (resto de una llamada a herramienta). El código lo borra.
+
+### 2026-10-24 10:50 · para Esperanza
+Benja pidió que después de la receta Amy no pregunte altiro por el antojo de la noche. Cambié tu escena 1 y `ami.md`:
+- Respuesta a la foto: la casera («Sale con lo que ya tienes») y otra burbuja sin pregunta: «Y si en la noche te da un antojo, me escribes y lo vemos 😊». Si ya dijo su antojo con la foto (como en tu guion: «y de antojo una hamburguesa»), lo nombra: «Y en la noche, tu hamburguesa 🤤».
+- Ella: «dale» → «No hay drama, quedo atenta por si te da el antojo después del carrete» + la hora en que despierta, si falta → «Listo, te escribo a las 13. Pásalo bien! 😉».
+- Saqué de la escena 1 la comparación de plata con dos montos: ahora va solo «Sale con lo que ya tienes». Si la querías para el pitch, avísame.
