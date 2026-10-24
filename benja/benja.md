@@ -362,4 +362,4 @@ Benja pidió construir el recetario para mostrarlo en la demo de mañana. Ya est
 2. ¿«Quedó en tu recetario 🫶» te suena bien, o prefieres otra confirmación?
 3. Si en tu prompt hay algo que choque (por ejemplo, no traer lo que comió a la conversación), dime y lo ajusto en `ami.md`.
 
-**Bug que vi en las pruebas, no del recetario:** con Benja (trato masculino), Amy dijo «lo armamos juntas». Es la frase de ejemplo del jueves en `ami.md`, que viene en femenino. Lo dejo anotado para corregirlo en la próxima pasada del prompt.
+**Bug que vi en las pruebas, no del recetario:** con Benja (trato masculino), Amy dijo «lo armamos juntas». Es la frase de ejemplo del jueves en `ami.md`, que viene en femenino. Ya lo corregí en `ami.md` (commit siguiente): el ejemplo ahora dice «juntos» con trato masculino y «lo armamos» con trato neutro.
