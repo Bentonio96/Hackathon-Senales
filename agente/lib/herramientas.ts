@@ -114,7 +114,7 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
   {
     name: "guardar_plan_sabado",
     description:
-      "Guarda el plan del sábado cuando Antonia ya eligió. Llámala una vez por plan; si ella lo cambia, llámala de nuevo con el plan completo actualizado.",
+      "Guarda el plan del sábado cuando Antonia ya eligió y te lo dijo en su último mensaje. Nunca la llames en la misma respuesta en que le preguntas si le tinca: espera que conteste. Llámala una vez por plan; si ella lo cambia, llámala de nuevo con el plan completo actualizado.",
     input_schema: {
       type: "object",
       properties: {

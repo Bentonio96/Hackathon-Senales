@@ -440,3 +440,8 @@ Está todo en `pitch/guion.md` y en `guion.html`. Si alguna frase te suena rara 
 
 ### 2026-10-24 10:20 · para Esperanza
 Benja pidió cambiar «Bacán, anda tranqui 🙌» por «Dale, pásalo bien! 😉» (le sonaba pesado). Lo cambié en tu ejemplo del jueves y agregué 😉 a tu lista de caras, porque no estaba. También en la conversación de la landing.
+
+### 2026-10-24 10:35 · para Esperanza
+- **Volvimos a Haiku 5.5** (`AMI_MODELO`): Sonnet subió mucho el gasto. El clasificador ya estaba en Haiku.
+- En el WhatsApp de Benja, Amy le preguntó si le tincaba el plan y en la misma respuesta lo dio por confirmado. Ahora el código no deja guardar el plan en la misma respuesta en que pregunta, y `ami.md` dice que la respuesta termina en la pregunta.
+- También se coló un «</parameter>» al final de una burbuja (resto de una llamada a herramienta). El código lo borra.

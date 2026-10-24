@@ -102,8 +102,14 @@ async function correrModelo(sesion: Sesion, esfuerzo: Esfuerzo, signal?: AbortSi
     if (respuesta.stop_reason !== "tool_use") break;
 
     const usos = respuesta.content.filter((b): b is Anthropic.Beta.BetaToolUseBlock => b.type === "tool_use");
+    // Si en esta misma respuesta le preguntó algo, todavía no contesta: guardar el plan sería responder por ella.
+    const yaPregunto = respuesta.content.some((b) => b.type === "text" && b.text.trim().endsWith("?"));
     const resultados: Anthropic.Beta.BetaToolResultBlockParam[] = await Promise.all(
       usos.map(async (uso) => {
+        if (yaPregunto && uso.name === "guardar_plan_sabado") {
+          const aviso = "No se guardó: le acabas de hacer una pregunta y todavía no contesta. Termina aquí sin escribir nada más; guardas cuando responda.";
+          return { type: "tool_result" as const, tool_use_id: uso.id, content: aviso, is_error: true };
+        }
         try {
           return { type: "tool_result" as const, tool_use_id: uso.id, content: await ejecutarHerramienta(uso.name, uso.input, sesion) };
         } catch (error) {
@@ -122,7 +128,8 @@ const enBurbujas = (textos: string[]) => {
   const vistas = new Set<string>();
   return textos
     .flatMap((t) => t.split(SEPARADOR_BURBUJAS))
-    .map((b) => b.trim())
+    // A veces se cuela en el texto un resto de la llamada a una herramienta («</parameter>»): se borra.
+    .map((b) => b.replace(/<\/?[a-z_:]*(parameter|invoke|function_calls)[^>]*>/gi, "").trim())
     .filter((b) => {
       if (!b) return false;
       const clave = normalizar(b);
