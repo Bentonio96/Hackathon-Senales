@@ -42,3 +42,5 @@ Se conocen en tres mensajes. El jueves Amy le pregunta si sale y dejan el sábad
 **Correrlo:** `cd agente && cp .env.example .env.local && npm install && npm run dev` → http://localhost:3000/demo. Detalle en [`agente/README.md`](agente/README.md).
 
 Todos los datos de la demo son inventados.
+
+Entregado para la Hackatón Señales, 24 de octubre de 2026.
