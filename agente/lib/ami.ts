@@ -117,7 +117,7 @@ const enBurbujas = (textos: string[]) =>
  */
 export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<string[]> {
   if (sesion.turnos >= MAX_TURNOS_POR_SESION) {
-    return ["Por hoy llegamos al límite de mensajes de la demo. Escríbeme más rato 🌿"];
+    return ["Por hoy llegamos al límite de mensajes de la demo. Escríbeme más rato 😊"];
   }
   sesion.turnos += 1;
   const texto = entrada.texto?.trim() ?? "";
@@ -129,7 +129,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     const burbujas = [
       previa
         ? "Dale, quedo en pausa. Si lo necesitas, el *4141 atiende a toda hora y tu nutricionista o la psicóloga de la u te pueden acompañar"
-        : "Dale, quedo en pausa esta semana. El jueves te pregunto por el finde 🌿",
+        : "Dale, quedo en pausa esta semana. El jueves te pregunto por el finde 👌",
     ];
     registrarFijo(sesion, contenido, burbujas);
     return burbujas;
@@ -217,7 +217,7 @@ export async function turnoDeAmi(sesion: Sesion, entrada: Entrada): Promise<stri
     });
     burbujas = enBurbujas(await correrModelo(sesion, esfuerzo));
     if (violaFiltro(burbujas.join("\n"))) {
-      burbujas = ["Perdón, se me enredó la respuesta. Me cuentas de nuevo? 🌿"];
+      burbujas = ["Perdón, se me enredó la respuesta. Me cuentas de nuevo? 😅"];
     }
   }
   return burbujas;

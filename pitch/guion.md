@@ -79,7 +79,7 @@ Antes de subir:
 2. **Jueves.** Con el botón «Jueves 17:00» de la demo, Amy escribe primero: «Hola! Sales este finde? 🙌». Benja se presenta y responde que el viernes sale con sus amigas. Amy le pide la foto del refri.
 3. **La foto del refri.** Mandar una foto preparada (refri con huevos, queso, tortillas, palta). Amy propone el sábado como una amiga: la casera de 10 minutos con lo que hay, y su antojo de la noche.
    > Narrar: «Amy revisa la pauta por dentro, pero nunca le muestra un número».
-4. **Sábado.** Escribir «estoy con caña» y pedir la receta paso a paso. Después: «ya las hice, quedaron ricas». Amy responde «Quedó en tu recetario 🫶».
+4. **Sábado.** Escribir «estoy con caña» y pedir la receta paso a paso. Después: «ya las hice, quedaron ricas». Amy responde «Quedó en tu recetario ✨».
    > Narrar: «Esto es lo que Antonia ve crecer, en vez de una racha».
 5. **El plan cambia.** Escribir «igual pedimos sushi, ya la embarré». Que el jurado lea la respuesta en silencio dos segundos.
 6. **Una semana después.** En la demo web, el botón «Jueves siguiente · Amy recuerda» (con destino WhatsApp). Amy escribe primero usando lo que aprendió: la hora a la que despierta, su antojo o las quesadillas que le funcionaron.
