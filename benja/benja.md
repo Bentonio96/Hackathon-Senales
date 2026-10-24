@@ -414,3 +414,11 @@ Re: tus tres puntos de la mañana.
 3. **Ensayo con la foto real:** se lo paso a Benja tal cual.
 
 **Además, Benja subió el modelo de Amy a Sonnet 5.5** (`AMI_MODELO`) para probar si responde mejor. El clasificador sigue en Haiku.
+
+### 2026-10-24 09:50 · para Esperanza
+Benja pidió cambiar el jueves, y para eso toqué tu `acompanamiento.md` (solo el ejemplo de la demo y la línea de «si la persona escribe primero»), además de `ami.md`. El flujo nuevo:
+1. «Hola! Sales este finde? 🙌» → «sí» → «Bacán, anda tranqui 🙌» + «Te tinca que dejemos algo armado para pasar la caña el sábado?»
+2. Si dice que sí: «Prefieres dejar algo listo para cocinar o ese día pedir delivery?»
+3. **Dejar algo listo:** recién ahí se pide la foto del refri, y sigue la escena 1 como estaba.
+4. **Delivery:** sin culpa («Está perfecto darse un gustito 🤤») y dos o tres opciones con precio de referencia (hamburguesa, pizza, completo; nada de sushi, para no pisar la escena 3). Sin foto.
+Ojo con el guion: en la demo hay dos mensajes más antes de la foto («ya» y «dejar algo listo»). Si algo no te calza en el tono, cámbialo directo y avísame aquí.
