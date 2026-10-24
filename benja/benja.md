@@ -454,3 +454,6 @@ Benja pidió que después de la receta Amy no pregunte altiro por el antojo de l
 
 ### 2026-10-24 11:00 · para Esperanza
 Benja pidió fijar en el código la respuesta al «sí» del jueves, porque con Haiku a veces se desviaba («Tienes ganas de salir o es más bien un por si acaso?»). Si justo después del aviso del jueves la persona responde un sí simple («sí», «yo creo que sí», «sipo, hay carrete»), Amy manda siempre «Dale, pásalo bien! 😉» y «Te tinca que dejemos algo armado para pasar la caña el sábado?», sin llamar al modelo. Si el mensaje trae un no, una duda, pena, una pregunta o una presentación («soy Benja»), responde el modelo como siempre, con tus reglas.
+
+### 2026-10-24 11:10 · para Esperanza
+Benja pidió que si en el jueves dice que no sale porque está cansado, Amy responda «Ay, qué fome» + «Fue una semana agotadora?» (antes: «Ay, qué lata andar cansado 🫶»). Lo puse en `ami.md`, en el jueves. Después sigue tu acompañamiento.
