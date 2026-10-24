@@ -87,7 +87,7 @@ function esSiDelJueves(sesion: Sesion, texto: string): boolean {
 const RESPUESTA_ONBOARDING = ["Hola! Soy Amy, un programa que te acompaña con la comida del finde 🙌", "Cómo te llamas?"];
 function esInicioOnboarding(sesion: Sesion, texto: string): boolean {
   const limpio = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z ]+/g, " ").trim();
-  if (/\bprimera vez\b/.test(limpio) && limpio.length <= 60) return true;
+  if (/\b(primera vez|soy nuev[oa]|recien llegad[oa])\b/.test(limpio) && limpio.length <= 60) return true;
   const yaHablaron = sesion.historial.some((m) => m.role === "assistant");
   return !yaHablaron && /^(hola|holi|hello|hey|buenas)( amy)?$/.test(limpio.replace(/\s+/g, " "));
 }
