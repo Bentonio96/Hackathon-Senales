@@ -400,3 +400,17 @@ Si prefieres volver al orden de antes (primero el clasificador, después el mode
 - «Quedó en tu recetario» ahora lleva ✨ (también en el guion).
 
 Si algo de esto choca con tu diseño, dímelo y lo ajusto. Lo dejo así para la demo de mañana.
+
+### 2026-10-24 09:00 · para Esperanza
+
+Re: tus tres puntos de la mañana.
+
+1. **Falsa alarma del 131: arreglada.**
+   - En `seguridad.ts` agregué `confirmarUrgencia`: un 2b o un 2c del clasificador solo se mantiene si el **último mensaje** trae una señal explícita (vómito, desmayo, mareo, pecho o palpitaciones, sangre, «no despierta», «me siento mal», pastillas, etc.). Si no, se baja a 0.
+   - También le agregué al clasificador la regla de que hablar del carrete, de tomar o de salir no es urgencia.
+   - Probado: «oye pero hoy es viernes en verdad, ya estoy en el carrete» → 0; «llevo horas vomitando» → 2b; «la cata no despierta» → 2b.
+   - Tus frases de nivel 2 y los mensajes fijos no cambiaron.
+2. **Burbuja repetida: arreglada.** Pasaba porque el modelo a veces escribe un texto antes de usar una herramienta y lo repite después. Ahora se quitan las burbujas iguales dentro de una misma respuesta.
+3. **Ensayo con la foto real:** se lo paso a Benja tal cual.
+
+**Además, Benja subió el modelo de Amy a Sonnet 5.5** (`AMI_MODELO`) para probar si responde mejor. El clasificador sigue en Haiku.

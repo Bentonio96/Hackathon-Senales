@@ -10,8 +10,8 @@ const client = new Anthropic();
 const MODELO = process.env.AMI_MODELO || "claude-haiku-5-5";
 // El clasificador de alertas corre en cada mensaje: por defecto el modelo barato.
 const MODELO_CLASIFICADOR = process.env.AMI_MODELO_CLASIFICADOR || "claude-haiku-5-5";
-// El respaldo automático por rechazo existe en Opus, no en Haiku.
-const CON_RESPALDO = MODELO.startsWith("claude-opus");
+// El respaldo automático por rechazo existe en Opus y en Sonnet 5.5, no en Haiku.
+const CON_RESPALDO = MODELO.startsWith("claude-opus") || MODELO === "claude-sonnet-5-5";
 const ANTOJOS_SEMANA = process.env.AMI_ANTOJOS_SEMANA || "dos";
 const MAX_VUELTAS_HERRAMIENTAS = 8;
 const MAX_TURNOS_POR_SESION = 120;
@@ -108,8 +108,21 @@ async function correrModelo(sesion: Sesion, esfuerzo: Esfuerzo, signal?: AbortSi
   return textos;
 }
 
-const enBurbujas = (textos: string[]) =>
-  textos.flatMap((t) => t.split(SEPARADOR_BURBUJAS)).map((b) => b.trim()).filter(Boolean);
+// Sin burbujas repetidas: a veces el modelo escribe un texto antes de usar una herramienta y lo repite después.
+const normalizar = (t: string) => t.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+const enBurbujas = (textos: string[]) => {
+  const vistas = new Set<string>();
+  return textos
+    .flatMap((t) => t.split(SEPARADOR_BURBUJAS))
+    .map((b) => b.trim())
+    .filter((b) => {
+      if (!b) return false;
+      const clave = normalizar(b);
+      if (vistas.has(clave)) return false;
+      vistas.add(clave);
+      return true;
+    });
+};
 
 /**
  * Corre un turno de Amy y devuelve las burbujas para Antonia.

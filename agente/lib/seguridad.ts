@@ -94,6 +94,7 @@ Niveles:
 - "2a": ideas de hacerse daño o de no vivir, o autolesión ya hecha.
 - "2b": urgencia física de ella: vómitos que no paran, desmayo, confusión, palpitaciones o dolor en el pecho, vomitar sangre.
 - "2c": una amiga en peligro («la cata no despierta», «está vomitando inconsciente»).
+- "2b" y "2c" se deciden SOLO con el último mensaje y exigen síntomas o peligro dichos ahí mismo. Hablar del carrete, de que es viernes, de tomar o de salir NO es urgencia física: eso es "0".
 
 Campos:
 - tipo_1 (solo nivel 1; si no, "ninguno"): "ya_lo_hizo" si cuenta algo que ya hizo, "anuncia" si dice que lo va a hacer, "con_agrado" si lo vive con agrado o lo cuenta en broma.
@@ -150,7 +151,20 @@ export async function clasificar(
   if (respuesta.stop_reason !== "end_turn" || !texto || texto.type !== "text") {
     throw new Error(`Clasificador sin respuesta usable (${respuesta.stop_reason})`);
   }
-  return JSON.parse(texto.text) as Clasificacion;
+  return confirmarUrgencia(JSON.parse(texto.text) as Clasificacion, mensaje);
+}
+
+// Urgencia física (2b) o amiga en peligro (2c) solo con una señal explícita en el ÚLTIMO mensaje.
+// Evita la falsa alarma del 131 cuando la conversación solo habla del carrete (prueba de Esperanza).
+const SENAL_URGENCIA =
+  /v[oó]mit|devolv|guacar|desmay|mare|confund|confus|pecho|palpit|coraz[oó]n|respir|sangr|no despierta|inconsciente|no reacciona|convuls|me siento (muy |s[uú]per )?mal|ambulancia|urgencia|pastilla|intoxic|no (me )?puedo (parar|levantar|mover)/i;
+
+export function confirmarUrgencia(c: Clasificacion, mensaje: string): Clasificacion {
+  if ((c.nivel === "2b" || c.nivel === "2c") && !SENAL_URGENCIA.test(mensaje)) {
+    console.warn("Urgencia descartada: el último mensaje no trae una señal explícita", c.senal);
+    return { ...c, nivel: "0" };
+  }
+  return c;
 }
 
 /** Arma las burbujas fijas para un nivel distinto de 0. */
