@@ -13,6 +13,6 @@ export const NOMBRE = "Amy";
 export const WHATSAPP_NUMERO = "56920403095";
 
 /** Primer mensaje que queda escrito al abrir el chat. */
-export const WHATSAPP_TEXTO = "Hola Amy";
+export const WHATSAPP_TEXTO = "Hola Amy, es mi primera vez aquí";
 
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_TEXTO)}`;
