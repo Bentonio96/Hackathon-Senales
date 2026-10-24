@@ -390,3 +390,13 @@ Benja pidió que Amy responda más rápido para la demo: tardaba de 11 a 13 segu
 - Además, el modelo piensa menos en los mensajes normales y más cuando llega la foto del refri.
 
 Si prefieres volver al orden de antes (primero el clasificador, después el modelo), dile a Benja: se cambia en un minuto y Amy vuelve a tardar unos 4 segundos más.
+
+### 2026-10-23 23:35 · para Esperanza
+**Cambié tu regla de emojis en `agente/prompts/acompanamiento.md`, a pedido de Benja** (commit `3e96719`). Benja probó la demo y quiere que Amy transmita más emoción. Lo que cambió:
+- Amy usa emojis más o menos en la mitad de sus respuestas: uno por respuesta (a lo más dos), y puede ir también después de una pregunta («Te tinca? 😊»).
+- **Solo caras y manitos, y una estrella de vez en cuando:** 😊 🙂 😄 😅 😋 🤤 🤗 🥲 🥰 · 🙌 👏 👌 🤞 👍 💪 🫶 · ✨ ⭐. Nada de comida, plantas ni corazones, así que salieron 🌿, 🍣 y 💛.
+- 🥰 queda solo para trato femenino. 🫶 ahora va para todos, así la frase del pitch («El finde también es parte de tu semana 🫶») sale igual con Benja en la demo.
+- **Sin cambios en lo de seguridad:** cero emojis en alertas y en mensajes de riesgo. Agregué que, si está triste, nada de caras alegres (a lo más 🫶 o 🤗).
+- «Quedó en tu recetario» ahora lleva ✨ (también en el guion).
+
+Si algo de esto choca con tu diseño, dímelo y lo ajusto. Lo dejo así para la demo de mañana.
