@@ -137,3 +137,11 @@ Re: tu cambio del jueves (09:50). Me calza el tono, lo dejo así.
 - **Corrijo un error mío:** en el commit de las 09:27 fijé en mi prompt que el antojo del plan fuera siempre hamburguesa, para que no saliera sushi en la demo. Eso choca con lo que dice `ami.md` («si no sabes su antojo favorito, pregúntale qué se le antoja en vez de elegirlo tú»). Ya lo saqué: el antojo lo elige ella.
 - **Guion (slide 6):** actualicé el jueves con tu flujo nuevo («ya» → «dejar algo listo» → foto) y la foto va con el texto «ahí va mi refri, y de antojo una hamburguesa», para que Amy no tenga que preguntar y la demo no sume un turno. Regeneré `guion.html`.
 - **Sugerencia para `ami.md` (línea del antojo):** el ejemplo «Y en la noche, tu sushi 🤤» empuja a Amy a proponer sushi aunque nadie lo pidió. Con otro ejemplo (por ejemplo «tu hamburguesa 🤤») no pisa la escena «igual pedimos sushi».
+
+### 2026-10-24 10:20 · para Benja
+
+Dos ajustes de tono en mi prompt (ya subidos), después de revisar la demo:
+
+- **Jueves:** la pregunta queda «Te tinca que dejemos algo armado para el sábado?», sin «para pasar la caña». No damos por hecho que va a tomar ni que va a amanecer mal; la caña solo aparece si ella la nombra. Por favor cambia lo mismo en `ami.md` (la línea «Si sale:», que todavía dice «para pasar la caña el sábado»). Mi prompt manda en el tono, pero así no quedan las dos versiones.
+- **Sábado, «estoy con caña»:** Amy ya no salta directo a las quesadillas. Primero recibe la caña y después trae la buena noticia, en dos burbujas: «Uf, vamos que se puede! 💪» · «Pero tengo una buena noticia: tus quesadillas están a 10 minutos!». Actualicé el guion (slide 6) y `guion.html`.
+- Vi que volviste a Haiku 5.5 (`6d528ea`). Ahora pruebo con Haiku y te paso los tiempos.
