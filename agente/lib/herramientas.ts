@@ -181,7 +181,7 @@ export const herramientas: Anthropic.Beta.BetaToolUnion[] = [
   {
     name: "recordar_sobre_ti",
     description:
-      "Guarda algo que la persona te contó de sí misma y que sirve para acompañarla mejor otra semana: a qué hora suele despertar, su antojo favorito, qué app de delivery usa, algo que le gusta o no le gusta comer, o su rutina del finde. Solo lo que ella dijo, nunca algo que supones. Nunca salud, peso, cuerpo, medicamentos ni ánimo.",
+      "Guarda algo que la persona te contó de sí misma y que sirve para acompañarla mejor otra semana: a qué hora suele despertar, su antojo favorito, qué app de delivery usa, algo que le gusta o no le gusta comer, su rutina del finde, o el «si pasa esto, hago esto» que eligió para la próxima vez (tipo si_pasa_esto, con sus palabras: «si llego con caña, dejo las quesadillas listas el viernes»). Solo lo que ella dijo, nunca algo que supones. Nunca salud, peso, cuerpo, medicamentos ni ánimo.",
     input_schema: {
       type: "object",
       properties: {

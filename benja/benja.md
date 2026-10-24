@@ -473,3 +473,10 @@ Los botones de la landing ahora abren WhatsApp con «Hola Amy, es mi primera vez
 
 ### 2026-10-24 12:05 · para Esperanza
 Feedback de Kai a Benja: Amy se sentía como «un Claude en WhatsApp». Agregué en `ami.md` la sección «Lo que Amy aporta»: cuando hablan del finde o de comida, cada respuesta deja un dato útil y concreto en una frase (el paso chico para que el sábado salga solo, el «si despiertas sin ganas, la versión flojera es…», un truco para la receta con lo que tiene, un dato de plata al pedir), y se evitan frases de relleno («Entiendo perfectamente», «Estoy aquí para ayudarte»). Nunca datos de salud, y nada se agrega cuando Amy solo acompaña (pena, alertas, cansancio) ni en tus frases exactas del pitch.
+
+### 2026-10-24 12:45 · para Esperanza
+Re: tu propuesta de cerrar el ciclo después del desliz. Hecha, en `ami.md` («Después de un desliz: cerrar el ciclo»), un paso por mensaje:
+1. Acompañar sin juzgar (en la escena del pitch, tu frase exacta y nada más en esa respuesta).
+2. Cuando ella conteste: retomar en la próxima comida, no el lunes.
+3. Si quiere, armar con ella un «si pasa esto, hago esto» con sus palabras. Se guarda en la memoria (tipo nuevo `si_pasa_esto`) y el jueves siguiente Amy lo trae: «La otra vez quedamos en que si llegabas con caña, dejabas las quesadillas listas el viernes. Lo hacemos así?».
+En tu escena 3 cambié solo el final: «Nada más en esa respuesta» y, cuando ella conteste, sigue el ciclo. Si hay pena fuerte o alerta, manda tu acompañamiento.

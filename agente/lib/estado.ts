@@ -136,10 +136,10 @@ async function agregarSinCola(id: string, receta: Omit<RecetaGuardada, "guardada
 
 // Lo que Amy va sabiendo de la persona, solo lo que ella misma contó (nada de salud, peso ni cuerpo).
 // Igual que el recetario: aparte de la sesión y sin vencimiento. Ella puede pedir verlo u olvidarlo.
-export const TIPOS_RECUERDO = ["hora_despertar", "antojo_favorito", "app_delivery", "le_gusta", "no_le_gusta", "rutina", "otro"] as const;
+export const TIPOS_RECUERDO = ["hora_despertar", "antojo_favorito", "app_delivery", "le_gusta", "no_le_gusta", "rutina", "si_pasa_esto", "otro"] as const;
 export type TipoRecuerdo = (typeof TIPOS_RECUERDO)[number];
 // Estos tienen un solo valor: si cambia, se reemplaza. Los demás se acumulan.
-const UNICOS: TipoRecuerdo[] = ["hora_despertar", "antojo_favorito", "app_delivery"];
+const UNICOS: TipoRecuerdo[] = ["hora_despertar", "antojo_favorito", "app_delivery", "si_pasa_esto"];
 
 export interface Recuerdo {
   tipo: TipoRecuerdo;
