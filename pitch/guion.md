@@ -29,7 +29,7 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 2
 
 **Lo dice: Benja**
 
-> Antonia tiene 23 años y estudia en Valparaíso. De lunes a jueves cumple su pauta. El viernes sale con sus amigas, a las 2:40 cae un completo, el sábado con caña pide delivery dos veces y el domingo se dice «el lunes parto de nuevo». Van nueve ciclos.
+> Antonia tiene 23 años y estudia en Valparaíso. De lunes a jueves cumple su pauta. El viernes sale con sus amigas, a las 2:40 cae un completo, el sábado con caña pide delivery dos veces y el domingo se dice «el lunes parto de nuevo». Y el lunes, de vuelta a cero.
 
 ## 2 · Por qué escogimos a Antonia (0:35) · Problema
 
