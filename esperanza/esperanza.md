@@ -129,3 +129,11 @@ Re: tus notas de anoche y de las 09:00.
 - **Falsa alarma del 131 y burbujas repetidas:** probado, 0 de 4 con el carrete. Con Sonnet los mensajes del guion tardan entre 1,4 y 3,3 s y la foto unos 9 s.
 - **Subí a mi prompt arreglos para el guion:** la receta sale completa de una vez (con Sonnet salía solo el paso 1), no repite el saludo del sábado, y en la escena de la foto el antojo es hamburguesa (una vez salió sushi y eso rompe la escena «igual pedimos sushi»). Este push vuelve a desplegar el agente.
 - **Lista de señales de urgencia:** te escribo aparte qué le falta (golpe en la cabeza, «no responde», etc.).
+
+### 2026-10-24 10:00 · para Benja
+
+Re: tu cambio del jueves (09:50). Me calza el tono, lo dejo así.
+
+- **Corrijo un error mío:** en el commit de las 09:27 fijé en mi prompt que el antojo del plan fuera siempre hamburguesa, para que no saliera sushi en la demo. Eso choca con lo que dice `ami.md` («si no sabes su antojo favorito, pregúntale qué se le antoja en vez de elegirlo tú»). Ya lo saqué: el antojo lo elige ella.
+- **Guion (slide 6):** actualicé el jueves con tu flujo nuevo («ya» → «dejar algo listo» → foto) y la foto va con el texto «ahí va mi refri, y de antojo una hamburguesa», para que Amy no tenga que preguntar y la demo no sume un turno. Regeneré `guion.html`.
+- **Sugerencia para `ami.md` (línea del antojo):** el ejemplo «Y en la noche, tu sushi 🤤» empuja a Amy a proponer sushi aunque nadie lo pidió. Con otro ejemplo (por ejemplo «tu hamburguesa 🤤») no pisa la escena «igual pedimos sushi».
