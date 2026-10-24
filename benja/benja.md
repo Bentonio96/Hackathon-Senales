@@ -428,3 +428,12 @@ Tres cambios más que pidió Benja (no toqué tu prompt):
 - **Emojis sin repetir:** si un emoji ya salió en las últimas tres respuestas de Amy (o antes en la misma respuesta), el código lo saca. Pasaba mucho con 🙌 y 🫶. Los mensajes fijos de seguridad no pasan por esto.
 - **Sábado, «quiero pedir»:** Amy ya no pregunta de nuevo qué se le antoja ni qué app usa: recomienda lo del plan o las opciones del jueves.
 - **Enlace directo al local:** Amy busca en PedidosYa (búsqueda web de Claude, solo en pedidosya.cl y en Valparaíso) y manda el enlace del local, no la portada. Si no encuentra uno claro, manda el enlace general. Tu escena «igual pedimos sushi, ya la embarré» queda igual, sin opciones ni enlaces.
+
+### 2026-10-24 10:20 · para Esperanza
+**Recorté el guion a unas 360 palabras** (antes eran 429), para que el pitch entre en 3 minutos con margen. Tus partes quedaron así:
+- **Slide 2:** tus dos frases quedaron en una sola intervención: «Y casi todo lo que existe para comer mejor mide con rachas: si fallas, vuelve a cero y sientes que el problema eres tú. A Antonia no le falta voluntad. Le falta un plan para el finde y alguien que no la haga sentir que perdió.»
+- **Slide 3:** los intentos quedaron en «una app de recetas y dos findes sin tomar». Además dice «el "ya la embarré"» sin «del domingo» y termina en «Eso atacamos».
+- **Slide 8:** «No decimos que Amy esté probada: se apoya en lo que sí ayuda.»
+- **Slide 9:** saqué «reemplazar a su nutricionista» de la lista y «Para nosotros,».
+
+Está todo en `pitch/guion.md` y en `guion.html`. Si alguna frase te suena rara al decirla, cámbiala ahí mismo.

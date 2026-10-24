@@ -10,17 +10,17 @@ Al final se pregunta «¿con cuál de estas sí cambiaría esta persona?». Todo
 
 Lo que más pesa en una hackatón es mostrar que entendemos a Antonia de verdad. Por eso el pitch dura 3 minutos y se dedica a eso: quién es, por qué la escogimos, qué le pasa y cómo Amy la ayuda sin rachas. La demo dura 2 minutos y solo muestra lo esencial, porque Amy ya funciona.
 
-Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 2:55 de pitch y 2:00 de demo.
+Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 2:40 de pitch y 2:00 de demo, con unos 20 segundos de margen para los cambios de slide. Son unas 360 palabras: ensáyenlo con cronómetro.
 
 | # | Slide | Tiempo | Quién |
 |---|---|---|---|
 | 1 | Antonia parte de cero cada lunes | 0:20 | Benja |
-| 2 | Por qué escogimos a Antonia | 0:40 | Benja, después Esperanza |
-| 3 | «Ya la embarré…» y lo que atacamos | 0:25 | Esperanza |
+| 2 | Por qué escogimos a Antonia | 0:35 | Benja, después Esperanza |
+| 3 | «Ya la embarré…» y lo que atacamos | 0:20 | Esperanza |
 | 4 | Les presentamos a Amy | 0:05 | Benja |
 | 5 | El lunes ya no partes de cero | 0:25 | Benja |
 | 6 | Demo en vivo | 2:00 | Benja maneja, Esperanza narra |
-| 7 | Cómo sabe Antonia que avanza | 0:25 | Benja |
+| 7 | Cómo sabe Antonia que avanza | 0:20 | Benja |
 | 8 | Por qué le cambiaría la vida | 0:15 | Esperanza |
 | 9 | Lo que dejamos fuera y cierre | 0:20 | Esperanza |
 | 10 | Portada de Amy | (preguntas) | — |
@@ -29,25 +29,23 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman 2
 
 **Lo dice: Benja**
 
-> Antonia tiene 23 años y estudia en Valparaíso. De lunes a jueves cumple su pauta al pie de la letra. El viernes sale con sus amigas, a las 2:40 cae un completo, el sábado con caña pide delivery dos veces y el domingo se dice «el lunes parto de nuevo». Van nueve ciclos.
+> Antonia tiene 23 años y estudia en Valparaíso. De lunes a jueves cumple su pauta. El viernes sale con sus amigas, a las 2:40 cae un completo, el sábado con caña pide delivery dos veces y el domingo se dice «el lunes parto de nuevo». Van nueve ciclos.
 
-## 2 · Por qué escogimos a Antonia (0:40) · Problema
+## 2 · Por qué escogimos a Antonia (0:35) · Problema
 
 **Lo dice: Benja, después Esperanza**
 
-> **Benja:** La escogimos porque la conocemos. Yo estudié lejos de mi casa, con mesada, y aunque tuviera táperes, el finde pedía algo rico: una hamburguesa de diez lucas, que eran varios almuerzos. Antonia anda con la plata justa, igual que yo.
+> **Benja:** La escogimos porque la conocemos. Yo estudié lejos de mi casa, con la plata justa, y el finde igual pedía algo rico: una hamburguesa de diez lucas, que eran varios almuerzos.
 >
-> **Esperanza:** Y casi todo lo que existe para comer mejor mide con rachas: cuando fallas, vuelve a cero y te quedas con la sensación de que el problema eres tú.
->
-> **Esperanza:** A Antonia no le falta voluntad. Le falta un plan para el finde y alguien que no la haga sentir que perdió.
+> **Esperanza:** Y casi todo lo que existe para comer mejor mide con rachas: si fallas, vuelve a cero y sientes que el problema eres tú. A Antonia no le falta voluntad. Le falta un plan para el finde y alguien que no la haga sentir que perdió.
 
 Esperanza: tu parte está armada con las ideas de tu archivo (rachas, «el problema eres tú», sin medidas de progreso). Ajústala a tus palabras y, si tienes una experiencia propia que quieras contar, cámbiala por esa.
 
-## 3 · El «ya la embarré» (0:25) · Problema
+## 3 · El «ya la embarré» (0:20) · Problema
 
 **Lo dice: Esperanza**
 
-> Ya probó una app de recetas, dos findes sin tomar y partir el lunes 1 de cada mes. Todo le pide más disciplina, y disciplina le sobra. Lo que la hace caer no es el completo: es el «ya la embarré» del domingo, que hace que el resto del finde dé lo mismo. Eso es lo que atacamos.
+> Ya probó una app de recetas y dos findes sin tomar. Todo le pide más disciplina, y disciplina le sobra. Lo que la hace caer no es el completo: es el «ya la embarré», que hace que el resto del finde dé lo mismo. Eso atacamos.
 
 ## 4 · Les presentamos a Amy (0:05)
 
@@ -59,7 +57,7 @@ Esperanza: tu parte está armada con las ideas de tu archivo (rachas, «el probl
 
 **Lo dice: Benja**
 
-> El jueves, con la cabeza fresca, Antonia le manda una foto del refri y Amy arma el sábado: una casera rica de 10 minutos con lo que ya tiene, para que le quede más para su antojo. Y si el plan cambia, Amy no la juzga: «Te entiendo. El finde también es parte de tu semana».
+> El jueves, con la cabeza fresca, Antonia le manda una foto del refri y Amy arma el sábado: una casera de 10 minutos con lo que tiene, y le queda más para su antojo. Y si el plan cambia, Amy no la juzga: «Te entiendo. El finde también es parte de tu semana».
 
 ## 6 · Demo en vivo (2:00) · lo que más pesa
 
@@ -88,11 +86,11 @@ Antes de subir:
 
 **Si WhatsApp falla:** abrir la demo web en la otra ventana (`hola-ami-agente.vercel.app/demo`) y usar el reloj para adelantar al sábado. Decirlo sin drama: «es el mismo cerebro de Amy, en la web».
 
-## 7 · Cómo sabe Antonia que avanza (0:25) · Convicción
+## 7 · Cómo sabe Antonia que avanza (0:20) · Convicción
 
 **Lo dice: Benja**
 
-> El caso pide que Antonia vea su progreso sin que se reinicie. Por eso en Amy nada vuelve a cero: cada casera que hace queda en su recetario, que solo crece. Y Amy la va conociendo: su hora, su antojo, lo que le funcionó. Como vieron en la demo, el jueves siguiente le escribe con eso, sin que ella tenga que repetirlo. El domingo no hay puntaje: hay lo que ella eligió esa semana.
+> El caso pide que Antonia vea su progreso sin que se reinicie. En Amy nada vuelve a cero: cada casera que hace queda en su recetario, que solo crece. Y Amy la va conociendo: su hora, su antojo, lo que le funcionó. El domingo no hay puntaje: hay lo que ella eligió.
 
 El recetario ya funciona en Amy: se vio en la demo. Si preguntan, escribir «mi recetario» en el chat y Amy lo muestra.
 
@@ -100,13 +98,13 @@ El recetario ya funciona en Amy: se vio en la demo. Si preguntan, escribir «mi 
 
 **Lo dice: Esperanza**
 
-> Hay evidencia de que decidir antes ayuda a cumplir una meta, y de que después de un desliz la autocompasión frena el «qué más da». No decimos que esté probado que Amy funciona: decimos que se apoya en lo que sí ayuda.
+> Hay evidencia de que decidir antes ayuda a cumplir una meta, y de que después de un desliz la autocompasión frena el «qué más da». No decimos que Amy esté probada: se apoya en lo que sí ayuda.
 
 ## 9 · Lo que dejamos fuera y cierre (0:20)
 
 **Lo dice: Esperanza**
 
-> Dejamos fuera, a propósito, las rachas, las calorías, pedirle que no salga y reemplazar a su nutricionista. Para nosotros, funcionó si el domingo ya no escribe «el lunes parto de nuevo». Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.
+> Dejamos fuera, a propósito, las rachas, las calorías y pedirle que no salga. Funcionó si el domingo ya no escribe «el lunes parto de nuevo». Antonia no tiene que dejar de salir. Tiene que dejar de partir de cero.
 
 Pasar a la slide 10 y dejarla durante las preguntas.
 
