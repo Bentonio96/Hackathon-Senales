@@ -37,7 +37,7 @@ Quién dice qué es una propuesta: cámbienlo entre ustedes. Los tiempos suman u
 
 > **Benja:** La escogimos porque la conocemos. Yo estudié lejos de mi casa, con la plata justa, y el finde igual pedía algo rico: una hamburguesa de diez lucas, que eran varios almuerzos.
 >
-> **Esperanza:** Y casi todo lo que existe para comer mejor mide con rachas: si fallas, vuelve a cero y sientes que el problema eres tú. A Antonia no le falta voluntad. Le falta un plan para el finde y alguien que no la haga sentir que perdió.
+> **Esperanza:** Y casi todo lo que existe para comer mejor mide con rachas: si fallas, vuelve a cero y sientes que el problema eres tú. Lo sé de cerca: cuando todo se mide con rachas, un mal finde no se siente como un tropiezo. Se siente como que fallaste tú. A Antonia no le falta voluntad. Le falta un plan para el finde y alguien que no la haga sentir que perdió.
 
 Esperanza: tu parte está armada con las ideas de tu archivo (rachas, «el problema eres tú», sin medidas de progreso). Ajústala a tus palabras y, si tienes una experiencia propia que quieras contar, cámbiala por esa.
 
